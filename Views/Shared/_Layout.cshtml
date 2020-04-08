@@ -1,44 +1,131 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title></title>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- Header -->
+
+    <header>
+        <div class="wrapper" style="position: fixed;top: 0;width: 100%;">
+            <div class="topnav" style="border-bottom: 1px solid #DCDCDC;">
+                <div class="container">
+                    <div style="display: inline-block;">
+                        <a href="Product.html" class="logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
+                        <div class="search-container">
+                            <input type="text" placeholder="Tìm kiếm..." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                        <a href="SignUp.html" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
+                        <a href="Login.html" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
+                        <div class="cart">
+                            <a href="#" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'> 1 </span></i>Giỏ hàng</a>
+                            <div class="dropdown-cart">
+                                <div class="row Title">
+                                    <div class="col-md-5 columm-1"><p>Tên</p></div>
+                                    <div class="col-md-2 columm-2"><p>Số lượng</p></div>
+                                    <div class="col-md-3 columm-3"><p>Giá</p></div>
+                                    <div class="col-md-2 columm-4"><p>Tác vụ</p></div>
+                                </div>
+                                <div class="row Info">
+                                    <img style="width: 50px;height:50px;margin-left: 10px;" src="img/1.png">
+                                    <div class="col-md-4 columm-1"><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></div>
+                                    <div class="col-md-2 columm-2" style="margin-left: 10px;"><p>1</p></div>
+                                    <div class="col-md-3 columm-3"><p>4.150.000</p></div>
+                                    <div class="col-md-1 columm-4" style="margin-top: -2px;"><a href="#"><i class="fas fa-trash action"></i></a></div>
+                                </div>
+                                <div class="row Total">
+                                    <div class="col-md-12 Total-price"><p>Thành tiền: 4.150.000đ<button class="pay" href="#">Thanh toán</button></p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+
+
+            <div class="topnav" style="box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2)">
+                <div class="container">
+                    <div class="dropdown">
+                        <button class="dropbtn"><i class="fas fa-bars" style="margin-right: 10px;"></i>Danh mục sản phẩm</button>
+                        <div class="dropdown-content">
+                            <div class="Title">Sản phẩm</div>
+                            <a href="#">Linh Kiện</a>
+                            <a href="#">Phụ kiện</a>
+                            <a href="#">Gear</a>
+                        </div>
+                    </div>
+                    <a href="#"><i class="far fa-file-alt" style="margin-right: 10px"></i>Kiểm tra bảo hành</a>
+                    <a href="#"><i class="fas fa-gifts" style="margin-right: 10px"></i>Chương trình khuyến mãi</a>
+                    <a href="#"><i class="fas fa-truck" style="margin-right: 10px"></i>Chính sách vận chuyển</a>
+                    <a href="#"><i class="fas fa-tools" style="margin-right: 10px"></i>Chính sách bảo hành</a>
+                    <a href="#"><i class="far fa-id-badge" style="margin-right: 10px"></i>về chúng tôi</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </header>
+    <!--BODY -->
+    @RenderBody()
+    <!-- END BODY -->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Footer -->
+    <footer class="footer-distributed">
+        <div class="container">
+            <div class="footer-left">
+
+                <a href="Product.html" class="logo col-md-12"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
+
+                <p class="footer-company-name">Copyrights &copy; 2020 by Cybershop</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fas fa-map-marker"></i>
+                    <p>Địa chỉ cửa hàng<span style="line-height:1;"> 181 Lê Hồng Phong Phường 7 Quận 10 TP HCM</span><span>Thời gian làm việc: 08:30 – 21:30 | T2 – CN.</span></p>
+                </div>
+
+                <div>
+                    <i class="fas fa-phone"></i>
+                    <p>Số điện thoại liên lạc<span>+84777792670</span>
+                </div>
+
+                <div>
+                    <i class="fas fa-envelope"></i>
+                    <p>Email<span><a href="mailto:tranthaitat99@gmail.com">tranthaitat99@gmail.com</a></span></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-company-about">
+                    <span>Mạng xã hội</span>
+                    Các trang mạng xã hội là nơi được cập nhật những thông tin, video mới nhất từ shop chúng tôi
+                </p>
+
+                <div class="footer-icons">
+
+                    <a href="https://www.facebook.com/Anticard99"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/" style="background: red;"><i class="fab fa-youtube"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

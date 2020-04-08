@@ -1,31 +1,140 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!-- List sản phẩm -->
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<section class="container" style="padding-top: 160px; padding-bottom: 50px;">
+    <h3><i class="fas fa-microchip" style="margin-right: 10px"></i>Card màn hình</h3>
+    <ul class="breadcrumb Page-address">
+        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
+        <li class="breadcrumb-item active">Card màn hình</li>
+    </ul>
+    <div class="sort">
+        <button class="active">Giá tăng dần</button>
+        <button>Giá giảm dần</button>
+        <button>A -> Z</button>
+        <button>Z -> A</button>
+        <button>mới nhất</button>
+        <button>cũ nhất</button>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <div class="row">
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 card">
+            <div class="box">
+                <a href="#">
+                    <img class="card-img" src="/assets/img/1.png">
+                    <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
+                    <p class="price-tag">4.150.000đ</p>
+                    <p class="status">Tình trạng: còn hàng</p>
+                </a>
+                <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="pagination col-md-12">
+        <a href="#"><i class="fas fa-angle-double-left"></i></a>
+        <a href="#"><i class="fas fa-angle-left"></i></a>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#"><i class="fas fa-angle-right"></i></a>
+        <a href="#"><i class="fas fa-angle-double-right"></i></a>
     </div>
-</div>
+</section>
