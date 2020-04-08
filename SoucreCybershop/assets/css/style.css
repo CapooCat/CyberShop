@@ -142,6 +142,13 @@ body {
   z-index: 1;
 }
 
+.dropdown-content a::after{
+  font-family: "FontAwesome";
+  content: "\f105";
+  float: right;
+  margin-right: 0px;
+}
+
 .dropdown-content a {
   transition: .2s;
   margin-left: 0;
@@ -153,24 +160,64 @@ body {
   text-align: left;
 }
 
-.dropdown-content .Title {
-  background-color: #1E90FF;
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
+.dropdown-content i {
+  margin-right: 10px;
 }
 
 .dropdown-content a:hover {
-  color: black;
-  background-color: #ddd;
+  color: white;
+  background-color: #1E90FF;
 }
 
 .dropdown:hover .dropdown-content {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
+}
+
+.dropdown-content:hover .more-content {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.dropdown-content .more-content {
+  color: #1E90FF;
+  transition: 0.1s 0.2s;
+  visibility: hidden;
+  opacity: 0;
+  box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.2);
+  position: absolute;
+  left: 103%;
+  top: 0;
+  bottom: 0;
+  background-color: #f9f9f9;
+  min-width: 890px;
+  overflow: hidden;
+}
+
+.dropdown-content .more-content-items {
+  padding: 10px 15px;
+}
+
+.dropdown-content .more-content-items li{
+  list-style-type:none;
+}
+
+.dropdown-content .more-content-items a{
+  color: black
+  background-color: #f9f9f9;
+  padding: 0px 0px;
+}
+
+.dropdown-content .more-content-items a:hover{
+  color: #1E90FF;
+  background-color: #f9f9f9;
+  padding: 0px 5px;
+}
+
+.dropdown-content .more-content-items a::after{
+  content: "";
 }
 
 .container {
@@ -202,15 +249,6 @@ body {
   margin-right: 50px;
 }
 
-.topnav .logo:hover{
-  opacity: 0.6;
-  color: black;
-  padding: 0;
-  margin: 0;
-  float: left;
-  margin-right: 50px;
-}
-
 .logo{
   transition: .2s;
   text-decoration:underline;
@@ -223,8 +261,8 @@ body {
 }
 
 .logo:hover{
-  opacity: 0.6;
-  color: black;
+  text-shadow: 0px 0px 16px rgba(30,144,255,0.2);
+  color: #1E90FF;
   padding: 0;
   margin: 0;
   float: left;
@@ -340,6 +378,10 @@ body {
   text-decoration: none;
   font-size: 16px;
   padding: 8px 0px;
+}
+
+.topnav .dropdown-cart a:hover {
+  color: #1E90FF;
 }
 
 .Total {
