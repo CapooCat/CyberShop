@@ -1,0 +1,52 @@
+﻿@model List<Data.Product>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- List sản phẩm -->
+
+<section class="container" style="padding-top: 160px; padding-bottom: 50px;">
+    <h3><i class="fas fa-microchip" style="margin-right: 10px"></i>Card màn hình</h3>
+    <ul class="breadcrumb Page-address">
+        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
+        <li class="breadcrumb-item active">Card màn hình</li>
+    </ul>
+    <div class="sort">
+        <button class="active">Giá tăng dần</button>
+        <button>Giá giảm dần</button>
+        <button>A -> Z</button>
+        <button>Z -> A</button>
+        <button>mới nhất</button>
+        <button>cũ nhất</button>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+                <div class="col-md-3 card">
+                    <div class="box">
+                        <a href="#">
+                            <img class="card-img" src="/assets/img/1.png">
+                            <h6>@item.ProductName</h6>
+                            <p class="price-tag">@string.Format("{0:#,##0}", @item.Price)đ</p>
+                            <p class="status">Tình trạng: còn hàng</p>
+                        </a>
+                        <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                    </div>
+                </div>
+        }
+    </div>
+
+    <div class="pagination col-md-12">
+        <a href="#"><i class="fas fa-angle-double-left"></i></a>
+        <a href="#"><i class="fas fa-angle-left"></i></a>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#"><i class="fas fa-angle-right"></i></a>
+        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+    </div>
+</section>
