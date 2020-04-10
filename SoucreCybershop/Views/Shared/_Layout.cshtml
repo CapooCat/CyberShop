@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+    var sessionCheck = Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -17,13 +21,21 @@
             <div class="topnav" style="border-bottom: 1px solid #DCDCDC;">
                 <div class="container">
                     <div style="display: inline-block;">
-                        <a href="Product.html" class="logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
+                        <a href="/Home" class="logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
                         <div class="search-container">
                             <input type="text" placeholder="Tìm kiếm..." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </div>
-                        <a href="SignUp.html" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
-                        <a href="/Home/Login" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
+                        @if (sessionCheck!=null)
+                        {
+                            <a href="#" style="margin-top: 13px">Xin chào @session.HoTen</a>
+                            <a href="/Home/Logout" style="margin-top: 13px"><i class="glyphicon-remove-sign" style="margin-right: 10px"></i>Đăng xuất</a>
+                        }
+                        else
+                        {
+                            <a href="SignUp.html" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
+                            <a href="/Home/Login" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
+                        }
                         <div class="cart">
                             <a href="#" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'> 1 </span></i>Giỏ hàng</a>
                             <div class="dropdown-cart">
@@ -168,5 +180,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

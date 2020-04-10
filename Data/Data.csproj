@@ -101,6 +101,7 @@
     <Compile Include="User.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserDao.cs" />
     <Compile Include="Warehouse.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>

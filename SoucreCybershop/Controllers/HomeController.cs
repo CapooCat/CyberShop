@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using CyberShop.Models;
+using CyberShop.Common;
 namespace CyberShop.Controllers
 {
     public class HomeController : Controller
@@ -25,11 +26,39 @@ namespace CyberShop.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            UserDao userDao = new UserDao();
             if(ModelState.IsValid)
             {
-
+                if (userDao.KTTaiKhoan(model.Username))
+                {
+                    if (userDao.KTMatKhau(Encryptor.MD5Hash(model.Password)))
+                    {
+                        var user = userDao.getInfo(model.Username);
+                        var userSession = new UserInfo();
+                        userSession.Id = user.id;
+                        userSession.TaiKhoan = user.Username;
+                        userSession.Image = user.Image;
+                        userSession.HoTen = user.Name;
+                        userSession.DateOfBirth = user.DayOfBirth.ToString();
+                        Session.Add(CommonConstantUser.USER_SESSION, userSession);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng");
+                }
             }
             return View(model);
+        }
+        public ActionResult Logout()
+        {
+            Session[CommonConstantUser.USER_SESSION] = null;
+            return Redirect("/");
         }
 
 
