@@ -23,7 +23,7 @@
                 @Html.TextBoxFor(model=> model.Username, new { @type="text",@placeholder="Tài khoản...",@name="search",})
             </h6>
             <h6>
-                @Html.TextBoxFor(model => model.Password, new { @type = "text", @placeholder = "Mật khẩu...", @name = "search", })
+                @Html.TextBoxFor(model => model.Password, new { @type = "password", @placeholder = "Mật khẩu...", @name = "search", })
             </h6>
             <h6>
                 <button type="submit">Đăng nhập</button>
@@ -37,16 +37,11 @@
 
     <script>
         var x = document.getElementById("Post_Error");
-        x.style.display = "none";
-        function PostError() {
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            }
-        }
-        function Success() {
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            }
+        var list = x.getElementsByTagName("UL")[0];
+        if (list.getElementsByTagName("LI")[0].innerHTML != "") {
+            x.style.display = 'inline-block';
+        } else {
+            x.style.display = 'none';
         }
     </script>
 
