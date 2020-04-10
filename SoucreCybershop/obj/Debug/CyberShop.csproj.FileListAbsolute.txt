@@ -100,8 +100,6 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\CyberShop.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\CyberShop.pdb
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Antlr3.Runtime.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Data.dll
-C:\GitLaravel\CyberShop\SoucreCybershop\bin\EntityFramework.dll
-C:\GitLaravel\CyberShop\SoucreCybershop\bin\EntityFramework.SqlServer.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.AI.Agent.Intercept.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.AI.DependencyCollector.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -149,8 +147,6 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.WebPages.Deployment.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.WebPages.Razor.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Antlr3.Runtime.pdb
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Newtonsoft.Json.xml
-C:\GitLaravel\CyberShop\SoucreCybershop\bin\EntityFramework.xml
-C:\GitLaravel\CyberShop\SoucreCybershop\bin\EntityFramework.SqlServer.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.AspNet.Identity.Core.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.AspNet.Identity.EntityFramework.xml
