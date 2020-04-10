@@ -13,7 +13,11 @@ ViewBag.Title = "Login";
 
     <div class="login col-md-12">
         <h1>Đăng nhập</h1>
-        @Html.ValidationSummary(false, "", "alert alert-danger")
+            <div class="error" id="Post_Error">
+                <ul>
+                    @Html.ValidationSummary(false, "", "alert alert-danger")
+                </ul>
+            </div>
         <form method="post" action="/Home/Login">
             <h6>
                 @Html.TextBoxFor(model=> model.Username, new { @type="text",@placeholder="Tài khoản...",@name="search",})
@@ -30,6 +34,21 @@ ViewBag.Title = "Login";
             <a href="#">quên mật khẩu ?</a>
         </h6>
     </div>
+
+    <script>
+        var x = document.getElementById("Post_Error");
+        x.style.display = "none";
+        function PostError() {
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            }
+        }
+        function Success() {
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
 </section>
 

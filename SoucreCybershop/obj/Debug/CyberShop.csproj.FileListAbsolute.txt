@@ -178,8 +178,6 @@ D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\CyberShop.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\CyberShop.pdb
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Antlr3.Runtime.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Data.dll
-D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\EntityFramework.dll
-D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\EntityFramework.SqlServer.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.AI.Agent.Intercept.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.AI.DependencyCollector.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -227,8 +225,6 @@ D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.WebPages.Deployment.x
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.WebPages.Razor.xml
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Antlr3.Runtime.pdb
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Newtonsoft.Json.xml
-D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\EntityFramework.xml
-D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\EntityFramework.SqlServer.xml
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.AspNet.Identity.Core.xml
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.AspNet.Identity.Owin.xml
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.AspNet.Identity.EntityFramework.xml
