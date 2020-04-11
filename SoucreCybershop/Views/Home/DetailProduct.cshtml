@@ -1,0 +1,108 @@
+﻿@model Data.Product
+
+@{
+    ViewBag.Title = "Detail Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container" style="padding-top: 160px; padding-bottom: 50px;">
+    <ul class="breadcrumb Page-address">
+        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
+        <li class="breadcrumb-item"><a href="#">Linh kiện PC</a></li>
+        <li class="breadcrumb-item active">@Model.ProductName</li>
+    </ul>
+    <div class="row">
+        <div class="col-md-6 product-img">
+            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/1.png">
+            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/2.png">
+            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/3.png">
+            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/4.png">
+            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/5.png">
+            <div class="Dots col-md-12" style="text-align: center;">
+                <div class="Dot"></div>
+                <div class="Dot"></div>
+                <div class="Dot"></div>
+                <div class="Dot"></div>
+                <div class="Dot"></div>
+            </div>
+            <div class="row product-img-demo">
+                <img class="demo" onclick="currentSlide(1)" src="/assets/img/1.png">
+                <img class="demo" onclick="currentSlide(2)" src="/assets/img/2.png">
+                <img class="demo" onclick="currentSlide(3)" src="/assets/img/3.png">
+                <img class="demo" onclick="currentSlide(4)" src="/assets/img/4.png">
+                <img class="demo" onclick="currentSlide(5)" src="/assets/img/5.png">
+            </div>
+        </div>
+        <div class="col-md-6 product-info">
+            <h3>@Model.ProductName</h3>
+            <ul>
+                <li><span>Nhà sản xuất:</span> Asus</li>
+                <li><span>Tình trạng sản phẩm:</span> mới 100%</li>
+                <li><span>Bảo hành:</span>@Model.MonthWarranty tháng</li>
+                <li><span>Tình trạng hàng:</span> còn hàng</li>
+            </ul>
+            <p style="margin-top: 50px;" class="price-tag"><span>Giá: </span>@string.Format("{0:#,##0}", @Model.Price)đ</p>
+            <div style="margin-top: 25px;">
+                <button href="#">Thêm vào giỏ</button>
+                <button href="#">Mua ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="word-content">
+        <h1>Mô tả sản phẩm</h1>
+    </div>
+
+</section>
+@section scripts{
+<script type="text/javascript">
+				var slideIndex = 1;
+				var Timer = window.setTimeout(AutoSlide, 3000);
+				ShowCurrentSlide(slideIndex);
+
+				$(window).focus(function() {
+					clearTimeout(Timer);
+  					Timer = window.setTimeout(AutoSlide, 3000);
+				});
+
+				$(window).blur(function() {
+    				clearTimeout(Timer);
+				});
+
+				function plusSlides(n) {
+  					ShowCurrentSlide(slideIndex += n);
+  					clearTimeout(Timer);
+  					Timer = window.setTimeout(AutoSlide, 30000);
+				}
+
+				function currentSlide(n) {
+  					ShowCurrentSlide(slideIndex = n);
+  					clearTimeout(Timer);
+  					Timer = window.setTimeout(AutoSlide, 30000);
+				}
+
+				function ShowCurrentSlide(n) {
+					var slides = document.getElementsByClassName("Slide");
+					var dots = document.getElementsByClassName("Dot");
+					var demo = document.getElementsByClassName("demo");
+					if (n > slides.length) {slideIndex = 1}
+					if (n < 1) {slideIndex = slides.length}
+					for (i = 0; i < slides.length; i++) {
+      					slides[i].style.display = "none";
+  					}
+  					for (i = 0; i < dots.length; i++) {
+      					dots[i].className = dots[i].className.replace(" active", "");
+      					demo[i].className = demo[i].className.replace(" active", "");
+  					}
+  					slides[slideIndex-1].style.display = "block";
+  					dots[slideIndex-1].className += " active";
+  					demo[slideIndex-1].className += " active";
+				}
+				function AutoSlide() {
+					ShowCurrentSlide(slideIndex += 1);
+					clearTimeout(Timer);
+					Timer = window.setTimeout(AutoSlide, 3000);
+				}
+</script>
+    }
+

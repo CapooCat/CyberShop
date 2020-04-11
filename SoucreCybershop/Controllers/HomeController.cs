@@ -60,6 +60,12 @@ namespace CyberShop.Controllers
             Session[CommonConstantUser.USER_SESSION] = null;
             return Redirect("/");
         }
+        public ActionResult DetailProduct(int id)
+        {
+            var model = new Product();
+            model= data.Products.Where(x => x.id == id).FirstOrDefault();
+            return View(model);
+        }
 
 
     }
