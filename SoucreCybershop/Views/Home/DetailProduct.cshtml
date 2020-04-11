@@ -15,7 +15,7 @@
         <div class="col-md-6 product-img">
             @foreach (var item in Model)
             {
-                <img class="Slide" onclick="plusSlides(1)" src="@item.Url">
+                <img class="Slide" onclick="plusSlides()" src="@item.Url">
             }
             <div class="Dots col-md-12" style="text-align: center;">
             @foreach (var item in Model)
@@ -67,8 +67,8 @@
     				clearTimeout(Timer);
 				});
 
-				function plusSlides(n) {
-  					ShowCurrentSlide(slideIndex += n);
+				function plusSlides() {
+  					ShowCurrentSlide(slideIndex += 1);
   					clearTimeout(Timer);
   					Timer = window.setTimeout(AutoSlide, 30000);
 				}
