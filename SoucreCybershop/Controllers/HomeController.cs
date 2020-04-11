@@ -62,8 +62,17 @@ namespace CyberShop.Controllers
         }
         public ActionResult DetailProduct(int id)
         {
-            var model = new Product();
-            model= data.Products.Where(x => x.id == id).FirstOrDefault();
+            var model = (from a in data.ProductImages
+                         join b in data.Products on a.Product_id equals b.id
+                         where b.id == id
+                         select new DetailProductViewModel
+                         {
+                             id = a.id,
+                             ProductName=b.ProductName,
+                             Price=b.Price,
+                             MonthWarranty=b.MonthWarranty,
+                             Url=a.Url
+                         }).ToList();
             return View(model);
         }
 

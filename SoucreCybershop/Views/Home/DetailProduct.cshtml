@@ -1,4 +1,4 @@
-﻿@model Data.Product
+﻿@model List<CyberShop.Models.DetailProductViewModel>
 
 @{
     ViewBag.Title = "Detail Product";
@@ -9,39 +9,37 @@
     <ul class="breadcrumb Page-address">
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
         <li class="breadcrumb-item"><a href="#">Linh kiện PC</a></li>
-        <li class="breadcrumb-item active">@Model.ProductName</li>
+        <li class="breadcrumb-item active">@Model.FirstOrDefault().ProductName</li>
     </ul>
     <div class="row">
         <div class="col-md-6 product-img">
-            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/1.png">
-            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/2.png">
-            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/3.png">
-            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/4.png">
-            <img class="Slide" onclick="plusSlides(1)" src="/assets/img/5.png">
+            @foreach (var item in Model)
+            {
+                <img class="Slide" onclick="plusSlides(1)" src="@item.Url">
+            }
             <div class="Dots col-md-12" style="text-align: center;">
+            @foreach (var item in Model)
+            {
                 <div class="Dot"></div>
-                <div class="Dot"></div>
-                <div class="Dot"></div>
-                <div class="Dot"></div>
-                <div class="Dot"></div>
+            }
             </div>
             <div class="row product-img-demo">
-                <img class="demo" onclick="currentSlide(1)" src="/assets/img/1.png">
-                <img class="demo" onclick="currentSlide(2)" src="/assets/img/2.png">
-                <img class="demo" onclick="currentSlide(3)" src="/assets/img/3.png">
-                <img class="demo" onclick="currentSlide(4)" src="/assets/img/4.png">
-                <img class="demo" onclick="currentSlide(5)" src="/assets/img/5.png">
+                @foreach (var item in Model)
+                {
+                <img class="demo" onclick="currentSlide(1)" src="@item.Url">
+                }
             </div>
+
         </div>
         <div class="col-md-6 product-info">
-            <h3>@Model.ProductName</h3>
+            <h3>@Model.FirstOrDefault().ProductName</h3>
             <ul>
                 <li><span>Nhà sản xuất:</span> Asus</li>
                 <li><span>Tình trạng sản phẩm:</span> mới 100%</li>
-                <li><span>Bảo hành:</span>@Model.MonthWarranty tháng</li>
+                <li><span>Bảo hành:</span>@Model.FirstOrDefault().MonthWarranty tháng</li>
                 <li><span>Tình trạng hàng:</span> còn hàng</li>
             </ul>
-            <p style="margin-top: 50px;" class="price-tag"><span>Giá: </span>@string.Format("{0:#,##0}", @Model.Price)đ</p>
+            <p style="margin-top: 50px;" class="price-tag"><span>Giá: </span>@string.Format("{0:#,##0}", @Model.FirstOrDefault().Price)đ</p>
             <div style="margin-top: 25px;">
                 <button href="#">Thêm vào giỏ</button>
                 <button href="#">Mua ngay</button>

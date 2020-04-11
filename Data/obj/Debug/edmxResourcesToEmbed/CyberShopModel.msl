@@ -166,5 +166,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductImages">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.ProductImage">
+        <MappingFragment StoreEntitySet="ProductImage">
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

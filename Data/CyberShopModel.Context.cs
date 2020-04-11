@@ -36,5 +36,6 @@ namespace Data
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<WarehouseDetail> WarehouseDetails { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
     }
 }

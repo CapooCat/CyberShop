@@ -91,6 +91,15 @@
     <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
     <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+    <Property Name="Product_id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Promotion">
     <Key>
       <PropertyRef Name="Id" />
@@ -227,6 +236,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProductImage_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Warehouse_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
@@ -260,6 +281,7 @@
     <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -288,6 +310,10 @@
     <AssociationSet Name="FK_Product_Promotion1" Association="Self.FK_Product_Promotion1">
       <End Role="Promotion" EntitySet="Promotion" />
       <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductImage" EntitySet="ProductImage" />
     </AssociationSet>
     <AssociationSet Name="FK_Warehouse_Product" Association="Self.FK_Warehouse_Product">
       <End Role="Product" EntitySet="Product" />

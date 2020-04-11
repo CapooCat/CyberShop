@@ -24,6 +24,8 @@
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Promotion" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Warehouse_Product" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_WarehouseDetail_Warehouse" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.ProductImage" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_ProductImage_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -96,6 +96,15 @@
           <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Url" Type="varchar(max)" Nullable="false" />
+          <Property Name="Product_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Promotion">
           <Key>
             <PropertyRef Name="Id" />
@@ -232,6 +241,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductImage_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Warehouse_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
@@ -265,6 +286,7 @@
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -293,6 +315,10 @@
           <AssociationSet Name="FK_Product_Promotion1" Association="Self.FK_Product_Promotion1">
             <End Role="Promotion" EntitySet="Promotion" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
           <AssociationSet Name="FK_Warehouse_Product" Association="Self.FK_Warehouse_Product">
             <End Role="Product" EntitySet="Product" />
@@ -408,6 +434,7 @@
           <NavigationProperty Name="Invoice_Detail" Relationship="Self.FK_Invoice_Detail_Product" FromRole="Product" ToRole="Invoice_Detail" />
           <NavigationProperty Name="Promotion" Relationship="Self.FK_Product_Promotion" FromRole="Product" ToRole="Promotion" />
           <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouse_Product" FromRole="Product" ToRole="Warehouse" />
+          <NavigationProperty Name="ProductImages" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -620,7 +647,34 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="WarehouseDetail" EntitySet="WarehouseDetails" />
           </AssociationSet>
+          <EntitySet Name="ProductImages" EntityType="ShopPCComponentsModel.ProductImage" />
+          <AssociationSet Name="FK_ProductImage_Product" Association="ShopPCComponentsModel.FK_ProductImage_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Product_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ProductImage_Product">
+          <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ShopPCComponentsModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -789,6 +843,16 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImages">
+            <EntityTypeMapping TypeName="ShopPCComponentsModel.ProductImage">
+              <MappingFragment StoreEntitySet="ProductImage">
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

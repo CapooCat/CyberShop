@@ -91,6 +91,9 @@
     <Compile Include="Product.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductImage.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Promotion.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
