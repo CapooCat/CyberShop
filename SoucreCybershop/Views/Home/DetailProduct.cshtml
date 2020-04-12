@@ -24,20 +24,21 @@
             }
             </div>
             <div class="row product-img-demo">
-                @foreach (var item in Model)
+                @for (int i = 0; i < Model.Count; i++)
                 {
-                <img class="demo" onclick="currentSlide(1)" src="@item.Url">
+                    <img class="demo" onclick="currentSlide(@i+1)" src="@Model[i].Url">
                 }
+
             </div>
 
         </div>
         <div class="col-md-6 product-info">
             <h3>@Model.FirstOrDefault().ProductName</h3>
             <ul>
-                <li><span>Nhà sản xuất: </span> Asus</li>
-                <li><span>Tình trạng sản phẩm: </span> mới 100%</li>
+                <li><span>Nhà sản xuất: </span>@Model.FirstOrDefault().BrandName </li>
+                <li><span>Tình trạng sản phẩm: </span> Mới 100%</li>
                 <li><span>Bảo hành: </span>@Model.FirstOrDefault().MonthWarranty tháng</li>
-                <li><span>Tình trạng hàng: </span> còn hàng</li>
+                <li><span>Tình trạng hàng: </span> Còn hàng</li>
             </ul>
             <p style="margin-top: 50px;" class="price-tag"><span>Giá: </span>@string.Format("{0:#,##0}", @Model.FirstOrDefault().Price)đ</p>
             <div style="margin-top: 25px;">

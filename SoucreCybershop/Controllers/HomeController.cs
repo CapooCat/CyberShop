@@ -64,6 +64,7 @@ namespace CyberShop.Controllers
         {
             var model = (from a in data.ProductImages
                          join b in data.Products on a.Product_id equals b.id
+                         join c in data.Brands on b.Brand_id equals c.Id
                          where b.id == id
                          select new DetailProductViewModel
                          {
@@ -71,7 +72,8 @@ namespace CyberShop.Controllers
                              ProductName=b.ProductName,
                              Price=b.Price,
                              MonthWarranty=b.MonthWarranty,
-                             Url=a.Url
+                             Url=a.Url,
+                             BrandName=c.BrandName
                          }).ToList();
             return View(model);
         }

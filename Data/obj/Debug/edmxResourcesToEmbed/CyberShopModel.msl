@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Category">
         <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Info" ColumnName="Info" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

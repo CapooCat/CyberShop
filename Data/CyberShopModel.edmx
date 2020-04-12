@@ -44,6 +44,7 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
           <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="Info" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -101,7 +102,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Url" Type="varchar(max)" Nullable="false" />
           <Property Name="Product_id" Type="int" Nullable="false" />
         </EntityType>
@@ -374,6 +375,7 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Categories" FromRole="Categories" ToRole="Product" />
+          <Property Name="Info" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -658,7 +660,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Product_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
@@ -714,6 +716,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Info" ColumnName="Info" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

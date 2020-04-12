@@ -39,6 +39,7 @@
     <Property Name="CreateTime" Type="datetime" />
     <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
     <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="Info" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Invoice">
     <Key>
@@ -96,7 +97,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Url" Type="varchar(max)" Nullable="false" />
     <Property Name="Product_id" Type="int" Nullable="false" />
   </EntityType>

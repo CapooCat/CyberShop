@@ -1,6 +1,9 @@
-﻿@{ 
+﻿@using Data;
+@{ 
     var session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
     var sessionCheck = Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+    CategoriesDao catDao = new CategoriesDao();
+    List<Category> catList = catDao.getAllCatgories();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -68,16 +71,19 @@
                     <div class="dropdown">
                         <button class="dropbtn"><i class="fas fa-bars" style="margin-right: 10px;"></i>Danh mục sản phẩm</button>
                         <div class="dropdown-content">
-                            <a href="#">Laptop</a>
-                            <a href="#">Máy bộ CyberShop</a>
                             <a href="#">Linh kiện PC</a>
-                            <a href="#">Màn hình</a>
-                            <a href="#">Bàn phím</a>
-                            <a href="#">Chuột + Lót chuột</a>
-                            <a href="#">Tai nghe</a>
-                            <a href="#">Loa</a>
-                            <a href="#">Ghế gaming</a>
-                            <a href="#">Phụ kiện</a>
+                            <a href="#">Gears</a>
+                            @foreach (var item in catList)
+                            {
+                                if (item.Info!="Linh kiện PC" && item.Info != "Gears")
+                                {
+                                    <a href = "#" > @item.CategoryName</a>
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
                             <div class="more-content">
                                 <div class="row more-content-items">
                                     <div class="col-md-3">
