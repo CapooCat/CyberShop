@@ -696,6 +696,14 @@ body {
   position: absolute; 
 }
 
+.card .old-price {
+  font-weight: normal;
+  margin-right: 10px;
+  text-decoration: line-through;
+  font-size: 14px;
+  color: gray;
+}
+
 .card:hover .sale {
   border: 2px solid #1E90FF;
   color: white;
