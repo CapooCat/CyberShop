@@ -83,6 +83,10 @@ namespace CyberShop.Controllers
             ViewBag.Category = cate.TypeName;
             return View(model);
         }
+        public ActionResult HomePage()
+        {
+            return View();
+        }
 
 
     }
