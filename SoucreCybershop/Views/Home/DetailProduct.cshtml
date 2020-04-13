@@ -13,10 +13,12 @@
     </ul>
     <div class="row">
         <div class="col-md-6 product-img">
-            @foreach (var item in Model)
-            {
-                <img class="Slide" onclick="plusSlides()" src="@item.Url">
-            }
+            <div class="image-box">
+                @foreach (var item in Model)
+                {
+                    <img class="Slide" onclick="plusSlides()" src="@item.Url">
+                }
+            </div>
             <div class="Dots col-md-12" style="text-align: center;">
             @foreach (var item in Model)
             {
