@@ -868,9 +868,9 @@ body {
 }
 
 /* Product-Single */
-.product-img .image-box {
-  max-width: 531px;
-  max-height: 531px;
+.image-box {
+  width: 531px;
+  height: 531px;
 }
 .product-img img {
   display: none;
