@@ -679,6 +679,37 @@ body {
   margin: 0;
 }
 
+.card .sale {
+  transition: .2s;
+  color: #1E90FF;
+  font-size: 15px;
+  text-align: center;
+  border: 2px solid #1E90FF;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-top: -25px;
+  background-color: white;
+  border-radius: 50%;
+  padding-top: 12px;
+  width: 50px;
+  height: 50px;
+  position: absolute; 
+}
+
+.card .old-price {
+  font-weight: normal;
+  margin-right: 10px;
+  text-decoration: line-through;
+  font-size: 14px;
+  color: gray;
+}
+
+.card:hover .sale {
+  border: 2px solid #1E90FF;
+  color: white;
+  background-color: #1E90FF;
+}
+
 .card:hover {
   transform: translate(0%,-1%);
 }
@@ -837,17 +868,14 @@ body {
 }
 
 /* Product-Single */
-.product-img img {
-  display: none;
-  margin-left: auto;
-  margin-right: auto;
+.product-img .image-box {
   max-width: 531px;
   max-height: 531px;
 }
-
-.product-img .image-box {
-  width: 531px;
-  height: 531px;
+.product-img img {
+  display: none;
+  max-width: 531px;
+  max-height: 531px;
 }
 
 .product-img img:hover {
