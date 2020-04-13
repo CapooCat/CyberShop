@@ -61,12 +61,28 @@
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CategoriesDao.cs" />
-    <Compile Include="Category.cs">
+    <Compile Include="CategoryDetail.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryDetailDao.cs" />
+    <Compile Include="CategoryDetailSuggest.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categoryy.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice_Detail.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Product.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProductDao.cs" />
     <Compile Include="CyberShopModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -83,16 +99,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CyberShopModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Invoice.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Invoice_Detail.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Product.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ProductImage.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProducType.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Promotion.cs">

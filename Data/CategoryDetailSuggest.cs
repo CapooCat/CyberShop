@@ -12,24 +12,17 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class CategoryDetailSuggest
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
-        {
-            this.Products = new HashSet<Product>();
-        }
-    
         public int Id { get; set; }
-        public string CategoryName { get; set; }
+        public string SuggestName { get; set; }
+        public int CategoryDetail_id { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
-        public string Info { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual CategoryDetail CategoryDetail { get; set; }
     }
 }

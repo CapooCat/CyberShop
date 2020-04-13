@@ -3,7 +3,9 @@
     var session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
     var sessionCheck = Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
     CategoriesDao catDao = new CategoriesDao();
-    List<Category> catList = catDao.getAllCatgories();
+    CategoryDetailDao catDetailDao = new CategoryDetailDao();
+    List<Categoryy> catList = catDao.getAllCatgories();
+    List<CategoryDetailDao> catListDetail=catDetailDao.getListCateDetail(1);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -73,52 +75,23 @@
                     <div class="dropdown">
                         <button class="dropbtn"><i class="fas fa-bars" style="margin-right: 10px;"></i>Danh mục sản phẩm</button>
                         <div class="dropdown-content">
-                            <a href="#">Linh kiện PC</a>
-                            <a href="#">Gears</a>
                             @foreach (var item in catList)
                             {
-                                if (item.Info!="Linh kiện PC" && item.Info != "Gears")
-                                {
                                     <a href = "#" > @item.CategoryName</a>
-                                }
-                                else
-                                {
-                                    continue;
-                                }
                             }
                             <div class="more-content">
                                 <div class="row more-content-items">
+                                @foreach (var item in catListDetail)
+                                {
                                     <div class="col-md-3">
-                                        Hãng Laptop
+                                        @item.CateDetailName
                                         <li><a href="#">Acer</a></li>
                                         <li><a href="#">Asus</a></li>
                                         <li><a href="#">MSI</a></li>
                                         <li><a href="#">Dell</a></li>
                                         <li><a href="#">HP</a></li>
                                     </div>
-                                    <div class="col-md-3">
-                                        Hãng RAM Laptop
-                                        <li><a href="#">Corsair</a></li>
-                                        <li><a href="#">Crucial</a></li>
-                                        <li><a href="#">Adata</a></li>
-                                        <li><a href="#">Team Elite</a></li>
-                                        <li><a href="#">Kingston</a></li>
-                                        <li><a href="#">Gskill</a></li>
-                                    </div>
-                                    <div class="col-md-3">
-                                        Phụ kiện Laptop
-                                        <li><a href="#">Đế tản nhiệt laptop</a></li>
-                                        <li><a href="#">Ổ cứng di động</a></li>
-                                        <li><a href="#">Balo</a></li>
-                                        <li><a href="#">Túi chống sốc</a></li>
-                                    </div>
-                                    <div class="col-md-3">
-                                        Laptop theo giá
-                                        <li><a href="#">Dưới 10 triệu</a></li>
-                                        <li><a href="#">trên 10 triệu dưới 20 triệu</a></li>
-                                        <li><a href="#">trên 20 triệu dưới 30 triệu</a></li>
-                                        <li><a href="#">trên 30 triệu</a></li>
-                                    </div>
+                                }
                                 </div>
                             </div>
                         </div>

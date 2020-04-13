@@ -27,7 +27,6 @@ namespace Data
     
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Invoice_Detail> Invoice_Detail { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -37,5 +36,9 @@ namespace Data
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<WarehouseDetail> WarehouseDetails { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<Categoryy> Categoryies { get; set; }
+        public virtual DbSet<CategoryDetail> CategoryDetails { get; set; }
+        public virtual DbSet<CategoryDetailSuggest> CategoryDetailSuggests { get; set; }
+        public virtual DbSet<ProducType> ProducTypes { get; set; }
     }
 }

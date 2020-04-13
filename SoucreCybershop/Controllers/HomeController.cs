@@ -75,18 +75,12 @@ namespace CyberShop.Controllers
                              Url=a.Url,
                              BrandName=c.BrandName
                          }).ToList();
-            var cate = (from a in data.Categories
-                        join b in data.Products on a.Id equals b.Categorie_id
-                     where b.id == id
-                        select new { a.CategoryName,a.Info}).FirstOrDefault();
-            if(cate.Info!="Linh kiện PC"&&cate.Info!="Gears")
-            {
-                ViewBag.Category = cate.CategoryName;
-            }
-            else
-            {
-                ViewBag.Category = cate.Info;
-            }
+            var cate = (from a in data.ProducTypes
+                        join b in data.Products on a.Id equals b.ProductType_id
+                        where b.id == id
+                        select new { a.TypeName,a.Info}).FirstOrDefault();
+
+            ViewBag.Category = cate.TypeName;
             return View(model);
         }
 

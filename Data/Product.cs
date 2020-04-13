@@ -25,7 +25,6 @@ namespace Data
         public int id { get; set; }
         public int Brand_id { get; set; }
         public Nullable<int> Promotion_id { get; set; }
-        public int Categorie_id { get; set; }
         public string ProductName { get; set; }
         public string Info { get; set; }
         public Nullable<double> Price { get; set; }
@@ -36,9 +35,9 @@ namespace Data
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public int ProductType_id { get; set; }
     
         public virtual Brand Brand { get; set; }
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
         public virtual Promotion Promotion { get; set; }
@@ -46,5 +45,6 @@ namespace Data
         public virtual ICollection<Warehouse> Warehouses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual ProducType ProducType { get; set; }
     }
 }
