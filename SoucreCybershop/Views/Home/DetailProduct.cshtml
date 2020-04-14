@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Detail Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
 }
 
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">

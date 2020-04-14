@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Sản phẩm Cybershop";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER,Request.Url);
 }
 <!-- List sản phẩm -->
 
