@@ -5,7 +5,7 @@
     CategoriesDao catDao = new CategoriesDao();
     CategoryDetailDao catDetailDao = new CategoryDetailDao();
     List<Categoryy> catList = catDao.getAllCatgories();
-    List<CategoryDetailDao> catListDetail=new List<CategoryDetailDao>();
+    List<CategoryDetailDao> catListDetail= new List<CategoryDetailDao>();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -78,23 +78,27 @@
                             @foreach (var item in catList)
                             {
                                     <a href = "#" > @item.CategoryName</a>
-                                    catListDetail=catDetailDao.getListCateDetail(item.Id);
-                            <div class="more-content">
-                                <div class="row more-content-items">
-                                @foreach (var cat in catListDetail)
+                            }
+                            <a href="/Product">Tất cả sản phẩm</a>
+                                @foreach (var item in catList)
                                 {
-                                    <div class="col-md-3">
-                                        <a class="Title" href="#">@cat.CateDetailName</a>
-                                        <li><a href="#">Acer</a></li>
-                                        <li><a href="#">Asus</a></li>
-                                        <li><a href="#">MSI</a></li>
-                                        <li><a href="#">Dell</a></li>
-                                        <li><a href="#">HP</a></li>
+                                    catListDetail = catDetailDao.getListCateDetail(item.Id);
+                                    <div class="more-content">
+                                        <div class="row more-content-items">
+                                        @foreach (var cat in catListDetail)
+                                        {
+                                            <div class="col-md-3">
+                                                <a class="Title" href="#">@cat.CateDetailName</a>
+                                                <li><a href="#">Acer</a></li>
+                                                <li><a href="#">Asus</a></li>
+                                                <li><a href="#">MSI</a></li>
+                                                <li><a href="#">Dell</a></li>
+                                                <li><a href="#">HP</a></li>
+                                            </div>
+                                        }
+                                        </div>
                                     </div>
                                 }
-                                </div>
-                            </div>
-                            }
                         </div>
                     </div>
                     <a href="#"><i class="far fa-file-alt" style="margin-right: 10px"></i>Kiểm tra bảo hành</a>

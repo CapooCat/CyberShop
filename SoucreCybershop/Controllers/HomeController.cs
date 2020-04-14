@@ -14,9 +14,7 @@ namespace CyberShop.Controllers
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public ActionResult Index()
         {
-            List<Product> model = new List<Product>();
-            model = productDao.ListProduct();
-            return View(model);
+            return View();
         }
         public ActionResult Login()
         {
