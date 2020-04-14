@@ -17,9 +17,16 @@ namespace CyberShop.Controllers
             return View();
         }
         public ActionResult Login()
-        {
+        {    
             var model = new LoginModel();
-            return View(model);
+            if (Session[CommonConstantUser.USER_SESSION] == null)
+            {
+                return View(model);
+            }
+            else
+            {
+                return Redirect(Session[Common.CommonConstantUser.URL_REFERRER].ToString());
+            }
         }
         [HttpPost]
         public ActionResult Login(LoginModel model)
@@ -39,7 +46,7 @@ namespace CyberShop.Controllers
                         userSession.HoTen = user.Name;
                         userSession.DateOfBirth = user.DayOfBirth.ToString();
                         Session.Add(CommonConstantUser.USER_SESSION, userSession);
-                        return RedirectToAction("Index", "Home");
+                        return Redirect(Session[Common.CommonConstantUser.URL_REFERRER].ToString());
                     }
                     else
                     {

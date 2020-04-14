@@ -8,5 +8,6 @@ namespace CyberShop.Common
     public static class CommonConstantUser
     {
         public static string USER_SESSION = "USER_SESSION";
+        public static string URL_REFERRER = "URL_REFERRER";
     }
 }
