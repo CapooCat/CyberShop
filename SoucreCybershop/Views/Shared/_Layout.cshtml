@@ -80,11 +80,12 @@
                                     <a href = "#" id="category_@item.Id"> @item.CategoryName</a>
                             }
                             <a href="/Product">Tất cả sản phẩm</a>
+                            <div class="more-content">
                                 @foreach (var item in catList)
                                 {
                                     catListDetail = catDetailDao.getListCateDetail(item.Id);
-                                    <div class="more-content">
-                                        <div class="row more-content-items" id="@item.Id">
+
+                                    <div class="row more-content-items" id="@item.Id">
                                         @foreach (var cat in catListDetail)
                                         {
                                             <div class="col-md-3">
@@ -96,9 +97,10 @@
                                                 <li><a href="#">HP</a></li>
                                             </div>
                                         }
-                                        </div>
                                     </div>
+
                                 }
+                            </div>
                         </div>
                     </div>
                     <a href="#"><i class="far fa-file-alt" style="margin-right: 10px"></i>Kiểm tra bảo hành</a>
