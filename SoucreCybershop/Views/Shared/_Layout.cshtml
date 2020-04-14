@@ -77,14 +77,14 @@
                         <div class="dropdown-content">
                             @foreach (var item in catList)
                             {
-                                    <a href = "#" > @item.CategoryName</a>
+                                    <a href = "#" id="category_@item.Id"> @item.CategoryName</a>
                             }
                             <a href="/Product">Tất cả sản phẩm</a>
                                 @foreach (var item in catList)
                                 {
                                     catListDetail = catDetailDao.getListCateDetail(item.Id);
                                     <div class="more-content">
-                                        <div class="row more-content-items">
+                                        <div class="row more-content-items" id="@item.Id">
                                         @foreach (var cat in catListDetail)
                                         {
                                             <div class="col-md-3">
