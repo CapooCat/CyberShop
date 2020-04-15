@@ -25,6 +25,7 @@
     <!-- Header -->
 
     <header>
+        <button onclick="topFunction();return false" id="myBtn" class="GoTop"><i class="fas fa-arrow-up"></i></button>
         <div class="wrapper" style="position: fixed;top: 0;width: 100%;">
             <div class="topnav" style="border-bottom: 1px solid #DCDCDC;">
                 <div class="container">
@@ -208,6 +209,23 @@
         }
         function openbox() {
             document.getElementsByClassName("more-content")[0].style.display = "block";
+        }
+
+        var mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            window.scroll({
+                top: 0,
+                behavior: 'smooth'
+            })
         }
     </script>
     @RenderSection("scripts", false)
