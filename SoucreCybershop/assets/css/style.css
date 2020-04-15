@@ -209,6 +209,12 @@ body {
 
 .dropdown-content .more-content-items {
   padding: 10px 15px;
+  filter: blur(0);
+  animation: forwards;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: .4s;
+  animation-name: fade;
+  animation-duration: .4s;
 }
 
 .dropdown-content .more-content-items li{
@@ -226,6 +232,11 @@ body {
   color: #1E90FF;
   background-color: #f9f9f9;
   padding: 0px 5px;
+}
+
+.dropdown-content .active{
+  color: white;
+  background-color: #1E90FF;
 }
 
 .dropdown-content .more-content-items a::after{
