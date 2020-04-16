@@ -35,5 +35,9 @@ namespace Data
                         ModifiedTime=b.ModifiedTime
                     }).ToList();
         }
+        public List<CategoryDetailSuggest> getListCateDetailSuggest(int categoryDetail_id)
+        {
+            return data.CategoryDetailSuggests.Where(x => x.CategoryDetail_id == categoryDetail_id).ToList();
+        }
     }
 }
