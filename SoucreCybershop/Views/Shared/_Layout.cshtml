@@ -6,6 +6,7 @@
     CategoryDetailDao catDetailDao = new CategoryDetailDao();
     List<Categoryy> catList = catDao.getAllCatgories();
     List<CategoryDetailDao> catListDetail= new List<CategoryDetailDao>();
+    List<CategoryDetailSuggest> subCatList = new List<CategoryDetailSuggest>();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -93,13 +94,16 @@
                                         <div class="row">
                                             @foreach (var cat in catListDetail)
                                             {
+                                                subCatList = catDetailDao.getListCateDetailSuggest(cat.Id);
                                                 <div class="col-md-3">
                                                     <a class="Title" href="#">@cat.CateDetailName</a>
-                                                    <li><a href="#">Acer</a></li>
-                                                    <li><a href="#">Asus</a></li>
-                                                    <li><a href="#">MSI</a></li>
-                                                    <li><a href="#">Dell</a></li>
-                                                    <li><a href="#">HP</a></li>
+                                                    @if (subCatList != null)
+                                                    {
+                                                        foreach (var subCat in subCatList)
+                                                        {
+                                                            <li><a href="#">@subCat.SuggestName</a></li>
+                                                        }
+                                                    }
                                                 </div>
                                             }
                                         </div>
