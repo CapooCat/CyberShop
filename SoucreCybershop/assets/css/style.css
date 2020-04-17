@@ -163,7 +163,6 @@ body {
   background-color: #f9f9f9;
   min-width: 175px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
 }
 
 .dropdown-content a::after{
@@ -230,13 +229,13 @@ body {
   transition: 0.1s 0.2s;
   visibility: hidden;
   opacity: 0;
-  box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.2);
+  box-shadow: 3px 7px 13px 0px rgba(0,0,0,0.2);
   position: absolute;
-  left: 103%;
+  left: 100%;
   top: 0;
   bottom: 0;
   background-color: #f9f9f9;
-  min-width: 890px;
+  min-width: 900px;
 }
 
 .dropdown-content .more-content-items {
@@ -1048,7 +1047,7 @@ background-color: #1E90FF;
   to {opacity: 1}
 }
 
-/* CartInfo */
+/* Cartpay */
 
 table {
   margin-top: 50px;
@@ -1141,12 +1140,15 @@ th {
   color: #1E90FF;
 }
 
+
 .form-control {
+  padding-left: 15px;
   color: gray;
   height: 60px;
   border-radius: 30px;
   border: 2px solid gray;
 }
+
 
 .discount {
   width: 100%;
