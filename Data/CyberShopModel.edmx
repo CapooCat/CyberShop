@@ -44,6 +44,7 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
           <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="Metatitle" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CategoryDetail">
           <Key>
@@ -114,6 +115,7 @@
           <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Info" Type="nvarchar(max)" />
           <Property Name="Price" Type="float" />
+          <Property Name="SalePercent" Type="int" />
           <Property Name="MonthWarranty" Type="int" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="IsDeleted" Type="bit" />
@@ -136,6 +138,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_id" Type="int" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreateBy" Type="nchar" MaxLength="30" />
@@ -316,6 +319,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProducType_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="ProducType" Type="Self.ProducType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProducType">
+              <PropertyRef Name="Category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Warehouse_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
@@ -393,6 +408,10 @@
           <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductImage" EntitySet="ProductImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProducType_Category" Association="Self.FK_ProducType_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="ProducType" EntitySet="ProducType" />
           </AssociationSet>
           <AssociationSet Name="FK_Warehouse_Product" Association="Self.FK_Warehouse_Product">
             <End Role="Product" EntitySet="Product" />
@@ -496,6 +515,7 @@
           <NavigationProperty Name="ProductImages" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
           <Property Name="ProductType_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProducType" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="Product" ToRole="ProducType" />
+          <Property Name="SalePercent" Type="Int32" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -712,6 +732,10 @@
             <End Role="ProducType" EntitySet="ProducTypes" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProducType_Category" Association="ShopPCComponentsModel.FK_ProducType_Category">
+            <End Role="Categoryy" EntitySet="Categoryies" />
+            <End Role="ProducType" EntitySet="ProducTypes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProductImage">
           <Key>
@@ -747,6 +771,8 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CategoryDetails" Relationship="ShopPCComponentsModel.FK_CategoryDetail_Category" FromRole="Category1" ToRole="CategoryDetail" />
+          <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ProducTypes" Relationship="ShopPCComponentsModel.FK_ProducType_Category" FromRole="Categoryy" ToRole="ProducType" />
         </EntityType>
         <EntityType Name="CategoryDetail">
           <Key>
@@ -790,6 +816,8 @@
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="Info" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="ProducType" ToRole="Product" />
+          <Property Name="Category_id" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_ProducType_Category" FromRole="ProducType" ToRole="Categoryy" />
         </EntityType>
         <Association Name="FK_CategoryDetail_Category">
           <End Type="ShopPCComponentsModel.Categoryy" Role="Category1" Multiplicity="1" />
@@ -824,6 +852,18 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="ProductType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProducType_Category">
+          <End Type="ShopPCComponentsModel.Categoryy" Role="Categoryy" Multiplicity="0..1" />
+          <End Type="ShopPCComponentsModel.ProducType" Role="ProducType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoryy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProducType">
+              <PropertyRef Name="Category_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -900,6 +940,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
                 <ScalarProperty Name="ProductType_id" ColumnName="ProductType_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
@@ -998,6 +1039,7 @@
           <EntitySetMapping Name="Categoryies">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Categoryy">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -1039,6 +1081,7 @@
           <EntitySetMapping Name="ProducTypes">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.ProducType">
               <MappingFragment StoreEntitySet="ProducType">
+                <ScalarProperty Name="Category_id" ColumnName="Category_id" />
                 <ScalarProperty Name="Info" ColumnName="Info" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />

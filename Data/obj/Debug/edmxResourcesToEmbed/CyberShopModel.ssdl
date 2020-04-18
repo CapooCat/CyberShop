@@ -39,6 +39,7 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
     <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="Metatitle" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CategoryDetail">
     <Key>
@@ -109,6 +110,7 @@
     <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Info" Type="nvarchar(max)" />
     <Property Name="Price" Type="float" />
+    <Property Name="SalePercent" Type="int" />
     <Property Name="MonthWarranty" Type="int" />
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="IsDeleted" Type="bit" />
@@ -131,6 +133,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category_id" Type="int" />
     <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
@@ -311,6 +314,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProducType_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="ProducType" Type="Self.ProducType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProducType">
+        <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Warehouse_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
@@ -388,6 +403,10 @@
     <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="ProductImage" EntitySet="ProductImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProducType_Category" Association="Self.FK_ProducType_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="ProducType" EntitySet="ProducType" />
     </AssociationSet>
     <AssociationSet Name="FK_Warehouse_Product" Association="Self.FK_Warehouse_Product">
       <End Role="Product" EntitySet="Product" />

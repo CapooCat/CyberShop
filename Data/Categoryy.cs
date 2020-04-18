@@ -18,6 +18,7 @@ namespace Data
         public Categoryy()
         {
             this.CategoryDetails = new HashSet<CategoryDetail>();
+            this.ProducTypes = new HashSet<ProducType>();
         }
     
         public int Id { get; set; }
@@ -27,8 +28,11 @@ namespace Data
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
+        public string Metatitle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryDetail> CategoryDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProducType> ProducTypes { get; set; }
     }
 }

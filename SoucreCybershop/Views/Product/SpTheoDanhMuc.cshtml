@@ -1,4 +1,4 @@
-﻿@model List<Data.Product>
+﻿@model List<CyberShop.Models.ProductCategoryViewModel>
 @{
     ViewBag.Title = "Sản phẩm Cybershop";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,19 +23,28 @@
     </div>
 
     <div class="row">
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <div class="col-md-3 card">
-                <div class="box">
-                    <a href="/Home/DetailProduct/@item.id">
-                        <img class="card-img" src="@item.Image">
-                        <h6>@item.ProductName</h6>
-                        <p class="price-tag">@string.Format("{0:#,##0}", @item.Price)đ</p>
-                        <p class="status">Tình trạng: còn hàng</p>
-                    </a>
-                    <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+            foreach (var item in Model)
+            {
+                <div class="col-md-3 card">
+                    <div class="box">
+                        <a href="/Home/DetailProduct/@item.id">
+                            <img class="card-img" src="@item.Image">
+                            <h6>@item.ProductName</h6>
+                            <p class="price-tag">@string.Format("{0:#,##0}", @item.Price)đ</p>
+                            <p class="status">Tình trạng: còn hàng</p>
+                        </a>
+                        <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                    </div>
                 </div>
-            </div>
+            }
+        }
+        else
+        { 
+            <div class="col-md-3 card">
+                <p> Không tìm thấy sản phẩm nào khớp với lựa chọn của bạn</p>
+             </div>
         }
 
         <!-- Mẫu sale -->

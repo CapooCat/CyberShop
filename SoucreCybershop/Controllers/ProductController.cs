@@ -18,7 +18,7 @@ namespace CyberShop.Controllers
             model = productDao.ListProduct();
             return View(model);
         }
-        public ActionResult SpTheoDanhMuc(List<Product> model)
+        public ActionResult SpTheoDanhMuc(List<ProductCategoryViewModel> model)
         {
             return View(model);
         }
@@ -27,6 +27,32 @@ namespace CyberShop.Controllers
             List<Product> model = new List<Product>();
             model = data.Products.Where(x=>x.ProductType_id==1).ToList();
             return View("SpTheoDanhMuc",model);
+        }
+        public ActionResult Category(string metatitle)
+        {
+            List<ProductCategoryViewModel> model = new List<ProductCategoryViewModel>();
+            model = (from a in data.Categoryies
+                     join b in data.ProducTypes on a.Id equals b.Category_id
+                     join c in data.Products on b.Id equals c.ProductType_id
+                     where a.Metatitle == metatitle
+                     select new ProductCategoryViewModel
+                     {
+                         id=c.id,
+                         Brand_id=c.Brand_id,
+                         Promotion_id=c.Promotion_id,
+                         ProductName=c.ProductName,
+                         Info=c.Info,
+                         Price=c.Price,
+                         MonthWarranty=c.MonthWarranty,
+                         Image=c.Image,
+                         IsDeleted=c.IsDeleted,
+                         CreateBy=c.CreateBy,
+                         CreateDate=c.CreateDate,
+                         ModifiedBy=c.ModifiedBy,
+                         ModifiedDate=c.ModifiedDate,
+                         ProductType_id=c.ProductType_id
+                     }).ToList();
+            return View("SpTheoDanhMuc", model);
         }
 
     }
