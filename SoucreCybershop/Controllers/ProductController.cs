@@ -54,6 +54,31 @@ namespace CyberShop.Controllers
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }
+        public ActionResult CategoryDetail(string metatitle)
+        {
+            List<ProductCategoryViewModel> model = new List<ProductCategoryViewModel>();
+            model = (from a in data.ProducTypes
+                     join b in data.Products on a.Id equals b.ProductType_id
+                     where a.Metatitle == metatitle
+                     select new ProductCategoryViewModel
+                     {
+                         id = b.id,
+                         Brand_id = b.Brand_id,
+                         Promotion_id = b.Promotion_id,
+                         ProductName = b.ProductName,
+                         Info = b.Info,
+                         Price = b.Price,
+                         MonthWarranty = b.MonthWarranty,
+                         Image = b.Image,
+                         IsDeleted = b.IsDeleted,
+                         CreateBy = b.CreateBy,
+                         CreateDate = b.CreateDate,
+                         ModifiedBy = b.ModifiedBy,
+                         ModifiedDate = b.ModifiedDate,
+                         ProductType_id = b.ProductType_id
+                     }).ToList();
+            return View("SpTheoDanhMuc", model);
+        }
 
     }
 }

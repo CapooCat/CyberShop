@@ -53,6 +53,7 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
     <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="MetaTitle" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="CategoryDetailSuggest">
     <Key>
@@ -141,6 +142,7 @@
     <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="Info" Type="nvarchar" MaxLength="500" />
+    <Property Name="Metatitle" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Promotion">
     <Key>

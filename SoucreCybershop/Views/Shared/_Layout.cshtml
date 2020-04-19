@@ -96,7 +96,7 @@
                                             {
                                                 subCatList = catDetailDao.getListCateDetailSuggest(cat.Id);
                                                 <div class="col-md-3">
-                                                    <a class="Title" href="#">@cat.CateDetailName</a>
+                                                    <a class="Title" href="/chi-tiet-danh-muc/@cat.MetaTitle">@cat.CateDetailName</a>
                                                     @if (subCatList != null)
                                                     {
                                                         foreach (var subCat in subCatList)

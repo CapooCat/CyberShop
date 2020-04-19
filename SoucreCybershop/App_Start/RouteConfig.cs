@@ -18,6 +18,11 @@ namespace CyberShop
               defaults: new { controller = "Product", action = "Category", metatitle = UrlParameter.Optional }
             );
             routes.MapRoute(
+             name: "ChiTietDanhMuc",
+             url: "chi-tiet-danh-muc/{metatitle}",
+             defaults: new { controller = "Product", action = "CategoryDetail", metatitle = UrlParameter.Optional }
+           );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

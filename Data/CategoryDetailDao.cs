@@ -18,6 +18,7 @@ namespace Data
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
+        public string MetaTitle { get; set; }
         public List<CategoryDetailDao> getListCateDetail(int category_id)
         {
             return (from a in data.Categoryies
@@ -32,7 +33,9 @@ namespace Data
                         CreateBy=b.CreateBy,
                         CreateDate=b.CreateDate,
                         ModifiedBy=b.ModifiedBy,
-                        ModifiedTime=b.ModifiedTime
+                        ModifiedTime=b.ModifiedTime,
+                        MetaTitle=b.MetaTitle
+                        
                     }).ToList();
         }
         public List<CategoryDetailSuggest> getListCateDetailSuggest(int categoryDetail_id)

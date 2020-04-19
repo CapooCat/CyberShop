@@ -58,6 +58,7 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
           <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="MetaTitle" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="CategoryDetailSuggest">
           <Key>
@@ -146,6 +147,7 @@
           <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="Info" Type="nvarchar" MaxLength="500" />
+          <Property Name="Metatitle" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -788,6 +790,7 @@
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_CategoryDetail_Category" FromRole="CategoryDetail" ToRole="Category1" />
           <NavigationProperty Name="CategoryDetailSuggests" Relationship="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail" FromRole="CategoryDetail" ToRole="CategoryDetailSuggest" />
+          <Property Name="MetaTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CategoryDetailSuggest">
           <Key>
@@ -818,6 +821,7 @@
           <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="ProducType" ToRole="Product" />
           <Property Name="Category_id" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_ProducType_Category" FromRole="ProducType" ToRole="Categoryy" />
+          <Property Name="Metatitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CategoryDetail_Category">
           <End Type="ShopPCComponentsModel.Categoryy" Role="Category1" Multiplicity="1" />
@@ -1053,6 +1057,7 @@
           <EntitySetMapping Name="CategoryDetails">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.CategoryDetail">
               <MappingFragment StoreEntitySet="CategoryDetail">
+                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -1081,6 +1086,7 @@
           <EntitySetMapping Name="ProducTypes">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.ProducType">
               <MappingFragment StoreEntitySet="ProducType">
+                <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
                 <ScalarProperty Name="Category_id" ColumnName="Category_id" />
                 <ScalarProperty Name="Info" ColumnName="Info" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />

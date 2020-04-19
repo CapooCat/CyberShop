@@ -362,6 +362,7 @@
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_CategoryDetail_Category" FromRole="CategoryDetail" ToRole="Category1" />
     <NavigationProperty Name="CategoryDetailSuggests" Relationship="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail" FromRole="CategoryDetail" ToRole="CategoryDetailSuggest" />
+    <Property Name="MetaTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CategoryDetailSuggest">
     <Key>
@@ -392,6 +393,7 @@
     <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="ProducType" ToRole="Product" />
     <Property Name="Category_id" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_ProducType_Category" FromRole="ProducType" ToRole="Categoryy" />
+    <Property Name="Metatitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_CategoryDetail_Category">
     <End Type="ShopPCComponentsModel.Categoryy" Role="Category1" Multiplicity="1" />

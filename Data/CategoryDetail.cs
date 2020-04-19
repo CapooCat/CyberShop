@@ -28,6 +28,7 @@ namespace Data
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
+        public string MetaTitle { get; set; }
     
         public virtual Categoryy Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
