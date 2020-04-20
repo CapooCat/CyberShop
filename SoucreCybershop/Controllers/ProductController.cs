@@ -84,7 +84,7 @@ namespace CyberShop.Controllers
             List<ProductCategoryViewModel> model = new List<ProductCategoryViewModel>();
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
-                     where a.Metatitle.Contains(metatitle)
+                     where b.MetaTitle.Contains(metatitle)
                      select new ProductCategoryViewModel
                      {
                          id = b.id,
