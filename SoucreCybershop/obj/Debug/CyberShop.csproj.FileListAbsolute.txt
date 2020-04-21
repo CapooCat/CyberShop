@@ -240,3 +240,9 @@ D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.Microsof
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\obj\Debug\CyberShop.csprojResolveAssemblyReference.cache
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\obj\Debug\CyberShop.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\obj\Debug\CyberShop.pdb
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Net.Http.Formatting.dll
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.dll
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.dll
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Net.Http.Formatting.xml
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.xml
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.xml
