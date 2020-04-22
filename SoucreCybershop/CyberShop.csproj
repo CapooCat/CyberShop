@@ -211,12 +211,14 @@
     <Compile Include="Common\CommonConstantUser.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserInfo.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\CategoryDetailViewModel.cs" />
     <Compile Include="Models\DetailProductViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -338,6 +340,7 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="bin\roslyn\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
