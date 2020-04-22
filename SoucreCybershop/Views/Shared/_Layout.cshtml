@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <title>@ViewBag.Title</title>
 </head>
-<body>
+<body ng-app="MyApp" ng-controller="MyController">
     <!-- Header -->
 
     <header>
@@ -46,8 +46,8 @@
                             <a href="SignUp.html" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
                             <a href="/Home/Login" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
                         }
-                        <div class="cart">
-                            <a href="#" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'> 1 </span></i>Giỏ hàng</a>
+                        <div class="cart" >
+                            <a href="#" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'>{{cartList.length}} </span></i>Giỏ hàng</a>
                             <div class="dropdown-cart">
                                 <div class="row Title">
                                     <div class="col-md-5 columm-1"><p>Tên</p></div>
@@ -55,15 +55,15 @@
                                     <div class="col-md-3 columm-3"><p>Giá</p></div>
                                     <div class="col-md-2 columm-4"><p>Tác vụ</p></div>
                                 </div>
-                                <div class="row Info">
-                                    <img style="width: 50px;height:50px;margin-left: 10px;" src="img/1.png">
-                                    <div class="col-md-4 columm-1"><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></div>
-                                    <div class="col-md-2 columm-2" style="margin-left: 10px;"><p>1</p></div>
-                                    <div class="col-md-3 columm-3"><p>4.150.000</p></div>
+                                <div class="row Info" ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)">
+                                    <img style="width: 50px;height:50px;margin-left: 10px;" ng-src="{{item.Image}}">
+                                    <div class="col-md-4 columm-1"><a href="#">{{item.ProductName}}</a></div>
+                                    <div class="col-md-2 columm-2" style="margin-left: 10px;"><p>{{item.Quanlity}}</p></div>
+                                    <div class="col-md-3 columm-3"><p>{{item.Price | currency:"":0}}đ</p></div>
                                     <div class="col-md-1 columm-4" style="margin-top: -2px;"><a href="#"><i class="fas fa-trash action"></i></a></div>
                                 </div>
                                 <div class="row Total">
-                                    <div class="col-md-12 Total-price"><p>Thành tiền: 4.150.000đ<button class="pay" href="#">Thanh toán</button></p></div>
+                                    <div class="col-md-12 Total-price"><p>Thành tiền: {{bucket.total_amount | currency:"":0}}đ<button class="pay" href="#">Thanh toán</button></p></div>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +83,7 @@
                                     <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" href="/danh-muc/@item.Metatitle"> @item.CategoryName</a>
                                 }
                             </div>
-                            <a onmouseover="closebox()" onmouseout="openbox()" href="/Product">Tất cả sản phẩm</a>
-                            <a onmouseover="closebox()" onmouseout="openbox()" href="/Product/TatCaVGA">Test VGA</a>
+                                    <a onmouseover="closebox()" onmouseout="openbox()" href="/Product">Tất cả sản phẩm</a>
                             <div class="more-content">
                                 @foreach (var item in catList)
                                 {
@@ -101,7 +100,7 @@
                                                     {
                                                         foreach (var subCat in subCatList)
                                                         {
-                                                            <li><a href="#">@subCat.SuggestName</a></li>
+                                                            <li><a href="/SanPham/@subCat.Metatitle">@subCat.SuggestName</a></li>
                                                         }
                                                     }
                                                 </div>
@@ -177,6 +176,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script>
         var totalcat = document.getElementsByClassName("more-content-items");
         for (i = 0; i < totalcat.length; i++) {

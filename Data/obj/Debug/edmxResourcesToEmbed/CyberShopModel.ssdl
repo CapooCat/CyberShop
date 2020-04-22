@@ -67,6 +67,7 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
     <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Invoice">
     <Key>
@@ -109,6 +110,7 @@
     <Property Name="Promotion_id" Type="int" />
     <Property Name="ProductType_id" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MetaTitle" Type="nvarchar" MaxLength="50" />
     <Property Name="Info" Type="nvarchar(max)" />
     <Property Name="Price" Type="float" />
     <Property Name="SalePercent" Type="int" />

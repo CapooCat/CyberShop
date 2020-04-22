@@ -68,6 +68,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
           <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
           <ScalarProperty Name="ProductType_id" ColumnName="ProductType_id" />
           <ScalarProperty Name="id" ColumnName="id" />
@@ -196,6 +197,7 @@
     <EntitySetMapping Name="CategoryDetailSuggests">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.CategoryDetailSuggest">
         <MappingFragment StoreEntitySet="CategoryDetailSuggest">
+          <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
           <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

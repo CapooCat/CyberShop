@@ -22,6 +22,7 @@ namespace Data
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
+        public string Metatitle { get; set; }
     
         public virtual CategoryDetail CategoryDetail { get; set; }
     }

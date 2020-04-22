@@ -90,6 +90,7 @@
     <Property Name="ProductType_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ProducType" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="Product" ToRole="ProducType" />
     <Property Name="SalePercent" Type="Int32" />
+    <Property Name="MetaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Promotion">
     <Key>
@@ -377,6 +378,7 @@
     <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CategoryDetail" Relationship="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail" FromRole="CategoryDetailSuggest" ToRole="CategoryDetail" />
+    <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ProducType">
     <Key>
