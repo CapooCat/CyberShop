@@ -179,23 +179,6 @@
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script>
-        var app = angular.module('MyApp', [])
-        .directive('loading', function () {
-            return {
-                restrict: 'E',
-                replace:true,
-                template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
-                link: function (scope, element, attr) {
-                    scope.$watch('loading', function (val) {
-                        if (val)
-                            $(element).show();
-                        else
-                            $(element).hide();
-                    });
-                }
-            }
-        })
-
         var totalcat = document.getElementsByClassName("more-content-items");
         for (i = 0; i < totalcat.length; i++) {
             totalcat[i].style.display = "none";
