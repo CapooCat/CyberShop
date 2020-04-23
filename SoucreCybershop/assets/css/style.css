@@ -7,6 +7,72 @@ body {
 
 
 /* Header */
+
+.loading {
+  color: white;
+  z-index: 1000;
+  height: 200px;
+  width: 200px;
+  background-color: rgba(0,0,0,0.9);
+  border-radius: 50%;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.Loading-background {
+  background-color: rgba(0,0,0,0.1);
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.loading .obj {
+  z-index: 1000;
+  width: 5px;
+  height: 0px;
+  background: white;
+  margin: 0 3px;
+  border-radius: 10px;
+  animation: loading 0.6s infinite;
+}
+
+.obj:nth-child(2){
+  animation-delay: 0.1s;
+}
+.obj:nth-child(3){
+  animation-delay: 0.2s;
+}
+.obj:nth-child(4){
+  animation-delay: 0.3s;
+}
+.obj:nth-child(5){
+  animation-delay: 0.4s;
+}
+.obj:nth-child(6){
+  animation-delay: 0.5s;
+}
+
+@keyframes loading {
+  0%{
+    height: 0px;
+  }
+  50%{
+    height: 40px;
+  }
+  100%{
+    height: 0px;
+  }
+}
 .GoTop {
   transition: .2s;
   height: 50px;
@@ -32,7 +98,7 @@ body {
 }
 
 .wrapper {
-  z-index: 9999;
+  z-index: 999;
   position: fixed;
   top: 0;
   width: 100%;

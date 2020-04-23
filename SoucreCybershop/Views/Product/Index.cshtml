@@ -87,8 +87,25 @@
 @section scripts{
     <script>
         var app = angular.module('MyApp', [])
+        .directive('loading', function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
+                link: function (scope, element, attr) {
+                    scope.$watch('loading', function (val) {
+                        if (val)
+                            $(element).show();
+                        else
+                            $(element).hide();
+                    });
+                }
+            }
+        })
         app.controller('MyController', function ($scope, $http) {
-            $http.get("/Product/SanPham").then(function (res, status, xhr) {
+            $scope.loading = true;
+            $http.get("/Product/SanPham").then(function (res) {
+                $scope.loading = false;
                 $scope.data = res.data;
             });
             $scope.FetchCart=function()
@@ -100,7 +117,9 @@
             $scope.bucket = { total_amount: 0 };
             $scope.FetchCart();
             $scope.AddItem = function (id) {
+                $scope.loading = true;
                 $http.get("/Cart/AddItem/" + id).then(function (response) {
+                    $scope.loading = false;
                     $scope.FetchCart();
                 });
             }
