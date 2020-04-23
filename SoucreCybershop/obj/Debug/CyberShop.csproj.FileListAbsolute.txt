@@ -246,3 +246,9 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Net.Http.Formatting.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.xml
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Net.Http.Formatting.dll
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.Http.dll
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.dll
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Net.Http.Formatting.xml
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.Http.xml
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.xml

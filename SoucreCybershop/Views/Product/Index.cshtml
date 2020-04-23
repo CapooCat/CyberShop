@@ -14,23 +14,23 @@
         <li class="breadcrumb-item active">Tất cả sản phẩm</li>
     </ul>
     <div class="sort">
-        <button class="active">Giá tăng dần</button>
-        <button>Giá giảm dần</button>
-        <button>A -> Z</button>
-        <button>Z -> A</button>
-        <button>Mới nhất</button>
-        <button>Cũ nhất</button>
+        <button  ng-click="sortBy = '+Price'" class="clickDo active">Giá tăng dần</button>
+        <button  ng-click="sortBy = '-Price'" class="clickDo">Giá giảm dần</button>
+        <button  ng-click="sortBy = '+ProductName'" class="clickDo">A -> Z</button>
+        <button  ng-click="sortBy ='-ProductName'" class="clickDo">Z -> A</button>
+        <button  ng-click="sortBy ='-CreateDate'" class="clickDo">Mới nhất</button>
+        <button  ng-click="sortBy ='+CreateDate'" class="clickDo">Cũ nhất</button>
     </div>
 
     <div>
         <div class="row">
-            <div class="col-md-3 card" ng-repeat="item in data">
+            <div class="col-md-3 card" ng-repeat="item in data | orderBy: sortBy">
                 <div class="box">
                     <a href="/Home/DetailProduct/{{item.id}}">
                         <input type="hidden" value="{{item.id}}"/>
                         <img class="card-img" ng-src="{{ item.Image }}">
                         <h6>{{ item.ProductName }}</h6>
-                        <p class="price-tag">{{ item.Price }}đ</p>
+                        <p class="price-tag">{{ item.Price | currency : "" : 0 }}đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
                         <button ng-click="AddItem(item.id)" class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
@@ -104,6 +104,17 @@
                     $scope.FetchCart();
                 });
             }
+            $scope.sortBy = '+Price';
         });
+        
+        var x = document.getElementsByClassName("clickDo");
+
+        for (var i = 0; i < x.length; i++) {
+            x[i].addEventListener("click", function () {
+                for (var j = 0; j < x.length; j++)
+                    x[j].className = "clickDo";
+                this.className += " active";
+            });
+        }
     </script>
 }
