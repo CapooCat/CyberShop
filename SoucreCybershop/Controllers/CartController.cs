@@ -105,12 +105,19 @@ namespace CyberShop.Controllers
             var cart = Session[Common.CommonConstantUser.CART_SESSION];
             var product = data.Products.Where(x => x.id == id).FirstOrDefault();
             List<CartViewModel> cartList = (List<CartViewModel>)cart;
-            foreach (CartViewModel item in cartList)
+            foreach (CartViewModel item in cartList.ToList())
             {
                 if (item.id == id)
                 {
-                    item.Quanlity -= 1;
-                    item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                    if(item.Quanlity==1)
+                    {
+                        cartList.Remove(item);
+                    }
+                    else
+                    {
+                        item.Quanlity -= 1;
+                        item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                    }
                 }
             }
             Session[Common.CommonConstantUser.CART_SESSION] = cartList;
