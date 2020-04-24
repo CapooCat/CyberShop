@@ -60,7 +60,7 @@
                                     <div class="col-md-4 columm-1"><a href="#">{{item.ProductName}}</a></div>
                                     <div class="col-md-2 columm-2" style="margin-left: 10px;"><p>{{item.Quanlity}}</p></div>
                                     <div class="col-md-3 columm-3"><p>{{item.Price | currency:"":0}}đ</p></div>
-                                    <div class="col-md-1 columm-4" style="margin-top: -2px;"><a href="#"><i class="fas fa-trash action"></i></a></div>
+                                    <div class="col-md-1 columm-4" style="margin-top: -2px;"><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a><a ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a></div>
                                 </div>
                                 <div class="row Total">
                                     <div class="col-md-12 Total-price"><p>Thành tiền: {{bucket.total_amount | currency:"":0}}đ<button class="pay" href="#">Thanh toán</button></p></div>
@@ -174,6 +174,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="/assets/js/jquery-3.4.1.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>

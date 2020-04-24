@@ -30,10 +30,10 @@
                         <input type="hidden" value="{{item.id}}"/>
                         <img class="card-img" ng-src="{{ item.Image }}">
                         <h6>{{ item.ProductName }}</h6>
-                        <p class="price-tag">{{ item.Price }}đ</p>
+                        <p class="price-tag">{{ item.Price | currency:"":0 }}đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
-                        <button ng-click="AddItem(item.id)" class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                        <button type="button" ng-click="AddItem(item.id)" class="Add" data-loading-text="<i class='fa fa-circle-notch fa-spin'></i> Thêm vào giỏ"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
                 </div>
              </div>
         </div>
@@ -86,6 +86,17 @@
 
 @section scripts{
     <script>
+        $(document).ready(function () {
+            $('.Add').on('click', function () {
+                var $this = $(this);
+                $this.button('loading');
+                setTimeout(function () {
+                    $this.button('reset');
+                }, 8000);
+            });
+        });
+    </script>
+    <script>
         var app = angular.module('MyApp', [])
         app.controller('MyController', function ($scope, $http) {
             $http.get("/Product/SanPham").then(function (res, status, xhr) {
@@ -101,6 +112,19 @@
             $scope.FetchCart();
             $scope.AddItem = function (id) {
                 $http.get("/Cart/AddItem/" + id).then(function (response) {
+                    $scope.bucket.total_amount = 0;
+                    $scope.FetchCart();
+                });
+            }
+            $scope.RemoveItem = function (id) {
+                $http.get("/Cart/RemoveItem/" + id).then(function (response) {
+                    $scope.bucket.total_amount = 0;
+                    $scope.FetchCart();
+                });
+            }
+            $scope.MiniusItem = function (id) {
+                $http.get("/Cart/MiniusItem/" + id).then(function (response) {
+                    $scope.bucket.total_amount = 0;
                     $scope.FetchCart();
                 });
             }

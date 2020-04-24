@@ -52,6 +52,7 @@ namespace CyberShop.Controllers
             {
                 var list = new List<CartViewModel>();
                 var item = new CartViewModel();
+                item.id = id;
                 item.ProductName = data.Products.Where(x => x.id == id).Select(x => x.ProductName).FirstOrDefault();
                 item.Quanlity = 1;
                 item.Image = product.Image;
@@ -82,8 +83,38 @@ namespace CyberShop.Controllers
             }
             else
             {
-                return Json(new List<object> { new CartViewModel() }, JsonRequestBehavior.AllowGet);
+                return Json(new { }, JsonRequestBehavior.AllowGet);
             }
+        }
+        public EmptyResult RemoveItem(int id)
+        {
+            var cart = Session[Common.CommonConstantUser.CART_SESSION];
+            List<CartViewModel> cartList = (List<CartViewModel>)cart;
+            foreach(CartViewModel item in cartList.ToList())
+            {
+                if(item.id==id)
+                {
+                    cartList.Remove(item);
+                }
+            }
+            Session[Common.CommonConstantUser.CART_SESSION] = cartList;
+            return new EmptyResult();
+        }
+        public EmptyResult MiniusItem(int id)
+        {
+            var cart = Session[Common.CommonConstantUser.CART_SESSION];
+            var product = data.Products.Where(x => x.id == id).FirstOrDefault();
+            List<CartViewModel> cartList = (List<CartViewModel>)cart;
+            foreach (CartViewModel item in cartList)
+            {
+                if (item.id == id)
+                {
+                    item.Quanlity -= 1;
+                    item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                }
+            }
+            Session[Common.CommonConstantUser.CART_SESSION] = cartList;
+            return new EmptyResult();
         }
     }
 }
