@@ -28,7 +28,7 @@
                 <div class="box">
                     <a href="/Home/DetailProduct/{{item.id}}">
                         <input type="hidden" value="{{item.id}}"/>
-                        <img class="card-img" ng-src="{{ item.Image }}">
+                            <img class="card-img" ng-src="{{ item.Image }}">
                         <h6>{{ item.ProductName }}</h6>
                       <p class="price-tag">{{ item.Price | currency:"":0 }}đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
@@ -130,6 +130,7 @@
             $scope.AddItem = function (id) {
                 $scope.loading = true;
                 $http.get("/Cart/AddItem/" + id).then(function (response) {
+                    $scope.loading = false;
                     $scope.bucket.total_amount = 0;
                     $scope.FetchCart();
                 });
