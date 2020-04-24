@@ -34,10 +34,10 @@ app.controller('MyController', function ($scope, $http) {
     $scope.bucket = { total_amount: 0 };
     $scope.FetchCart();
     $scope.AddItem = function (id) {
-
+        $scope.loading = true;
         $http.get("/Cart/AddItem/" + id).then(function (response) {
             $scope.bucket.total_amount = 0;
-            $scope.loading = true;
+            $scope.loading = false;
             $scope.FetchCart();
         });
     }
@@ -50,7 +50,6 @@ app.controller('MyController', function ($scope, $http) {
     $scope.MiniusItem = function (id) {
         $http.get("/Cart/MiniusItem/" + id).then(function (response) {
             $scope.bucket.total_amount = 0;
-            $scope.loading = true;
             $scope.FetchCart();
         });
     }
