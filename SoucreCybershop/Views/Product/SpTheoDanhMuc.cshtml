@@ -24,7 +24,7 @@
 
     <div>
         <div class="row">
-            <div class="col-md-3 card" ng-repeat="item in data | orderBy: sortBy">
+            <div class="col-md-3 card" ng-repeat="item in datalist | orderBy: sortBy">
                 <div class="box">
                     <a href="/Home/DetailProduct/{{item.id}}">
                         <input type="hidden" value="{{item.id}}" />

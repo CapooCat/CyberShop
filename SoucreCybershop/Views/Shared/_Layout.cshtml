@@ -81,7 +81,7 @@
                             <div class="cat">
                                 @foreach (var item in catList)
                                 {
-                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" ng-click="ReturnDataCategory(@item.Metatitle)" href="/Product/Category"> @item.CategoryName</a>
+                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" ng-click="ReturnDataCategory('@item.Metatitle')" href="/Product/Category"> @item.CategoryName</a>
                                 }
                             </div>
                                     <a onmouseover="closebox()" onmouseout="openbox()" href="/Product">Tất cả sản phẩm</a>

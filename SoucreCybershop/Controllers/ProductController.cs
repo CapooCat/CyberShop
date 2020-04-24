@@ -56,6 +56,10 @@ namespace CyberShop.Controllers
             List<ProductCategoryViewModel> model = new List<ProductCategoryViewModel>();
             return View("SpTheoDanhMuc", model);
         }
+        public JsonResult ReturnTest()
+        {
+            return Json(new { data="ok"}, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ReturnDataCategory(string id)
         {
             var model = new List<ProductCategoryViewModel>();

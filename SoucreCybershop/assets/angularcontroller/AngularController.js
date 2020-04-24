@@ -20,10 +20,10 @@ app.controller('MyController', function ($scope, $http) {
         $scope.loading = false;
         $scope.data = res.data;
     });
-    $scope.ReturnDataCategory = function (metatitle) {
-        $http.get("/Product/ReturnDataCategory/" + metatitle).then(function (response) {
+    $scope.ReturnDataCategory = function (Metatitle) {
+        $http.get("/Product/ReturnDataCategory/" + Metatitle).then(function (response) {
             $scope.loading = false;
-            $scope.data = response.data;
+            $scope.datalist = response.data;
         });
     }
     $scope.FetchCart = function () {
