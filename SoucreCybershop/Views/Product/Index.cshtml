@@ -14,23 +14,23 @@
         <li class="breadcrumb-item active">Tất cả sản phẩm</li>
     </ul>
     <div class="sort">
-        <button class="active">Giá tăng dần</button>
-        <button>Giá giảm dần</button>
-        <button>A -> Z</button>
-        <button>Z -> A</button>
-        <button>Mới nhất</button>
-        <button>Cũ nhất</button>
+        <button  ng-click="sortBy = '+Price'" class="clickDo active">Giá tăng dần</button>
+        <button  ng-click="sortBy = '-Price'" class="clickDo">Giá giảm dần</button>
+        <button  ng-click="sortBy = '+ProductName'" class="clickDo">A -> Z</button>
+        <button  ng-click="sortBy ='-ProductName'" class="clickDo">Z -> A</button>
+        <button  ng-click="sortBy ='-CreateDate'" class="clickDo">Mới nhất</button>
+        <button  ng-click="sortBy ='+CreateDate'" class="clickDo">Cũ nhất</button>
     </div>
 
     <div>
         <div class="row">
-            <div class="col-md-3 card" ng-repeat="item in data">
+            <div class="col-md-3 card" ng-repeat="item in data | orderBy: sortBy">
                 <div class="box">
                     <a href="/Home/DetailProduct/{{item.id}}">
                         <input type="hidden" value="{{item.id}}"/>
                         <img class="card-img" ng-src="{{ item.Image }}">
                         <h6>{{ item.ProductName }}</h6>
-                        <p class="price-tag">{{ item.Price | currency:"":0 }}đ</p>
+                      <p class="price-tag">{{ item.Price | currency:"":0 }}đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
                         <button type="button" ng-click="AddItem(item.id)" class="Add" data-loading-text="<i class='fa fa-circle-notch fa-spin'></i> Thêm vào giỏ"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
@@ -98,8 +98,25 @@
     </script>
     <script>
         var app = angular.module('MyApp', [])
+        .directive('loading', function () {
+            return {
+                restrict: 'E',
+                replace: true,
+                template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
+                link: function (scope, element, attr) {
+                    scope.$watch('loading', function (val) {
+                        if (val)
+                            $(element).show();
+                        else
+                            $(element).hide();
+                    });
+                }
+            }
+        })
         app.controller('MyController', function ($scope, $http) {
-            $http.get("/Product/SanPham").then(function (res, status, xhr) {
+            $scope.loading = true;
+            $http.get("/Product/SanPham").then(function (res) {
+                $scope.loading = false;
                 $scope.data = res.data;
             });
             $scope.FetchCart=function()
@@ -111,6 +128,7 @@
             $scope.bucket = { total_amount: 0 };
             $scope.FetchCart();
             $scope.AddItem = function (id) {
+                $scope.loading = true;
                 $http.get("/Cart/AddItem/" + id).then(function (response) {
                     $scope.bucket.total_amount = 0;
                     $scope.FetchCart();
@@ -125,9 +143,21 @@
             $scope.MiniusItem = function (id) {
                 $http.get("/Cart/MiniusItem/" + id).then(function (response) {
                     $scope.bucket.total_amount = 0;
+                    $scope.loading = false;
                     $scope.FetchCart();
                 });
             }
+            $scope.sortBy = '+Price';
         });
+        
+        var x = document.getElementsByClassName("clickDo");
+
+        for (var i = 0; i < x.length; i++) {
+            x[i].addEventListener("click", function () {
+                for (var j = 0; j < x.length; j++)
+                    x[j].className = "clickDo";
+                this.className += " active";
+            });
+        }
     </script>
 }
