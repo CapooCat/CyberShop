@@ -20,6 +20,12 @@ app.controller('MyController', function ($scope, $http) {
         $scope.loading = false;
         $scope.data = res.data;
     });
+    $scope.ReturnDataCategory = function (metatitle) {
+        $http.get("/Product/ReturnDataCategory/" + metatitle).then(function (response) {
+            $scope.loading = false;
+            $scope.data = response.data;
+        });
+    }
     $scope.FetchCart = function () {
         $http.get("/Cart/ReturnCartItem").then(function (response) {
             $scope.cartList = response.data;

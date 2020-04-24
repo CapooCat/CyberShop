@@ -25,31 +25,83 @@ namespace CyberShop.Controllers
         {
             return View(model);
         }
-        public ActionResult Category(string metatitle)
+        //public ActionResult Category(string metatitle)
+        //{
+        //    List<ProductCategoryViewModel> model = new List<ProductCategoryViewModel>();
+        //    model = (from a in data.Categoryies
+        //             join b in data.ProducTypes on a.Id equals b.Category_id
+        //             join c in data.Products on b.Id equals c.ProductType_id
+        //             where a.Metatitle == metatitle
+        //             select new ProductCategoryViewModel
+        //             {
+        //                 id=c.id,
+        //                 Brand_id=c.Brand_id,
+        //                 Promotion_id=c.Promotion_id,
+        //                 ProductName=c.ProductName,
+        //                 Info=c.Info,
+        //                 Price=c.Price,
+        //                 MonthWarranty=c.MonthWarranty,
+        //                 Image=c.Image,
+        //                 IsDeleted=c.IsDeleted,
+        //                 CreateBy=c.CreateBy,
+        //                 CreateDate=c.CreateDate,
+        //                 ModifiedBy=c.ModifiedBy,
+        //                 ModifiedDate=c.ModifiedDate,
+        //                 ProductType_id=c.ProductType_id
+        //             }).ToList();
+        //    return View("SpTheoDanhMuc", model);
+        //}
+        public ActionResult Category()
         {
             List<ProductCategoryViewModel> model = new List<ProductCategoryViewModel>();
+            return View("SpTheoDanhMuc", model);
+        }
+        public JsonResult ReturnDataCategory(string id)
+        {
+            var model = new List<ProductCategoryViewModel>();
             model = (from a in data.Categoryies
                      join b in data.ProducTypes on a.Id equals b.Category_id
                      join c in data.Products on b.Id equals c.ProductType_id
-                     where a.Metatitle == metatitle
+                     where a.Metatitle == id
                      select new ProductCategoryViewModel
                      {
-                         id=c.id,
-                         Brand_id=c.Brand_id,
-                         Promotion_id=c.Promotion_id,
-                         ProductName=c.ProductName,
-                         Info=c.Info,
-                         Price=c.Price,
-                         MonthWarranty=c.MonthWarranty,
-                         Image=c.Image,
-                         IsDeleted=c.IsDeleted,
-                         CreateBy=c.CreateBy,
-                         CreateDate=c.CreateDate,
-                         ModifiedBy=c.ModifiedBy,
-                         ModifiedDate=c.ModifiedDate,
-                         ProductType_id=c.ProductType_id
+                         id = c.id,
+                         Brand_id = c.Brand_id,
+                         Promotion_id = c.Promotion_id,
+                         ProductName = c.ProductName,
+                         Info = c.Info,
+                         Price = c.Price,
+                         MonthWarranty = c.MonthWarranty,
+                         Image = c.Image,
+                         IsDeleted = c.IsDeleted,
+                         CreateBy = c.CreateBy,
+                         CreateDate = c.CreateDate,
+                         ModifiedBy = c.ModifiedBy,
+                         ModifiedDate = c.ModifiedDate,
+                         ProductType_id = c.ProductType_id
                      }).ToList();
-            return View("SpTheoDanhMuc", model);
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    Brand_id = item.Brand_id,
+                    Promotion_id = item.Promotion_id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    ProductType_id = item.ProductType_id
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
         public ActionResult CategoryDetail(string metatitle)
         {
