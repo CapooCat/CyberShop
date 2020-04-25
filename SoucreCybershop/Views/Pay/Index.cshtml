@@ -18,23 +18,16 @@
             <th style="width: 20%;">Giá</th>
             <th style="width: 10%;">Tác vụ</th>
         </tr>
-        <tr>
-            <td><img style="max-width: 200px;max-height:200px;" src="img/1.png"></td>
-            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
-            <td>1</td>
-            <td>4.150.000đ</td>
-            <td><a href="#"><i class="fas fa-trash action"></i></a></td>
-        </tr>
-        <tr>
-            <td><img style="max-width: 200px;max-height:200px;" src="img/1.png"></td>
-            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
-            <td>1</td>
-            <td>4.150.000đ</td>
-            <td><a href="#"><i class="fas fa-trash action"></i></a></td>
+        <tr ng-repeat="item in cartList">
+            <td><img style="max-width: 200px;max-height:200px;" ng-src="{{item.Image}}"></td>
+            <td><a href="#">{{item.ProductName}}</a></td>
+            <td>{{item.Quanlity}}</td>
+            <td>{{item.Price | currency:"":0}}đ</td>
+            <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
         </tr>
         <tr class="Total-Payment">
             <td colspan="3">Tổng tiền</td>
-            <td colspan="2">8.300.000đ</td>
+            <td colspan="2">{{bucket.total_amount | currency:"":0}}đ</td>
         </tr>
     </table>
     <h1 style="text-align: center; margin: 50px;">Điền thông tin</h1>
@@ -85,13 +78,17 @@
 </section>
 @section scripts{
     <script>
-        document.getElementById('rd_giaohang').addEventListener('click', function () {
-            var checkbox = document.getElementById("radio1");
+        document.getElementById('giaohang').addEventListener('click', function () {
+            document.getElementById("giaohang").className = "active";
+            document.getElementById("nhanhang").className = "";
+            var checkbox = document.getElementById("rd_giaohang");
             checkbox.checked = true;
             alert("Giao hàng tận tay " + checkbox.checked);
         });
-        document.getElementById('rd_nhanhang').addEventListener('click', function () {
-            var checkbox = document.getElementById("radio1");
+        document.getElementById('nhanhang').addEventListener('click', function () {
+            document.getElementById("giaohang").className = "";
+            document.getElementById("nhanhang").className = "active";
+            var checkbox = document.getElementById("rd_nhanhang");
             checkbox.checked = true;
             alert("Nhận hàng tại Cybershop " + checkbox.checked);
         });
