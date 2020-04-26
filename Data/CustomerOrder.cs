@@ -12,28 +12,26 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice
+    public partial class CustomerOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Invoice()
+        public CustomerOrder()
         {
-            this.Invoice_Detail = new HashSet<Invoice_Detail>();
+            this.Invoices = new HashSet<Invoice>();
         }
     
         public int Id { get; set; }
-        public Nullable<System.DateTime> PurchaseDate { get; set; }
-        public string DeliveryAddress { get; set; }
-        public string DeliveryPhoneNum { get; set; }
-        public Nullable<double> Total { get; set; }
+        public string CustomerName { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string PhoneNum { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
         public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> CustomerOrder_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
-        public virtual CustomerOrder CustomerOrder { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

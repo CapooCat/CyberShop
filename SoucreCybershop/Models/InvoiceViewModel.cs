@@ -12,7 +12,7 @@ namespace CyberShop.Models
         public string UserName { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string DeliveryAddress { get; set; }
-        public string DeliveryPhoneNum { get; set; }
+        public string PhoneNum{ get; set; }
         public Nullable<double> Total { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }

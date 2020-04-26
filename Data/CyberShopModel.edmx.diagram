@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="ShopPCComponentsModel.WarehouseDetail" Width="1.5" PointX="7.5" PointY="11.875" IsExpanded="true" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Brand" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_User" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Product" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Promotion" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Warehouse_Product" ManuallyRouted="false" />
@@ -33,6 +32,8 @@
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_ProducType" />
         <AssociationConnector Association="ShopPCComponentsModel.ProducTypeCategoryy" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProducType_Category" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.CustomerOrder" Width="1.5" PointX="3.5" PointY="14.875" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_CustomerOrder" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

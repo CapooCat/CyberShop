@@ -54,4 +54,7 @@ app.controller('MyController', function ($scope, $http) {
         });
     }
     $scope.sortBy = '+Price';
+
+    //Kiếm tra đã chọn thành phố hay chưa
 });
+

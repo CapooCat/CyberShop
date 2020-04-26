@@ -40,5 +40,6 @@ namespace Data
         public virtual DbSet<CategoryDetail> CategoryDetails { get; set; }
         public virtual DbSet<CategoryDetailSuggest> CategoryDetailSuggests { get; set; }
         public virtual DbSet<ProducType> ProducTypes { get; set; }
+        public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
     }
 }

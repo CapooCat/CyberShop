@@ -221,6 +221,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\CategoryDetailViewModel.cs" />
+    <Compile Include="Models\CustomerOrderViewModel.cs" />
     <Compile Include="Models\DetailProductViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />

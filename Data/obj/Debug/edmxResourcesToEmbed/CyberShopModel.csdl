@@ -34,7 +34,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="User_id" Type="Int32" />
     <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
     <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DeliveryPhoneNum" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
@@ -45,7 +44,8 @@
     <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Invoice_Detail" Relationship="Self.FK_Invoice_Detail_Invoice" FromRole="Invoice" ToRole="Invoice_Detail" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Invoice_User" FromRole="Invoice" ToRole="User" />
+    <Property Name="CustomerOrder_id" Type="Int32" />
+    <NavigationProperty Name="CustomerOrder" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="Invoice" ToRole="CustomerOrder" />
   </EntityType>
   <EntityType Name="Invoice_Detail">
     <Key>
@@ -130,7 +130,6 @@
     <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_User" FromRole="User" ToRole="Invoice" />
   </EntityType>
   <EntityType Name="Warehouse">
     <Key>
@@ -182,18 +181,6 @@
       </Principal>
       <Dependent Role="Invoice_Detail">
         <PropertyRef Name="Invoice_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Invoice_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Invoice">
-        <PropertyRef Name="User_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -266,10 +253,6 @@
       <End Role="Invoice" EntitySet="Invoices" />
       <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
     </AssociationSet>
-    <AssociationSet Name="FK_Invoice_User" Association="Self.FK_Invoice_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Invoice" EntitySet="Invoices" />
-    </AssociationSet>
     <AssociationSet Name="FK_Invoice_Detail_Product" Association="Self.FK_Invoice_Detail_Product">
       <End Role="Product" EntitySet="Products" />
       <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
@@ -310,6 +293,11 @@
     <AssociationSet Name="FK_ProducType_Category" Association="ShopPCComponentsModel.FK_ProducType_Category">
       <End Role="Categoryy" EntitySet="Categoryies" />
       <End Role="ProducType" EntitySet="ProducTypes" />
+    </AssociationSet>
+    <EntitySet Name="CustomerOrders" EntityType="ShopPCComponentsModel.CustomerOrder" />
+    <AssociationSet Name="FK_Invoice_CustomerOrder" Association="ShopPCComponentsModel.FK_Invoice_CustomerOrder">
+      <End Role="CustomerOrder" EntitySet="CustomerOrders" />
+      <End Role="Invoice" EntitySet="Invoices" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ProductImage">
@@ -442,6 +430,34 @@
       </Principal>
       <Dependent Role="ProducType">
         <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CustomerOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Invoices" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="CustomerOrder" ToRole="Invoice" />
+  </EntityType>
+  <Association Name="FK_Invoice_CustomerOrder">
+    <End Type="ShopPCComponentsModel.CustomerOrder" Role="CustomerOrder" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="CustomerOrder_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
