@@ -34,8 +34,8 @@
     <EntitySetMapping Name="Invoices">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice">
         <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="CustomerOrder_id" ColumnName="CustomerOrder_id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
           <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
           <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
           <ScalarProperty Name="DeliveryPhoneNum" ColumnName="DeliveryPhoneNum" />
@@ -221,6 +221,22 @@
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerOrders">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.CustomerOrder">
+        <MappingFragment StoreEntitySet="CustomerOrder">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
