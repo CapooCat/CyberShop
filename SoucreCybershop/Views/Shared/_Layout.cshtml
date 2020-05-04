@@ -83,7 +83,7 @@
                             <div class="cat">
                                 @foreach (var item in catList)
                                 {
-                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" ng-click="ReturnDataCategory('@item.Metatitle')" href="/Product/Category"> @item.CategoryName</a>
+                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" href="/danh-muc/@item.Metatitle"> @item.CategoryName</a>
                                 }
                             </div>
                                     <a onmouseover="closebox()" onmouseout="openbox()" href="/Product">Tất cả sản phẩm</a>
@@ -103,7 +103,7 @@
                                                     {
                                                         foreach (var subCat in subCatList)
                                                         {
-                                                            <li><a href="/SanPham/@subCat.Metatitle">@subCat.SuggestName</a></li>
+                                                            <li><a href="/san-pham/@subCat.Metatitle">@subCat.SuggestName</a></li>
                                                         }
                                                     }
                                                 </div>

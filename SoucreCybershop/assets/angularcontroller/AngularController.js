@@ -15,17 +15,25 @@
             }
         })
 app.controller('MyController', function ($scope, $http) {
-    $scope.loading = true;
-    $http.get("/Product/SanPham").then(function (res) {
-        $scope.loading = false;
-        $scope.data = res.data;
-    });
-    $scope.ReturnDataCategory = function (Metatitle) {
-        $http.get("/Product/ReturnDataCategory/" + Metatitle).then(function (response) {
+    $a = window.location.pathname;
+    
+    if ($a.includes("/Product") != false) {
+        $scope.loading = true;
+        $http.get("/Product/SanPham").then(function (res) {
             $scope.loading = false;
-            $scope.datalist = response.data;
+            $scope.data = res.data;
         });
     }
+    
+    if ($a.includes("/danh-muc/") != false || $a.includes("/chi-tiet-danh-muc/") != false || $a.includes("/san-pham/") != false) {
+        $scope.loading = true;
+        $http.get(window.location.pathname + "/JSON")
+            .then(function (response) {
+                $scope.loading = false;
+                $scope.datalist = response.data;
+            });
+    }
+    
     $scope.FetchCart = function () {
         $http.get("/Cart/ReturnCartItem").then(function (response) {
             $scope.cartList = response.data;

@@ -24,9 +24,30 @@ namespace CyberShop
            );
             routes.MapRoute(
              name: "SanPham",
-             url: "SanPham/{metatitle}",
+             url: "san-pham/{metatitle}",
              defaults: new { controller = "Product", action = "CategoryDetailSuggest", metatitle = UrlParameter.Optional }
            );
+
+
+
+            routes.MapRoute(
+              name: "DanhMucJSON",
+              url: "danh-muc/{metatitle}/JSON",
+              defaults: new { controller = "Product", action = "CategoryJSON", metatitle = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+             name: "ChiTietDanhMucJSON",
+             url: "chi-tiet-danh-muc/{metatitle}/JSON",
+             defaults: new { controller = "Product", action = "CategoryDetailJSON", metatitle = UrlParameter.Optional }
+           );
+            routes.MapRoute(
+             name: "SanPhamJSON",
+             url: "san-pham/{metatitle}/JSON",
+             defaults: new { controller = "Product", action = "CategoryDetailSuggestJSON", metatitle = UrlParameter.Optional }
+           );
+
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
