@@ -589,6 +589,24 @@ body {
   opacity: 0;
 }
 
+.dropdown-cart table {
+  text-align: left;
+  border-radius: 0;
+  margin-top: 0 !important;
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+  
+}
+
+.dropdown-cart th {
+  text-align: left;
+  border: 0px;
+}
+
+.dropdown-cart td {
+  text-align: left;
+  border: 0px;
+}
+
 .cart {
   float: left;
   overflow: hidden;
@@ -618,30 +636,6 @@ body {
   opacity: 1;
 }
 
-.columm-1 {
-  width: 100%;
-  word-wrap: break-word;
-}
-.columm-2 {
-  width: 100%;
-  word-wrap: break-word;
-}
-.columm-3 {
-  width: 100%;
-  word-wrap: break-word;
-}
-.columm-4 {
-  width: 100%;
-  word-wrap: break-word;
-}
-
-.dropdown-cart .Title {
-  padding-top: 15px;
-  background-color: #1E90FF;
-  color: white;
-  text-decoration: none;
-}
-
 .topnav .dropdown-cart a {
   transition: color .2s;
   float: left;
@@ -656,19 +650,6 @@ body {
 
 .topnav .dropdown-cart a:hover {
   color: #1E90FF;
-}
-
-.Total {
-  padding-top: 15px;
-  padding-bottom: 5px;
-  background-color: #f9f9f9;
-  color: black;
-  text-decoration: none;
-  border: none;
-}
-
-.Total-price {
-  width: 100%;
 }
 
 .pay {
