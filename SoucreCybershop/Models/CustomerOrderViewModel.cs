@@ -15,6 +15,7 @@ namespace CyberShop.Models
         public string Email { get; set; }
         [Required(ErrorMessage = "Bạn chưa nhập địa chỉ")]
         public string Address { get; set; }
+        [Required(ErrorMessage = "Bạn chưa chọn tỉnh thành")]
         public string City { get; set; }
         [Required(ErrorMessage = "Bạn chưa chọn phương thức thanh toán")]
         public string Payment { get; set; }
