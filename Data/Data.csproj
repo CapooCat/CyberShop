@@ -74,9 +74,11 @@
     <Compile Include="CustomerOrder.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerOrderDao.cs" />
     <Compile Include="Invoice.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceDao.cs" />
     <Compile Include="Invoice_Detail.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
