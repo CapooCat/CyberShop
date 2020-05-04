@@ -101,11 +101,12 @@ namespace CyberShop.Controllers
             model = (from a in data.CategoryDetails
                      where a.MetaTitle == metatitle
                      join b in data.ProducTypes on metatitle equals b.Metatitle
+
                      select new CategoryViewModel
                      {
                          CateName = a.CateDetailName,
                          breadcrumb = b.TypeName
-                     }).ToList();
+                     }).Distinct().ToList();
             return View("SpTheoDanhMuc", model);
         }
 
