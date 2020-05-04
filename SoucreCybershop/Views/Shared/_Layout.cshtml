@@ -51,22 +51,24 @@
                         <div class="cart" >
                             <a href="#" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'>{{cartList.length}} </span></i>Giỏ hàng</a>
                             <div class="dropdown-cart">
-                                <div class="row Title">
-                                    <div class="col-md-5 columm-1"><p>Tên</p></div>
-                                    <div class="col-md-2 columm-2"><p>Số lượng</p></div>
-                                    <div class="col-md-3 columm-3"><p>Giá</p></div>
-                                    <div class="col-md-2 columm-4"><p>Tác vụ</p></div>
-                                </div>
-                                <div class="row Info" ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)">
-                                    <img style="width: 50px;height:50px;margin-left: 10px;" ng-src="{{item.Image}}">
-                                    <div class="col-md-4 columm-1"><a href="#">{{item.ProductName}}</a></div>
-                                    <div class="col-md-2 columm-2" style="margin-left: 10px;"><p>{{item.Quanlity}}</p></div>
-                                    <div class="col-md-3 columm-3"><p>{{item.Price | currency:"":0}}đ</p></div>
-                                    <div class="col-md-1 columm-4" style="margin-top: -2px;"><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a><a ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a></div>
-                                </div>
-                                <div class="row Total">
-                                    <div class="col-md-12 Total-price"><p>Thành tiền: {{bucket.total_amount | currency:"":0}}đ<button class="pay" onclick="location.href='/Pay';" >Thanh toán</button></p></div>
-                                </div>
+                                <table>
+                                    <tr>
+                                        <th style="width: 50%;">Tên sản phẩm</th>
+                                        <th style="width: 20%;">Số lượng</th>
+                                        <th style="width: 20%;">Giá</th>
+                                        <th style="width: 10%;">Tác vụ</th>
+                                    </tr>
+                                        <tr ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)">
+                                            <td><a href="#"><img style="max-width: 50px;max-height:50px;margin-right: 10px;" ng-src="{{item.Image}}">{{item.ProductName}}</a></td>
+                                            <td>{{item.Quanlity}}</td>
+                                            <td>{{item.Price | currency:"":0}}đ</td>
+                                            <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a><a ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a></td>
+                                        </tr>
+                                    <tr style="border-top: 1px solid #DCDCDC;height: 65px;">
+                                        <td colspan="1" style="text-align: left;">Thành tiền: {{bucket.total_amount | currency:"":0}}đ</td>
+                                        <td colspan="4"><button class="pay" onclick="location.href = '/Pay';">Thanh toán</button></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -82,7 +84,7 @@
                             <div class="cat">
                                 @foreach (var item in catList)
                                 {
-                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" ng-click="ReturnDataCategory('@item.Metatitle')" href="/Product/Category"> @item.CategoryName</a>
+                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" href="/danh-muc/@item.Metatitle"> @item.CategoryName</a>
                                 }
                             </div>
                                     <a onmouseover="closebox()" onmouseout="openbox()" href="/Product">Tất cả sản phẩm</a>
@@ -102,7 +104,7 @@
                                                     {
                                                         foreach (var subCat in subCatList)
                                                         {
-                                                            <li><a href="/SanPham/@subCat.Metatitle">@subCat.SuggestName</a></li>
+                                                            <li><a href="/san-pham/@subCat.Metatitle">@subCat.SuggestName</a></li>
                                                         }
                                                     }
                                                 </div>

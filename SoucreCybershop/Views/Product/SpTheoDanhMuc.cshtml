@@ -1,4 +1,4 @@
-﻿@model List<CyberShop.Models.ProductCategoryViewModel>
+﻿@model List<CyberShop.Models.CategoryViewModel>
 @{
     ViewBag.Title = "Sản phẩm Cybershop";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,11 +7,14 @@
 <!-- List sản phẩm -->
 
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
-    <h3><i class="fas fa-bars" style="margin-right: 10px"></i>Tất cả sản phẩm</h3>
+    @{ var last = Model.Last(); }
+        <h3><i class="fas fa-bars" style="margin-right: 10px"></i>@Html.DisplayFor(modelItem => last.CateName)</h3>
     <ul class="breadcrumb Page-address">
         <li class="breadcrumb-item"><a href="#"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
-        <li class="breadcrumb-item"><a href="#">Linh kiện PC</a></li>
-        <li class="breadcrumb-item active">Tất cả sản phẩm</li>
+        @foreach (var item in Model)
+        {
+            <li class="breadcrumb-item">@item.breadcrumb</li>
+        }
     </ul>
     <div class="sort">
         <button ng-click="sortBy = '+Price'" class="clickDo active">Giá tăng dần</button>
