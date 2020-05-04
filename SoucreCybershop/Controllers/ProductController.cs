@@ -244,6 +244,10 @@ namespace CyberShop.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult CurrentUrl()
+        {
+            return Json(Session[Common.CommonConstantUser.URL_REFERRER], JsonRequestBehavior.AllowGet);
+        } 
 
     }
 }

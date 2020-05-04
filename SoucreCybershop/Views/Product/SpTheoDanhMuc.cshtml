@@ -5,7 +5,6 @@
     Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
 }
 <!-- List sản phẩm -->
-
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
     @{ var last = Model.Last(); }
         <h3><i class="fas fa-bars" style="margin-right: 10px"></i>@Html.DisplayFor(modelItem => last.CateName)</h3>

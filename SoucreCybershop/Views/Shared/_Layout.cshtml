@@ -7,6 +7,7 @@
     List<Categoryy> catList = catDao.getAllCatgories();
     List<CategoryDetailDao> catListDetail= new List<CategoryDetailDao>();
     List<CategoryDetailSuggest> subCatList = new List<CategoryDetailSuggest>();
+    Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
 }
 <!DOCTYPE html>
 <html lang="en">
