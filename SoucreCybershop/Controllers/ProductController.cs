@@ -30,9 +30,11 @@ namespace CyberShop.Controllers
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.Categoryies
                      where a.Metatitle == metatitle
+                     join b in data.ProducTypes on metatitle equals b.Metatitle
                      select new CategoryViewModel
                      {
-                         CateName = a.CategoryName
+                         CateName = a.CategoryName,
+                         breadcrumb = b.TypeName
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }
@@ -98,9 +100,11 @@ namespace CyberShop.Controllers
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.CategoryDetails
                      where a.MetaTitle == metatitle
+                     join b in data.ProducTypes on metatitle equals b.Metatitle
                      select new CategoryViewModel
                      {
-                         CateName = a.CateDetailName
+                         CateName = a.CateDetailName,
+                         breadcrumb = b.TypeName
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }
@@ -156,9 +160,12 @@ namespace CyberShop.Controllers
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.CategoryDetailSuggests
                      where a.Metatitle == metatitle
+                     join b in data.CategoryDetails on a.CategoryDetail_id equals b.Id
+                     join c in data.ProducTypes on b.MetaTitle equals c.Metatitle
                      select new CategoryViewModel
                      {
-                         CateName = a.SuggestName
+                         CateName = a.SuggestName,
+                         breadcrumb = c.TypeName
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }

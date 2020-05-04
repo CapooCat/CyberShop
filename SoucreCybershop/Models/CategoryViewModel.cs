@@ -9,11 +9,7 @@ namespace CyberShop.Models
     {
         public int Id { get; set; }
         public string CateName { get; set; }
-        public int Category_id { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public string CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedTime { get; set; }
+
+        public string breadcrumb { get; set; }
     }
 }
