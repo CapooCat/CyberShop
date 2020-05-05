@@ -229,6 +229,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\SignUpViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -355,6 +356,7 @@
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Shared\_LayoutTrong.cshtml" />
     <Content Include="Views\Pay\Index.cshtml" />
+    <Content Include="Views\Home\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
