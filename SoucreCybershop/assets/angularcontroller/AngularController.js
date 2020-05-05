@@ -25,7 +25,7 @@ app.controller('MyController', function ($scope, $http) {
         });
     }
     
-    if ($a.includes("/danh-muc/") != false || $a.includes("/chi-tiet-danh-muc/") != false || $a.includes("/san-pham/") != false) {
+    if ($a.includes("/danh-muc/") !== false || $a.includes("/chi-tiet-danh-muc/") !== false || $a.includes("/san-pham/") !== false) {
         $scope.loading = true;
         $http.get(window.location.pathname + "/JSON")
             .then(function (response) {
