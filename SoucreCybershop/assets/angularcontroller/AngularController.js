@@ -15,7 +15,7 @@
             }
         })
 app.controller('MyController', function ($scope, $http) {
-    $a = $location.path();
+    $a = window.location.pathname;
     if ($a.includes("/Product") != false) {
         $scope.loading = true;
         $http.get("/Product/SanPham").then(function (res) {
@@ -26,7 +26,7 @@ app.controller('MyController', function ($scope, $http) {
     
     if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true) {
         $scope.loading = true;
-        $http.get($location.path() + "/JSON")
+        $http.get(window.location.pathname + "/JSON")
             .then(function (response) {
                 $scope.loading = false;
                 $scope.datalist = response.data;
