@@ -30,11 +30,10 @@ namespace CyberShop.Controllers
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.Categoryies
                      where a.Metatitle == metatitle
-                     join b in data.ProducTypes on metatitle equals b.Metatitle
                      select new CategoryViewModel
                      {
                          CateName = a.CategoryName,
-                         breadcrumb = b.TypeName
+                         breadcrumb = a.CategoryName
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }
