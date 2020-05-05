@@ -12,6 +12,44 @@ namespace CyberShop
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+
+            routes.MapRoute(
+              name: "LessThanJSON",
+              url: "san-pham/{Type}-duoi-{Number}-trieu/JSON",
+              defaults: new { controller = "Product", action = "SortPriceLessThan", Type = UrlParameter.Optional, Number = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "MoreThanJSON",
+              url: "san-pham/{Type}-tren-{Number}-trieu/JSON",
+              defaults: new { controller = "Product", action = "SortPriceMoreThan", Type = UrlParameter.Optional, Number = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "FromToJSON",
+              url: "san-pham/{type}-tu-{NumberFrom}-den-{NumberTo}-trieu/JSON",
+              defaults: new { controller = "Product", action = "SortPriceFromTo", Type = UrlParameter.Optional, NumberFrom = UrlParameter.Optional, NumberTo = UrlParameter.Optional}
+            );
+
+
+
+            routes.MapRoute(
+              name: "LessThan",
+              url: "san-pham/{metatitle}-duoi-{Number}-trieu/JSON",
+              defaults: new { controller = "Product", action = "CategoryDetailSuggest", metatitle = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "MoreThan",
+              url: "san-pham/{metatitle}-tren-{Number}-trieu/JSON",
+              defaults: new { controller = "Product", action = "CategoryDetailSuggest", metatitle = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "FromTo",
+              url: "san-pham/{metatitle}-tu-{NumberFrom}-den-{NumberTo}-trieu/JSON",
+              defaults: new { controller = "Product", action = "CategoryDetailSuggest", metatitle = UrlParameter.Optional }
+            );
+
+
+
             routes.MapRoute(
               name: "DanhMuc",
               url: "danh-muc/{metatitle}",
@@ -45,7 +83,7 @@ namespace CyberShop
              url: "san-pham/{metatitle}/JSON",
              defaults: new { controller = "Product", action = "CategoryDetailSuggestJSON", metatitle = UrlParameter.Optional }
            );
-
+            
 
 
             routes.MapRoute(
