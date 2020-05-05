@@ -16,7 +16,6 @@
         })
 app.controller('MyController', function ($scope, $http) {
     $a = window.location.pathname;
-    
     if ($a.includes("/Product") != false) {
         $scope.loading = true;
         $http.get("/Product/SanPham").then(function (res) {
@@ -25,7 +24,8 @@ app.controller('MyController', function ($scope, $http) {
         });
     }
     
-    if ($a.includes("/danh-muc/") !== false || $a.includes("/chi-tiet-danh-muc/") !== false || $a.includes("/san-pham/") !== false) {
+
+    if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true) {
         $scope.loading = true;
         $http.get(window.location.pathname + "/JSON")
             .then(function (response) {
@@ -62,8 +62,6 @@ app.controller('MyController', function ($scope, $http) {
         });
     }
     $scope.sortBy = '+Price';
-
-    //Kiếm tra đã chọn thành phố hay chưa
 
 });
 

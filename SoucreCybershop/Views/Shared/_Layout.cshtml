@@ -7,6 +7,7 @@
     List<Categoryy> catList = catDao.getAllCatgories();
     List<CategoryDetailDao> catListDetail= new List<CategoryDetailDao>();
     List<CategoryDetailSuggest> subCatList = new List<CategoryDetailSuggest>();
+    Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@
                         }
                         else
                         {
-                            <a href="SignUp.html" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
+                            <a href="/Home/SignUp" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
                             <a href="/Home/Login" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
                         }
                         <div class="cart" >
@@ -181,8 +182,8 @@
     <script src="/assets/js/jquery-3.4.1.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="/assets/angularcontroller/AngularController.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="~/assets/angularcontroller/AngularController.js"></script>
     <script>
         var totalcat = document.getElementsByClassName("more-content-items");
         for (i = 0; i < totalcat.length; i++) {

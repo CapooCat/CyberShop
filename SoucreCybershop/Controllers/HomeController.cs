@@ -92,7 +92,19 @@ namespace CyberShop.Controllers
         {
             return View();
         }
+        public ActionResult SignUp()
+        {
+            var model = new SignUpViewModel();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SignUp(SignUpViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
 
-
+            }
+            return View(model);
+        }
     }
 }
