@@ -20,6 +20,18 @@ namespace Data
                 return false;
             }
         }
+        public bool KTEmail(string email)
+        {
+            var res = data.Users.Where(x => x.Username == email).Count();
+            if (res > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public bool KTMatKhau(string mk)
         {
             var res = data.Users.Where(x => x.Password == mk).Count();
@@ -36,6 +48,15 @@ namespace Data
         {
             return data.Users.FirstOrDefault(x => x.Username == tk);
         }
-       
+        public bool InsertUser(User entity)
+        {
+            if (entity != null)
+            {
+                data.Users.Add(entity);
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -20,6 +20,9 @@
         </div>
         <form method="post" action="/Home/SignUp">
             <h6>
+                @Html.TextBoxFor(model => model.Name, new { @type = "text", @placeholder = "Họ tên...", @name = "search", })
+            </h6>
+            <h6>
                 @Html.TextBoxFor(model => model.Email, new { @type = "text", @placeholder = "Email...", @name = "search", })
             </h6>
             <h6>

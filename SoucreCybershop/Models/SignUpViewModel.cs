@@ -13,10 +13,12 @@ namespace CyberShop.Models
         [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Bạn chưa nhập lại mật khẩu")]
+        [CompareAttribute("Password", ErrorMessage = "Mật khẩu không khớp")]
         public string Re_Password { get; set; }
         [Required(ErrorMessage = "Bạn chưa nhập email")]
         [EmailAddress(ErrorMessage = "Email chưa đúng định dạng")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Bạn chưa nhập họ tên")]
         public string Name { get; set; }
         public System.DateTime DayOfBirth { get; set; }
         public string Image { get; set; }
