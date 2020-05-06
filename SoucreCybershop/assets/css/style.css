@@ -7,6 +7,9 @@ body {
 
 
 /* Header */
+button:focus {
+  outline: none;
+}
 
 .loading {
   color: white;
@@ -579,7 +582,7 @@ body {
 .dropdown-cart {
   margin-top: 50px;
   left: 45%;
-  right: 14%;
+  right: 10%;
   visibility: hidden;
   position: fixed;
   background-color: #f9f9f9;

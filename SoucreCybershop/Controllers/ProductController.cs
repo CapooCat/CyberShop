@@ -30,11 +30,10 @@ namespace CyberShop.Controllers
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.Categoryies
                      where a.Metatitle == metatitle
-                     join b in data.ProducTypes on metatitle equals b.Metatitle
                      select new CategoryViewModel
                      {
                          CateName = a.CategoryName,
-                         breadcrumb = b.TypeName
+                         breadcrumb = a.CategoryName
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }
@@ -177,6 +176,151 @@ namespace CyberShop.Controllers
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
                      where b.MetaTitle.Contains(metatitle)
+                     select new ProductCategoryViewModel
+                     {
+                         id = b.id,
+                         Brand_id = b.Brand_id,
+                         Promotion_id = b.Promotion_id,
+                         ProductName = b.ProductName,
+                         Info = b.Info,
+                         Price = b.Price,
+                         MonthWarranty = b.MonthWarranty,
+                         Image = b.Image,
+                         IsDeleted = b.IsDeleted,
+                         CreateBy = b.CreateBy,
+                         CreateDate = b.CreateDate,
+                         ModifiedBy = b.ModifiedBy,
+                         ModifiedDate = b.ModifiedDate,
+                         ProductType_id = b.ProductType_id
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    Brand_id = item.Brand_id,
+                    Promotion_id = item.Promotion_id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    ProductType_id = item.ProductType_id
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SortPriceLessThan(string type, string number)
+        {
+            var model = new List<ProductCategoryViewModel>();
+            int PriceToSort = Convert.ToInt32(number + "000000");
+            model = (from a in data.ProducTypes
+                     join b in data.Products on a.Id equals b.ProductType_id
+                     where b.MetaTitle.Contains(type) && b.Price < PriceToSort
+                     select new ProductCategoryViewModel
+                     {
+                         id = b.id,
+                         Brand_id = b.Brand_id,
+                         Promotion_id = b.Promotion_id,
+                         ProductName = b.ProductName,
+                         Info = b.Info,
+                         Price = b.Price,
+                         MonthWarranty = b.MonthWarranty,
+                         Image = b.Image,
+                         IsDeleted = b.IsDeleted,
+                         CreateBy = b.CreateBy,
+                         CreateDate = b.CreateDate,
+                         ModifiedBy = b.ModifiedBy,
+                         ModifiedDate = b.ModifiedDate,
+                         ProductType_id = b.ProductType_id
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    Brand_id = item.Brand_id,
+                    Promotion_id = item.Promotion_id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    ProductType_id = item.ProductType_id
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SortPriceMoreThan(string type, string number)
+        {
+            var model = new List<ProductCategoryViewModel>();
+            int PriceToSort = Convert.ToInt32(number + "000000");
+            model = (from a in data.ProducTypes
+                     join b in data.Products on a.Id equals b.ProductType_id
+                     where b.MetaTitle.Contains(type) && b.Price > PriceToSort
+                     select new ProductCategoryViewModel
+                     {
+                         id = b.id,
+                         Brand_id = b.Brand_id,
+                         Promotion_id = b.Promotion_id,
+                         ProductName = b.ProductName,
+                         Info = b.Info,
+                         Price = b.Price,
+                         MonthWarranty = b.MonthWarranty,
+                         Image = b.Image,
+                         IsDeleted = b.IsDeleted,
+                         CreateBy = b.CreateBy,
+                         CreateDate = b.CreateDate,
+                         ModifiedBy = b.ModifiedBy,
+                         ModifiedDate = b.ModifiedDate,
+                         ProductType_id = b.ProductType_id
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    Brand_id = item.Brand_id,
+                    Promotion_id = item.Promotion_id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    ProductType_id = item.ProductType_id
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SortPriceFromTo(string type, string NumberFrom, string NumberTo)
+        {
+            var model = new List<ProductCategoryViewModel>();
+            int PriceToSortFrom = Convert.ToInt32(NumberFrom + "000000");
+            int PriceToSortTo = Convert.ToInt32(NumberTo + "000000");
+            model = (from a in data.ProducTypes
+                     join b in data.Products on a.Id equals b.ProductType_id
+                     where b.MetaTitle.Contains(type) && b.Price > PriceToSortFrom && b.Price < PriceToSortTo
                      select new ProductCategoryViewModel
                      {
                          id = b.id,

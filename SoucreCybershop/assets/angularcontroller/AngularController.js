@@ -24,6 +24,7 @@ app.controller('MyController', function ($scope, $http) {
         });
     }
     
+
     if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true) {
         $scope.loading = true;
         $http.get(window.location.pathname + "/JSON")
