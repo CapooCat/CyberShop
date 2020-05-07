@@ -14,12 +14,12 @@
             <li class="breadcrumb-item">@Html.DisplayFor(modelItem => bread.breadcrumb)</li>
     </ul>
     <div class="sort">
-        <button ng-click="sortBy = '+Price'" class="clickDo active">Giá tăng dần</button>
-        <button ng-click="sortBy = '-Price'" class="clickDo">Giá giảm dần</button>
-        <button ng-click="sortBy = '+ProductName'" class="clickDo">A -> Z</button>
-        <button ng-click="sortBy ='-ProductName'" class="clickDo">Z -> A</button>
-        <button ng-click="sortBy ='-CreateDate'" class="clickDo">Mới nhất</button>
-        <button ng-click="sortBy ='+CreateDate'" class="clickDo">Cũ nhất</button>
+        <button ng-click="SortBy(1); Reload()" class="clickDo active">Giá tăng dần</button>
+        <button ng-click="SortBy(2); Reload()" class="clickDo">Giá giảm dần</button>
+        <button ng-click="SortBy(3); Reload()" class="clickDo">A -> Z</button>
+        <button ng-click="SortBy(4); Reload()" class="clickDo">Z -> A</button>
+        <button ng-click="SortBy(5); Reload()" class="clickDo">Mới đến cũ</button>
+        <button ng-click="SortBy(6); Reload()" class="clickDo">Cũ đến mới</button>
     </div>
 
     <div>
@@ -66,17 +66,13 @@
 
     </div>*@
 
-    <div class="pagination col-md-12">
-        <a href="#"><i class="fas fa-angle-double-left"></i></a>
-        <a href="#"><i class="fas fa-angle-left"></i></a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#"><i class="fas fa-angle-right"></i></a>
-        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+    <div class="pagination col-md-12 no-select">
+        <a ng-click="Back(); Reload()"><i class="fas fa-angle-left"></i></a>
+        <a ng-click="Change(1); Reload()" class="NumberPage active">1</a>
+        <div ng-repeat="x in paginate track by $index" style="display: inline">
+            <a class="NumberPage" ng-click="Change(x); Reload()">{{x}}</a>
+        </div>
+        <a ng-click="Next(); Reload()"><i class="fas fa-angle-right"></i></a>
     </div>
 </section>
 

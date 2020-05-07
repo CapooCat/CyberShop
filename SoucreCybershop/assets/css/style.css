@@ -7,6 +7,13 @@ body {
 
 
 /* Header */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 button:focus {
   outline: none;
 }
@@ -689,7 +696,9 @@ button:focus {
   color: black;
   padding: 8px 16px;
   text-decoration: none;
-  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .pagination .active {
