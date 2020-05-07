@@ -34,7 +34,7 @@ namespace CyberShop.Controllers
                     customerOrder.Address = model.Address;
                     customerOrder.Email = model.Email;
                     customerOrder.PhoneNum = model.PhoneNum;
-                    customerOrder.IsDeleted = true;
+                    customerOrder.IsDeleted = false;
                     customerOrder.CreateBy = "Admin";
                     customerOrder.ModifiedBy = "";
                     customerOrder.CreateDate = DateTime.Now;
@@ -47,7 +47,7 @@ namespace CyberShop.Controllers
                     invoice.PurchaseDate = DateTime.Now;
                     invoice.DeliveryAddress = model.Address + " " + model.City;
                     invoice.DeliveryPhoneNum = model.PhoneNum;
-                    invoice.IsDeleted = true;
+                    invoice.IsDeleted = false;
                     invoice.CreateBy = "Admin";
                     invoice.CreateDate = DateTime.Now;
                     List<CartViewModel> cart = (List<CartViewModel>)Session[CyberShop.Common.CommonConstantUser.CART_SESSION];

@@ -105,7 +105,7 @@ namespace CyberShop.Controllers
             if(ModelState.IsValid)
             {
                 var userDao = new UserDao();
-                if(userDao.KTEmail(model.Email)==false & userDao.KTTaiKhoan(model.Username)==false)
+                if(userDao.KTEmail(model.Email)==false && userDao.KTTaiKhoan(model.Username)==false)
                 {
                     var user = new User();
                     user.Email = model.Email;
@@ -151,7 +151,7 @@ namespace CyberShop.Controllers
             var loginUrl = fb.GetLoginUrl(new
             {
                 client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secrect=ConfigurationManager.AppSettings["FbAppSecret"],
+                client_secret=ConfigurationManager.AppSettings["FbAppSecret"],
                 redirect_uri=RedirectUri.AbsoluteUri,
                 response_type="code",
                 scope="email"
@@ -164,7 +164,7 @@ namespace CyberShop.Controllers
             dynamic result = fb.Post("oauth/access_token", new
             {
                 client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secrect = ConfigurationManager.AppSettings["FbAppSecret"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
                 redirect_uri = RedirectUri.AbsoluteUri,
                 code = code,
             });
@@ -173,10 +173,11 @@ namespace CyberShop.Controllers
             if(!string.IsNullOrEmpty(accessToken))
             {
                 fb.AccessToken = accessToken;
-                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email,picture,gender");
+                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email,picture");
                 string email = me.email;
                 string username = me.email;
-                string image = me.picture.data.url; 
+                string birthday = me.birthday;
+                string image = me.picture.data.url;
                 string firstname = me.first_name;
                 string middlename = me.middle_name;
                 string lastname = me.last_name;
@@ -188,8 +189,7 @@ namespace CyberShop.Controllers
                     user.Email = email;
                     user.Username = email;
                     user.Name = firstname + " " + middlename + " " + lastname;
-                    user.Image = image;
-                    user.IsDeleted = true;
+                    user.IsDeleted = false;
                     user.CreateDate = DateTime.Now;
 
                     var resultInsert=userDao.InsertUser(user);
@@ -198,12 +198,24 @@ namespace CyberShop.Controllers
                         user = userDao.getInfo(user.Email);
                         var userSession = new UserInfo();
                         userSession.Id = user.id;
-                        userSession.TaiKhoan = user.Username;
+                        userSession.TaiKhoan = "";
                         userSession.Image = user.Image;
                         userSession.HoTen = user.Name;
                         userSession.DateOfBirth = null;
                         Session.Add(CommonConstantUser.USER_SESSION, userSession);  
                     }
+                }
+                else
+                {
+                    var user = new User();
+                    user = userDao.getInfo(user.Email);
+                    var userSession = new UserInfo();
+                    userSession.Id = user.id;
+                    userSession.TaiKhoan = user.Username;
+                    userSession.Image = user.Image;
+                    userSession.HoTen = user.Name;
+                    userSession.DateOfBirth = null;
+                    Session.Add(CommonConstantUser.USER_SESSION, userSession);
                 }
             }
             return Redirect("/");
