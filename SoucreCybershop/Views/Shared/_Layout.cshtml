@@ -40,42 +40,48 @@
                             <input type="text" placeholder="Tìm kiếm..." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </div>
-                        @if (sessionCheck!=null)
+                        @if (sessionCheck != null)
                         {
-                            <a href="#" style="max-width: 180px;margin-top: 13px; overflow:hidden;"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@session.HoTen</a>
-                            <a href="/Home/Logout" style="margin-top: 13px"><i class="fas fa-sign-out-alt" style="margin-right: 10px"></i>Đăng xuất</a>
+                            <div class="user">
+                                <a onmouseover="dropdown()" style="max-width: 180px;margin-top: 13px; overflow:hidden;"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@session.HoTen</a>
+                                <div class="dropdown-user">
+                                    <a href="#"><i class="fas fa-user-cog"></i>Thông tin người dùng</a>
+                                    <a href="/Home/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+                                </div>
+                            </div>
+
                         }
                         else
                         {
-                            <a href="/Home/SignUp" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
-                            <a href="/Home/Login" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
-                        }
-                        <div class="cart" >
-                            <a href="#" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'>{{cartList.length}} </span></i>Giỏ hàng</a>
-                            <div class="dropdown-cart">
-                                <table>
-                                    <tr>
-                                        <th></th>
-                                        <th style="width: 50%;">Tên sản phẩm</th>
-                                        <th style="width: 15%;">Số lượng</th>
-                                        <th style="width: 20%;">Giá</th>
-                                        <th style="width: 15%;">Tác vụ</th>
-                                    </tr>
-                                        <tr ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)">
-                                            <td><img style="max-width: 50px;max-height:50px" ng-src="{{item.Image}}"></td>
-                                            <td><a href="#">{{item.ProductName}}</a></td>
-                                            <td>{{item.Quanlity}}</td>
-                                            <td>{{item.Price | currency:"":0}}đ</td>
-                                            <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a><a ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a></td>
-                                        </tr>
-                                    <tr style="border-top: 1px solid #DCDCDC;height: 65px;">
-                                        <td colspan="2" style="text-align: left;">Thành tiền: {{bucket.total_amount | currency:"":0}}đ</td>
-                                        <td colspan="5"><button class="pay" onclick="location.href = '/Pay';">Thanh toán</button></td>
-                                    </tr>
-                                </table>
+                                <a href="/Home/SignUp" style="margin-top: 13px"><i class="fas fa-user-plus" style="margin-right: 10px"></i>Đăng ký</a>
+                                <a href="/Home/Login" style="margin-top: 13px"><i class="fas fa-user-circle" style="margin-right: 10px"></i>Đăng nhập</a>
+                                }
+                                <div class="cart">
+                                    <a onmouseover="dropdown()" style="margin-top: 13px"><i class="fas fa-shopping-cart" style="margin-right: 10px"><span class='badge badge-warning' id='lblCartCount'>{{cartList.length}} </span></i>Giỏ hàng</a>
+                                    <div class="dropdown-cart">
+                                        <table>
+                                            <tr>
+                                                <th></th>
+                                                <th style="width: 50%;">Tên sản phẩm</th>
+                                                <th style="width: 15%;">Số lượng</th>
+                                                <th style="width: 20%;">Giá</th>
+                                                <th style="width: 15%;">Tác vụ</th>
+                                            </tr>
+                                            <tr ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)">
+                                                <td><img style="max-width: 50px;max-height:50px" ng-src="{{item.Image}}"></td>
+                                                <td><a href="#">{{item.ProductName}}</a></td>
+                                                <td>{{item.Quanlity}}</td>
+                                                <td>{{item.Price | currency:"":0}}đ</td>
+                                                <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a><a ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a></td>
+                                            </tr>
+                                            <tr style="border-top: 1px solid #DCDCDC;height: 65px;">
+                                                <td colspan="2" style="text-align: left;">Thành tiền: {{bucket.total_amount | currency:"":0}}đ</td>
+                                                <td colspan="5"><button class="pay" onclick="location.href = '/Pay';">Thanh toán</button></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
