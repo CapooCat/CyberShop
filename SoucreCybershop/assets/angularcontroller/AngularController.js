@@ -64,81 +64,34 @@ app.controller('MyController', function ($scope, $http) {
             $scope.loading = true;
             $http.get("/Product/SanPham").then(function (res) {
                 $scope.loading = false;
-
-                if (SortType == 1)
-                    (res.data).sort((a, b) => (a.Price - b.Price));
-                if (SortType == 2)
-                    (res.data).sort((a, b) => (b.Price - a.Price));
-                if (SortType == 3)
-                    (res.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName < b.ProductName ? -1 : 1 : 0);
-                if (SortType == 4)
-                    (res.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName > b.ProductName ? -1 : 1 : 0);
-                if (SortType == 5)
-                    (res.data).sort(NewToOld);
-                if (SortType == 6)
-                    (res.data).sort(OldToNew);
-
-                var Length = Object.keys(res.data).length;
-                $scope.paginate = [];
-                $scope.data = [];
-                var PageNum = 1;
-                while ((Length - 12) > 0) {
-                    Length = Length - 12;
-                    PageNum = PageNum + 1;
-                    $scope.paginate.push(PageNum);
+                if ((res.data).length == 0) {
+                    document.getElementsByClassName("empty-alert")[0].style.display = "block";
                 }
-                Length = Object.keys(res.data).length;
-                var BeginPageIndex = 0;
-                var EndPageIndex = 0;
-                for (i = 0; i <= Page; i++) {
-                    if (EndPageIndex < Length) {
-                        if (BeginPageIndex == EndPageIndex)
-                            EndPageIndex = EndPageIndex + 12;
-                        else {
-                            BeginPageIndex = BeginPageIndex + 12;
-                            EndPageIndex = EndPageIndex + 12;
-                        }
-                    }
-                    if (EndPageIndex >= Length) {
-                            EndPageIndex = Length;
-                    }
-                }
-                while (BeginPageIndex < EndPageIndex) {
-                    $scope.data.push(res.data[BeginPageIndex])
-                    BeginPageIndex = BeginPageIndex + 1;
-                }
-            });
-        }
-        else if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true) {
-            $scope.loading = true;
-            $http.get(window.location.pathname + "/JSON")
-                .then(function (response) {
-                    $scope.loading = false;
-                    $scope.datalist = response.data;
+                else {
 
                     if (SortType == 1)
-                        (response.data).sort((a, b) => (a.Price - b.Price));
+                        (res.data).sort((a, b) => (a.Price - b.Price));
                     if (SortType == 2)
-                        (response.data).sort((a, b) => (b.Price - a.Price));
+                        (res.data).sort((a, b) => (b.Price - a.Price));
                     if (SortType == 3)
-                        (response.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName < b.ProductName ? -1 : 1 : 0);
+                        (res.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName < b.ProductName ? -1 : 1 : 0);
                     if (SortType == 4)
-                        (response.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName > b.ProductName ? -1 : 1 : 0);
+                        (res.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName > b.ProductName ? -1 : 1 : 0);
                     if (SortType == 5)
-                        (response.data).sort(NewToOld);
+                        (res.data).sort(NewToOld);
                     if (SortType == 6)
-                        (response.data).sort(OldToNew);
+                        (res.data).sort(OldToNew);
 
-                    var Length = Object.keys(response.data).length;
-                    $scope.datalist = [];
+                    var Length = Object.keys(res.data).length;
                     $scope.paginate = [];
+                    $scope.data = [];
                     var PageNum = 1;
                     while ((Length - 12) > 0) {
                         Length = Length - 12;
                         PageNum = PageNum + 1;
                         $scope.paginate.push(PageNum);
                     }
-                    Length = Object.keys(response.data).length;
+                    Length = Object.keys(res.data).length;
                     var BeginPageIndex = 0;
                     var EndPageIndex = 0;
                     for (i = 0; i <= Page; i++) {
@@ -155,8 +108,64 @@ app.controller('MyController', function ($scope, $http) {
                         }
                     }
                     while (BeginPageIndex < EndPageIndex) {
-                        $scope.datalist.push(response.data[BeginPageIndex])
+                        $scope.data.push(res.data[BeginPageIndex])
                         BeginPageIndex = BeginPageIndex + 1;
+                    }
+                }
+            });
+        }
+        else if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true) {
+            $scope.loading = true;
+            $http.get(window.location.pathname + "/JSON")
+                .then(function (response) {
+                    $scope.loading = false;
+                    if ((response.data).length == 0) {
+                        document.getElementsByClassName("empty-alert")[0].style.display = "block";
+                    }
+
+                    else {
+                        if (SortType == 1)
+                            (response.data).sort((a, b) => (a.Price - b.Price));
+                        if (SortType == 2)
+                            (response.data).sort((a, b) => (b.Price - a.Price));
+                        if (SortType == 3)
+                            (response.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName < b.ProductName ? -1 : 1 : 0);
+                        if (SortType == 4)
+                            (response.data).sort((a, b) => a.ProductName !== b.ProductName ? a.ProductName > b.ProductName ? -1 : 1 : 0);
+                        if (SortType == 5)
+                            (response.data).sort(NewToOld);
+                        if (SortType == 6)
+                            (response.data).sort(OldToNew);
+
+                        var Length = Object.keys(response.data).length;
+                        $scope.datalist = [];
+                        $scope.paginate = [];
+                        var PageNum = 1;
+                        while ((Length - 12) > 0) {
+                            Length = Length - 12;
+                            PageNum = PageNum + 1;
+                            $scope.paginate.push(PageNum);
+                        }
+                        Length = Object.keys(response.data).length;
+                        var BeginPageIndex = 0;
+                        var EndPageIndex = 0;
+                        for (i = 0; i <= Page; i++) {
+                            if (EndPageIndex < Length) {
+                                if (BeginPageIndex == EndPageIndex)
+                                    EndPageIndex = EndPageIndex + 12;
+                                else {
+                                    BeginPageIndex = BeginPageIndex + 12;
+                                    EndPageIndex = EndPageIndex + 12;
+                                }
+                            }
+                            if (EndPageIndex >= Length) {
+                                EndPageIndex = Length;
+                            }
+                        }
+                        while (BeginPageIndex < EndPageIndex) {
+                            $scope.datalist.push(response.data[BeginPageIndex])
+                            BeginPageIndex = BeginPageIndex + 1;
+                        }
                     }
                 });
         }

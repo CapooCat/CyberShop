@@ -684,6 +684,11 @@ button:focus {
 }
 
 /* Product */
+.empty-alert {
+  display: none;
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
 
 .pagination {
   margin-top: 30px;

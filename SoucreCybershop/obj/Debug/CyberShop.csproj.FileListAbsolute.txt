@@ -254,3 +254,5 @@ C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.pdb
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Facebook.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Facebook.xml
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Facebook.dll
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Facebook.xml
