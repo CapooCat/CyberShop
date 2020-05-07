@@ -101,7 +101,7 @@
             <div class="col-md-6 input-info">
                 <h6>
                     @*<input type="text" placeholder="Số điện thoại..." name="search">*@
-                    @Html.TextBoxFor(model => model.PhoneNum, new { @type = "text", @placeholder = "Số điện thoại...", @name = "search", @ng_model = "PhoneNum", @required = true, })
+                    @Html.TextBoxFor(model => model.PhoneNum, new { @type = "text", @placeholder = "Số điện thoại...", @name = "search", @ng_model = "PhoneNum", @required = true,@id="key", })
                     <span style="color:red" ng-show="formThanhToan.PhoneNum.$touched && formThanhToan.PhoneNum.$invalid">Bạn chưa nhập số điện thoại</span>
                 </h6>
                 <h6>
@@ -148,19 +148,19 @@
             checkbox.checked = true;
             //alert("Giao hàng tận tay " + checkbox.checked);
         });
-        document.getElementById('nhanhang').addEventListener('click', function (e) {
-            e.preventDefault()
-            document.getElementById("giaohang").className = "";
-            document.getElementById("nhanhang").className = "active";
-            var checkbox = document.getElementById("rd_nhanhang");
-            checkbox.checked = true;
-            //alert("Nhận hàng tại Cybershop " + checkbox.checked);
+        //document.getElementById('nhanhang').addEventListener('click', function (e) {
+        //    e.preventDefault();
+        //    document.getElementById("giaohang").className = "";
+        //    document.getElementById("nhanhang").className = "active";
+        //    var checkbox = document.getElementById("rd_nhanhang");
+        //    checkbox.checked = true;
+        //    //alert("Nhận hàng tại Cybershop " + checkbox.checked);
+        //});
+        document.getElementById("tt1").addEventListener('click', function (e) {
+            e.preventDefault();
         });
-        document.getElementById('tt1').addEventListener('click', function (e) {
-            e.preventDefault()
-        });
-        document.getElementById('tt2').addEventListener('click', function (e) {
-            e.preventDefault()
+        document.getElementById("tt2").addEventListener('click', function (e) {
+            e.preventDefault();
         });
     </script>
     <script>
@@ -183,6 +183,22 @@
         setTimeout(function(){ div.style.display = "none"; }, 600);
       }
     }
+    </script>
+    <script type="text/javascript">
+	    var myInput = document.getElementById('key');
+	    myInput.addEventListener('keypress', function(e) {
+      var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
+      function keyAllowed() {
+        var keys = [8,9,13,16,17,18,19,20,27,46,48,49,50,
+                    51,52,53,54,55,56,57,91,92,93];
+        if (key && keys.indexOf(key) === -1)
+          return false;
+        else
+          return true;
+  			    }
+      if (!keyAllowed())
+        e.preventDefault();
+    }, false);
     </script>
     }
 

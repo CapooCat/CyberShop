@@ -252,3 +252,5 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.MicrosoftAcc
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.csprojResolveAssemblyReference.cache
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.pdb
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\Facebook.dll
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\Facebook.xml

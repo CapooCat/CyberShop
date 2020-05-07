@@ -19,7 +19,7 @@ namespace Data
         public string Password { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
-        public System.DateTime DayOfBirth { get; set; }
+        public Nullable<System.DateTime> DayOfBirth { get; set; }
         public string Image { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
