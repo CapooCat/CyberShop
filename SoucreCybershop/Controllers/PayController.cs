@@ -50,6 +50,15 @@ namespace CyberShop.Controllers
                     invoice.IsDeleted = false;
                     invoice.CreateBy = "Admin";
                     invoice.CreateDate = DateTime.Now;
+                    if(Session[Common.CommonConstantUser.USER_SESSION]!=null)
+                    {
+                        var userSession= (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+                        invoice.User_id = userSession.Id;
+                    }
+                    else
+                    {
+                        invoice.User_id = null;
+                    }
                     List<CartViewModel> cart = (List<CartViewModel>)Session[CyberShop.Common.CommonConstantUser.CART_SESSION];
                     double? total = 0;
                     foreach (CartViewModel item in cart)

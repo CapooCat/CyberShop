@@ -46,6 +46,7 @@
     <NavigationProperty Name="Invoice_Detail" Relationship="Self.FK_Invoice_Detail_Invoice" FromRole="Invoice" ToRole="Invoice_Detail" />
     <Property Name="CustomerOrder_id" Type="Int32" />
     <NavigationProperty Name="CustomerOrder" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="Invoice" ToRole="CustomerOrder" />
+    <Property Name="User_id" Type="Int32" />
   </EntityType>
   <EntityType Name="Invoice_Detail">
     <Key>

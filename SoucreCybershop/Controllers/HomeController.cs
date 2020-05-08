@@ -27,7 +27,7 @@ namespace CyberShop.Controllers
             }
             else
             {
-                return Redirect(Session[Common.CommonConstantUser.URL_REFERRER].ToString());
+                return Redirect("/");
             }
         }
         [HttpPost]
@@ -208,6 +208,7 @@ namespace CyberShop.Controllers
                 else
                 {
                     var user = new User();
+                    user.Email = email;
                     user = userDao.getInfo(user.Email);
                     var userSession = new UserInfo();
                     userSession.Id = user.id;

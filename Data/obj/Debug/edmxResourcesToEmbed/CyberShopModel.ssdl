@@ -90,6 +90,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CustomerOrder_id" Type="int" />
+    <Property Name="User_id" Type="int" />
     <Property Name="PurchaseDate" Type="datetime" />
     <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
     <Property Name="DeliveryPhoneNum" Type="nchar" MaxLength="15" />
