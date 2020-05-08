@@ -32,7 +32,7 @@ namespace CyberShop.Controllers
                 }
                 return View(model);
             }
-            return Redirect(Request.UrlReferrer.ToString());
+            return Redirect("/");
         }
         [HttpPost]
         public ActionResult Index(UserViewModel model)
