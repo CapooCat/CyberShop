@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@model CyberShop.Models.UserViewModel
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
     <h3><i class="fas fa-user-cog" style="margin-right: 10px;"></i>Thông tin người dùng</h3>
     <ul class="breadcrumb Page-address">
@@ -12,23 +12,39 @@
     </ul>
     <h1 style="text-align: center; margin: 50px;">Thông tin người dùng</h1>
     <div class="row">
+        <div class="error" id="Post_Error">
+            <ul>
+                @Html.ValidationSummary(false, "", "alert alert-danger")
+            </ul>
+        </div>
+        <form method="post" action="/User">
         <div class="col-md-6 input-info">
             <h6>
-                <input type="text" placeholder="Họ và tên..." name="search">
+                @*<input type="text" placeholder="Họ và tên..." name="search">*@
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model=>model.Name, new {@*@name="search"*@})
             </h6>
             <h6>
-                <input type="text" placeholder="Tên tài khoản..." name="search">
+                @*<input type="text" placeholder="Tên tài khoản..." name="search">*@
+                @Html.LabelFor(model => model.Username)
+                @Html.TextBoxFor(model => model.Username, new { @value = Model.Username,@*@name = "search"*@ @readonly=true, })
             </h6>
             <h6>
-                <input type="text" placeholder="Email..." name="search">
+                @*<input type="text" placeholder="Email..." name="search">*@
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @value = Model.Email, @*@name = "search",*@ @readonly = true, })
             </h6>
         </div>
         <div class="col-md-6 input-info">
             <h6>
-                <input type="text" placeholder="Số điện thoại..." name="search">
+                @*<input type="text" placeholder="Số điện thoại..." name="search">*@
+                @Html.LabelFor(model => model.PhoneNum)
+                @Html.TextBoxFor(model => model.PhoneNum, new { @*@name = "search"*@ })
             </h6>
             <h6>
-                <input type="text" placeholder="Địa chỉ..." name="search">
+                @*<input type="text" placeholder="Địa chỉ..." name="search">*@
+                @Html.LabelFor(model => model.Address)
+                @Html.TextBoxFor(model => model.Address, new { @*@name = "search"*@ })
             </h6>
 
             <div class="form-group">
@@ -42,8 +58,9 @@
 
         </div>
         <div class="btn-submit col-md-12">
-            <button>Xác nhận thay đổi</button>
+            <button type="submit">Xác nhận thay đổi</button>
         </div>
+        </form>
     </div>
 
     <h1 style="text-align: center; margin: 50px;">Lịch sử mua hàng</h1>

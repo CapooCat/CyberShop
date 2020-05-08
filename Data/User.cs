@@ -23,5 +23,7 @@ namespace Data
         public string Image { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Address { get; set; }
+        public string PhoneNum { get; set; }
     }
 }
