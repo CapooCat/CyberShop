@@ -65,17 +65,18 @@
                         @Html.TextBoxFor(model => model.Address, new
                { @*@name = "search"*@ })
                     </h6>
-                    @Html.LabelFor(model => model.City)
-                    <div class="form-group">
-                        <select style="margin-top: -5px;" id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
-                            <option value="" disabled selected>Chọn tỉnh thành...</option>
-                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                            <option value="Hà Nội">Hà Nội</option>
-                        </select>
-                    </div>
+                    <h6>
+                        @Html.LabelFor(model => model.City)
+                        <div class="form-group">
+                            <select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
+                                <option value="" disabled selected>Chọn tỉnh thành...</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                            </select>
+                        </div>
+                        </h6>
 
-
-                </div>
+</div>
                 <div class="btn-submit col-md-12">
                     <button type="submit">Xác nhận thay đổi</button>
                 </div>
