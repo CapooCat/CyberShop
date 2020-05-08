@@ -112,6 +112,7 @@ namespace CyberShop.Controllers
                     user.Username = model.Username;
                     user.Name = model.Name;
                     user.Password = Encryptor.MD5Hash(model.Password);
+                    user.Image = "";
                     user.IsDeleted = true;
                     user.CreateDate = DateTime.Now;
                     userDao.InsertUser(user);

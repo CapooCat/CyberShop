@@ -117,6 +117,8 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
