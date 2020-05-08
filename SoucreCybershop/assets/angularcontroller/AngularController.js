@@ -30,8 +30,11 @@ app.controller('MyController', function ($scope, $http, $window) {
         } else {
             document.getElementsByClassName("dropdown-loading")[0].style.visibility = "visible";
             $http.get("/TimKiem/" + $scope.myValue + "/JSON").then(function (res) {
+                var Input = document.getElementById("Search");
                 document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
-                document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
+                if ($(Input).is(':focus')) {
+                    document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
+                }
                 $scope.SResult = res.data;
             });
         }
