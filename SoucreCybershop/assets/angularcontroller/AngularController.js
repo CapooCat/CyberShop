@@ -31,7 +31,9 @@ app.controller('MyController', function ($scope, $http, $window) {
             document.getElementsByClassName("dropdown-loading")[0].style.visibility = "visible";
             $http.get("/TimKiem/" + $scope.myValue + "/JSON").then(function (res) {
                 document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
-                document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
+                document.getElementById("Search").addEventListener("focus", function () {
+                    document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
+                });
                 $scope.SResult = res.data;
             });
         }
