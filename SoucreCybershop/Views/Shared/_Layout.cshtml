@@ -261,10 +261,12 @@
             document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
         }
         function Hide() {
-            setTimeout(function () {
+            var Item = document.getElementsByClassName("dropdown-search")[0];
+            if ($(Item).is(':hover')) {
+                document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
+            }
+            else
                 document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
-            }, 100);
-            
         }
     </script>
     @RenderSection("scripts", false)
