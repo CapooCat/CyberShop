@@ -14,21 +14,38 @@
                 }
             }
         })
-app.controller('MyController', function ($scope, $http, $window) {
+app.controller('MyController', function ($scope, $http, $window, $q) {
     var Page = 0;
     var SortType = 1;
+
     $a = window.location.pathname;
     $scope.$watch('$viewContentLoaded', function () {
         $scope.Reload();
     });
 
-    $scope.showup = function () {
-        document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
-        if ($scope.myValue == null) {
+    var typingTimer;
+    var doneTypingInterval = 1000;
+    var myInput = document.getElementById('Search');
+
+    myInput.addEventListener('keyup', () => {
+        clearTimeout(typingTimer);
+        if (myInput.value) {
+              $scope.SResult = null;
+              typingTimer = setTimeout(doneTyping, doneTypingInterval);
+              document.getElementsByClassName("dropdown-loading")[0].style.visibility = "visible";
+        } else {
+              $scope.SResult = null;
+              document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
+              task();
+        }
+    });
+
+    function doneTyping() {
+        $scope.SResult = null;
+        if ($scope.myValue == "") {
             document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
             document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("dropdown-loading")[0].style.visibility = "visible";
             $http.get("/TimKiem/" + $scope.myValue + "/JSON").then(function (res) {
                 var Input = document.getElementById("Search");
                 document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
@@ -242,8 +259,11 @@ app.controller('MyController', function ($scope, $http, $window) {
     }
 
     $scope.redirect = function () {
-        var url = "/TimKiem/" + $scope.myValue
-        $window.location.href = url;
+        if ($scope.myValue.replace(/\s/g, '').length != 0)
+        {
+            var url = "/TimKiem/" + $scope.myValue
+            $window.location.href = url;
+        }
     }
 });
 

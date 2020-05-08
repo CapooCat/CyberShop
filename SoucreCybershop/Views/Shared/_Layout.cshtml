@@ -37,7 +37,7 @@
                     <div style="display: inline-block;">
                         <a href="/Home" class="logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
                         <div class="search-container">
-                            <input id="Search" onfocusin="Show()" onfocusout="Hide()" ng-keyup="$event.keyCode == 13 && redirect()" type="text" ng-change="showup()" placeholder="Tìm kiếm..." ng-model="myValue">
+                            <input id="Search" onfocusin="Show()" onfocusout="Hide()" ng-keyup="$event.keyCode == 13 && redirect()" type="text" placeholder="Tìm kiếm..." ng-model="myValue">
                             <button type="submit" ng-click="redirect()"><i class="fa fa-search"></i></button>
                             <div class="dropdown-search">
                                 <div ng-repeat="item in SResult | limitTo: 6">

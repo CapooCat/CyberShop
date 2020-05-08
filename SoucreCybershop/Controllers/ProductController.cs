@@ -40,7 +40,10 @@ namespace CyberShop.Controllers
 
         public ActionResult Search(string Value)
         {
-            Value = System.Uri.UnescapeDataString(Value);
+            if (Value != null)
+            {
+                Value = System.Uri.UnescapeDataString(Value);
+            }
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model.Add(
                      new CategoryViewModel
