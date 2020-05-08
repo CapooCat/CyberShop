@@ -126,6 +126,10 @@ app.controller('MyController', function ($scope, $http, $window) {
                         $scope.data.push(res.data[BeginPageIndex])
                         BeginPageIndex = BeginPageIndex + 1;
                     }
+                    window.scroll({
+                        top: 0,
+                        behavior: 'auto'
+                    })
                 }
             });
         }
@@ -181,6 +185,10 @@ app.controller('MyController', function ($scope, $http, $window) {
                             $scope.datalist.push(response.data[BeginPageIndex])
                             BeginPageIndex = BeginPageIndex + 1;
                         }
+                        window.scroll({
+                            top: 0,
+                            behavior: 'auto'
+                        })
                     }
                 });
         }
