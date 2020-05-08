@@ -26,6 +26,10 @@ namespace CyberShop.Controllers
                     PhoneNum=x.PhoneNum,
                     Username=x.Username
                 }).FirstOrDefault();
+                if(model.Address==null || model.PhoneNum==null)
+                {
+                    ViewBag.Warning = "yes";
+                }
                 return View(model);
             }
             return Redirect(Request.UrlReferrer.ToString());
