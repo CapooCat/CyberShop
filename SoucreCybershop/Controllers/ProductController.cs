@@ -38,6 +38,66 @@ namespace CyberShop.Controllers
             return View("SpTheoDanhMuc", model);
         }
 
+        public ActionResult Search(string Value)
+        {
+            Value = System.Uri.UnescapeDataString(Value);
+            List<CategoryViewModel> model = new List<CategoryViewModel>();
+            model.Add(
+                     new CategoryViewModel
+                     {
+                         CateName = "Tìm kiếm \"" + Value + "\"",
+                         breadcrumb = "Tìm kiếm"
+                     });
+            return View("SpTheoDanhMuc", model);
+        }
+
+        public JsonResult SearchJSON(string Value)
+        {
+            Value = System.Uri.UnescapeDataString(Value);
+            var model = new List<ProductCategoryViewModel>();
+            model = (from a in data.Products
+                     where a.ProductName.Contains(Value)
+                     select new ProductCategoryViewModel
+                     {
+                         id = a.id,
+                         Brand_id = a.Brand_id,
+                         Promotion_id = a.Promotion_id,
+                         ProductName = a.ProductName,
+                         Info = a.Info,
+                         Price = a.Price,
+                         MonthWarranty = a.MonthWarranty,
+                         Image = a.Image,
+                         IsDeleted = a.IsDeleted,
+                         CreateBy = a.CreateBy,
+                         CreateDate = a.CreateDate,
+                         ModifiedBy = a.ModifiedBy,
+                         ModifiedDate = a.ModifiedDate,
+                         ProductType_id = a.ProductType_id
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    Brand_id = item.Brand_id,
+                    Promotion_id = item.Promotion_id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    ProductType_id = item.ProductType_id
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult CategoryJSON(string metatitle)
         {
             var model = new List<ProductCategoryViewModel>();

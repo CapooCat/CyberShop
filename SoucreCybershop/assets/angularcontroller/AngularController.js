@@ -14,13 +14,28 @@
                 }
             }
         })
-app.controller('MyController', function ($scope, $http) {
+app.controller('MyController', function ($scope, $http, $window) {
     var Page = 0;
     var SortType = 1;
     $a = window.location.pathname;
     $scope.$watch('$viewContentLoaded', function () {
         $scope.Reload();
     });
+
+    $scope.showup = function () {
+        document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
+        if ($scope.myValue == "") {
+            document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
+            document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
+        } else {
+            document.getElementsByClassName("dropdown-loading")[0].style.visibility = "visible";
+            $http.get("/TimKiem/" + $scope.myValue + "/JSON").then(function (res) {
+                document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
+                document.getElementsByClassName("dropdown-search")[0].style.visibility = "visible";
+                $scope.SResult = res.data;
+            });
+        }
+    }
     
 
     $scope.Back = function() {
@@ -114,7 +129,7 @@ app.controller('MyController', function ($scope, $http) {
                 }
             });
         }
-        else if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true) {
+        else if ($a.includes("/danh-muc/") == true || $a.includes("/chi-tiet-danh-muc/") == true || $a.includes("/san-pham/") == true || $a.includes("/TimKiem/") == true) {
             $scope.loading = true;
             $http.get(window.location.pathname + "/JSON")
                 .then(function (response) {
@@ -215,6 +230,9 @@ app.controller('MyController', function ($scope, $http) {
         });
     }
 
-
+    $scope.redirect = function () {
+        var url = "/TimKiem/" + $scope.myValue
+        $window.location.href = url;
+    }
 });
 

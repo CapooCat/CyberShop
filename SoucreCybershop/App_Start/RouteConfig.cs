@@ -15,6 +15,17 @@ namespace CyberShop
 
 
             routes.MapRoute(
+              name: "Search",
+              url: "TimKiem/{Value}",
+              defaults: new { controller = "Product", action = "Search", Value = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "SearchJSON",
+              url: "TimKiem/{Value}/JSON",
+              defaults: new { controller = "Product", action = "SearchJSON", Value = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
               name: "LessThanJSON",
               url: "san-pham/{Type}-duoi-{Number}-trieu/JSON",
               defaults: new { controller = "Product", action = "SortPriceLessThan", Type = UrlParameter.Optional, Number = UrlParameter.Optional }

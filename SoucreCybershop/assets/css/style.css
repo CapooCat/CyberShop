@@ -4,6 +4,105 @@ body {
   margin: 0;
   font-family: 'Oswald', sans-serif;
 }
+/* Search */
+.dropdown-loading {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  padding: 12px 16px;
+  width: 500px;
+  height: 50px;
+  margin-left: -50px;
+  z-index: 1;
+  visibility: hidden;
+  position: fixed;
+  background-color: #f9f9f9;
+  min-width: 175px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-loading .object {
+  width: 5px;
+  height: 0;
+  background: #1E90FF;
+  margin: 0 1px;
+  border-radius: 10px;
+  animation: loading-S 0.5s infinite;
+}
+
+@keyframes loading-S {
+  0%{
+    height: 0px;
+  }
+  50%{
+    height: 25px;
+  }
+  100%{
+    height: 0px;
+  }
+}
+
+.object:nth-child(2){
+  animation-delay: 0.1s;
+}
+.object:nth-child(3){
+  animation-delay: 0.2s;
+}
+.object:nth-child(4){
+  animation-delay: 0.3s;
+}
+.object:nth-child(5){
+  animation-delay: 0.4s;
+}
+
+
+
+.dropdown-search {
+  margin-left: -50px;
+  z-index: 1;
+  visibility: hidden;
+  position: fixed;
+  background-color: #f9f9f9;
+  min-width: 175px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-search a {
+    -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+  width: 500px;
+  clear: left;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left !important;
+}
+
+.dropdown-search img {
+  float: left;
+  margin-left: -10px;
+  margin-right: 5px;
+}
+
+.dropdown-search span {
+  padding-left: 10px;
+  float: right;
+  color: #1E90FF;
+  text-align: right !important;
+}
+
+.dropdown-search a:hover {
+  background-color: #1E90FF;
+  color: #fff !important;
+}
+
+.dropdown-search a:hover span{
+  color: #fff !important;
+}
 
 
 /* Header */
@@ -186,6 +285,7 @@ button:focus {
 
 @media screen and (max-width: 600px) {
   .topnav .search-container {
+    z-index: 1;
     float: none;
   }
   .topnav a, .topnav input[type=text], .topnav .search-container button {
@@ -197,7 +297,7 @@ button:focus {
     padding: 14px;
   }
   .topnav input[type=text] {
-    border: 1px solid #ccc;  
+    border: 1px solid #ccc;
   }
 }
 
