@@ -4,6 +4,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model CyberShop.Models.UserViewModel
+@section style{
+    <style>
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.6s;
+            margin-bottom: 15px;
+        }
+
+            .alert.success {
+                background-color: #58EA64;
+            }
+
+            .alert.info {
+                background-color: #2196F3;
+            }
+
+            .alert.warning {
+                background-color: #ff9800;
+            }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .closebtn:hover {
+                color: black;
+            }
+    </style>
+}
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
     <h3><i class="fas fa-user-cog" style="margin-right: 10px;"></i>Thông tin người dùng</h3>
     <ul class="breadcrumb Page-address">
@@ -12,6 +51,10 @@
     </ul>
     <h1 style="text-align: center; margin: 50px;">Thông tin người dùng</h1>
     <div class="row">
+        <div class="alert warning">
+            <span class="closebtn">&times;</span>
+            <strong></strong> Vui lòng nhập đầy đủ thông tin cần thiết
+        </div>
         <div class="error" id="Post_Error">
             <ul>
                 @Html.ValidationSummary(false, "", "alert alert-danger")
@@ -46,7 +89,7 @@
                 @Html.LabelFor(model => model.Address)
                 @Html.TextBoxFor(model => model.Address, new { @*@name = "search"*@ })
             </h6>
-
+            @Html.LabelFor(model => model.City)
             <div class="form-group">
                 <select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
                     <option value="" disabled selected>Chọn tỉnh thành...</option>

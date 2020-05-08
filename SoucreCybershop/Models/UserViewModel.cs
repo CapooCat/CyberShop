@@ -19,6 +19,9 @@ namespace CyberShop.Models
         [Required(ErrorMessage = "Địa chỉ không được để trống")]
         [Display(Name = "Địa chỉ ")]
         public string Address { get; set; }
+        [Required(ErrorMessage = "Tỉnh/Thành không được để trống")]
+        [Display(Name = "Tỉnh thành ")]
+        public string City { get; set; }
         [Required(ErrorMessage = "Số điện thoại không được để trống")]
         [Display(Name = "Số điện thoại ")]
         public string PhoneNum { get; set; }
