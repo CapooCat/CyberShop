@@ -687,9 +687,9 @@ button:focus {
 
 /* Cart */
 .dropdown-cart {
+  left: 50%;
   margin-top: 50px;
-  left: 45%;
-  right: 10%;
+  width: 45%;
   visibility: hidden;
   position: fixed;
   background-color: #f9f9f9;
@@ -718,7 +718,6 @@ button:focus {
 }
 
 .cart {
-  cursor: pointer;
   float: left;
   overflow: hidden;
   -webkit-user-select: none;

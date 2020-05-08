@@ -24,7 +24,7 @@ app.controller('MyController', function ($scope, $http, $window) {
 
     $scope.showup = function () {
         document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
-        if ($scope.myValue == "") {
+        if ($scope.myValue == null) {
             document.getElementsByClassName("dropdown-search")[0].style.visibility = "hidden";
             document.getElementsByClassName("dropdown-loading")[0].style.visibility = "hidden";
         } else {
