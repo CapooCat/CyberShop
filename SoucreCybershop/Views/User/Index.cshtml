@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container" style="padding-top: 160px; padding-bottom: 50px;">
+    <h3><i class="fas fa-user-cog" style="margin-right: 10px;"></i>Thông tin người dùng</h3>
+    <ul class="breadcrumb Page-address">
+        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
+        <li class="breadcrumb-item active">Thông tin người dùng</li>
+    </ul>
+    <h1 style="text-align: center; margin: 50px;">Thông tin người dùng</h1>
+    <div class="row">
+        <div class="col-md-6 input-info">
+            <h6>
+                <input type="text" placeholder="Họ và tên..." name="search">
+            </h6>
+            <h6>
+                <input type="text" placeholder="Tên tài khoản..." name="search">
+            </h6>
+            <h6>
+                <input type="text" placeholder="Email..." name="search">
+            </h6>
+        </div>
+        <div class="col-md-6 input-info">
+            <h6>
+                <input type="text" placeholder="Số điện thoại..." name="search">
+            </h6>
+            <h6>
+                <input type="text" placeholder="Địa chỉ..." name="search">
+            </h6>
+
+            <div class="form-group">
+                <select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
+                    <option value="" disabled selected>Chọn tỉnh thành...</option>
+                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                </select>
+            </div>
+
+
+        </div>
+        <div class="btn-submit col-md-12">
+            <button>Xác nhận thay đổi</button>
+        </div>
+    </div>
+
+    <h1 style="text-align: center; margin: 50px;">Lịch sử mua hàng</h1>
+    <table>
+        <tr>
+            <th style="width: 10%;">Mã hóa đơn</th>
+            <th style="width: 35%;">Tên sản phẩm</th>
+            <th style="width: 10%;">Số lượng</th>
+            <th style="width: 20%;">Giá</th>
+            <th style="width: 15%;">Ngày mua</th>
+            <th style="width: 10%;">Tình trạng</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
+            <td>1</td>
+            <td>4.150.000đ</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
+            <td>1</td>
+            <td>4.150.000đ</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</section>
+

@@ -95,6 +95,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerOrder_id" Type="int" />
+          <Property Name="User_id" Type="int" />
           <Property Name="PurchaseDate" Type="datetime" />
           <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="DeliveryPhoneNum" Type="nchar" MaxLength="15" />
@@ -492,6 +493,7 @@
           <NavigationProperty Name="Invoice_Detail" Relationship="Self.FK_Invoice_Detail_Invoice" FromRole="Invoice" ToRole="Invoice_Detail" />
           <Property Name="CustomerOrder_id" Type="Int32" />
           <NavigationProperty Name="CustomerOrder" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="Invoice" ToRole="CustomerOrder" />
+          <Property Name="User_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Invoice_Detail">
           <Key>
@@ -946,6 +948,7 @@
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="CustomerOrder_id" ColumnName="CustomerOrder_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
