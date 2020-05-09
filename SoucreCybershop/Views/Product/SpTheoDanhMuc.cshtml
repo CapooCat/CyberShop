@@ -14,12 +14,12 @@
             <li class="breadcrumb-item">@Html.DisplayFor(modelItem => bread.breadcrumb)</li>
     </ul>
     <div class="sort">
-        <button ng-click="SortBy(1); Reload()" class="clickDo active">Giá tăng dần</button>
-        <button ng-click="SortBy(2); Reload()" class="clickDo">Giá giảm dần</button>
-        <button ng-click="SortBy(3); Reload()" class="clickDo">A -> Z</button>
-        <button ng-click="SortBy(4); Reload()" class="clickDo">Z -> A</button>
-        <button ng-click="SortBy(5); Reload()" class="clickDo">Mới đến cũ</button>
-        <button ng-click="SortBy(6); Reload()" class="clickDo">Cũ đến mới</button>
+        <button ng-click="SortBy(1);Change(1); Reload()" class="clickDo active">Giá tăng dần</button>
+        <button ng-click="SortBy(2);Change(1); Reload()" class="clickDo">Giá giảm dần</button>
+        <button ng-click="SortBy(3);Change(1); Reload()" class="clickDo">A -> Z</button>
+        <button ng-click="SortBy(4);Change(1); Reload()" class="clickDo">Z -> A</button>
+        <button ng-click="SortBy(5);Change(1); Reload()" class="clickDo">Mới đến cũ</button>
+        <button ng-click="SortBy(6);Change(1); Reload()" class="clickDo">Cũ đến mới</button>
     </div>
 
     <div>

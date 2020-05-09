@@ -4,45 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model CyberShop.Models.UserViewModel
-@section style{
-    <style>
-        .alert {
-            padding: 20px;
-            background-color: #f44336;
-            color: white;
-            opacity: 1;
-            transition: opacity 0.6s;
-            margin-bottom: 15px;
-        }
-
-            .alert.success {
-                background-color: #58EA64;
-            }
-
-            .alert.info {
-                background-color: #2196F3;
-            }
-
-            .alert.warning {
-                background-color: #ff9800;
-            }
-
-        .closebtn {
-            margin-left: 15px;
-            color: white;
-            font-weight: bold;
-            float: right;
-            font-size: 22px;
-            line-height: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            .closebtn:hover {
-                color: black;
-            }
-    </style>
-}
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
     <h3><i class="fas fa-user-cog" style="margin-right: 10px;"></i>Thông tin người dùng</h3>
     <ul class="breadcrumb Page-address">
@@ -50,36 +11,11 @@
         <li class="breadcrumb-item active">Thông tin người dùng</li>
     </ul>
     <h1 style="text-align: center; margin: 50px;">Thông tin người dùng</h1>
-        @if (ViewBag.Warning != null)
-        {
-            <div class="alert warning">
-                <span class="closebtn">&times;</span>
-                <strong></strong><div style="text-align:center">Vui lòng nhập đầy đủ thông tin cần thiết</div>
-            </div>
-        }
-    <div class="error" id="Post_Error">
-        <ul>
-            @Html.ValidationSummary(false, "", "alert alert-danger")
-        </ul>
-    </div>
-    <div class="row">
-        <form method="post" action="/User">
-        <div class="col-md-6 input-info">
-            <h6>
-                @*<input type="text" placeholder="Họ và tên..." name="search">*@
-                @Html.LabelFor(model => model.Name)
-                @Html.TextBoxFor(model=>model.Name, new {@*@name="search"*@})
-            </h6>
-            <h6>
-                @*<input type="text" placeholder="Tên tài khoản..." name="search">*@
-                @Html.LabelFor(model => model.Username)
-                @Html.TextBoxFor(model => model.Username, new { @value = Model.Username,@*@name = "search"*@ @readonly=true, })
-            </h6>
-            <h6>
-                @*<input type="text" placeholder="Email..." name="search">*@
-                @Html.LabelFor(model => model.Email)
-                @Html.TextBoxFor(model => model.Email, new { @value = Model.Email, @*@name = "search",*@ @readonly = true, })
-            </h6>
+    @if (ViewBag.Warning != null)
+    {
+        <div class="alert warning">
+            <span class="closebtn">&times;</span>
+            <strong></strong><div style="text-align:center">Vui lòng nhập đầy đủ thông tin cần thiết</div>
         </div>
         <div class="col-md-6 input-info">
             <h6>
@@ -107,14 +43,61 @@
                         },
                     new { @class = "form-control", @data_role = "select-dropdown", @data_profile = "minimal", @required = true,@id="province" })
             </div>
+    
+   
+        <form method="post" action="/User">
+            <div class="row">
+                <div class="error col-md-12" id="Post_Error">
+                    <ul>
+                        @Html.ValidationSummary(false, "", "alert alert-danger")
+                    </ul>
+                </div>
+                <div class="col-md-6 input-info">
+                    <h6>
+                        @*<input type="text" placeholder="Họ và tên..." name="search">*@
+                        @Html.LabelFor(model => model.Name)
+                        @Html.TextBoxFor(model => model.Name, new {@*@name="search"*@})
+                    </h6>
+                    <h6>
+                        @*<input type="text" placeholder="Tên tài khoản..." name="search">*@
+                        @Html.LabelFor(model => model.Username)
+                        @Html.TextBoxFor(model => model.Username, new { @value = Model.Username,@*@name = "search"*@ @readonly = true,})
+                    </h6>
+                    <h6>
+                        @*<input type="text" placeholder="Email..." name="search">*@
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new{ @value = Model.Email, @*@name = "search",*@ @readonly = true,})
+                    </h6>
+                </div>
+                <div class="col-md-6 input-info">
+                    <h6>
+                        @*<input type="text" placeholder="Số điện thoại..." name="search">*@
+                        @Html.LabelFor(model => model.PhoneNum)
+                        @Html.TextBoxFor(model => model.PhoneNum, new{ @*@name = "search"*@ @id = "key" })
+                    </h6>
+                    <h6>
+                        @*<input type="text" placeholder="Địa chỉ..." name="search">*@
+                        @Html.LabelFor(model => model.Address)
+                        @Html.TextBoxFor(model => model.Address, new { @*@name = "search"*@ })
+                    </h6>
+                    <h6>
+                        @Html.LabelFor(model => model.City)
+                        <div class="form-group">
+                            <select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
+                                <option value="" disabled selected>Chọn tỉnh thành...</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                            </select>
+                        </div>
+                        </h6>
 
+                </div>
+                <div class="btn-submit col-md-12">
+                    <button type="submit">Xác nhận thay đổi</button>
+                </div>
+            </div>
+    </form>
 
-        </div>
-        <div class="btn-submit col-md-12">
-            <button type="submit">Xác nhận thay đổi</button>
-        </div>
-        </form>
-    </div>
 
     <h1 style="text-align: center; margin: 50px;">Lịch sử mua hàng</h1>
     <table>
@@ -156,8 +139,7 @@
         setTimeout(function(){ div.style.display = "none"; }, 600);
       }
     }
-</script>
-<script type="text/javascript">
+
 	    var myInput = document.getElementById('key');
 	    myInput.addEventListener('keypress', function(e) {
       var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
@@ -171,7 +153,15 @@
   			    }
       if (!keyAllowed())
         e.preventDefault();
-    }, false);
+	    }, false);
+
+	    var x = document.getElementById("Post_Error");
+	    var list = x.getElementsByTagName("UL")[0];
+	    if (list.getElementsByTagName("LI")[0].innerHTML != "") {
+	        x.style.display = 'inline-block';
+	    } else {
+	        x.style.display = 'none';
+	    }
 </script>
     }
 
