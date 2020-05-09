@@ -44,9 +44,10 @@ namespace CyberShop.Controllers
                 var user = new User();
                 user.id = userSession.Id;
                 user.Name = model.Name;
-                user.Address = model.Address + " " + model.City;
+                user.Address = model.Address;
                 user.PhoneNum = model.PhoneNum;
                 userDao.UpdateUser(user);
+                ViewBag.Success = "Cập nhật thành công";
             }
             return View(model);
         }
