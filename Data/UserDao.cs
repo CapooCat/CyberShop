@@ -58,5 +58,18 @@ namespace Data
             }
             return false;
         }
+        public bool UpdateUser(User entity)
+        {
+            if(entity!=null)
+            {
+                var res = data.Users.Find(entity.id);
+                res.Name = entity.Name;
+                res.Address = entity.Address;
+                res.PhoneNum = entity.PhoneNum;
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

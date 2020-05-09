@@ -39,7 +39,14 @@ namespace CyberShop.Controllers
         {
             if(ModelState.IsValid)
             {
-
+                var userDao = new UserDao();
+                var userSession = (UserInfo)Session[CommonConstantUser.USER_SESSION];
+                var user = new User();
+                user.id = userSession.Id;
+                user.Name = model.Name;
+                user.Address = model.Address + " " + model.City;
+                user.PhoneNum = model.PhoneNum;
+                userDao.UpdateUser(user);
             }
             return View(model);
         }
