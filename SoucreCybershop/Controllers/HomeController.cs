@@ -75,7 +75,7 @@ namespace CyberShop.Controllers
                          where b.id == id
                          select new DetailProductViewModel
                          {
-                             id = a.id,
+                             id = b.id,
                              ProductName=b.ProductName,
                              Price=b.Price,
                              MonthWarranty=b.MonthWarranty,
@@ -85,9 +85,10 @@ namespace CyberShop.Controllers
             var cate = (from a in data.ProducTypes
                         join b in data.Products on a.Id equals b.ProductType_id
                         where b.id == id
-                        select new { a.TypeName,a.Info}).FirstOrDefault();
+                        select new { a.TypeName,a.Info,a.Metatitle}).FirstOrDefault();
 
             ViewBag.Category = cate.TypeName;
+            ViewBag.CategoryHref = cate.Metatitle;
             return View(model);
         }
         public ActionResult HomePage()

@@ -927,6 +927,11 @@ button:focus {
   color: white;
 }
 
+.pagination a:hover {
+  background-color: #1E90FF;
+  color: white;
+}
+
 .pagination a:hover:not(.active) {
   background-color: #1E90FF;
   color: white;

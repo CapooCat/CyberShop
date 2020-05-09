@@ -17,6 +17,9 @@
 app.controller('MyController', function ($scope, $http, $window, $q) {
     var Page = 0;
     var SortType = 1;
+    var BuyNow = false;
+
+    $scope.Domain = window.location.hostname;
 
     $a = window.location.pathname;
     $scope.$watch('$viewContentLoaded', function () {
@@ -214,6 +217,10 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         }
     }
 
+    $scope.GoToPay = function() {
+        BuyNow = true;
+    }
+
     function NewToOld(a, b) {
         var dateA = new Date(a.CreateDatee).getTime();
         var dateB = new Date(b.CreateDate).getTime();
@@ -231,8 +238,15 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
     }
     
     $scope.FetchCart = function () {
+        console.log(BuyNow);
+        var url = "/Pay";
         $http.get("/Cart/ReturnCartItem").then(function (response) {
             $scope.cartList = response.data;
+            if (BuyNow == true) {
+                $window.location.href = url;
+            } else {
+                $scope.loading = false;
+            }
         });
     }
     $scope.bucket = { total_amount: 0 };
@@ -241,17 +255,19 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         $scope.loading = true;
         $http.get("/Cart/AddItem/" + id).then(function (response) {
             $scope.bucket.total_amount = 0;
-            $scope.loading = false;
             $scope.FetchCart();
         });
     }
+
     $scope.RemoveItem = function (id) {
+        $scope.loading = true;
         $http.get("/Cart/RemoveItem/" + id).then(function (response) {
             $scope.bucket.total_amount = 0;
             $scope.FetchCart();
         });
     }
     $scope.MiniusItem = function (id) {
+        $scope.loading = true;
         $http.get("/Cart/MiniusItem/" + id).then(function (response) {
             $scope.bucket.total_amount = 0;
             $scope.FetchCart();
