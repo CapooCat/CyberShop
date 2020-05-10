@@ -97,7 +97,7 @@
           <Property Name="CustomerOrder_id" Type="int" />
           <Property Name="User_id" Type="int" />
           <Property Name="PurchaseDate" Type="datetime" />
-          <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeliveryAddress" Type="nvarchar(max)" />
           <Property Name="DeliveryPhoneNum" Type="nchar" MaxLength="15" />
           <Property Name="Status" Type="bit" />
           <Property Name="Total" Type="float" />
@@ -485,7 +485,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
-          <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DeliveryPhoneNum" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="Total" Type="Double" />
           <Property Name="IsDeleted" Type="Boolean" />

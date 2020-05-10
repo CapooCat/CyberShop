@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var userSession = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
-    var orderHistory = new CyberShop.Common.OrderHistory();
-    List<CyberShop.Models.InvoiceDetailViewModel> listOrderHistory = orderHistory.listOrderHistory(userSession.Id);
+    List<CyberShop.Models.InvoiceDetailViewModel> listOrderHistory = ViewBag.OrderHistory;
 }
 @model CyberShop.Models.UserViewModel
 @section style{
@@ -123,7 +121,7 @@
         @foreach (InvoiceDetailViewModel item in listOrderHistory)
         {
         <tr>
-            <td>@item.Invoice_id<td>
+            <td>@item.Invoice_id</td>
             <td><a href="#">@item.ProductName</a></td>
             <td>@item.Amount</td>
             <td>@string.Format("{0:#,##0.00}", item.Price)</td>
@@ -135,14 +133,6 @@
             <td>Đã nhận</td> }
         </tr>
         }
-        <tr>
-            <td>2</td>
-            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
-            <td>1</td>
-            <td>4.150.000đ</td>
-            <td></td>
-            <td></td>
-        </tr>
     </table>
 </section>
 @section scripts{

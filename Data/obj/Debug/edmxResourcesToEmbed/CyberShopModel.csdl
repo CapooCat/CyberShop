@@ -35,7 +35,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
-    <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DeliveryPhoneNum" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
     <Property Name="Total" Type="Double" />
     <Property Name="IsDeleted" Type="Boolean" />
@@ -47,6 +47,7 @@
     <Property Name="CustomerOrder_id" Type="Int32" />
     <NavigationProperty Name="CustomerOrder" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="Invoice" ToRole="CustomerOrder" />
     <Property Name="User_id" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
   </EntityType>
   <EntityType Name="Invoice_Detail">
     <Key>

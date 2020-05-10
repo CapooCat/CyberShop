@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Invoices">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice">
         <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="User_id" ColumnName="User_id" />
           <ScalarProperty Name="CustomerOrder_id" ColumnName="CustomerOrder_id" />
           <ScalarProperty Name="Id" ColumnName="Id" />

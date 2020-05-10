@@ -118,7 +118,7 @@
                     </select>*@
                    @Html.DropDownListFor(model => model.City,
                     new List<SelectListItem> {
-                       new SelectListItem { Value = null , Text = "Chọn tỉnh thành",Disabled=true,Selected=true },
+                       new SelectListItem { Value = "" , Text = "Chọn tỉnh thành",Disabled=true,Selected=true },
                        new SelectListItem { Value = "Hồ Chí Minh" , Text = "Hồ Chí Minh" },
                        new SelectListItem { Value = "Hà Nội" , Text = "Hà Nội" }
                         },
