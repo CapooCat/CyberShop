@@ -214,6 +214,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Common\CommonConstantUser.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\OrderHistory.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\CustomerOrderViewModel.cs" />
     <Compile Include="Models\DetailProductViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InvoiceDetailViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
