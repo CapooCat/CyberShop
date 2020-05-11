@@ -16,6 +16,21 @@ namespace CyberShop.Controllers
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public ActionResult Index()
         {
+            List<ProductHomeViewModel> spGiamGia = new List<ProductHomeViewModel>();
+            spGiamGia = (from a in data.Promotions
+                         join b in data.Products on a.Id equals b.Promotion_id
+                         where a.Id == 2
+                         select new ProductHomeViewModel
+                         {
+                             id=b.id,
+                             Promotion_id=a.Id,
+                             ReducePercent= a.ReducedPrice,
+                             ProductName=b.ProductName,
+                             oldPrice=b.Price,
+                             newPrice=(b.Price - b.Price*a.ReducedPrice/100),
+                             Image=b.Image,
+                         }).ToList();
+            ViewBag.SpGiamGia = spGiamGia;
             return View();
         }
         public ActionResult Login()
