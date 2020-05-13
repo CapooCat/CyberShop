@@ -32,6 +32,7 @@ namespace Data
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> CustomerOrder_id { get; set; }
         public Nullable<int> User_id { get; set; }
+        public Nullable<bool> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }

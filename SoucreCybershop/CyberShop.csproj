@@ -231,10 +231,12 @@
     <Compile Include="Models\CustomerOrderViewModel.cs" />
     <Compile Include="Models\DetailProductViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InvoiceDetailViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\ProductHomeViewModel.cs" />
     <Compile Include="Models\SignUpViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />

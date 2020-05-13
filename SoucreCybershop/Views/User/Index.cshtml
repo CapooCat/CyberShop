@@ -1,7 +1,8 @@
-﻿
+﻿@using CyberShop.Models;
 @{
     ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CyberShop.Models.InvoiceDetailViewModel> listOrderHistory = ViewBag.OrderHistory;
 }
 @model CyberShop.Models.UserViewModel
 @section style{
@@ -57,6 +58,13 @@
             <strong></strong><div style="text-align:center">Vui lòng nhập đầy đủ thông tin cần thiết</div>
         </div>
     }
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert success">
+            <span class="closebtn">&times;</span>
+            <strong></strong><div style="text-align:center">@ViewBag.Success</div>
+        </div>
+    }
         <form method="post" action="/User/Index">
             <div class="row">
                 <div class="error col-md-12" id="Post_Error">
@@ -73,12 +81,12 @@
                     <h6>
                         @*<input type="text" placeholder="Tên tài khoản..." name="search">*@
                         @Html.LabelFor(model => model.Username)
-                        @Html.TextBoxFor(model => model.Username, new { @value = Model.Username,@*@name = "search"*@ @readonly = true,})
+                        @Html.TextBoxFor(model => model.Username, new { @value = Model.Username, @style = "background-color: #808080", @readonly = true,})
                     </h6>
                     <h6>
                         @*<input type="text" placeholder="Email..." name="search">*@
                         @Html.LabelFor(model => model.Email)
-                        @Html.TextBoxFor(model => model.Email, new{ @value = Model.Email, @*@name = "search",*@ @readonly = true,})
+                        @Html.TextBoxFor(model => model.Email, new{ @value = Model.Email, @style= "background-color: #808080", @readonly = true,})
                     </h6>
                 </div>
                 <div class="col-md-6 input-info">
@@ -92,24 +100,6 @@
                         @Html.LabelFor(model => model.Address)
                         @Html.TextBoxFor(model => model.Address, new { @*@name = "search"*@ })
                     </h6>
-                    <h6>
-                        @Html.LabelFor(model => model.City)
-                        <div class="form-group">
-                            @*<select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
-                                <option value="" disabled selected>Chọn tỉnh thành...</option>
-                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                            </select>*@
-                            @Html.DropDownListFor(model => model.City,
-                                new List<SelectListItem> {
-                                   new SelectListItem { Value = null , Text = "Chọn tỉnh thành",Disabled=true,Selected=true },
-                                   new SelectListItem { Value = "Hồ Chí Minh" , Text = "Hồ Chí Minh" },
-                                   new SelectListItem { Value = "Hà Nội" , Text = "Hà Nội" }
-                                    },
-                                new { @class = "form-control", @data_role = "select-dropdown", @data_profile = "minimal", @required = true, @id = "province", @value = Model.City })
-                        </div>
-                    </h6>
-
                 </div>
                 <div class="btn-submit col-md-12">
                     <button type="submit">Xác nhận thay đổi</button>
@@ -128,22 +118,21 @@
             <th style="width: 15%;">Ngày mua</th>
             <th style="width: 10%;">Tình trạng</th>
         </tr>
+        @foreach (InvoiceDetailViewModel item in listOrderHistory)
+        {
         <tr>
-            <td>1</td>
-            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
-            <td>1</td>
-            <td>4.150.000đ</td>
-            <td></td>
-            <td></td>
+            <td>@item.Invoice_id</td>
+            <td><a href="#">@item.ProductName</a></td>
+            <td>@item.Amount</td>
+            <td>@string.Format("{0:#,##0.00}", item.Price)</td>
+            <td>@item.CreateDate</td>
+            @if (item.Status == false)
+            {<td>Chưa nhận</td> }
+            else
+            {
+            <td>Đã nhận</td> }
         </tr>
-        <tr>
-            <td>2</td>
-            <td><a href="#">ROG Strix GeForce® GTX 1650 4GB GDDR5</a></td>
-            <td>1</td>
-            <td>4.150.000đ</td>
-            <td></td>
-            <td></td>
-        </tr>
+        }
     </table>
 </section>
 @section scripts{

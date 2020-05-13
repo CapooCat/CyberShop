@@ -97,8 +97,9 @@
           <Property Name="CustomerOrder_id" Type="int" />
           <Property Name="User_id" Type="int" />
           <Property Name="PurchaseDate" Type="datetime" />
-          <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeliveryAddress" Type="nvarchar(max)" />
           <Property Name="DeliveryPhoneNum" Type="nchar" MaxLength="15" />
+          <Property Name="Status" Type="bit" />
           <Property Name="Total" Type="float" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreateBy" Type="nchar" MaxLength="30" />
@@ -484,7 +485,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
-          <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DeliveryPhoneNum" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="Total" Type="Double" />
           <Property Name="IsDeleted" Type="Boolean" />
@@ -496,6 +497,7 @@
           <Property Name="CustomerOrder_id" Type="Int32" />
           <NavigationProperty Name="CustomerOrder" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="Invoice" ToRole="CustomerOrder" />
           <Property Name="User_id" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="Invoice_Detail">
           <Key>
@@ -952,6 +954,7 @@
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="CustomerOrder_id" ColumnName="CustomerOrder_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
