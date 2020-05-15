@@ -79,18 +79,23 @@
         <div class="row">
             <div class="col-md-6 input-info">
                 <h6>
-                    @*<input type="text" placeholder="Họ và tên..." name="search">*@
                     @Html.TextBoxFor(model => model.CustomerName, new { @type = "text", @placeholder = "Họ và tên...", @name = "search",@ng_model="CustomerName",@required=true, })
                     <span style="color:red" ng-show="formThanhToan.CustomerName.$touched && formThanhToan.CustomerName.$invalid">Bạn chưa nhập họ tên</span>
                 </h6>
                 <h6>
-                    @*<input type="text" placeholder="Email..." name="search">*@
                     @Html.TextBoxFor(model => model.Email, new { @type = "text", @placeholder = "Email...", @name = "search", @ng_model = "Email", @required = true, })
-                    <span style="color:red"" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</span>
+                    <span style="color:red" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</span>
                 </h6>
                 <div class="discount">
-                    <input type="text" placeholder="Mã giảm giá..." name="search">
-                    <button href="#">Xác nhận</button>
+                    @Html.TextBoxFor(model => model.Discount, new { @type = "text", @placeholder = "Mã giảm giá...",@id="input_cpn" })
+                    <div class="tick-mark" hidden id="tickmark">
+                        <svg class="checkmark" viewBox="0 0 52 52">
+                            <circle class="checkmark-circle" fill="none" cx="26" cy="26" r="25"></circle>
+                            <path class="checkmart-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+                        </svg>
+                    </div>
+                    <button id="ConfirmDiscount">Xác nhận</button>
+                    <span style="color:red" hidden id="error_cpn">Mã giảm giá không hợp lệ</span>
                 </div>
                 <h3 style="text-align: center; margin: 30px;">Phương thức thanh toán</h3>
                 <div class="pay-method" style="text-align: center;">
@@ -100,12 +105,10 @@
             </div>
             <div class="col-md-6 input-info">
                 <h6>
-                    @*<input type="text" placeholder="Số điện thoại..." name="search">*@
                     @Html.TextBoxFor(model => model.PhoneNum, new { @type = "text", @placeholder = "Số điện thoại...", @name = "search", @ng_model = "PhoneNum", @required = true,@id="key", })
                     <span style="color:red" ng-show="formThanhToan.PhoneNum.$touched && formThanhToan.PhoneNum.$invalid">Bạn chưa nhập số điện thoại</span>
                 </h6>
                 <h6>
-                    @*<input type="text" placeholder="Địa chỉ..." name="search">*@
                     @Html.TextBoxFor(model => model.Address, new { @type = "text", @placeholder = "Địa chỉ...", @name = "search", @ng_model = "Address", @required = true, })
                     <span style="color:red" ng-show="formThanhToan.Address.$touched && formThanhToan.Address.$invalid">Bạn chưa nhập địa chỉ</span>
                 </h6>
@@ -198,7 +201,11 @@
   			    }
       if (!keyAllowed())
         e.preventDefault();
-    }, false);
+	    }, false);
+	    //var btn_confirm = document.getElementById("ConfirmDiscount");
+	    //btn_confirm.addEventListener('click', function (e) {
+	    //    e.preventDefault();
+	    //});
     </script>
     }
 

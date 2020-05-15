@@ -74,6 +74,21 @@
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Coupon_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Coupon_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Percent_Discount" Type="int" />
+          <Property Name="Money_Discount" Type="float" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="30" />
+          <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CustomerOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -83,6 +98,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNum" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Coupon_code" Type="varchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreateBy" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="30" Nullable="false" />
@@ -386,6 +402,7 @@
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryDetail" EntityType="Self.CategoryDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryDetailSuggest" EntityType="Self.CategoryDetailSuggest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerOrder" EntityType="Self.CustomerOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" Schema="dbo" store:Type="Tables" />
@@ -753,6 +770,7 @@
             <End Role="CustomerOrder" EntitySet="CustomerOrders" />
             <End Role="Invoice" EntitySet="Invoices" />
           </AssociationSet>
+          <EntitySet Name="Coupons" EntityType="ShopPCComponentsModel.Coupon" />
         </EntityContainer>
         <EntityType Name="ProductImage">
           <Key>
@@ -902,6 +920,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Invoices" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="CustomerOrder" ToRole="Invoice" />
+          <Property Name="Coupon_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Invoice_CustomerOrder">
           <End Type="ShopPCComponentsModel.CustomerOrder" Role="CustomerOrder" Multiplicity="0..1" />
@@ -915,6 +934,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Coupon_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Coupon_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Percent_Discount" Type="Int32" />
+          <Property Name="Money_Discount" Type="Double" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1152,6 +1186,7 @@
           <EntitySetMapping Name="CustomerOrders">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.CustomerOrder">
               <MappingFragment StoreEntitySet="CustomerOrder">
+                <ScalarProperty Name="Coupon_code" ColumnName="Coupon_code" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1162,6 +1197,22 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupons">
+            <EntityTypeMapping TypeName="ShopPCComponentsModel.Coupon">
+              <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Money_Discount" ColumnName="Money_Discount" />
+                <ScalarProperty Name="Percent_Discount" ColumnName="Percent_Discount" />
+                <ScalarProperty Name="Coupon_Code" ColumnName="Coupon_Code" />
+                <ScalarProperty Name="Coupon_Name" ColumnName="Coupon_Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

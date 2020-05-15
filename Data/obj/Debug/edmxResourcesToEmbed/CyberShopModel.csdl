@@ -303,6 +303,7 @@
       <End Role="CustomerOrder" EntitySet="CustomerOrders" />
       <End Role="Invoice" EntitySet="Invoices" />
     </AssociationSet>
+    <EntitySet Name="Coupons" EntityType="ShopPCComponentsModel.Coupon" />
   </EntityContainer>
   <EntityType Name="ProductImage">
     <Key>
@@ -452,6 +453,7 @@
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Invoices" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="CustomerOrder" ToRole="Invoice" />
+    <Property Name="Coupon_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Invoice_CustomerOrder">
     <End Type="ShopPCComponentsModel.CustomerOrder" Role="CustomerOrder" Multiplicity="0..1" />
@@ -465,4 +467,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Coupon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Coupon_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Coupon_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Percent_Discount" Type="Int32" />
+    <Property Name="Money_Discount" Type="Double" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

@@ -281,5 +281,28 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
             $window.location.href = url;
         }
     }
+
+    var btn_confirm = document.getElementById("ConfirmDiscount");
+    if (btn_confirm != null) {
+        btn_confirm.addEventListener('click', (e) => {
+            e.preventDefault();
+            $scope.temp = "";
+            var coupon_value = document.getElementById("input_cpn").value;
+            $http.get("/Pay/ConfirmCoupon/" + coupon_value).then(function (response) {
+                $scope.temp = angular.fromJson(response.data);
+                if ($scope.temp.success == "true") {
+                    document.getElementById("tickmark").hidden = false;
+                    btn_confirm.hidden = true;
+                    document.getElementById("error_cpn").hidden = true;
+                }
+                else {
+                    document.getElementById("error_cpn").hidden = false;
+                }
+            });
+
+        });
+    }
+    else { }
+
 });
 

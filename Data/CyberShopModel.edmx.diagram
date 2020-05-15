@@ -34,6 +34,7 @@
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProducType_Category" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.CustomerOrder" Width="1.5" PointX="3.5" PointY="14.875" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_CustomerOrder" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Coupon" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

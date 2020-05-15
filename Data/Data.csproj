@@ -71,6 +71,9 @@
     <Compile Include="Categoryy.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Coupon.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CustomerOrder.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>

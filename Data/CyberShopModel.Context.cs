@@ -41,5 +41,6 @@ namespace Data
         public virtual DbSet<CategoryDetailSuggest> CategoryDetailSuggests { get; set; }
         public virtual DbSet<ProducType> ProducTypes { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
     }
 }

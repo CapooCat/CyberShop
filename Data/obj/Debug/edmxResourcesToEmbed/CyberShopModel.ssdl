@@ -69,6 +69,21 @@
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Coupon">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Coupon_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Coupon_Code" Type="varchar" MaxLength="50" />
+    <Property Name="Percent_Discount" Type="int" />
+    <Property Name="Money_Discount" Type="float" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateBy" Type="varchar" MaxLength="30" />
+    <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="CustomerOrder">
     <Key>
       <PropertyRef Name="Id" />
@@ -78,6 +93,7 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PhoneNum" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Coupon_code" Type="varchar" MaxLength="50" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="ModifiedBy" Type="varchar" MaxLength="30" Nullable="false" />
@@ -381,6 +397,7 @@
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoryDetail" EntityType="Self.CategoryDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoryDetailSuggest" EntityType="Self.CategoryDetailSuggest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerOrder" EntityType="Self.CustomerOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" Schema="dbo" store:Type="Tables" />

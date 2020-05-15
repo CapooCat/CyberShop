@@ -89,5 +89,17 @@ namespace CyberShop.Controllers
             }
             return View(model);
         }
+        public JsonResult ConfirmCoupon(string id)
+        {
+            var coupon = data.Coupons.Where(x => x.Coupon_Code.Equals(id)).Count();
+            if (coupon > 0)
+            {
+                return Json(new {success="true"}, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

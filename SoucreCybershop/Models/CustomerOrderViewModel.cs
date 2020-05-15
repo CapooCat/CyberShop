@@ -17,6 +17,7 @@ namespace CyberShop.Models
         public string Payment { get; set; }
         public string Receive { get; set; }
         public string PhoneNum { get; set; }
+        public string Discount { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public string ModifiedBy { get; set; }

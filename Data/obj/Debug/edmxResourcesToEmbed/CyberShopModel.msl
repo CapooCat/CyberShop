@@ -232,6 +232,7 @@
     <EntitySetMapping Name="CustomerOrders">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.CustomerOrder">
         <MappingFragment StoreEntitySet="CustomerOrder">
+          <ScalarProperty Name="Coupon_code" ColumnName="Coupon_code" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -242,6 +243,22 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coupons">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Coupon">
+        <MappingFragment StoreEntitySet="Coupon">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Money_Discount" ColumnName="Money_Discount" />
+          <ScalarProperty Name="Percent_Discount" ColumnName="Percent_Discount" />
+          <ScalarProperty Name="Coupon_Code" ColumnName="Coupon_Code" />
+          <ScalarProperty Name="Coupon_Name" ColumnName="Coupon_Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
