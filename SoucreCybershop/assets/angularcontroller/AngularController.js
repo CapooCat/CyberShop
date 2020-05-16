@@ -282,6 +282,7 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         }
     }
 
+    $scope.discount_price = 0;
     var btn_confirm = document.getElementById("ConfirmDiscount");
     if (btn_confirm != null) {
         btn_confirm.addEventListener('click', (e) => {

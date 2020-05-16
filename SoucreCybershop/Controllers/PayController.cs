@@ -25,6 +25,10 @@ namespace CyberShop.Controllers
                 {
                     ModelState.AddModelError("", "Không thể thanh toán vì không có sản phẩm");
                 }
+                else if(data.Coupons.Where(x=>x.Coupon_Code.Equals(model.Discount)).Count() < 1)
+                {
+                    ModelState.AddModelError("", "Mã giảm giá không hợp lệ");
+                }
                 else
                 {
                     //Tạo bảng khách hàng đặt sp
