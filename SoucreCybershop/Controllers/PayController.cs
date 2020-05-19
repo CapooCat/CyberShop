@@ -98,7 +98,8 @@ namespace CyberShop.Controllers
             var coupon = data.Coupons.Where(x => x.Coupon_Code.Equals(id)).Count();
             if (coupon > 0)
             {
-                return Json(new {success="true"}, JsonRequestBehavior.AllowGet);
+                var priceDiscount = data.Coupons.Where(x => x.Coupon_Code == id).Select(x => x.Money_Discount);
+                return Json(new { success = "true", price_discount = priceDiscount }, JsonRequestBehavior.AllowGet);
             }
             else
             {

@@ -295,6 +295,9 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                     document.getElementById("tickmark").hidden = false;
                     btn_confirm.hidden = true;
                     document.getElementById("error_cpn").hidden = true;
+                    document.getElementById("input_cpn").readOnly = true;
+                    $scope.discount_price = -($scope.temp.price_discount);
+                    $scope.bucket.total_amount = $scope.bucket.total_amount + $scope.discount_price;
                 }
                 else {
                     document.getElementById("error_cpn").hidden = false;
