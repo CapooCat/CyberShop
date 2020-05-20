@@ -31,6 +31,14 @@ namespace CyberShop.Controllers
                              Image=b.Image,
                          }).ToList();
             ViewBag.SpGiamGia = spGiamGia;
+            List<ProductHomeViewModel> spMoi = new List<ProductHomeViewModel>();
+            spMoi = data.Products.Take(12).Select(x=> new ProductHomeViewModel {
+                id=x.id,
+                ProductName=x.ProductName,
+                oldPrice=x.Price,
+                Image=x.Image,
+            }).ToList();
+            ViewBag.spMoi = spMoi;
             return View();
         }
         public ActionResult Login()

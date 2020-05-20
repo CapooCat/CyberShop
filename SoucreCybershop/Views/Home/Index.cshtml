@@ -52,92 +52,25 @@
     <div class="items-header">Sản phẩm mới</div>
     <div class="see-all"><a href="#">Xem tất cả<i class="fa fa-chevron-right"></i></a></div>
     <div class="owl-carousel owl-theme home-item">
+    @foreach (ProductHomeViewModel item in ViewBag.spMoi)
+    {
         <div class="item">
             <div class="col-md-3 card">
                 <div class="box">
                     <a href="Product-Single.html">
-                        <img class="card-img" src="/assets/img/1.png">
-                        <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
-                        <p class="price-tag">4.150.000đ</p>
+                        <img class="card-img" src="@item.Image">
+                        <h6>@item.ProductName</h6>
+                        <p class="price-tag">@string.Format("{0:#,##0}", item.oldPrice)đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
                     <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
                 </div>
             </div>
         </div>
-
-        <div class="item">
-            <div class="col-md-3 card">
-                <div class="box">
-                    <a href="Product-Single.html">
-                        <img class="card-img" src="/assets/img/1.png">
-                        <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
-                        <p class="price-tag">4.150.000đ</p>
-                        <p class="status">Tình trạng: còn hàng</p>
-                    </a>
-                    <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="col-md-3 card">
-                <div class="box">
-                    <a href="Product-Single.html">
-                        <img class="card-img" src="/assets/img/1.png">
-                        <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
-                        <p class="price-tag">4.150.000đ</p>
-                        <p class="status">Tình trạng: còn hàng</p>
-                    </a>
-                    <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="col-md-3 card">
-                <div class="box">
-                    <a href="Product-Single.html">
-                        <img class="card-img" src="/assets/img/1.png">
-                        <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
-                        <p class="price-tag">4.150.000đ</p>
-                        <p class="status">Tình trạng: còn hàng</p>
-                    </a>
-                    <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="col-md-3 card">
-                <div class="box">
-                    <a href="Product-Single.html">
-                        <img class="card-img" src="/assets/img/1.png">
-                        <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
-                        <p class="price-tag">4.150.000đ</p>
-                        <p class="status">Tình trạng: còn hàng</p>
-                    </a>
-                    <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <div class="col-md-3 card">
-                <div class="box">
-                    <a href="Product-Single.html">
-                        <img class="card-img" src="/assets/img/1.png">
-                        <h6>ROG Strix GeForce® GTX 1650 4GB GDDR5</h6>
-                        <p class="price-tag">4.150.000đ</p>
-                        <p class="status">Tình trạng: còn hàng</p>
-                    </a>
-                    <button class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
-                </div>
-            </div>
-        </div>
+    }
     </div>
 
-    <div class="items-header">Sản phẩm bán chạy</div>
+    @*<div class="items-header">Sản phẩm bán chạy</div>
     <div class="see-all"><a href="#">Xem tất cả<i class="fa fa-chevron-right"></i></a></div>
     <div class="owl-carousel owl-theme home-item">
         <div class="item">
@@ -223,7 +156,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </section>
 @section scripts{
     <script>

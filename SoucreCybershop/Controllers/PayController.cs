@@ -71,6 +71,11 @@ namespace CyberShop.Controllers
                         total += item.Price;
                     }
                     invoice.Total = total;
+                    if (data.Coupons.Where(x => x.Coupon_Code.Equals(model.Discount)).Count()>=1)
+                    {
+                        var discount_price = data.Coupons.Where(x => x.Coupon_Code == model.Discount).First().Money_Discount;
+                        invoice.Total = invoice.Total - discount_price;
+                    }
                     inDao.InsertInvoice(invoice);
                     //Tạo chi tiết hóa đơn
                     Invoice_Detail inDetail = new Invoice_Detail();

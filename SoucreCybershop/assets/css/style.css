@@ -28,7 +28,9 @@ body {
   background: #1E90FF;
   margin: 0 1px;
   border-radius: 10px;
-  animation: loading-S 0.5s infinite;
+  
+  
+  : loading-S 0.5s infinite;
 }
 
 @keyframes loading-S {
