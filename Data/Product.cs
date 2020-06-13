@@ -18,8 +18,9 @@ namespace Data
         public Product()
         {
             this.Invoice_Detail = new HashSet<Invoice_Detail>();
-            this.Warehouses = new HashSet<Warehouse>();
             this.ProductImages = new HashSet<ProductImage>();
+            this.Detail_PcSets = new HashSet<Detail_PcSets>();
+            this.InOrder_Detail = new HashSet<InOrder_Detail>();
         }
     
         public int id { get; set; }
@@ -42,11 +43,12 @@ namespace Data
         public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
-        public virtual Promotion Promotion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Warehouse> Warehouses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ProducType ProducType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detail_PcSets> Detail_PcSets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InOrder_Detail> InOrder_Detail { get; set; }
     }
 }

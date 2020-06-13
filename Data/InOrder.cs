@@ -12,25 +12,24 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Promotion
+    public partial class InOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Promotion()
+        public InOrder()
         {
-            this.Products = new HashSet<Product>();
+            this.InOrder_Detail = new HashSet<InOrder_Detail>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public double ReducedPrice { get; set; }
+        public Nullable<int> CreateBy_User_id { get; set; }
         public string Info { get; set; }
+        public Nullable<double> Total { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-        public string CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedTime { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<InOrder_Detail> InOrder_Detail { get; set; }
+        public virtual User User { get; set; }
     }
 }

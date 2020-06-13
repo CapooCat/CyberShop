@@ -12,15 +12,17 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class InOrder_Detail
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Position { get; set; }
-        public string Address { get; set; }
+        public Nullable<int> InOrder_id { get; set; }
+        public Nullable<int> Product_id { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<int> Amount { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+    
+        public virtual InOrder InOrder { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

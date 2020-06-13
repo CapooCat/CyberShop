@@ -36,6 +36,6 @@ namespace Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
-        public virtual CustomerOrder CustomerOrder { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -12,17 +12,18 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Coupon
+    public partial class History
     {
-        public int id { get; set; }
-        public string Coupon_Name { get; set; }
-        public string Coupon_Code { get; set; }
-        public Nullable<int> Percent_Discount { get; set; }
-        public Nullable<double> Money_Discount { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> User_id { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> Product_tag { get; set; }
+        public Nullable<bool> Invoice_tag { get; set; }
+        public Nullable<bool> Warehouse_tag { get; set; }
+        public Nullable<bool> User_tag { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public string CreateBy { get; set; }
-        public Nullable<System.DateTime> ModifiedTime { get; set; }
-        public string ModifiedBy { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

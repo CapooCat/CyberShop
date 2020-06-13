@@ -54,30 +54,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Brand.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CategoriesDao.cs" />
-    <Compile Include="CategoryDetail.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CategoryDetailDao.cs" />
-    <Compile Include="CategoryDetailSuggest.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Categoryy.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Coupon.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerOrder.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CustomerOrderDao.cs" />
+    <Compile Include="Detail_PcSets.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="History.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InOrder.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InOrder_Detail.cs">
+      <DependentUpon>CyberShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Invoice.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
@@ -114,9 +111,6 @@
     <Compile Include="ProducType.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Promotion.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
@@ -125,12 +119,6 @@
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDao.cs" />
-    <Compile Include="Warehouse.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WarehouseDetail.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

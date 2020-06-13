@@ -4,37 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="afb5bb61c6fc4fe0a5e26fbcabca43cb" Name="Diagram1">
-        <EntityTypeShape EntityType="ShopPCComponentsModel.Admin" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="afb5bb61c6fc4fe0a5e26fbcabca43cb" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="ShopPCComponentsModel.Brand" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice_Detail" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Product" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.Promotion" Width="1.5" PointX="6.5" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.User" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.Warehouse" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.WarehouseDetail" Width="1.5" PointX="7.5" PointY="11.875" IsExpanded="true" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Brand" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" ManuallyRouted="false" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Promotion" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_Warehouse_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_WarehouseDetail_Warehouse" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.ProductImage" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProductImage_Product" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Categoryy" Width="1.5" PointX="8.5" PointY="5.125" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.CategoryDetail" Width="1.5" PointX="11.625" PointY="5" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.CategoryDetailSuggest" Width="1.5" PointX="13.875" PointY="5.125" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.ProducType" Width="1.5" PointX="0.75" PointY="15" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_CategoryDetail_Category" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_ProducType" />
         <AssociationConnector Association="ShopPCComponentsModel.ProducTypeCategoryy" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProducType_Category" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.CustomerOrder" Width="1.5" PointX="3.5" PointY="14.875" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_CustomerOrder" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.Coupon" Width="1.5" PointX="10.375" PointY="0.75" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Category_Category" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_User" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Detail_PcSets" Width="1.5" PointX="5.25" PointY="16" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.History" Width="1.5" PointX="3" PointY="15.625" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder" Width="1.5" PointX="3" PointY="19.25" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder_Detail" Width="1.5" PointX="5.25" PointY="12" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Detail_PcSets_Product" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_History_User" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_User" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_Detail_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

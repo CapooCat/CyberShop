@@ -64,7 +64,6 @@ namespace CyberShop.Controllers
                      {
                          id = a.id,
                          Brand_id = a.Brand_id,
-                         Promotion_id = a.Promotion_id,
                          ProductName = a.ProductName,
                          Info = a.Info,
                          Price = a.Price,
@@ -84,7 +83,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price = item.Price,
@@ -112,7 +110,6 @@ namespace CyberShop.Controllers
                      {
                          id = c.id,
                          Brand_id = c.Brand_id,
-                         Promotion_id = c.Promotion_id,
                          ProductName = c.ProductName,
                          Info = c.Info,
                          Price = c.Price,
@@ -132,7 +129,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price = item.Price,
@@ -243,7 +239,6 @@ namespace CyberShop.Controllers
                      {
                          id = b.id,
                          Brand_id = b.Brand_id,
-                         Promotion_id = b.Promotion_id,
                          ProductName = b.ProductName,
                          Info = b.Info,
                          Price = b.Price,
@@ -263,7 +258,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price = item.Price,
@@ -291,7 +285,6 @@ namespace CyberShop.Controllers
                      {
                          id = b.id,
                          Brand_id = b.Brand_id,
-                         Promotion_id = b.Promotion_id,
                          ProductName = b.ProductName,
                          Info = b.Info,
                          Price = b.Price,
@@ -311,7 +304,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price = item.Price,
@@ -339,7 +331,6 @@ namespace CyberShop.Controllers
                      {
                          id = b.id,
                          Brand_id = b.Brand_id,
-                         Promotion_id = b.Promotion_id,
                          ProductName = b.ProductName,
                          Info = b.Info,
                          Price = b.Price,
@@ -359,7 +350,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price = item.Price,
@@ -388,7 +378,6 @@ namespace CyberShop.Controllers
                      {
                          id = b.id,
                          Brand_id = b.Brand_id,
-                         Promotion_id = b.Promotion_id,
                          ProductName = b.ProductName,
                          Info = b.Info,
                          Price = b.Price,
@@ -408,7 +397,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price = item.Price,
@@ -435,7 +423,6 @@ namespace CyberShop.Controllers
                 {
                     id = item.id,
                     Brand_id = item.Brand_id,
-                    Promotion_id = item.Promotion_id,
                     ProductName = item.ProductName,
                     Info = item.Info,
                     Price =item.Price,
