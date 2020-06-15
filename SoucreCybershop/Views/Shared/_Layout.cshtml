@@ -117,7 +117,7 @@
                                         <div class="row">
                                             @foreach (var cat in catListDetail)
                                             {
-                                                subCatList = catDao.getListCategoryLv3(cat.Id);
+                                                subCatList = catDao.getListCategoryLv3(cat.category_lv2_id);
                                                 <div class="col-md-3">
                                                     <a class="Title" href="/chi-tiet-danh-muc/@cat.Metatitle">@cat.Name</a>
                                                     @if (subCatList != null)
