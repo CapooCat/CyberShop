@@ -28,12 +28,12 @@ namespace CyberShop.Controllers
         public ActionResult Category(string metatitle)
         {
             List<CategoryViewModel> model = new List<CategoryViewModel>();
-            model = (from a in data.Categoryies
+            model = (from a in data.Categories
                      where a.Metatitle == metatitle
                      select new CategoryViewModel
                      {
-                         CateName = a.CategoryName,
-                         breadcrumb = a.CategoryName
+                         CateName = a.Name,
+                         breadcrumb = a.Name
                      }).ToList();
             return View("SpTheoDanhMuc", model);
         }
@@ -72,8 +72,6 @@ namespace CyberShop.Controllers
                          IsDeleted = a.IsDeleted,
                          CreateBy = a.CreateBy,
                          CreateDate = a.CreateDate,
-                         ModifiedBy = a.ModifiedBy,
-                         ModifiedDate = a.ModifiedDate,
                          ProductType_id = a.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -102,7 +100,7 @@ namespace CyberShop.Controllers
         public JsonResult CategoryJSON(string metatitle)
         {
             var model = new List<ProductCategoryViewModel>();
-            model = (from a in data.Categoryies
+            model = (from a in data.Categories
                      join b in data.ProducTypes on a.Id equals b.Category_id
                      join c in data.Products on b.Id equals c.ProductType_id
                      where a.Metatitle == metatitle
@@ -118,8 +116,6 @@ namespace CyberShop.Controllers
                          IsDeleted = c.IsDeleted,
                          CreateBy = c.CreateBy,
                          CreateDate = c.CreateDate,
-                         ModifiedBy = c.ModifiedBy,
-                         ModifiedDate = c.ModifiedDate,
                          ProductType_id = c.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -156,13 +152,13 @@ namespace CyberShop.Controllers
         public ActionResult CategoryDetail(string metatitle)
         {
             List<CategoryViewModel> model = new List<CategoryViewModel>();
-            model = (from a in data.CategoryDetails
-                     where a.MetaTitle == metatitle
+            model = (from a in data.Categories
+                     where a.Metatitle == metatitle
                      join b in data.ProducTypes on metatitle equals b.Metatitle
 
                      select new CategoryViewModel
                      {
-                         CateName = a.CateDetailName,
+                         CateName = a.Name,
                          breadcrumb = b.TypeName
                      }).Distinct().ToList();
             return View("SpTheoDanhMuc", model);
@@ -178,7 +174,6 @@ namespace CyberShop.Controllers
                      {
                          id = b.id,
                          Brand_id = b.Brand_id,
-                         Promotion_id = b.Promotion_id,
                          ProductName = b.ProductName,
                          Info = b.Info,
                          Price = b.Price,
@@ -187,8 +182,6 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ModifiedBy = b.ModifiedBy,
-                         ModifiedDate = b.ModifiedDate,
                          ProductType_id = b.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -217,13 +210,13 @@ namespace CyberShop.Controllers
         public ActionResult CategoryDetailSuggest(string metatitle)
         {
             List<CategoryViewModel> model = new List<CategoryViewModel>();
-            model = (from a in data.CategoryDetailSuggests
+            model = (from a in data.Categories
                      where a.Metatitle == metatitle
-                     join b in data.CategoryDetails on a.CategoryDetail_id equals b.Id
-                     join c in data.ProducTypes on b.MetaTitle equals c.Metatitle
+                     join b in data.Categories on a.category_lv2_id equals b.Id
+                     join c in data.ProducTypes on b.Metatitle equals c.Metatitle
                      select new CategoryViewModel
                      {
-                         CateName = a.SuggestName,
+                         CateName = a.Name,
                          breadcrumb = c.TypeName
                      }).ToList();
             return View("SpTheoDanhMuc", model);
@@ -247,8 +240,6 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ModifiedBy = b.ModifiedBy,
-                         ModifiedDate = b.ModifiedDate,
                          ProductType_id = b.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -293,8 +284,6 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ModifiedBy = b.ModifiedBy,
-                         ModifiedDate = b.ModifiedDate,
                          ProductType_id = b.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -339,8 +328,6 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ModifiedBy = b.ModifiedBy,
-                         ModifiedDate = b.ModifiedDate,
                          ProductType_id = b.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -386,8 +373,6 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ModifiedBy = b.ModifiedBy,
-                         ModifiedDate = b.ModifiedDate,
                          ProductType_id = b.ProductType_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
@@ -431,8 +416,6 @@ namespace CyberShop.Controllers
                     IsDeleted = item.IsDeleted,
                     CreateBy = item.CreateBy,
                     CreateDate = item.CreateDate,
-                    ModifiedBy = item.ModifiedBy,
-                    ModifiedDate = item.ModifiedDate,
                     ProductType_id = item.ProductType_id
                 });
             }

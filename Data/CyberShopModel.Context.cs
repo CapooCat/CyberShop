@@ -25,18 +25,18 @@ namespace Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<Invoice_Detail> Invoice_Detail { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
-        public virtual DbSet<Categoryy> Categoryies { get; set; }
-        public virtual DbSet<ProducType> ProducTypes { get; set; }
         public virtual DbSet<Detail_PcSets> Detail_PcSets { get; set; }
         public virtual DbSet<History> Histories { get; set; }
         public virtual DbSet<InOrder> InOrders { get; set; }
         public virtual DbSet<InOrder_Detail> InOrder_Detail { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Invoice_Detail> Invoice_Detail { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<ProducType> ProducTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -3,10 +3,9 @@
     var session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
     var sessionCheck = Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
     CategoriesDao catDao = new CategoriesDao();
-    CategoryDetailDao catDetailDao = new CategoryDetailDao();
-    List<Categoryy> catList = catDao.getAllCatgories();
-    List<CategoryDetailDao> catListDetail= new List<CategoryDetailDao>();
-    List<CategoryDetailSuggest> subCatList = new List<CategoryDetailSuggest>();
+    List<Category> catList = catDao.getAllCatgories();
+    List<Category> catListDetail= new List<Category>();
+    List<Category> subCatList = new List<Category>();
     Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
 }
 <!DOCTYPE html>
@@ -105,27 +104,27 @@
                             <div class="cat">
                                 @foreach (var item in catList)
                                 {
-                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" href="/danh-muc/@item.Metatitle"> @item.CategoryName</a>
+                                    <a onmouseover="OpenCat(@item.Id)" id="cat_@item.Id" href="/danh-muc/@item.Metatitle"> @item.Name</a>
                                 }
                             </div>
                                     <a onmouseover="closebox()" onmouseout="openbox()" href="/Product">Tất cả sản phẩm</a>
                             <div class="more-content">
                                 @foreach (var item in catList)
                                 {
-                                    catListDetail = catDetailDao.getListCateDetail(item.Id);
+                                    catListDetail = catDao.getListCategoryLv2(item.Id);
 
                                     <div class="more-content-items" id="@item.Id">
                                         <div class="row">
                                             @foreach (var cat in catListDetail)
                                             {
-                                                subCatList = catDetailDao.getListCateDetailSuggest(cat.Id);
+                                                subCatList = catDao.getListCategoryLv3(cat.Id);
                                                 <div class="col-md-3">
-                                                    <a class="Title" href="/chi-tiet-danh-muc/@cat.MetaTitle">@cat.CateDetailName</a>
+                                                    <a class="Title" href="/chi-tiet-danh-muc/@cat.Metatitle">@cat.Name</a>
                                                     @if (subCatList != null)
                                                     {
                                                         foreach (var subCat in subCatList)
                                                         {
-                                                            <li><a href="/san-pham/@subCat.Metatitle">@subCat.SuggestName</a></li>
+                                                            <li><a href="/san-pham/@subCat.Metatitle">@subCat.Name</a></li>
                                                         }
                                                     }
                                                 </div>

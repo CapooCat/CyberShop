@@ -23,10 +23,8 @@ namespace Data
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual Invoice Invoice { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Invoice Invoice { get; set; }
     }
 }

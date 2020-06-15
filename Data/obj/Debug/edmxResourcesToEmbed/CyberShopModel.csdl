@@ -1,54 +1,201 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ShopPCComponentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Admin">
+  <EntityType Name="sysdiagram">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Username" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-    <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="Brand">
+  <EntityContainer Name="ShopPCComponentsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="ProductImages" EntityType="ShopPCComponentsModel.ProductImage" />
+    <EntitySet Name="Detail_PcSets" EntityType="ShopPCComponentsModel.Detail_PcSets" />
+    <EntitySet Name="Histories" EntityType="ShopPCComponentsModel.History" />
+    <EntitySet Name="InOrders" EntityType="ShopPCComponentsModel.InOrder" />
+    <EntitySet Name="InOrder_Detail" EntityType="ShopPCComponentsModel.InOrder_Detail" />
+    <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder">
+      <End Role="InOrder" EntitySet="InOrders" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
+    </AssociationSet>
+    <EntitySet Name="Categories" EntityType="ShopPCComponentsModel.Category" />
+    <AssociationSet Name="FK_Category_Category" Association="ShopPCComponentsModel.FK_Category_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Category1" EntitySet="Categories" />
+    </AssociationSet>
+    <EntitySet Name="Invoice_Detail" EntityType="ShopPCComponentsModel.Invoice_Detail" />
+    <EntitySet Name="Products" EntityType="ShopPCComponentsModel.Product" />
+    <AssociationSet Name="FK_Detail_PcSets_Product" Association="ShopPCComponentsModel.FK_Detail_PcSets_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Detail_PcSets" EntitySet="Detail_PcSets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_Detail_Product" Association="ShopPCComponentsModel.FK_InOrder_Detail_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Detail_Product" Association="ShopPCComponentsModel.FK_Invoice_Detail_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImage_Product" Association="ShopPCComponentsModel.FK_ProductImage_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
+    </AssociationSet>
+    <EntitySet Name="Brands" EntityType="ShopPCComponentsModel.Brand" />
+    <AssociationSet Name="FK_Product_Brand" Association="ShopPCComponentsModel.FK_Product_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Invoices" EntityType="ShopPCComponentsModel.Invoice" />
+    <AssociationSet Name="FK_Invoice_Detail_Invoice" Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
+    </AssociationSet>
+    <EntitySet Name="ProducTypes" EntityType="ShopPCComponentsModel.ProducType" />
+    <AssociationSet Name="FK_ProducType_Category1" Association="ShopPCComponentsModel.FK_ProducType_Category1">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="ProducType" EntitySet="ProducTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProducType" Association="ShopPCComponentsModel.FK_Product_ProducType">
+      <End Role="ProducType" EntitySet="ProducTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="ShopPCComponentsModel.User" />
+    <AssociationSet Name="FK_History_User" Association="ShopPCComponentsModel.FK_History_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="History" EntitySet="Histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_User" Association="ShopPCComponentsModel.FK_InOrder_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="InOrder" EntitySet="InOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_User" Association="ShopPCComponentsModel.FK_Invoice_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Product_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Detail_PcSets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="cpu_id" Type="Int32" />
+    <Property Name="main_id" Type="Int32" />
+    <Property Name="ram_id" Type="Int32" />
+    <Property Name="hdd_id" Type="Int32" />
+    <Property Name="ssd_id" Type="Int32" />
+    <Property Name="vga_int" Type="Int32" />
+    <Property Name="power_id" Type="Int32" />
+    <Property Name="cooler_id" Type="Int32" />
+    <Property Name="monitor_id" Type="Int32" />
+    <Property Name="keyboard_id" Type="Int32" />
+    <Property Name="mouse_id" Type="Int32" />
+    <Property Name="headphone_id" Type="Int32" />
+    <Property Name="speaker_id" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreateTime" Type="DateTime" Precision="0" />
+    <Property Name="CreateBy" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_Detail_PcSets_Product" FromRole="Detail_PcSets" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="History">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="User_id" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product_tag" Type="Boolean" />
+    <Property Name="Invoice_tag" Type="Boolean" />
+    <Property Name="Warehouse_tag" Type="Boolean" />
+    <Property Name="User_tag" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="ShopPCComponentsModel.FK_History_User" FromRole="History" ToRole="User" />
+  </EntityType>
+  <EntityType Name="InOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateBy_User_id" Type="Int32" />
     <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Double" />
     <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Brand" FromRole="Brand" ToRole="Product" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder" ToRole="InOrder_Detail" />
+    <NavigationProperty Name="User" Relationship="ShopPCComponentsModel.FK_InOrder_User" FromRole="InOrder" ToRole="User" />
   </EntityType>
-  <EntityType Name="Invoice">
+  <EntityType Name="InOrder_Detail">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
-    <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DeliveryPhoneNum" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-    <Property Name="Total" Type="Double" />
+    <Property Name="InOrder_id" Type="Int32" />
+    <Property Name="Product_id" Type="Int32" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="InOrder" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder_Detail" ToRole="InOrder" />
+    <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_Product" FromRole="InOrder_Detail" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_InOrder_Detail_InOrder">
+    <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="InOrder_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_lv2_id" Type="Int32" />
+    <Property Name="category_lv3_id" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Invoice_Detail" Relationship="Self.FK_Invoice_Detail_Invoice" FromRole="Invoice" ToRole="Invoice_Detail" />
-    <Property Name="CustomerOrder_id" Type="Int32" />
-    <NavigationProperty Name="CustomerOrder" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="Invoice" ToRole="CustomerOrder" />
-    <Property Name="User_id" Type="Int32" />
-    <Property Name="Status" Type="Boolean" />
+    <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="category_lv1_master_id" Type="Int32" />
+    <Property Name="category_lv2_master_id" Type="Int32" />
+    <NavigationProperty Name="Category1" Relationship="ShopPCComponentsModel.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+    <NavigationProperty Name="Category2" Relationship="ShopPCComponentsModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
+    <NavigationProperty Name="ProducTypes" Relationship="ShopPCComponentsModel.FK_ProducType_Category1" FromRole="Category" ToRole="ProducType" />
   </EntityType>
+  <Association Name="FK_Category_Category">
+    <End Type="ShopPCComponentsModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.Category" Role="Category1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="category_lv1_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="Invoice_Detail">
     <Key>
       <PropertyRef Name="Id" />
@@ -61,11 +208,9 @@
     <Property Name="WarrantyExpires" Type="DateTime" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Invoice" Relationship="Self.FK_Invoice_Detail_Invoice" FromRole="Invoice_Detail" ToRole="Invoice" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Invoice_Detail_Product" FromRole="Invoice_Detail" ToRole="Product" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_Invoice_Detail_Product" FromRole="Invoice_Detail" ToRole="Product" />
+    <NavigationProperty Name="Invoice" Relationship="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" FromRole="Invoice_Detail" ToRole="Invoice" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -73,124 +218,51 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Brand_id" Type="Int32" Nullable="false" />
-    <Property Name="Promotion_id" Type="Int32" />
-    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductType_id" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MetaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Price" Type="Double" />
+    <Property Name="SalePercent" Type="Int32" />
     <Property Name="MonthWarranty" Type="Int32" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Brand" Relationship="Self.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
-    <NavigationProperty Name="Invoice_Detail" Relationship="Self.FK_Invoice_Detail_Product" FromRole="Product" ToRole="Invoice_Detail" />
-    <NavigationProperty Name="Promotion" Relationship="Self.FK_Product_Promotion" FromRole="Product" ToRole="Promotion" />
-    <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouse_Product" FromRole="Product" ToRole="Warehouse" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Detail_PcSets" Relationship="ShopPCComponentsModel.FK_Detail_PcSets_Product" FromRole="Product" ToRole="Detail_PcSets" />
+    <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_Product" FromRole="Product" ToRole="InOrder_Detail" />
+    <NavigationProperty Name="Invoice_Detail" Relationship="ShopPCComponentsModel.FK_Invoice_Detail_Product" FromRole="Product" ToRole="Invoice_Detail" />
     <NavigationProperty Name="ProductImages" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
-    <Property Name="ProductType_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Brand" Relationship="ShopPCComponentsModel.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="ProducType" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="Product" ToRole="ProducType" />
-    <Property Name="SalePercent" Type="Int32" />
-    <Property Name="MetaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="Promotion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ReducedPrice" Type="Double" Nullable="false" />
-    <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Promotion" FromRole="Promotion" ToRole="Product" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="User">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DayOfBirth" Type="DateTime" Precision="3" />
-    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNum" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Warehouse">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Product_id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Product_id" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Int32" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Warehouse_Product" FromRole="Warehouse" ToRole="Product" />
-    <NavigationProperty Name="WarehouseDetails" Relationship="Self.FK_WarehouseDetail_Warehouse" FromRole="Warehouse" ToRole="WarehouseDetail" />
-  </EntityType>
-  <EntityType Name="WarehouseDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Product_id" Type="Int32" Nullable="false" />
-    <Property Name="Warehouse_id" Type="Int32" Nullable="false" />
-    <Property Name="Brand_id" Type="Int32" Nullable="false" />
-    <Property Name="AmountImport" Type="Int32" Nullable="false" />
-    <Property Name="TotalPrice" Type="Double" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Warehouse" Relationship="Self.FK_WarehouseDetail_Warehouse" FromRole="WarehouseDetail" ToRole="Warehouse" />
-  </EntityType>
-  <Association Name="FK_Product_Brand">
-    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+  <Association Name="FK_Detail_PcSets_Product">
+    <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ShopPCComponentsModel.Detail_PcSets" Role="Detail_PcSets" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Brand">
-        <PropertyRef Name="Id" />
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="Brand_id" />
+      <Dependent Role="Detail_PcSets">
+        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Invoice_Detail_Invoice">
-    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
-    <End Role="Invoice_Detail" Type="Self.Invoice_Detail" Multiplicity="*" />
+  <Association Name="FK_InOrder_Detail_Product">
+    <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Invoice">
-        <PropertyRef Name="Id" />
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Invoice_Detail">
-        <PropertyRef Name="Invoice_id" />
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="Product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Invoice_Detail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="Invoice_Detail" Type="Self.Invoice_Detail" Multiplicity="*" />
+    <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ShopPCComponentsModel.Invoice_Detail" Role="Invoice_Detail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="id" />
@@ -200,121 +272,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Promotion">
-    <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Promotion">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="Promotion_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Warehouse_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Warehouse">
-        <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_WarehouseDetail_Warehouse">
-    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-    <End Role="WarehouseDetail" Type="Self.WarehouseDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Warehouse">
-        <PropertyRef Name="Id" />
-        <PropertyRef Name="Product_id" />
-      </Principal>
-      <Dependent Role="WarehouseDetail">
-        <PropertyRef Name="Warehouse_id" />
-        <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="ShopPCComponentsEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Admins" EntityType="Self.Admin" />
-    <EntitySet Name="Brands" EntityType="Self.Brand" />
-    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
-    <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" />
-    <EntitySet Name="Products" EntityType="Self.Product" />
-    <EntitySet Name="Promotions" EntityType="Self.Promotion" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="Users" EntityType="Self.User" />
-    <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
-    <EntitySet Name="WarehouseDetails" EntityType="Self.WarehouseDetail" />
-    <AssociationSet Name="FK_Product_Brand" Association="Self.FK_Product_Brand">
-      <End Role="Brand" EntitySet="Brands" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Invoice_Detail_Invoice" Association="Self.FK_Invoice_Detail_Invoice">
-      <End Role="Invoice" EntitySet="Invoices" />
-      <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Invoice_Detail_Product" Association="Self.FK_Invoice_Detail_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Promotion" Association="Self.FK_Product_Promotion">
-      <End Role="Promotion" EntitySet="Promotions" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Warehouse_Product" Association="Self.FK_Warehouse_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="Warehouse" EntitySet="Warehouses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WarehouseDetail_Warehouse" Association="Self.FK_WarehouseDetail_Warehouse">
-      <End Role="Warehouse" EntitySet="Warehouses" />
-      <End Role="WarehouseDetail" EntitySet="WarehouseDetails" />
-    </AssociationSet>
-    <EntitySet Name="ProductImages" EntityType="ShopPCComponentsModel.ProductImage" />
-    <AssociationSet Name="FK_ProductImage_Product" Association="ShopPCComponentsModel.FK_ProductImage_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="ProductImage" EntitySet="ProductImages" />
-    </AssociationSet>
-    <EntitySet Name="Categoryies" EntityType="ShopPCComponentsModel.Categoryy" />
-    <EntitySet Name="CategoryDetails" EntityType="ShopPCComponentsModel.CategoryDetail" />
-    <EntitySet Name="CategoryDetailSuggests" EntityType="ShopPCComponentsModel.CategoryDetailSuggest" />
-    <EntitySet Name="ProducTypes" EntityType="ShopPCComponentsModel.ProducType" />
-    <AssociationSet Name="FK_CategoryDetail_Category" Association="ShopPCComponentsModel.FK_CategoryDetail_Category">
-      <End Role="Category1" EntitySet="Categoryies" />
-      <End Role="CategoryDetail" EntitySet="CategoryDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CategoryDetailSuggest_CategoryDetail" Association="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail">
-      <End Role="CategoryDetail" EntitySet="CategoryDetails" />
-      <End Role="CategoryDetailSuggest" EntitySet="CategoryDetailSuggests" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_ProducType" Association="ShopPCComponentsModel.FK_Product_ProducType">
-      <End Role="ProducType" EntitySet="ProducTypes" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProducType_Category" Association="ShopPCComponentsModel.FK_ProducType_Category">
-      <End Role="Categoryy" EntitySet="Categoryies" />
-      <End Role="ProducType" EntitySet="ProducTypes" />
-    </AssociationSet>
-    <EntitySet Name="CustomerOrders" EntityType="ShopPCComponentsModel.CustomerOrder" />
-    <AssociationSet Name="FK_Invoice_CustomerOrder" Association="ShopPCComponentsModel.FK_Invoice_CustomerOrder">
-      <End Role="CustomerOrder" EntitySet="CustomerOrders" />
-      <End Role="Invoice" EntitySet="Invoices" />
-    </AssociationSet>
-    <EntitySet Name="Coupons" EntityType="ShopPCComponentsModel.Coupon" />
-  </EntityContainer>
-  <EntityType Name="ProductImage">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Product_id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
-  </EntityType>
   <Association Name="FK_ProductImage_Product">
     <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="1" />
     <End Type="ShopPCComponentsModel.ProductImage" Role="ProductImage" Multiplicity="*" />
@@ -327,90 +284,85 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Categoryy">
+  <EntityType Name="Brand">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CategoryDetails" Relationship="ShopPCComponentsModel.FK_CategoryDetail_Category" FromRole="Category1" ToRole="CategoryDetail" />
-    <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="ProducTypes" Relationship="ShopPCComponentsModel.FK_ProducType_Category" FromRole="Categoryy" ToRole="ProducType" />
+    <Property Name="CreateTime" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_Brand" FromRole="Brand" ToRole="Product" />
   </EntityType>
-  <EntityType Name="CategoryDetail">
+  <Association Name="FK_Product_Brand">
+    <End Type="ShopPCComponentsModel.Brand" Role="Brand" Multiplicity="1" />
+    <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Brand_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Invoice">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CateDetailName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Category_id" Type="Int32" Nullable="false" />
+    <Property Name="User_id" Type="Int32" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+    <Property Name="DeliveryAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryPhoneNum" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Total" Type="Double" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_CategoryDetail_Category" FromRole="CategoryDetail" ToRole="Category1" />
-    <NavigationProperty Name="CategoryDetailSuggests" Relationship="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail" FromRole="CategoryDetail" ToRole="CategoryDetailSuggest" />
-    <Property Name="MetaTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Invoice_Detail" Relationship="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" FromRole="Invoice" ToRole="Invoice_Detail" />
+    <NavigationProperty Name="User" Relationship="ShopPCComponentsModel.FK_Invoice_User" FromRole="Invoice" ToRole="User" />
   </EntityType>
-  <EntityType Name="CategoryDetailSuggest">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SuggestName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CategoryDetail_id" Type="Int32" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CategoryDetail" Relationship="ShopPCComponentsModel.FK_CategoryDetailSuggest_CategoryDetail" FromRole="CategoryDetailSuggest" ToRole="CategoryDetail" />
-    <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
+  <Association Name="FK_Invoice_Detail_Invoice">
+    <End Type="ShopPCComponentsModel.Invoice" Role="Invoice" Multiplicity="1" />
+    <End Type="ShopPCComponentsModel.Invoice_Detail" Role="Invoice_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice_Detail">
+        <PropertyRef Name="Invoice_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="ProducType">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_id" Type="Int32" />
     <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="CreateTime" Type="DateTime" Precision="0" />
     <Property Name="Info" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="ProducType" ToRole="Product" />
-    <Property Name="Category_id" Type="Int32" />
-    <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_ProducType_Category" FromRole="ProducType" ToRole="Categoryy" />
     <Property Name="Metatitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="ShopPCComponentsModel.FK_ProducType_Category1" FromRole="ProducType" ToRole="Category" />
+    <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="ProducType" ToRole="Product" />
   </EntityType>
-  <Association Name="FK_CategoryDetail_Category">
-    <End Type="ShopPCComponentsModel.Categoryy" Role="Category1" Multiplicity="1" />
-    <End Type="ShopPCComponentsModel.CategoryDetail" Role="CategoryDetail" Multiplicity="*" />
+  <Association Name="FK_ProducType_Category1">
+    <End Type="ShopPCComponentsModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.ProducType" Role="ProducType" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Category1">
+      <Principal Role="Category">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CategoryDetail">
+      <Dependent Role="ProducType">
         <PropertyRef Name="Category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CategoryDetailSuggest_CategoryDetail">
-    <End Type="ShopPCComponentsModel.CategoryDetail" Role="CategoryDetail" Multiplicity="1" />
-    <End Type="ShopPCComponentsModel.CategoryDetailSuggest" Role="CategoryDetailSuggest" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CategoryDetail">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CategoryDetailSuggest">
-        <PropertyRef Name="CategoryDetail_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -426,60 +378,60 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProducType_Category">
-    <End Type="ShopPCComponentsModel.Categoryy" Role="Categoryy" Multiplicity="0..1" />
-    <End Type="ShopPCComponentsModel.ProducType" Role="ProducType" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categoryy">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProducType">
-        <PropertyRef Name="Category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="CustomerOrder">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNum" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Invoices" Relationship="ShopPCComponentsModel.FK_Invoice_CustomerOrder" FromRole="CustomerOrder" ToRole="Invoice" />
-    <Property Name="Coupon_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <Association Name="FK_Invoice_CustomerOrder">
-    <End Type="ShopPCComponentsModel.CustomerOrder" Role="CustomerOrder" Multiplicity="0..1" />
-    <End Type="ShopPCComponentsModel.Invoice" Role="Invoice" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CustomerOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Invoice">
-        <PropertyRef Name="CustomerOrder_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Coupon">
+  <EntityType Name="User">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Coupon_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Coupon_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Percent_Discount" Type="Int32" />
-    <Property Name="Money_Discount" Type="Double" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNum" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Histories" Relationship="ShopPCComponentsModel.FK_History_User" FromRole="User" ToRole="History" />
+    <NavigationProperty Name="InOrders" Relationship="ShopPCComponentsModel.FK_InOrder_User" FromRole="User" ToRole="InOrder" />
+    <NavigationProperty Name="Invoices" Relationship="ShopPCComponentsModel.FK_Invoice_User" FromRole="User" ToRole="Invoice" />
   </EntityType>
+  <Association Name="FK_History_User">
+    <End Type="ShopPCComponentsModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.History" Role="History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InOrder_User">
+    <End Type="ShopPCComponentsModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="InOrder">
+        <PropertyRef Name="CreateBy_User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_User">
+    <End Type="ShopPCComponentsModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

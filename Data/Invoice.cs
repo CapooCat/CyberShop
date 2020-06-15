@@ -21,18 +21,15 @@ namespace Data
         }
     
         public int Id { get; set; }
+        public Nullable<int> User_id { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string DeliveryAddress { get; set; }
         public string DeliveryPhoneNum { get; set; }
+        public Nullable<bool> Status { get; set; }
         public Nullable<double> Total { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> CustomerOrder_id { get; set; }
-        public Nullable<int> User_id { get; set; }
-        public Nullable<bool> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }

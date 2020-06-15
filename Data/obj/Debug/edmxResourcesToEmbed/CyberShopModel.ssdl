@@ -1,18 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ShopPCComponentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Admin">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Username" Type="nchar" MaxLength="30" />
-    <Property Name="Password" Type="nchar" MaxLength="30" />
-    <Property Name="PhoneNumber" Type="nchar" MaxLength="15" />
-    <Property Name="Position" Type="nvarchar" MaxLength="20" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" />
-    <Property Name="IsDeleted" Type="bit" />
-  </EntityType>
   <EntityType Name="Brand">
     <Key>
       <PropertyRef Name="Id" />
@@ -24,88 +11,89 @@
     <Property Name="Info" Type="nvarchar(max)" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="CreateTime" Type="date" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="category_lv2_id" Type="int" />
+    <Property Name="category_lv3_id" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="Metatitle" Type="nchar" MaxLength="50" />
+    <Property Name="category_lv1_master_id" Type="int" />
+    <Property Name="category_lv2_master_id" Type="int" />
   </EntityType>
-  <EntityType Name="CategoryDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CateDetailName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Category_id" Type="int" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
-    <Property Name="MetaTitle" Type="nvarchar" MaxLength="30" />
-  </EntityType>
-  <EntityType Name="CategoryDetailSuggest">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SuggestName" Type="nvarchar" MaxLength="50" />
-    <Property Name="CategoryDetail_id" Type="int" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
-    <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Coupon">
+  <EntityType Name="Detail_PcSets">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Coupon_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Coupon_Code" Type="varchar" MaxLength="50" />
-    <Property Name="Percent_Discount" Type="int" />
-    <Property Name="Money_Discount" Type="float" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="cpu_id" Type="int" />
+    <Property Name="main_id" Type="int" />
+    <Property Name="ram_id" Type="int" />
+    <Property Name="hdd_id" Type="int" />
+    <Property Name="ssd_id" Type="int" />
+    <Property Name="vga_int" Type="int" />
+    <Property Name="power_id" Type="int" />
+    <Property Name="cooler_id" Type="int" />
+    <Property Name="monitor_id" Type="int" />
+    <Property Name="keyboard_id" Type="int" />
+    <Property Name="mouse_id" Type="int" />
+    <Property Name="headphone_id" Type="int" />
+    <Property Name="speaker_id" Type="int" />
     <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="CreateBy" Type="varchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
-    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreateTime" Type="date" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="15" />
   </EntityType>
-  <EntityType Name="CustomerOrder">
+  <EntityType Name="History">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="PhoneNum" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="Coupon_code" Type="varchar" MaxLength="50" />
+    <Property Name="User_id" Type="int" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Product_tag" Type="bit" />
+    <Property Name="Invoice_tag" Type="bit" />
+    <Property Name="Warehouse_tag" Type="bit" />
+    <Property Name="User_tag" Type="bit" />
     <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateBy" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="ModifiedBy" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreateBy_User_id" Type="int" />
+    <Property Name="Info" Type="nvarchar(max)" />
+    <Property Name="Total" Type="float" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="InOrder_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InOrder_id" Type="int" />
+    <Property Name="Product_id" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateDate" Type="date" />
   </EntityType>
   <EntityType Name="Invoice">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CustomerOrder_id" Type="int" />
     <Property Name="User_id" Type="int" />
     <Property Name="PurchaseDate" Type="datetime" />
     <Property Name="DeliveryAddress" Type="nvarchar(max)" />
@@ -115,8 +103,6 @@
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Invoice_Detail">
     <Key>
@@ -130,9 +116,7 @@
     <Property Name="WarrantyExpires" Type="datetime" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="date" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -140,7 +124,6 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Brand_id" Type="int" Nullable="false" />
-    <Property Name="Promotion_id" Type="int" />
     <Property Name="ProductType_id" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MetaTitle" Type="nvarchar" MaxLength="50" />
@@ -151,9 +134,7 @@
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateDate" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreateDate" Type="date" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>
@@ -173,25 +154,9 @@
     <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="CreateTime" Type="date" />
     <Property Name="Info" Type="nvarchar" MaxLength="500" />
     <Property Name="Metatitle" Type="nvarchar" MaxLength="30" />
-  </EntityType>
-  <EntityType Name="Promotion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="ReducedPrice" Type="float" Nullable="false" />
-    <Property Name="Info" Type="nvarchar(max)" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -210,74 +175,85 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="nchar" MaxLength="50" />
     <Property Name="Password" Type="nchar" MaxLength="50" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="PhoneNum" Type="nvarchar" MaxLength="15" />
     <Property Name="Email" Type="nchar" MaxLength="50" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="DayOfBirth" Type="datetime" />
     <Property Name="Image" Type="nvarchar" MaxLength="50" />
     <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateDate" Type="date" />
   </EntityType>
-  <EntityType Name="Warehouse">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Product_id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Product_id" Type="int" Nullable="false" />
-    <Property Name="Amount" Type="int" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" />
-  </EntityType>
-  <EntityType Name="WarehouseDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Product_id" Type="int" Nullable="false" />
-    <Property Name="Warehouse_id" Type="int" Nullable="false" />
-    <Property Name="Brand_id" Type="int" Nullable="false" />
-    <Property Name="AmountImport" Type="int" Nullable="false" />
-    <Property Name="TotalPrice" Type="float" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModifiedBy" Type="nchar" MaxLength="30" />
-    <Property Name="ModifiedTime" Type="datetime" />
-  </EntityType>
-  <Association Name="FK_CategoryDetail_Category">
-    <End Role="Category" Type="Self.Category" Multiplicity="1" />
-    <End Role="CategoryDetail" Type="Self.CategoryDetail" Multiplicity="*" />
+  <Association Name="FK_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category1" Type="Self.Category" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Category">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CategoryDetail">
-        <PropertyRef Name="Category_id" />
+      <Dependent Role="Category1">
+        <PropertyRef Name="category_lv1_master_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CategoryDetailSuggest_CategoryDetail">
-    <End Role="CategoryDetail" Type="Self.CategoryDetail" Multiplicity="1" />
-    <End Role="CategoryDetailSuggest" Type="Self.CategoryDetailSuggest" Multiplicity="*" />
+  <Association Name="FK_Detail_PcSets_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Detail_PcSets" Type="Self.Detail_PcSets" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CategoryDetail">
-        <PropertyRef Name="Id" />
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="CategoryDetailSuggest">
-        <PropertyRef Name="CategoryDetail_id" />
+      <Dependent Role="Detail_PcSets">
+        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Invoice_CustomerOrder">
-    <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="0..1" />
-    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+  <Association Name="FK_History_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="History" Type="Self.History" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CustomerOrder">
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InOrder_Detail_InOrder">
+    <End Role="InOrder" Type="Self.InOrder" Multiplicity="0..1" />
+    <End Role="InOrder_Detail" Type="Self.InOrder_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InOrder">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Invoice">
-        <PropertyRef Name="CustomerOrder_id" />
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="InOrder_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InOrder_Detail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="InOrder_Detail" Type="Self.InOrder_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InOrder_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="InOrder" Type="Self.InOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="InOrder">
+        <PropertyRef Name="CreateBy_User_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -305,6 +281,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Invoice_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Brand">
     <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -329,18 +317,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Promotion1">
-    <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
-    <End Role="Product" Type="Self.Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Promotion">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="Promotion_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ProductImage_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
@@ -353,7 +329,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProducType_Category">
+  <Association Name="FK_ProducType_Category1">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="ProducType" Type="Self.ProducType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -365,61 +341,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Warehouse_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Warehouse">
-        <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_WarehouseDetail_Warehouse">
-    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-    <End Role="WarehouseDetail" Type="Self.WarehouseDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Warehouse">
-        <PropertyRef Name="Id" />
-        <PropertyRef Name="Product_id" />
-      </Principal>
-      <Dependent Role="WarehouseDetail">
-        <PropertyRef Name="Warehouse_id" />
-        <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="ShopPCComponentsModelStoreContainer">
-    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CategoryDetail" EntityType="Self.CategoryDetail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CategoryDetailSuggest" EntityType="Self.CategoryDetailSuggest" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CustomerOrder" EntityType="Self.CustomerOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detail_PcSets" EntityType="Self.Detail_PcSets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InOrder" EntityType="Self.InOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InOrder_Detail" EntityType="Self.InOrder_Detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProducType" EntityType="Self.ProducType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="WarehouseDetail" EntityType="Self.WarehouseDetail" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_CategoryDetail_Category" Association="Self.FK_CategoryDetail_Category">
+    <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
       <End Role="Category" EntitySet="Category" />
-      <End Role="CategoryDetail" EntitySet="CategoryDetail" />
+      <End Role="Category1" EntitySet="Category" />
     </AssociationSet>
-    <AssociationSet Name="FK_CategoryDetailSuggest_CategoryDetail" Association="Self.FK_CategoryDetailSuggest_CategoryDetail">
-      <End Role="CategoryDetail" EntitySet="CategoryDetail" />
-      <End Role="CategoryDetailSuggest" EntitySet="CategoryDetailSuggest" />
+    <AssociationSet Name="FK_Detail_PcSets_Product" Association="Self.FK_Detail_PcSets_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Detail_PcSets" EntitySet="Detail_PcSets" />
     </AssociationSet>
-    <AssociationSet Name="FK_Invoice_CustomerOrder" Association="Self.FK_Invoice_CustomerOrder">
-      <End Role="CustomerOrder" EntitySet="CustomerOrder" />
-      <End Role="Invoice" EntitySet="Invoice" />
+    <AssociationSet Name="FK_History_User" Association="Self.FK_History_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="History" EntitySet="History" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="Self.FK_InOrder_Detail_InOrder">
+      <End Role="InOrder" EntitySet="InOrder" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_Detail_Product" Association="Self.FK_InOrder_Detail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_User" Association="Self.FK_InOrder_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="InOrder" EntitySet="InOrder" />
     </AssociationSet>
     <AssociationSet Name="FK_Invoice_Detail_Invoice" Association="Self.FK_Invoice_Detail_Invoice">
       <End Role="Invoice" EntitySet="Invoice" />
@@ -429,6 +387,10 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
     </AssociationSet>
+    <AssociationSet Name="FK_Invoice_User" Association="Self.FK_Invoice_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Brand" Association="Self.FK_Product_Brand">
       <End Role="Brand" EntitySet="Brand" />
       <End Role="Product" EntitySet="Product" />
@@ -437,25 +399,13 @@
       <End Role="ProducType" EntitySet="ProducType" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_Promotion1" Association="Self.FK_Product_Promotion1">
-      <End Role="Promotion" EntitySet="Promotion" />
-      <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
     <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="ProductImage" EntitySet="ProductImage" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProducType_Category" Association="Self.FK_ProducType_Category">
+    <AssociationSet Name="FK_ProducType_Category1" Association="Self.FK_ProducType_Category1">
       <End Role="Category" EntitySet="Category" />
       <End Role="ProducType" EntitySet="ProducType" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Warehouse_Product" Association="Self.FK_Warehouse_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="Warehouse" EntitySet="Warehouse" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WarehouseDetail_Warehouse" Association="Self.FK_WarehouseDetail_Warehouse">
-      <End Role="Warehouse" EntitySet="Warehouse" />
-      <End Role="WarehouseDetail" EntitySet="WarehouseDetail" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

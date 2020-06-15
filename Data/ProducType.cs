@@ -21,18 +21,16 @@ namespace Data
         }
     
         public int Id { get; set; }
+        public Nullable<int> Category_id { get; set; }
         public string TypeName { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedTime { get; set; }
         public string Info { get; set; }
-        public Nullable<int> Category_id { get; set; }
         public string Metatitle { get; set; }
     
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
-        public virtual Categoryy Category { get; set; }
     }
 }

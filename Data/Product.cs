@@ -17,38 +17,35 @@ namespace Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Invoice_Detail = new HashSet<Invoice_Detail>();
-            this.ProductImages = new HashSet<ProductImage>();
             this.Detail_PcSets = new HashSet<Detail_PcSets>();
             this.InOrder_Detail = new HashSet<InOrder_Detail>();
+            this.Invoice_Detail = new HashSet<Invoice_Detail>();
+            this.ProductImages = new HashSet<ProductImage>();
         }
     
         public int id { get; set; }
         public int Brand_id { get; set; }
-        public Nullable<int> Promotion_id { get; set; }
+        public int ProductType_id { get; set; }
         public string ProductName { get; set; }
+        public string MetaTitle { get; set; }
         public string Info { get; set; }
         public Nullable<double> Price { get; set; }
+        public Nullable<int> SalePercent { get; set; }
         public Nullable<int> MonthWarranty { get; set; }
         public string Image { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public int ProductType_id { get; set; }
-        public Nullable<int> SalePercent { get; set; }
-        public string MetaTitle { get; set; }
     
-        public virtual Brand Brand { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
-        public virtual ProducType ProducType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detail_PcSets> Detail_PcSets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOrder_Detail> InOrder_Detail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual ProducType ProducType { get; set; }
     }
 }

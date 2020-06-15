@@ -17,30 +17,29 @@ namespace Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Invoices = new HashSet<Invoice>();
             this.Histories = new HashSet<History>();
             this.InOrders = new HashSet<InOrder>();
+            this.Invoices = new HashSet<Invoice>();
         }
     
         public int id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string UserType { get; set; }
+        public string Position { get; set; }
+        public string Address { get; set; }
+        public string PhoneNum { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> DayOfBirth { get; set; }
         public string Image { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public string Address { get; set; }
-        public string PhoneNum { get; set; }
-        public string UserType { get; set; }
-        public string Position { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<History> Histories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOrder> InOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

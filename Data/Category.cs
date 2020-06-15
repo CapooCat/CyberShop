@@ -12,33 +12,30 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Categoryy
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categoryy()
+        public Category()
         {
+            this.Category1 = new HashSet<Category>();
             this.ProducTypes = new HashSet<ProducType>();
-            this.Category1 = new HashSet<Categoryy>();
         }
     
         public int Id { get; set; }
-        public string CategoryName { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public string CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedTime { get; set; }
-        public string Metatitle { get; set; }
         public Nullable<int> category_lv2_id { get; set; }
         public Nullable<int> category_lv3_id { get; set; }
         public string Name { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
+        public string CreateBy { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Metatitle { get; set; }
         public Nullable<int> category_lv1_master_id { get; set; }
         public Nullable<int> category_lv2_master_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProducType> ProducTypes { get; set; }
+        public virtual ICollection<Category> Category1 { get; set; }
+        public virtual Category Category2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Categoryy> Category1 { get; set; }
-        public virtual Categoryy Category2 { get; set; }
+        public virtual ICollection<ProducType> ProducTypes { get; set; }
     }
 }

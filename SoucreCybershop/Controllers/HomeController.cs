@@ -63,7 +63,6 @@ namespace CyberShop.Controllers
                         userSession.TaiKhoan = user.Username;
                         userSession.Image = user.Image;
                         userSession.HoTen = user.Name;
-                        userSession.DateOfBirth = user.DayOfBirth.ToString();
                         Session.Add(CommonConstantUser.USER_SESSION, userSession);
                         return Redirect("/");
                     }
@@ -141,7 +140,6 @@ namespace CyberShop.Controllers
                     userSession.TaiKhoan = userInf.Username;
                     userSession.Image = userInf.Image;
                     userSession.HoTen = userInf.Name;
-                    userSession.DateOfBirth = userInf.DayOfBirth.ToString();
                     Session.Add(CommonConstantUser.USER_SESSION, userSession);
                     return Redirect("/");
                 }

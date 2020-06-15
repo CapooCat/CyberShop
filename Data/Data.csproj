@@ -58,8 +58,7 @@
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CategoriesDao.cs" />
-    <Compile Include="CategoryDetailDao.cs" />
-    <Compile Include="Categoryy.cs">
+    <Compile Include="Category.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomerOrderDao.cs" />

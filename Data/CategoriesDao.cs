@@ -8,9 +8,17 @@ namespace Data
     public class CategoriesDao
     {
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
-        public List<Categoryy> getAllCatgories()
+        public List<Category> getAllCatgories()
         {
-               return data.Categoryies.ToList();
+               return data.Categories.ToList();
+        }
+        public List<Category> getListCategoryLv2(int categoryLv1_id)
+        {
+            return data.Categories.Where(x => x.category_lv1_master_id == categoryLv1_id && x.category_lv2_master_id==null).ToList();
+        }
+        public List<Category> getListCategoryLv3(int categoryLv2_id)
+        {
+            return data.Categories.Where(x => x.category_lv2_master_id == categoryLv2_id).ToList();
         }
     }
 }

@@ -1,109 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ShopPCComponentsModelStoreContainer" CdmEntityContainer="ShopPCComponentsEntities">
-    <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Admin">
-        <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Position" ColumnName="Position" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Brands">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Brand">
-        <MappingFragment StoreEntitySet="Brand">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Info" ColumnName="Info" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Invoices">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice">
-        <MappingFragment StoreEntitySet="Invoice">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
-          <ScalarProperty Name="CustomerOrder_id" ColumnName="CustomerOrder_id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
-          <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
-          <ScalarProperty Name="DeliveryPhoneNum" ColumnName="DeliveryPhoneNum" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Invoice_Detail">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice_Detail">
-        <MappingFragment StoreEntitySet="Invoice_Detail">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Invoice_id" ColumnName="Invoice_id" />
-          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="WarrantyExpires" ColumnName="WarrantyExpires" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Product">
-        <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
-          <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
-          <ScalarProperty Name="ProductType_id" ColumnName="ProductType_id" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
-          <ScalarProperty Name="Promotion_id" ColumnName="Promotion_id" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="Info" ColumnName="Info" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="MonthWarranty" ColumnName="MonthWarranty" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Promotions">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Promotion">
-        <MappingFragment StoreEntitySet="Promotion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ReducedPrice" ColumnName="ReducedPrice" />
-          <ScalarProperty Name="Info" ColumnName="Info" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -112,50 +9,6 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.User">
-        <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DayOfBirth" ColumnName="DayOfBirth" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Warehouses">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Warehouse">
-        <MappingFragment StoreEntitySet="Warehouse">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="WarehouseDetails">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.WarehouseDetail">
-        <MappingFragment StoreEntitySet="WarehouseDetail">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
-          <ScalarProperty Name="Warehouse_id" ColumnName="Warehouse_id" />
-          <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
-          <ScalarProperty Name="AmountImport" ColumnName="AmountImport" />
-          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -169,46 +22,147 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Categoryies">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Categoryy">
+    <EntitySetMapping Name="Detail_PcSets">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Detail_PcSets">
+        <MappingFragment StoreEntitySet="Detail_PcSets">
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="speaker_id" ColumnName="speaker_id" />
+          <ScalarProperty Name="headphone_id" ColumnName="headphone_id" />
+          <ScalarProperty Name="mouse_id" ColumnName="mouse_id" />
+          <ScalarProperty Name="keyboard_id" ColumnName="keyboard_id" />
+          <ScalarProperty Name="monitor_id" ColumnName="monitor_id" />
+          <ScalarProperty Name="cooler_id" ColumnName="cooler_id" />
+          <ScalarProperty Name="power_id" ColumnName="power_id" />
+          <ScalarProperty Name="vga_int" ColumnName="vga_int" />
+          <ScalarProperty Name="ssd_id" ColumnName="ssd_id" />
+          <ScalarProperty Name="hdd_id" ColumnName="hdd_id" />
+          <ScalarProperty Name="ram_id" ColumnName="ram_id" />
+          <ScalarProperty Name="main_id" ColumnName="main_id" />
+          <ScalarProperty Name="cpu_id" ColumnName="cpu_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Histories">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.History">
+        <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="User_tag" ColumnName="User_tag" />
+          <ScalarProperty Name="Warehouse_tag" ColumnName="Warehouse_tag" />
+          <ScalarProperty Name="Invoice_tag" ColumnName="Invoice_tag" />
+          <ScalarProperty Name="Product_tag" ColumnName="Product_tag" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="User_id" ColumnName="User_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InOrders">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder">
+        <MappingFragment StoreEntitySet="InOrder">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="CreateBy_User_id" ColumnName="CreateBy_User_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InOrder_Detail">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder_Detail">
+        <MappingFragment StoreEntitySet="InOrder_Detail">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="InOrder_id" ColumnName="InOrder_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="category_lv2_master_id" ColumnName="category_lv2_master_id" />
+          <ScalarProperty Name="category_lv1_master_id" ColumnName="category_lv1_master_id" />
           <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="category_lv3_id" ColumnName="category_lv3_id" />
+          <ScalarProperty Name="category_lv2_id" ColumnName="category_lv2_id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CategoryDetails">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.CategoryDetail">
-        <MappingFragment StoreEntitySet="CategoryDetail">
+    <EntitySetMapping Name="Invoice_Detail">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice_Detail">
+        <MappingFragment StoreEntitySet="Invoice_Detail">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="WarrantyExpires" ColumnName="WarrantyExpires" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="Invoice_id" ColumnName="Invoice_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="MonthWarranty" ColumnName="MonthWarranty" />
+          <ScalarProperty Name="SalePercent" ColumnName="SalePercent" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
           <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductType_id" ColumnName="ProductType_id" />
+          <ScalarProperty Name="Brand_id" ColumnName="Brand_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Brand">
+        <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="Category_id" ColumnName="Category_id" />
-          <ScalarProperty Name="CateDetailName" ColumnName="CateDetailName" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CategoryDetailSuggests">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.CategoryDetailSuggest">
-        <MappingFragment StoreEntitySet="CategoryDetailSuggest">
-          <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CategoryDetail_id" ColumnName="CategoryDetail_id" />
-          <ScalarProperty Name="SuggestName" ColumnName="SuggestName" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DeliveryPhoneNum" ColumnName="DeliveryPhoneNum" />
+          <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+          <ScalarProperty Name="User_id" ColumnName="User_id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -217,47 +171,30 @@
       <EntityTypeMapping TypeName="ShopPCComponentsModel.ProducType">
         <MappingFragment StoreEntitySet="ProducType">
           <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
-          <ScalarProperty Name="Category_id" ColumnName="Category_id" />
           <ScalarProperty Name="Info" ColumnName="Info" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Category_id" ColumnName="Category_id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CustomerOrders">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.CustomerOrder">
-        <MappingFragment StoreEntitySet="CustomerOrder">
-          <ScalarProperty Name="Coupon_code" ColumnName="Coupon_code" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.User">
+        <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
           <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Coupons">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.Coupon">
-        <MappingFragment StoreEntitySet="Coupon">
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="Money_Discount" ColumnName="Money_Discount" />
-          <ScalarProperty Name="Percent_Discount" ColumnName="Percent_Discount" />
-          <ScalarProperty Name="Coupon_Code" ColumnName="Coupon_Code" />
-          <ScalarProperty Name="Coupon_Name" ColumnName="Coupon_Name" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
