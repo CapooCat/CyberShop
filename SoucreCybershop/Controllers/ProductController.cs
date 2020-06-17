@@ -29,10 +29,11 @@ namespace CyberShop.Controllers
         {
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.Categories
-                     where a.Metatitle == metatitle
+                     from b in data.ProducTypes
+                     where a.Metatitle == metatitle && metatitle.Contains(b.Metatitle)
                      select new CategoryViewModel
                      {
-                         CateName = a.Name,
+                         CateName = b.TypeName,
                          breadcrumb = a.Name
                      }).ToList();
             return View("SpTheoDanhMuc", model);
@@ -149,20 +150,6 @@ namespace CyberShop.Controllers
         //{
         //    return Json(new { data="ok"}, JsonRequestBehavior.AllowGet);
         //}
-        public ActionResult CategoryDetail(string metatitle)
-        {
-            List<CategoryViewModel> model = new List<CategoryViewModel>();
-            model = (from a in data.Categories
-                     where a.Metatitle == metatitle
-                     join b in data.ProducTypes on metatitle equals b.Metatitle
-
-                     select new CategoryViewModel
-                     {
-                         CateName = a.Name,
-                         breadcrumb = b.TypeName
-                     }).Distinct().ToList();
-            return View("SpTheoDanhMuc", model);
-        }
 
         public JsonResult CategoryDetailJSON(string metatitle)
         {
@@ -206,20 +193,6 @@ namespace CyberShop.Controllers
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult CategoryDetailSuggest(string metatitle)
-        {
-            List<CategoryViewModel> model = new List<CategoryViewModel>();
-            model = (from a in data.Categories
-                     where a.Metatitle == metatitle
-                     join b in data.Categories on a.category_lv2_id equals b.Id
-                     join c in data.ProducTypes on b.Metatitle equals c.Metatitle
-                     select new CategoryViewModel
-                     {
-                         CateName = a.Name,
-                         breadcrumb = c.TypeName
-                     }).ToList();
-            return View("SpTheoDanhMuc", model);
         }
 
         public JsonResult CategoryDetailSuggestJSON(string metatitle, string brand)

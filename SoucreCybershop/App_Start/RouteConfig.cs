@@ -69,12 +69,12 @@ namespace CyberShop
             routes.MapRoute(
              name: "ChiTietDanhMuc",
              url: "chi-tiet-danh-muc/{metatitle}",
-             defaults: new { controller = "Product", action = "CategoryDetail", metatitle = UrlParameter.Optional }
+             defaults: new { controller = "Product", action = "Category", metatitle = UrlParameter.Optional }
            );
             routes.MapRoute(
              name: "SanPham",
              url: "san-pham/{metatitle}",
-             defaults: new { controller = "Product", action = "CategoryDetailSuggest", metatitle = UrlParameter.Optional }
+             defaults: new { controller = "Product", action = "Category", metatitle = UrlParameter.Optional }
            );
 
 
