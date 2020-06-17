@@ -90,7 +90,7 @@
                     @Html.TextBoxFor(model => model.Email, new { @type = "text", @placeholder = "Email...", @name = "search", @ng_model = "Email", @required = true, })
                     <span style="color:red" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</span>
                 </h6>
-                <div class="discount">
+                @*<div class="discount">
                     @Html.TextBoxFor(model => model.Discount, new { @type = "text", @placeholder = "Mã giảm giá...",@id="input_cpn" })
                     <div class="tick-mark" hidden id="tickmark">
                         <svg class="checkmark" viewBox="0 0 52 52">
@@ -100,7 +100,7 @@
                     </div>
                     <button id="ConfirmDiscount">Xác nhận</button>
                     <span style="color:red" hidden id="error_cpn">Mã giảm giá không hợp lệ</span>
-                </div>
+                </div>*@
                 <h3 style="text-align: center; margin: 30px;">Phương thức thanh toán</h3>
                 <div class="pay-method" style="text-align: center;">
                     <button id="tt1" class="active" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-wallet"></i>@Html.RadioButtonFor(model => model.Payment,"Thanh toán khi nhận hàng", new { @value = "Thanh toán khi nhận hàng",@checked=true,@style="display:none", })</div>Thanh toán khi nhận hàng</button>
