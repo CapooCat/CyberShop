@@ -27,16 +27,6 @@ namespace CyberShop.Controllers
                 }
                 else
                 {
-                    //Tạo bảng khách hàng đặt sp
-                    CustomerOrderDao ctrDao = new CustomerOrderDao();
-                    var user = new User();
-                    user.Name = model.CustomerName;
-                    user.Address = model.Address;
-                    user.Email = model.Email;
-                    user.PhoneNum = model.PhoneNum;
-                    user.IsDeleted = false;
-                    user.CreateDate = DateTime.Now;
-                    //ctrDao.InsertCustomerOrDer(customerOrder);
                     //tạo hóa đơn
                     InvoiceDao inDao = new InvoiceDao();
                     var invoice = new Invoice();
