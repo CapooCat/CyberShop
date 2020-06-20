@@ -238,3 +238,48 @@
         </div>
     </div>
 </section>
+@section scripts{
+    <script>
+    var ctx = document.getElementById("myChart");
+			ctx.style = "-webkit-tap-highlight-color: transparent;";
+			Chart.defaults.global.defaultFontFamily = 'Oswald';
+			Chart.defaults.global.defaultFontSize = 14;
+			var myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+					datasets: [{ 
+						label: '# of Votes',
+						data: [12, 19, 3, 5, 2, 3],
+						backgroundColor: [
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)'
+						],
+						borderColor: [
+						'rgba(30, 144, 255,1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)'
+						],
+						borderWidth: 2,
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero:true,
+								
+							}
+						}]
+					}
+				}
+			});
+      </script>
+    }
