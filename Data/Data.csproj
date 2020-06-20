@@ -61,7 +61,6 @@
     <Compile Include="Category.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CustomerOrderDao.cs" />
     <Compile Include="Detail_PcSets.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
