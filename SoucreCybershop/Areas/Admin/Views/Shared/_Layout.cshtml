@@ -31,16 +31,16 @@
                     </div>
                     <a class="drop active" onclick='show_more(1);'>Bán hàng</a>
                     <div class="nav-detail" style="visibility: visible;">
-                        <li><button>Xuất hóa đơn</button></li>
+                        <li><button onclick="window.location.href='/Admin/InvoiceOutManager'">Xuất hóa đơn</button></li>
                     </div>
                     <a class="drop active" onclick='show_more(2);'>Tài khoản</a>
                     <div class="nav-detail" style="visibility: visible;">
-                        <li><button>Quản lý tài khoản khách hàng</button></li>
+                        <li><button onclick="window.location.href='/Admin/CustomerManager'">Quản lý tài khoản khách hàng</button></li>
                         <li><button>Quản lý tài khoản admin</button></li>
                     </div>
                     <a class="drop active" onclick='show_more(3);'>Tổng quan</a>
                     <div class="nav-detail" style="visibility: visible;">
-                        <li><button>Thống kê</button></li>
+                        <li><button onclick="window.location.href='/Admin/SummaryManager'">Thống kê</button></li>
                         <li><button>Thu chi</button></li>
                     </div>
                 </div>
@@ -267,5 +267,6 @@
 				document.getElementById("newBar").style.width = scrolled + "%";
 			}
     </script>
+    @RenderSection("scripts", false)
 </body>
 </html>
