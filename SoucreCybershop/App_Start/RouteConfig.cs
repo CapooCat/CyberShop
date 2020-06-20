@@ -94,8 +94,12 @@ namespace CyberShop
              url: "san-pham/{metatitle}/JSON",
              defaults: new { controller = "Product", action = "CategoryDetailSuggestJSON", metatitle = UrlParameter.Optional }
            );
-            
 
+            routes.MapRoute(
+               name: "Admin",
+               url: "{admin}/{controller}/{action}/{id}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+           );
 
             routes.MapRoute(
                 name: "Default",

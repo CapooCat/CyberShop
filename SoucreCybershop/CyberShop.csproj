@@ -288,9 +288,11 @@
     <Content Include="assets\css\font-awesome.min.css" />
     <Content Include="assets\js\jquery-3.4.1.min.js" />
     <Content Include="assets\js\jquery-3.4.1.slim.min.js" />
+    <Content Include="assets\js\jquery.floatThead.min.js" />
     <Content Include="assets\js\kit-fontawesome.js" />
     <Content Include="assets\js\owl.carousel.min.js" />
     <Content Include="assets\js\popper.min.js" />
+    <Content Include="assets\js\tendina.min.js" />
     <Content Include="assets\webfonts\fa-brands-400.svg" />
     <Content Include="assets\webfonts\fa-regular-400.svg" />
     <Content Include="assets\webfonts\fa-solid-900.svg" />
