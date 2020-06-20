@@ -76,6 +76,11 @@ namespace CyberShop
              url: "san-pham/{metatitle}",
              defaults: new { controller = "Product", action = "Category", metatitle = UrlParameter.Optional }
            );
+            routes.MapRoute(
+             name: "ChiTietSanPham",
+             url: "Home/DetailProduct/{id}",
+             defaults: new { controller = "Home", action = "DetailProduct", id = UrlParameter.Optional }
+           );
 
 
 
