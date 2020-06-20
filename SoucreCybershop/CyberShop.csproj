@@ -212,6 +212,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminLoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InvoiceManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InvoiceOutManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WarrantyManagerController.cs" />
     <Compile Include="Common\CommonConstantUser.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserInfo.cs" />
@@ -331,6 +339,15 @@
     <Content Include="assets\webfonts\fa-solid-900.ttf" />
     <Content Include="assets\webfonts\fa-solid-900.woff" />
     <Content Include="assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminLogin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CustomerManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceOutManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\WarrantyManager\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -373,9 +390,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="bin\roslyn\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Cart\" />

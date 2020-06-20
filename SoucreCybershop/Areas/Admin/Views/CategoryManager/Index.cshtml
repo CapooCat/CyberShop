@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" class="admin-content-container">
+    <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-bars" style="margin-right: 10px;"></i>Quản lý danh mục</h3>
+    <div class="row" style="margin: 5px;">
+        <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="Box" style="padding: 0;">
+                <div class="chart-title" style="height: 55px;">Danh mục</div>
+                <div class="admin-table" style="height: 500px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 40%;"><a href="#">Tên danh mục</a></th>
+                                <th style="width: 60%;text-align: center;"><a href="#">Hoạt động</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Máy bộ Cyber Shop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Linh kiện PC</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Màn hình</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Bàn phím</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Chuột + lót chuột</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Tài nghe</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Loa</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Ghế gaming</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="CategoryAdd" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+        </div>
+
+
+        <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="Box" style="padding: 0;">
+                <div class="chart-title" style="height: 55px;">Danh mục - Laptop</div>
+                <div class="admin-table" style="height: 500px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 40%;"><a href="#">Tên danh mục</a></th>
+                                <th style="width: 60%;text-align: center;"><a href="#">Hoạt động</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hãng Laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Hãng RAM Laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Phụ kiện laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Laptop theo giá</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="CategoryAdd" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+        </div>
+
+
+
+        <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="Box" style="padding: 0;">
+                <div class="chart-title" style="height: 55px;">Danh mục - Laptop - Hãng Laptop</div>
+                <div class="admin-table" style="height: 500px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 40%;"><a href="#">Tên danh mục</a></th>
+                                <th style="width: 60%;text-align: center;"><a href="#">Hoạt động</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hãng Laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Hãng RAM Laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Phụ kiện laptop</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>Laptop theo giá</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="CategoryAdd" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+        </div>
+
+
+
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Thêm mới</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                        <div class="col-md-4">
+                            <p>Tên:</p>
+                            <input type="text" placeholder="Nhập tên danh mục...">
+                        </div>
+                        <div class="col-md-4">
+                            <p>Lọc theo loại sản phẩm:</p>
+                            <select>
+                                <option value="">VGA</option>
+                                <option value="">SSD</option>
+                                <option value="">HDD</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Lọc theo hãng sản phẩm:</p>
+                            <input type="text" placeholder="hãng sản phẩm">
+                        </div>
+                        <div class="col-md-4">
+                            <p>Giá tiền dưới:</p>
+                            <input type="text" placeholder="Nhập giá tiền...">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Giá tiền trên:</p>
+                            <input type="text" placeholder="Nhập giá tiền...">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Lọc sản phẩm theo từ khóa:</p>
+                            <input type="text" placeholder="Nhập từ khóa...">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button">Thêm</button>
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cảnh báo !!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn chắc chắn muốn xóa chứ ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button">Xóa</button>
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

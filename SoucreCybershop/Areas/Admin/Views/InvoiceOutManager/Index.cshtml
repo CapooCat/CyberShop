@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content" class="admin-content-container">
+    <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-file-invoice-dollar" style="margin-right: 10px;"></i>Xuất hóa đơn</h3>
+    <div class="row" style="margin: 5px;">
+
+        <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+            <div class="col-md-2">
+                <p>Họ tên khách hàng:</p>
+                <input type="text" placeholder="Nhập Họ tên khách hàng...">
+            </div>
+            <div class="col-md-2">
+                <p>Địa chỉ:</p>
+                <input type="text" placeholder="Nhập địa chỉ...">
+            </div>
+            <div class="col-md-2">
+                <p>Số điện thoại:</p>
+                <input type="text" placeholder="Nhập số điện thoại...">
+            </div>
+            <div class="col-md-2">
+                <p>Email:</p>
+                <input type="text" placeholder="Nhập email...">
+            </div>
+            <div class="col-md-12">
+
+            </div>
+        </div>
+
+
+        <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
+            <button type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+            <button type="button" data-toggle="modal" data-target="#warningModal" class="delete"><i class="fas fa-trash"></i></button>
+        </div>
+
+
+        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="Box" style="padding: 0;">
+                <div class="chart-title" style="height: 55px;">Danh sách sản phẩm trong hóa đơn</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="myBar"></div>
+                </div>
+                <div class="admin-table" id="admin-table-best-sale">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 3%;"><a href="#"></a></th>
+                                <th style="width: 27%;"><a href="#">Tên sản phẩm</a></th>
+                                <th style="width: 20%;"><a href="#">Bảo hành</a></th>
+                                <th style="width: 20%;"><a href="#">Số lượng</a></th>
+                                <th style="width: 20%;"><a href="#">Giá tiền</a></th>
+                                <th style="width: 20%;"><a href="#">Hoạt động</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" value=""></td>
+                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                <td>36 tháng</td>
+                                <td>5</td>
+                                <td>4.150.000đ</td>
+                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" value=""></td>
+                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                <td>36 tháng</td>
+                                <td>5</td>
+                                <td>4.150.000đ</td>
+                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" value=""></td>
+                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                <td>36 tháng</td>
+                                <td>5</td>
+                                <td>4.150.000đ</td>
+                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" value=""></td>
+                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                <td>36 tháng</td>
+                                <td>5</td>
+                                <td>4.150.000đ</td>
+                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" value=""></td>
+                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                <td>36 tháng</td>
+                                <td>5</td>
+                                <td>4.150.000đ</td>
+                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Thêm mới</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                        <div class="col-md-4">
+                            <p>Tìm kiếm sản phẩm:</p>
+                            <input type="text" placeholder="Nhập từ khóa...">
+                        </div>
+                        <div class="col-md-4">
+                            <p>Lọc theo loại sản phẩm:</p>
+                            <select>
+                                <option value="">VGA</option>
+                                <option value="">SSD</option>
+                                <option value="">HDD</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Số lượng cần mua:</p>
+                            <input type="text" placeholder="Nhập số lượng...">
+                        </div>
+                        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <p>Danh sách sản phẩm:</p>
+                            <div class="Box" style="padding: 0;margin-top: 10px;">
+                                <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 40%;"><a href="#">Tên sản phẩm</a></th>
+                                                <th style="width: 10%;"><a href="#">Loại SP</a></th>
+                                                <th style="width: 15%;"><a href="#">SL hàng tồn</a></th>
+                                                <th style="width: 10%;"><a href="#">Bảo hành</a></th>
+                                                <th style="width: 30%;"><a href="#">Giá tiền</a></th>
+                                                <th style="width: 5%;text-align: center;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                <td>VGA</td>
+                                                <td>50</td>
+                                                <td>36 tháng</td>
+                                                <td>4.150.000đ</td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                <td>VGA</td>
+                                                <td>50</td>
+                                                <td>36 tháng</td>
+                                                <td>4.150.000đ</td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                <td>VGA</td>
+                                                <td>50</td>
+                                                <td>36 tháng</td>
+                                                <td>4.150.000đ</td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                <td>VGA</td>
+                                                <td>50</td>
+                                                <td>36 tháng</td>
+                                                <td>4.150.000đ</td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cảnh báo !!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn chắc chắn muốn xóa chứ ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button">Xóa</button>
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="text-align: center; margin-top: 15px;margin-bottom: 15px;font-size: 20px;">Tổng tiền: 8.300.000đ</div>
+    <div class="col-md-12 product-action" style="text-align: center">
+        <button type="button" style="width: 200px;height: 60px;">Xuất hóa đơn</button>
+    </div>
+</section>
+

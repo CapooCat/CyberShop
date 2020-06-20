@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <title></title>
+</head>
+<body onresize="resize()">
+    <!-- Header -->
+
+    <header>
+        <button onclick="topFunction();return false;" id="myBtn" class="GoTop"><i class="fas fa-arrow-up"></i></button>
+
+        <div class="wrapper">
+            <div id="logo" class="menu-logo no-select"><span><i class="fas fa-dragon"></i> Cyber</span>shop</div>
+            <div class="topnav" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);padding: 12px 16px;">
+
+                <div id="sidebar" class="sidenav" style="visibility: visible;">
+                    <a class="drop active" onclick='show_more(0);'>Quản lý</a>
+                    <div class="nav-detail" style="visibility: visible;">
+                        <li><button>Quản lý sản phẩm</button></li>
+                        <li><button>Quản lý hóa đơn</button></li>
+                        <li><button>Quản lý danh mục</button></li>
+                        <li><button>Quản lý bảo hành</button></li>
+                    </div>
+                    <a class="drop active" onclick='show_more(1);'>Bán hàng</a>
+                    <div class="nav-detail" style="visibility: visible;">
+                        <li><button>Xuất hóa đơn</button></li>
+                    </div>
+                    <a class="drop active" onclick='show_more(2);'>Tài khoản</a>
+                    <div class="nav-detail" style="visibility: visible;">
+                        <li><button>Quản lý tài khoản khách hàng</button></li>
+                        <li><button>Quản lý tài khoản admin</button></li>
+                    </div>
+                    <a class="drop active" onclick='show_more(3);'>Tổng quan</a>
+                    <div class="nav-detail" style="visibility: visible;">
+                        <li><button>Thống kê</button></li>
+                        <li><button>Thu chi</button></li>
+                    </div>
+                </div>
+                <div id="Push" class="push">
+                    <a onclick="MenuClick();" style="cursor: pointer;"><i class="fas fa-bars" style="font-size: 22px;"></i></a>
+                    <div class="user" style="float: right;">
+                        <a style="float: right;" href="Login.html"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>Trần Thái Đạt</a>
+                        <div class="dropdown-user" style="right: 10px;">
+                            <a href="/Home/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+                        </div>
+                    </div>
+                    <div class="notification">
+                        <a style="float: right;border-right: 2px solid #DCDCDC" href="Login.html"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> 5 </span>Thông báo</a>
+                        <div class="dropdown-notification">
+                            <div class="wall-background no-select">Thông báo</div>
+                            <div class="unread-notification no-select">Có 5 thông báo mới</div>
+                            <div class="notification-content">
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-archive"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">bán hàng<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có khách yêu cầu giao hàng</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-archive"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">bán hàng<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có khách yêu cầu giao hàng</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-archive"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">bán hàng<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có khách yêu cầu giao hàng</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-archive"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">bán hàng<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có khách yêu cầu giao hàng</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-archive"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">bán hàng<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có khách yêu cầu giao hàng</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history">
+                        <a style="float: right;border-right: 2px solid #DCDCDC" href="Login.html"><i class="fas fa-history" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> 5 </span>Lịch sử quản lý</a>
+                        <div class="dropdown-history">
+                            <div class="wall-background no-select">Lịch sử quản lý</div>
+                            <div class="unread-notification no-select">Có 5 thay đổi gần đây</div>
+                            <div class="notification-content">
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-truck-loading"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">quản lý sản phẩm<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có sản phẩm mới được thêm vào</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-bars"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">quản lý danh mục<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">có danh mục mới được thêm vào</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-clipboard-list"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">quản lý hóa đơn<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">thông tin hóa đơn #HD đã thay đổi</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-tools"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">quản lý bảo hành<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">Sản phẩm ABC trong hóa đơn #HD đã được gửi đi bảo hành</div>
+                                </a>
+                                <a class="notification-item" href="#">
+                                    <div class="notification-icon"><i class="fas fa-users"></i></div>
+                                    <div style="text-align: left;margin-left: 60px;color: #1E90FF">quản lý khách hàng<span class="Time">6/17/2020</span></div>
+                                    <div class="notification-info">Thông tin tài khoản khách hàng ABC đã chỉnh sửa</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </header>
+    @*------CONTENT-----*@
+    @RenderBody()
+    @*------END--CONTENT-----*@
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://unpkg.com/sticky-table-headers"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script>
+				DropdownContent = document.getElementsByClassName("nav-detail");
+				Dropdown = document.getElementsByClassName("drop");
+				Side = document.getElementById("sidebar");
+				Content = document.getElementById("content");
+				Logo = document.getElementById("logo");
+				Push = document.getElementById("Push");
+				Table = document.getElementById("admin-table-best-sale");
+				TableNew = document.getElementById("admin-table-new-customers");
+
+
+				var height = [];
+				for(i = 0; i < Dropdown.length; i++)
+				{
+					height.push(DropdownContent[i].clientHeight);
+				}
+
+				function tableFixHead (e) {
+					const el = e.target,
+					sT = el.scrollTop;
+					el.querySelectorAll("thead th").forEach(th =>
+						th.style.transform = `translateY(${sT}px)`
+						);
+				}
+				document.querySelectorAll(".admin-table").forEach(el =>
+					el.addEventListener("scroll", tableFixHead)
+					);
+
+
+				$(document).ready(function() {
+
+					});
+
+        function upload() {
+          $('#myFile').click();
+        }
+
+
+
+				var mybutton = document.getElementById("myBtn");
+				window.onscroll = function () { scrollFunction() };
+
+				function scrollFunction() {
+					if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+						mybutton.style.display = "block";
+					} else {
+						mybutton.style.display = "none";
+					}
+				}
+				function topFunction() {
+					window.scroll({
+						top: 0,
+						behavior: 'smooth'
+					})
+				}
+
+			function MenuClick() {
+				if(Side.style.visibility == 'visible')
+				{
+					for(i = 0; i < Dropdown.length; i++) {
+						Dropdown[i].style.width = 0;
+						Dropdown[i].style.opacity = 0;
+						DropdownContent[i].style.width = 0;
+						DropdownContent[i].style.opacity = 0;
+					}
+					Side.style.width = 0;
+					Side.style.opacity = 0;
+					Side.style.visibility = 'hidden';
+					Content.style.marginLeft = 0;
+					Logo.style.width = 0;
+					Logo.style.opacity = 0;
+					Logo.style.fontSize = 0;
+					Push.style.marginLeft = '-15px';
+				}
+				else
+				{
+					for(i = 0; i < Dropdown.length; i++) {
+						Dropdown[i].style.width = '95%';
+						Dropdown[i].style.opacity = 1;
+						DropdownContent[i].style.width = '95%';
+						DropdownContent[i].style.opacity = 1;
+					}
+
+					Side.style.width = '300px';
+					Side.style.opacity = 1;
+					Side.style.visibility = 'visible';
+					Content.style.marginLeft = '300px';
+					Logo.style.width = '300px';
+					Logo.style.opacity = 1;
+					Logo.style.fontSize = '30px';
+					Push.style.marginLeft = '285px';
+				}
+			}
+
+			function show_more(num) {
+				if(DropdownContent[num].style.visibility == 'visible')
+				{
+					Dropdown[num].classList.remove('active');
+					DropdownContent[num].style.opacity = 0;
+					DropdownContent[num].style.height = '0px';
+    				DropdownContent[num].style.padding = '0px';
+    				DropdownContent[num].style.visibility = 'hidden';
+				}
+				else {
+					Dropdown[num].classList.add('active');
+					DropdownContent[num].style.opacity = 1;
+					DropdownContent[num].style.height = height[num] + 'px';
+					DropdownContent[num].style.padding = '10px 0px 10px 0px';
+					DropdownContent[num].style.visibility = 'visible';
+				}
+			}
+
+
+			Table.onscroll = function() {myFunction()};
+
+			function myFunction() {
+				var winScroll = Table.scrollTop || Table.scrollTop;
+				var height = Table.scrollHeight - Table.clientHeight;
+				var scrolled = (winScroll / height) * 100;
+				document.getElementById("myBar").style.width = scrolled + "%";
+			}
+
+			TableNew.onscroll = function() {myFunctionNew()};
+
+			function myFunctionNew() {
+				var winScroll = TableNew.scrollTop || TableNew.scrollTop;
+				var height = TableNew.scrollHeight - TableNew.clientHeight;
+				var scrolled = (winScroll / height) * 100;
+				document.getElementById("newBar").style.width = scrolled + "%";
+			}
+    </script>
+</body>
+</html>
