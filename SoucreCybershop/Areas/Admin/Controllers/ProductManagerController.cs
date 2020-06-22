@@ -9,6 +9,7 @@ namespace CyberShop.Areas.Admin.Controllers
     public class ProductManagerController : Controller
     {
         // GET: Admin/ProductManager
+        [Authorize]
         public ActionResult Index()
         {
             return View();

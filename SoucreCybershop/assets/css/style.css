@@ -2097,7 +2097,7 @@ canvas{
   position: fixed;
   z-index: 9999;
   width: 350px;
-  height: 450px;
+  height: auto;
   background: #fff;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;

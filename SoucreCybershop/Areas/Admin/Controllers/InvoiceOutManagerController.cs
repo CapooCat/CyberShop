@@ -9,6 +9,7 @@ namespace CyberShop.Areas.Admin.Controllers
     public class InvoiceOutManagerController : Controller
     {
         // GET: Admin/InvoiceOutManager
+        [Authorize]
         public ActionResult Index()
         {
             return View();

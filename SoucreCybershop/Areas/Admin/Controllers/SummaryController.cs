@@ -9,6 +9,7 @@ namespace CyberShop.Areas.Admin.Controllers
     public class SummaryController : Controller
     {
         // GET: Admin/Summary
+        [Authorize]
         public ActionResult Index()
         {
             return View();

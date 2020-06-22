@@ -11,16 +11,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/fontawesome.css">
-    <title></title>
+    <title>Login</title>
+    <style>
+        .err {
+            color:red;
+            text-align:center;
+        }
+        ul{
+            list-style-type:none;
+        }
+    </style>
 </head>
 <body>
     <div>
         <div id="logo" class="menu-logo no-select" style="z-index: 9999;position: fixed;background: rgba(0,0,0,0.0);transition: none;text-align: left;margin-left: 15px;margin-top: 5px;"><span><i class="fas fa-dragon"></i> Cyber</span>shop</div>
         <div class="login-admin">
             <div class="login-admin-title">Đăng nhập</div>
-            <ul style="color:red">
+            <div class="err">
             @Html.ValidationSummary(false, "", "alert alert-danger")
-            </ul>
+            </div>
             @using (Html.BeginForm("Index", "AdminLogin", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
             {
                 <p te>Tên đăng nhập:</p>
