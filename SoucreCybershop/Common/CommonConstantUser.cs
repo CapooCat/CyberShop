@@ -10,5 +10,6 @@ namespace CyberShop.Common
         public static string USER_SESSION = "USER_SESSION";
         public static string URL_REFERRER = "URL_REFERRER";
         public static string CART_SESSION = "CART_SESSION";
+        public static string ADMIN_SESSION = "ADMIN_SESSION";
     }
 }

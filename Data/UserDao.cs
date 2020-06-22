@@ -21,6 +21,18 @@ namespace Data
                 return false;
             }
         }
+        public bool IsAdmin(string tk)
+        {
+            var res = data.Users.Where(x => x.Username == tk).First().UserType;
+            if (res == "admin")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public bool KTEmail(string email)
         {
             var res = data.Users.Where(x => x.Username == email).Count();

@@ -220,6 +220,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\SummaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\WarrantyManagerController.cs" />
+    <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Common\CommonConstantUser.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserInfo.cs" />
@@ -392,7 +393,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="bin\roslyn\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\Cart\" />
