@@ -281,6 +281,12 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
             $window.location.href = url;
         }
     }
+    //Lấy list Catgory
+    $scope.getCatList = function () {
+        $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
+            $scope.catList = response.data;
+        });
+    }
 
     //$scope.discount_price = 0;
     //var btn_confirm = document.getElementById("ConfirmDiscount");
