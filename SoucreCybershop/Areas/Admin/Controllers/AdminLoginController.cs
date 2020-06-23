@@ -10,6 +10,7 @@ using CyberShop.Common;
 using System.Web.Security;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
+using System.Threading;
 
 namespace CyberShop.Areas.Admin.Controllers
 {
@@ -40,6 +41,8 @@ namespace CyberShop.Areas.Admin.Controllers
 
                     HttpContext.GetOwinContext().Authentication.SignIn(
                        new AuthenticationProperties { IsPersistent = false }, ident);
+                    var claimsPrincipal = new ClaimsPrincipal(ident);
+                    Thread.CurrentPrincipal = claimsPrincipal;
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {

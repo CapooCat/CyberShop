@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+    var name = identity.Claims.Where(x => x.Type == ClaimTypes.Name).Select(x => x.Value).SingleOrDefault();
+}
+@using System.Security.Claims;
+@using Microsoft.AspNet.Identity;
+@using System.Threading;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -47,13 +54,13 @@
                 <div id="Push" class="push">
                     <a onclick="MenuClick();" style="cursor: pointer;"><i class="fas fa-bars" style="font-size: 22px;"></i></a>
                     <div class="user" style="float: right;">
-                        <a style="float: right;" href="Login.html"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>Trần Thái Đạt</a>
+                        <a style="float: right;" href="#"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@name</a>
                         <div class="dropdown-user" style="right: 10px;">
                             <a href="/Admin/AdminLogin/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
                         </div>
                     </div>
                     <div class="notification">
-                        <a style="float: right;border-right: 2px solid #DCDCDC" href="Login.html"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> 5 </span>Thông báo</a>
+                        <a style="float: right;border-right: 2px solid #DCDCDC" href="#"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> 5 </span>Thông báo</a>
                         <div class="dropdown-notification">
                             <div class="wall-background no-select">Thông báo</div>
                             <div class="unread-notification no-select">Có 5 thông báo mới</div>
@@ -88,7 +95,7 @@
                     </div>
 
                     <div class="history">
-                        <a style="float: right;border-right: 2px solid #DCDCDC" href="Login.html"><i class="fas fa-history" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> 5 </span>Lịch sử quản lý</a>
+                        <a style="float: right;border-right: 2px solid #DCDCDC" href="#"><i class="fas fa-history" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> 5 </span>Lịch sử quản lý</a>
                         <div class="dropdown-history">
                             <div class="wall-background no-select">Lịch sử quản lý</div>
                             <div class="unread-notification no-select">Có 5 thay đổi gần đây</div>

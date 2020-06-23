@@ -43,20 +43,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Hãng Laptop</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Hãng RAM Laptop</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Phụ kiện laptop</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Laptop theo giá</td>
+                            <tr ng-repeat="item in catListLv2">
+                                <td>{{item.Name}}</td>
                                 <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
                             </tr>
                         </tbody>
