@@ -21,7 +21,7 @@
                         <tbody>
                             <tr ng-repeat="item in catList">
                                 <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button class="look" ng-click="DetailCateLv1(item.Id)"><i class="fas fa-bars"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -33,7 +33,7 @@
 
         <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
-                <div class="chart-title" style="height: 55px;">Danh mục - Laptop</div>
+                <div class="chart-title" style="height: 55px;">Danh mục - {{CateNameLv1}}</div>
                 <div class="admin-table" style="height: 500px;">
                     <table>
                         <thead>
@@ -45,7 +45,7 @@
                         <tbody>
                             <tr ng-repeat="item in catListLv2">
                                 <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="look"><i class="fas fa-bars"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button class="look" ng-click="DetailCateLv2(item.category_lv2_id)"><i class="fas fa-bars"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -58,7 +58,7 @@
 
         <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
-                <div class="chart-title" style="height: 55px;">Danh mục - Laptop - Hãng Laptop</div>
+                <div class="chart-title" style="height: 55px;">Danh mục - {{CateNameLv1}} - {{CateNameLv2}}</div>
                 <div class="admin-table" style="height: 500px;">
                     <table>
                         <thead>
@@ -68,21 +68,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Hãng Laptop</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Hãng RAM Laptop</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Phụ kiện laptop</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Laptop theo giá</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                            <tr ng-repeat="item in catListLv3">
+                                <td>{{item.Name}}</td>
+                                <td class="table-product-action" style="text-align: center;"><button class="look"><i class="fas fa-bars"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
