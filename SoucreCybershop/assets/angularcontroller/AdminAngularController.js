@@ -77,7 +77,7 @@ app.controller('MyAdminController', function ($scope, $http) {
         var CategoryName = document.getElementById("inp_CategoryName").value;
         var CateKeyName = document.getElementById("inp_CategoryKey").value;
         if (CategoryName == null || CateKeyName == null) {
-
+            alert("Không được để trống");
         }
         else
         {
@@ -90,9 +90,39 @@ app.controller('MyAdminController', function ($scope, $http) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                alert("Thêm thành công");
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                alert("Thêm thất bại");
+                console.log(response);
+            });
+        }
+    }
+    $scope.AddCategoryLv2 = function () {
+        var e = document.getElementById("slc_lv1");
+        var CategoryIdLv1 = e.options[e.selectedIndex].value;
+        var CategoryNameLv2 = document.getElementById("inp_CategoryNameLv2").value;
+        var MetatitleLv2 = document.getElementById("inp_CategoryKeyLv2").value;
+        if (CategoryNameLv2 == null || MetatitleLv2 == null) {
+            alert("Không được để trống");
+        }
+        else {
+            $http({
+                url: '/Admin/CategoryManager/AddCategoryLv2',
+                method: "POST",
+                data: {
+                    category_lv1_master_id: CategoryIdLv1,
+                    Name: CategoryNameLv2,
+                    Metatitle: MetatitleLv2
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                alert("Thêm thành công");
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                alert("Thêm thất bại");
                 console.log(response);
             });
         }
