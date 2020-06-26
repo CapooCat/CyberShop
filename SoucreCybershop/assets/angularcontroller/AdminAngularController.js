@@ -73,4 +73,28 @@ app.controller('MyAdminController', function ($scope, $http) {
             $scope.loading = false;
         });
     }
+    $scope.AddCategory = function () {
+        var CategoryName = document.getElementById("inp_CategoryName").value;
+        var CateKeyName = document.getElementById("inp_CategoryKey").value;
+        if (CategoryName == null || CateKeyName == null) {
+
+        }
+        else
+        {
+            $http({
+                url: '/Admin/CategoryManager/AddCategory',
+                method: "POST",
+                data: {
+                    Name: CategoryName,
+                    Metatitle:CateKeyName
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                console.log(response);
+            });
+        }
+    }
 });

@@ -159,5 +159,19 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult AddCategory(CategoryManagerViewModel model)
+        {
+            var cateDao = new CategoriesDao();
+            var cateLv1 = new Category();
+            cateLv1.Name = model.Name;
+            cateLv1.Metatitle = model.Metatitle;
+            cateLv1.IsDeleted = false;
+            cateLv1.CreateDate = DateTime.Now;
+            cateLv1.CreateBy = "Admin";
+            if (cateDao.InsertCategoryLv1(cateLv1))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet);}
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
     }
 }

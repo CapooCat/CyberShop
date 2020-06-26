@@ -20,5 +20,15 @@ namespace Data
         {
             return data.Categories.Where(x => x.category_lv2_master_id == categoryLv2_id).ToList();
         }
+        public bool InsertCategoryLv1(Category entity)
+        {
+            if (entity != null)
+            {
+                data.Categories.Add(entity);
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }
