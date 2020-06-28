@@ -318,6 +318,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="obj\Debug\CyberShop.csprojResolveAssemblyReference.cache" />

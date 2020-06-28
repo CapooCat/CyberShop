@@ -340,6 +340,19 @@ button:focus {
   content: "";
 }
 
+.dropdown-search {
+  visibility: hidden;
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 500px;
+}
+
+.S-Price {
+  float: right;
+  color: #1E90FF;
+}
+
 .container {
   width: 100%;
   padding-right: 15px;
