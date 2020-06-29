@@ -5,6 +5,8 @@
     ViewBag.Title ="Category Manager";
 
     var catListLv1 = new CategoriesDao().getAllCatgories();
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
 }
 @using Data;
 <section id="content" class="admin-content-container">
@@ -23,8 +25,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in catList">
-                                <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="look" ng-click="DetailCateLv1(item.Id)"><i class="fas fa-bars"></i></button><button data-toggle="modal" data-target="#myModal2"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv1(item.Id)">{{item.Name}}</a></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal2"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -47,8 +49,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in catListLv2">
-                                <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="look" ng-click="DetailCateLv2(item.category_lv2_id)"><i class="fas fa-bars"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv2(item.category_lv2_id)">{{item.Name}}</a></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -73,7 +75,7 @@
                         <tbody>
                             <tr ng-repeat="item in catListLv3">
                                 <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button class="look"><i class="fas fa-bars"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash" ng-click="DeleteCategory(item.Id)"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -98,11 +100,39 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tên:</p>
-                            <input type="text" placeholder="Nhập tên danh mục..." id="inp_CategoryName">
+                            <input type="text" placeholder="Nhập tên danh mục..." id="inp_cateNameLv1">
                         </div>
                         <div class="col-md-4">
-                            <p>Từ khóa:</p>
-                            <input type="text" placeholder="Từ khóa danh mục..." id="inp_CategoryKey">
+                            <p>Lọc theo loại sản phẩm:</p>
+                            <select id="sl_prdTypeLv1">
+                                <option value="">Chọn loại sản phẩm</option>
+                                @foreach (var item in prdTypeList)
+                                {
+                                    <option value="@item.Metatitle">@item.TypeName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Lọc theo hãng sản phẩm:</p>
+                            <select id="sl_brandNameLv1">
+                                <option value="">Chọn hãng sản phẩm</option>
+                                @foreach (var item in brandList)
+                                {
+                                    <option value="@item.Metatitle">@item.BrandName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Giá tiền dưới: (triệu)</p>
+                            <input type="text" placeholder="Nhập giá tiền..." id="inp_lowPrice">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Giá tiền trên: (triệu)</p>
+                            <input type="text" placeholder="Nhập giá tiền..." id="inp_highPrice">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;" id="inp_productKw">
+                            <p>Lọc sản phẩm theo từ khóa:</p>
+                            <input type="text" placeholder="Nhập từ khóa...">
                         </div>
                     </div>
 

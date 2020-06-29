@@ -74,10 +74,20 @@ app.controller('MyAdminController', function ($scope, $http) {
         });
     }
     $scope.AddCategory = function () {
-        var CategoryName = document.getElementById("inp_CategoryName").value;
-        var CateKeyName = document.getElementById("inp_CategoryKey").value;
-        if (CategoryName == null || CateKeyName == null) {
+        var CategoryName = document.getElementById("inp_cateNameLv1").value;
+        var a = document.getElementById("sl_prdTypeLv1");
+        var productTypeKW = a.options[a.selectedIndex].value;
+        var b = document.getElementById("sl_brandNameLv1");
+        var brandKW = b.options[b.selectedIndex].value;
+        var lowPrice = document.getElementById("inp_lowPrice").value;
+        var highPrice = document.getElementById("inp_highPrice").value;
+        var productKW = document.getElementById("inp_productKw").value;
+        if (CategoryName == null || productTypeKW == "") {
             alert("Không được để trống");
+        }
+        else if ((CategoryName != null && productTypeKW != "" && lowPrice == null) || (CategoryName != null && productTypeKW != "" && highPrice == null))
+        {
+            alert("Không được để trống ngày");
         }
         else
         {
@@ -86,7 +96,11 @@ app.controller('MyAdminController', function ($scope, $http) {
                 method: "POST",
                 data: {
                     Name: CategoryName,
-                    Metatitle:CateKeyName
+                    ProductTypeKW: productTypeKW,
+                    BrandKW: brandKW,
+                    LowPrice: lowPrice,
+                    HighPrice: highPrice,
+                    ProductKW: productKW
                 }
             }).then(function onSuccess(response) {
                 // Handle success

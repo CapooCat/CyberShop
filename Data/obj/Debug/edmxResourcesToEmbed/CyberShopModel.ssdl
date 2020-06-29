@@ -12,6 +12,7 @@
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="CreateBy" Type="nchar" MaxLength="30" />
     <Property Name="CreateTime" Type="date" />
+    <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Category">
     <Key>

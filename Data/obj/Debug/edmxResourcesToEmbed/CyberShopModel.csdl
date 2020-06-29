@@ -297,6 +297,7 @@
     <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
     <Property Name="CreateTime" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_Brand" FromRole="Brand" ToRole="Product" />
+    <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Product_Brand">
     <End Type="ShopPCComponentsModel.Brand" Role="Brand" Multiplicity="1" />

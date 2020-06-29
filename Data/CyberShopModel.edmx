@@ -17,6 +17,7 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreateBy" Type="nchar" MaxLength="30" />
           <Property Name="CreateTime" Type="date" />
+          <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -714,6 +715,7 @@
           <Property Name="CreateBy" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Products" Relationship="ShopPCComponentsModel.FK_Product_Brand" FromRole="Brand" ToRole="Product" />
+          <Property Name="Metatitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Product_Brand">
           <End Type="ShopPCComponentsModel.Brand" Role="Brand" Multiplicity="1" />
@@ -996,6 +998,7 @@
           <EntitySetMapping Name="Brands">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Brand">
               <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

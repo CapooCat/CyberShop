@@ -140,6 +140,7 @@
     <EntitySetMapping Name="Brands">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Brand">
         <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
