@@ -19,19 +19,20 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnCategory()
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x=>x.category_lv2_id==null && x.category_lv3_id==null).Select(x => new CategoryManagerViewModel {
+            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null).Select(x => new CategoryManagerViewModel
+            {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
                 category_lv3_id = x.category_lv3_id,
                 Name = x.Name,
                 IsDeleted = x.IsDeleted,
-                CreateBy=x.CreateBy,
-                CreateDate=x.CreateDate,
-                Metatitle=x.Metatitle,
-                category_lv1_master_id=x.category_lv1_master_id,
-                category_lv2_master_id=x.category_lv2_master_id
+                CreateBy = x.CreateBy,
+                CreateDate = x.CreateDate,
+                Metatitle = x.Metatitle,
+                category_lv1_master_id = x.category_lv1_master_id,
+                category_lv2_master_id = x.category_lv2_master_id
             }).ToList();
-                  
+
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {
@@ -87,7 +88,7 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
-         public JsonResult ReturnCategoryLv3(int id) //category_id_lv2
+        public JsonResult ReturnCategoryLv3(int id) //category_id_lv2
         {
             var model = new List<CategoryManagerViewModel>();
             model = data.Categories.Where(x => x.category_lv2_master_id == id).Select(x => new CategoryManagerViewModel
@@ -126,7 +127,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnNameCategory(int id) //category_id_lv1
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null && x.Id==id).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null && x.Id == id).Select(x => new CategoryManagerViewModel
             {
                 Name = x.Name,
             }).ToList();
@@ -166,7 +167,7 @@ namespace CyberShop.Areas.Admin.Controllers
             var cateLv1 = new Category();
             cateLv1.Name = model.Name;
             cateLv1.Metatitle = model.ProductTypeKW;
-            if(!String.IsNullOrEmpty(model.BrandKW))
+            if (!String.IsNullOrEmpty(model.BrandKW))
             {
                 cateLv1.Metatitle = cateLv1.Metatitle + "-" + model.BrandKW;
             }
@@ -176,13 +177,13 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             if (model.LowPrice != null && model.HighPrice != null)
             {
-                cateLv1.Metatitle = cateLv1.Metatitle + "-" + "tu-"+model.LowPrice+"-den-"+model.HighPrice+"-trieu";
+                cateLv1.Metatitle = cateLv1.Metatitle + "-" + "tu-" + model.LowPrice + "-den-" + model.HighPrice + "-trieu";
             }
             cateLv1.IsDeleted = false;
             cateLv1.CreateDate = DateTime.Now;
             cateLv1.CreateBy = "Admin";
             if (cateDao.InsertCategoryLv1(cateLv1))
-            { return Json(new { success = true }, JsonRequestBehavior.AllowGet);}
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
         [HttpPost]
@@ -206,10 +207,10 @@ namespace CyberShop.Areas.Admin.Controllers
                 cateLv2.Metatitle = cateLv2.Metatitle + "-" + "tu-" + model.LowPrice + "-den-" + model.HighPrice + "-trieu";
             }
             cateLv2.category_lv1_master_id = model.category_lv1_master_id;
-            cateLv2.category_lv2_id =catIdLv2+1;
+            cateLv2.category_lv2_id = catIdLv2 + 1;
             cateLv2.IsDeleted = false;
             cateLv2.CreateDate = DateTime.Now;
-            cateLv2.CreateBy = "Admin"; 
+            cateLv2.CreateBy = "Admin";
             if (cateDao.InsertCategoryLv1(cateLv2))
             { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
@@ -224,13 +225,13 @@ namespace CyberShop.Areas.Admin.Controllers
                 ReturnData.Add(new Brand
                 {
                     Id = item.Id,
-                    BrandName=item.BrandName,
-                    Address=item.Address,
-                    PhoneNumber=item.PhoneNumber,
-                    Info=item.Info,
-                    IsDeleted=item.IsDeleted,
-                    CreateBy=item.CreateBy,
-                    CreateTime=item.CreateTime
+                    BrandName = item.BrandName,
+                    Address = item.Address,
+                    PhoneNumber = item.PhoneNumber,
+                    Info = item.Info,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateTime = item.CreateTime
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
