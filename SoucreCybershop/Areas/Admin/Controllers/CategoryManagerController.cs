@@ -192,7 +192,19 @@ namespace CyberShop.Areas.Admin.Controllers
             var cateLv2 = new Category();
             var catIdLv2 = data.Categories.Where(x => x.category_lv3_id == null && x.category_lv2_master_id == null).OrderByDescending(x => x.category_lv2_id).First().category_lv2_id;
             cateLv2.Name = model.Name;
-            cateLv2.Metatitle = model.Metatitle;
+            cateLv2.Metatitle = model.ProductTypeKW;
+            if (!String.IsNullOrEmpty(model.BrandKW))
+            {
+                cateLv2.Metatitle = cateLv2.Metatitle + "-" + model.BrandKW;
+            }
+            if (!String.IsNullOrEmpty(model.ProductKW))
+            {
+                cateLv2.Metatitle = cateLv2.Metatitle + "-" + model.ProductKW;
+            }
+            if (model.LowPrice != null && model.HighPrice != null)
+            {
+                cateLv2.Metatitle = cateLv2.Metatitle + "-" + "tu-" + model.LowPrice + "-den-" + model.HighPrice + "-trieu";
+            }
             cateLv2.category_lv1_master_id = model.category_lv1_master_id;
             cateLv2.category_lv2_id =catIdLv2+1;
             cateLv2.IsDeleted = false;

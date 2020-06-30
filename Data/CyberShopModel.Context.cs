@@ -35,8 +35,8 @@ namespace Data
         public virtual DbSet<Invoice_Detail> Invoice_Detail { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<ProducType> ProducTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
     }
 }

@@ -32,12 +32,18 @@ namespace CyberShop.Controllers
                     var invoice = new Invoice();
                     var user_session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
                     if (Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
-                    { invoice.User_id = user_session.Id; }
-                    else { invoice.User_id = null; }
+                    {
+                        invoice.User_id = user_session.Id;
+                    }
+                    else
+                    {
+                        invoice.User_id = null;
+                        invoice.CustomerName = model.CustomerName;
+                    }
                     invoice.PurchaseDate = DateTime.Now;
                     invoice.DeliveryAddress = model.Address + " " + model.City;
                     invoice.DeliveryPhoneNum = model.PhoneNum;
-                    invoice.Status = false;
+                    invoice.Status = "Đã hoàn thành";
                     invoice.IsDeleted = false;
                     invoice.CreateBy = "Admin";
                     invoice.CreateDate = DateTime.Now;

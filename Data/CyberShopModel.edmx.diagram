@@ -23,14 +23,14 @@
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProductImage_Product" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Brand" Width="1.5" PointX="0.75" PointY="5.625" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Brand" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice" Width="1.5" PointX="3" PointY="11.125" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.ProducType" Width="1.5" PointX="11.875" PointY="14.125" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProducType_Category1" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_ProducType" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.User" Width="1.5" PointX="0.75" PointY="14.625" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_History_User" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_User" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice" Width="1.5" PointX="3" PointY="10.875" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_User" />
       </Diagram>
     </edmx:Diagrams>

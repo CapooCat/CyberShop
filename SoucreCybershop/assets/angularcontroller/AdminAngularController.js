@@ -114,11 +114,17 @@ app.controller('MyAdminController', function ($scope, $http) {
         }
     }
     $scope.AddCategoryLv2 = function () {
-        var e = document.getElementById("slc_lv1");
+        var e = document.getElementById("slc_catelv1");
         var CategoryIdLv1 = e.options[e.selectedIndex].value;
-        var CategoryNameLv2 = document.getElementById("inp_CategoryNameLv2").value;
-        var MetatitleLv2 = document.getElementById("inp_CategoryKeyLv2").value;
-        if (CategoryNameLv2 == null || MetatitleLv2 == null) {
+        var CategoryName = document.getElementById("inp_cateNameLv2").value;
+        var a = document.getElementById("sl_prdTypeLv2");
+        var productTypeKW = a.options[a.selectedIndex].value;
+        var b = document.getElementById("sl_brandNameLv2");
+        var brandKW = b.options[b.selectedIndex].value;
+        var lowPrice = document.getElementById("inp_lowPriceLv2").value;
+        var highPrice = document.getElementById("inp_highPriceLv2").value;
+        var productKW = document.getElementById("inp_productKwLv2").value;
+        if (CategoryName == null || CategoryIdLv1==""||productTypeKW=="") {
             alert("Không được để trống");
         }
         else {
@@ -127,8 +133,12 @@ app.controller('MyAdminController', function ($scope, $http) {
                 method: "POST",
                 data: {
                     category_lv1_master_id: CategoryIdLv1,
-                    Name: CategoryNameLv2,
-                    Metatitle: MetatitleLv2
+                    Name: CategoryName,
+                    ProductTypeKW: productTypeKW,
+                    BrandKW: brandKW,
+                    LowPrice: lowPrice,
+                    HighPrice: highPrice,
+                    ProductKW: productKW
                 }
             }).then(function onSuccess(response) {
                 // Handle success
@@ -141,4 +151,10 @@ app.controller('MyAdminController', function ($scope, $http) {
             });
         }
     }
+    $scope.ReturnInvoice = function () {
+        $http.get("/Admin/InvoiceManager/ReturnInvoice").then(function (response) {
+            $scope.invoiceList = response.data;
+        });
+    }
+    $scope.ReturnInvoice();
 });
