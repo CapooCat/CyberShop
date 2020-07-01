@@ -57,6 +57,7 @@
     <Compile Include="Brand.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BrandDao.cs" />
     <Compile Include="CategoriesDao.cs" />
     <Compile Include="Category.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
@@ -106,6 +107,7 @@
     <Compile Include="ProductImage.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductTypeDao.cs" />
     <Compile Include="ProducType.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>

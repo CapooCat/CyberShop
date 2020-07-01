@@ -13,7 +13,7 @@ namespace CyberShop.Models
         public string ProductName { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<double> Price { get; set; }
-        public bool? Status { get; set; }
+        public string Status { get; set; }
         public Nullable<System.DateTime> WarrantyExpires { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }

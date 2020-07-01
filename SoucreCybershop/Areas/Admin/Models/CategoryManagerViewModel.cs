@@ -20,5 +20,10 @@ namespace CyberShop.Areas.Admin.Models
         {
             get; set;
         }
+        public string ProductTypeKW { get; set; }
+        public string BrandKW { get; set; }
+        public string ProductKW { get; set; }
+        public int? LowPrice { get; set; }
+        public int? HighPrice { get; set; }
     }
 }

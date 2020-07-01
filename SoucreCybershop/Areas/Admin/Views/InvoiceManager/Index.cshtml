@@ -49,74 +49,24 @@
                             <tr>
                                 <th style="width: 3%;"><a href="#"></a></th>
                                 <th style="width: 7%;"><a href="#">Mã hóa đơn</a></th>
-                                <th style="width: 10%;"><a href="#">Tên khách hàng</a></th>
-                                <th style="width: 25%;"><a href="#">Địa chỉ</a></th>
+                                <th style="width: 15%;"><a href="#">Tên khách hàng</a></th>
+                                <th style="width: 28%;"><a href="#">Địa chỉ</a></th>
                                 <th style="width: 10%;"><a href="#">Số điện thoại</a></th>
-                                <th style="width: 20%;"><a href="#">Tình trạng</a></th>
                                 <th style="width: 10%;"><a href="#">Ngày xuất</a></th>
+                                <th style="width: 12%;"><a href="#">Tình trạng</a></th>
                                 <th style="width: 15%;"><a href="#">Hoạt động</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="item in invoiceList">
                                 <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>Đã hoàn tất</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>Đã hoàn tất</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>Đã hoàn tất</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>Đã hoàn tất</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>Đã hoàn tất</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>Đã hoàn tất</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                                <td>{{item.Id}}</td>
+                                <td>{{item.CustomerName}}</td>
+                                <td>{{item.DeliveryAddress}}</td>
+                                <td>{{item.DeliveryPhoneNum}}</td>
+                                <td>{{item.PurchaseDate}}</td>
+                                <td>{{item.Status}}</td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -187,19 +137,19 @@
                                                 <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
                                                 <td>1</td>
                                                 <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></a></td>
                                             </tr>
                                             <tr>
                                                 <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
                                                 <td>1</td>
                                                 <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></a></td>
                                             </tr>
                                             <tr>
                                                 <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
                                                 <td>1</td>
                                                 <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></td>
+                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
