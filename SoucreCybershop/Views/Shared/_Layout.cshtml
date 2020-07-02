@@ -25,6 +25,32 @@
      @RenderSection("style", false)
 </head>
 <body ng-app="MyApp" ng-controller="MyController">
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v7.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="1747167785577082"
+         theme_color="#1E90FF"
+         logged_in_greeting="Xin chào ! mình có thể giúp được gì cho bạn ?"
+         logged_out_greeting="Xin chào ! mình có thể giúp được gì cho bạn ?">
+    </div>
     <!-- Header -->
 
     <header>
@@ -195,6 +221,8 @@
 
     </footer>
 
+    
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -204,6 +232,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
     <script src="~/assets/angularcontroller/AngularController.js"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=286282752195406&autoLogAppEvents=1"></script>
+
+
     <script>
         var totalcat = document.getElementsByClassName("more-content-items");
         for (i = 0; i < totalcat.length; i++) {
@@ -272,3 +302,4 @@
     @RenderSection("scripts", false)
 </body>
 </html>
+

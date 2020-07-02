@@ -117,13 +117,13 @@
                     <span style="color:red" ng-show="formThanhToan.Address.$touched && formThanhToan.Address.$invalid">Bạn chưa nhập địa chỉ</span>
                 </h6>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     @*<select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
                         <option value="" disabled selected>Chọn tỉnh thành...</option>
                         <option value="Hồ Chí Minh">Hồ Chí Minh</option>
                         <option value="Hà Nội">Hà Nội</option>
                     </select>*@
-                   @Html.DropDownListFor(model => model.City,
+                   @*@Html.DropDownListFor(model => model.City,
                     new List<SelectListItem> {
                        new SelectListItem { Value = "" , Text = "Chọn tỉnh thành",Disabled=true,Selected=true },
                        new SelectListItem { Value = "Hồ Chí Minh" , Text = "Hồ Chí Minh" },
@@ -131,7 +131,7 @@
                         },
                     new { @class = "form-control", @data_role = "select-dropdown", @data_profile = "minimal",@ng_model="City",@required=true, })
                     <span style="color:red" ng-show="formThanhToan.City.$touched && formThanhToan.Address.$invalid">Bạn chưa chọn tỉnh thành </span>
-                </div>
+                </div>*@*@
 
                 <h3 style="text-align: center; margin: 30px;">Phương thức nhận hàng</h3>
                 <div class="pay-method" style="text-align: center;">

@@ -97,6 +97,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div>
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tên:</p>
@@ -104,7 +105,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select id="sl_prdTypeLv1">
+                            <select id="sl_prdTypeLv1" class="list-select">
                                 <option value="">Chọn loại sản phẩm</option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -114,7 +115,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo hãng sản phẩm:</p>
-                            <select id="sl_brandNameLv1">
+                            <select id="sl_brandNameLv1" class="list-select">
                                 <option value="">Chọn hãng sản phẩm</option>
                                 @foreach (var item in brandList)
                                 {
@@ -138,6 +139,7 @@
 
 
                 </div>
+                    </div>
                 <div class="modal-footer">
                     <button type="button" ng-click="AddCategory()">Thêm</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
@@ -158,7 +160,7 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Chọn danh mục cấp 1:</p>
-                            <select id="slc_catelv1">
+                            <select id="slc_catelv1" class="list-select">
                                 <option value="">Chọn danh mục</option>
                                 @foreach (var item in catListLv1)
                                 {
@@ -172,7 +174,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select id="sl_prdTypeLv2">
+                            <select id="sl_prdTypeLv2" class="list-select">
                                 <option value="">Chọn loại sản phẩm</option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -182,7 +184,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo hãng sản phẩm:</p>
-                            <select id="sl_brandNameLv2">
+                            <select id="sl_brandNameLv2" class="list-select">
                                 <option value="">Chọn hãng sản phẩm</option>
                                 @foreach (var item in brandList)
                                 {
@@ -226,7 +228,7 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Chọn danh mục cấp 1:</p>
-                            <select>
+                            <select class="list-select">
                                 <option value="">Chọn danh mục</option>
                                 @foreach (var item in catListLv1)
                                 {
@@ -240,7 +242,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select>
+                            <select class="list-select">
                                 <option value="">Chọn loại sản phẩm</option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -250,7 +252,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo hãng sản phẩm:</p>
-                            <select>
+                            <select class="list-select">
                                 <option value="">Chọn hãng sản phẩm</option>
                                 @foreach (var item in brandList)
                                 {
@@ -286,7 +288,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select>
+                            <select class="list-select">
                                 @foreach (var item in catListLv1)
                                 {
                                     <option value="@item.Name">@item.Name</option>
@@ -340,4 +342,9 @@
         </div>
     </div>
 </section>
+
+<script>
+    Active = document.getElementById("CategoryManager");
+    Active.className = "active-button"
+</script>
 
