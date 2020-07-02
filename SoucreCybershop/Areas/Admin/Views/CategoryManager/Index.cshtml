@@ -226,7 +226,7 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Chọn danh mục cấp 1:</p>
-                            <select>
+                            <select id="slc_catelv3">
                                 <option value="">Chọn danh mục</option>
                                 @foreach (var item in catListLv1)
                                 {
@@ -236,11 +236,11 @@
                         </div>
                         <div class="col-md-4">
                             <p>Tên:</p>
-                            <input type="text" placeholder="Nhập tên danh mục...">
+                            <input type="text" placeholder="Nhập tên danh mục..." id="inp_cateNameLv3">
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select>
+                            <select id="sl_prdTypeLv3">
                                 <option value="">Chọn loại sản phẩm</option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -250,13 +250,25 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo hãng sản phẩm:</p>
-                            <select>
+                            <select id="sl_brandNameLv2">
                                 <option value="">Chọn hãng sản phẩm</option>
                                 @foreach (var item in brandList)
                                 {
                                     <option value="@item.Metatitle">@item.BrandName</option>
                                 }
                             </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Giá tiền dưới: (triệu)</p>
+                            <input type="text" placeholder="Nhập giá tiền..." id="inp_lowPriceLv3">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Giá tiền trên: (triệu)</p>
+                            <input type="text" placeholder="Nhập giá tiền..." id="inp_highPriceLv3">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Lọc sản phẩm theo từ khóa:</p>
+                            <input type="text" placeholder="Nhập từ khóa..." id="inp_productKwLv3">
                         </div>
                     </div>
 
