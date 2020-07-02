@@ -152,7 +152,7 @@ button:focus {
 .topnav input[type=text] {
   width: 350px;
   margin: auto;
-  border-radius: 30px 0px 0px 30px;
+  border-radius: 10px 0px 0px 10px;
   text-indent: 10px;
   padding: 7px;
   font-size: 17px;
@@ -171,7 +171,7 @@ button:focus {
   background: #1E90FF;
   font-size: 17px;
   border: 2px solid #1E90FF;
-  border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 10px 10px 0px;
   color: white;
   cursor: pointer;
 }
@@ -206,7 +206,7 @@ button:focus {
 
 .dropdown {
   background-color: #1E90FF;
-  border-radius: 30px;
+  border-radius: 10px;
   float: left;
   overflow: hidden;
 }
@@ -229,7 +229,7 @@ button:focus {
   background-color: #1E90FF;
   color: #1E90FF;
   background-color: #F0F0F0;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .dropdown-content {
@@ -348,6 +348,53 @@ button:focus {
   width: 500px;
 }
 
+.dropdown-loading {
+  position: absolute;
+  visibility: hidden;
+  width: 500px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-loading .object {
+  z-index: 1000;
+  width: 5px;
+  height: 0px;
+  background: #1E90FF;
+  margin: 0 1px;
+  border-radius: 10px;
+  animation: S-loading 0.5s infinite;
+}
+
+.object:nth-child(2){
+  animation-delay: 0.1s;
+}
+.object:nth-child(3){
+  animation-delay: 0.2s;
+}
+.object:nth-child(4){
+  animation-delay: 0.3s;
+}
+.object:nth-child(5){
+  animation-delay: 0.4s;
+}
+
+@keyframes S-loading {
+  0%{
+    height: 0px;
+  }
+  50%{
+    height: 20px;
+  }
+  100%{
+    height: 0px;
+  }
+}
+
 .S-Price {
   float: right;
   color: #1E90FF;
@@ -456,21 +503,21 @@ button:focus {
   width: 100%;
   height: 363px;
   background-color: transparent !important;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   color: white;
 }
 
 .owl-loader .item {
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 10px;
   color: white;
 }
 
 .owl-loader .item img{
   min-height: 363px;
   max-height: 363px;
-  border-radius: 30px;
+  border-radius: 10px;
   color: white;
 }
 
@@ -525,13 +572,13 @@ button:focus {
 .Side-item {
   height: 100%;
   width: 100%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .side-item img {
   width: 100%;
   height: 100%;
-  border-radius: 30px !important;
+  border-radius: 10px !important;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -544,13 +591,13 @@ button:focus {
 .bottom-item img{
   width: 100%;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .items-header {
     font-size: 25px; 
-    border-radius: 30px 30px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     background-color: #1E90FF;
     margin-top: 50px;
     color: white;
@@ -575,7 +622,7 @@ button:focus {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         color: white !important;
         background-color: #1E90FF !important;
-        border-radius: 30px !important;
+        border-radius: 10px !important;
         font-size: 20px !important;
         transition: .2s;
         width: 50px;
@@ -688,7 +735,7 @@ button:focus {
   border: 2px solid #1E90FF;
   background-color: #1E90FF;
   color: white;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 5px 20px;
   float: right;
 }
@@ -711,7 +758,7 @@ button:focus {
   text-align: center;
   transition: .2s;
   width: 20%;
-  border-radius: 30px;
+  border-radius: 10px;
   border: 2px solid #1E90FF;
   color: #fff;
   background-color: #1E90FF;
@@ -819,7 +866,7 @@ button:focus {
   background-color: #1E90FF;
   border: 2px solid #1E90FF;
   color: white;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .sort .active {
@@ -828,7 +875,7 @@ button:focus {
   background-color: #fff;
   border: 2px solid #1E90FF;
   color: #1E90FF;;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .sort button:hover {
@@ -837,7 +884,7 @@ button:focus {
   background-color: #fff;
   border: 2px solid #1E90FF;
   color: #1E90FF;;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .sort button:focus {
@@ -923,13 +970,13 @@ button:focus {
 .card .card-img {
   width: 100%;
   height: 255px;
-  border-radius: 30px 30px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   padding-bottom: 8px;
 }
 
 .card .box {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border-radius: 30px;
+  border-radius: 10px;
   padding-bottom: 30px;
   width: 250px;
   height: 100%;
@@ -943,7 +990,7 @@ button:focus {
 .card .Add {
   transition: .2s;
   background-color: #1E90FF;
-  border-radius: 30px;
+  border-radius: 10px;
   border: 2px solid #1E90FF;
   font-size: 16px;
   outline: none;
@@ -978,7 +1025,7 @@ button:focus {
   color: red;
   padding: 10px;
   border: 2px solid red;
-  border-radius: 30px;
+  border-radius: 10px;
   background-color: #ffc7d2;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -1013,7 +1060,7 @@ button:focus {
   border: 2px solid gray;
   padding: 15px 20px;
   width: 40%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .login input[type=text]:focus{
@@ -1024,7 +1071,7 @@ button:focus {
   border: 2px solid gray;
   padding: 15px 20px;
   width: 40%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .login input[type=password]:focus{
@@ -1038,7 +1085,7 @@ button:focus {
   color: white;
   background-color: #1E90FF;
   width: 40%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .login button:hover{
@@ -1052,7 +1099,7 @@ button:focus {
   color: #1E90FF;
   background-color: #fff;
   width: 40%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .login .second-btn:hover {color: #fff;
@@ -1074,7 +1121,7 @@ button:focus {
   color: white;
   width: 40%;
   background-color: #4267b2;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .login .facebook-btn:hover {
@@ -1144,7 +1191,7 @@ button:focus {
   width: 150px;
   font-size: 20px;
   transition: .2s;
-  border-radius: 30px;
+  border-radius: 10px;
   border: 2px solid #1E90FF;
   outline: none;
   color: white;
@@ -1159,7 +1206,7 @@ button:focus {
   background-color: #1E90FF;
   color: #1E90FF;
   background-color: #fff;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .product-info .price-tag {
@@ -1230,7 +1277,7 @@ background-color: #1E90FF;
 table {
   margin-top: 50px;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-collapse: collapse;
   width: 100%;
@@ -1266,7 +1313,7 @@ th {
   border: 2px solid gray;
   padding: 15px 20px;
   width: 100%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .input-info input[type=text]:focus {
@@ -1281,7 +1328,7 @@ th {
   background-color: #1E90FF;
   border: 2px solid #1E90FF;
   color: white;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .pay-method .active{
@@ -1308,7 +1355,7 @@ th {
   background-color: #1E90FF;
   border: 2px solid #1E90FF;
   color: white;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .start-pay button:hover {
@@ -1323,7 +1370,7 @@ th {
   padding-left: 15px;
   color: gray;
   height: 60px;
-  border-radius: 30px;
+  border-radius: 10px;
   border: 2px solid gray;
 }
 
@@ -1338,7 +1385,7 @@ th {
   border: 2px solid gray;
   padding: 15px 20px;
   width: 79%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .discount button {
@@ -1349,7 +1396,7 @@ th {
   background-color: #1E90FF;
   border: 2px solid #1E90FF;
   color: white;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .discount button:hover {
@@ -1480,7 +1527,7 @@ footer{
   padding-top: 8px;
   cursor: pointer;
   background-color: #1E90FF;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 3px 5px 8px 0px rgba(0,0,0,0.3);
   font-size: 20px;
   color: #ffffff;
