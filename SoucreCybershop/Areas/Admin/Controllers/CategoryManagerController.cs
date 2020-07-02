@@ -215,6 +215,36 @@ namespace CyberShop.Areas.Admin.Controllers
             { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
+        [HttpPost]
+        public JsonResult AddCategoryLv3(CategoryManagerViewModel model)
+        {
+            var cateDao = new CategoriesDao();
+            var cateLv3 = new Category();
+            var catIdLv3 = data.Categories.Where(x => x.category_lv2_id == null).OrderByDescending(x => x.category_lv3_id).First().category_lv3_id;
+            cateLv3.Name = model.Name;
+            cateLv3.Metatitle = model.ProductTypeKW;
+            if (!String.IsNullOrEmpty(model.BrandKW))
+            {
+                cateLv3.Metatitle = cateLv3.Metatitle + "-" + model.BrandKW;
+            }
+            if (!String.IsNullOrEmpty(model.ProductKW))
+            {
+                cateLv3.Metatitle = cateLv3.Metatitle + "-" + model.ProductKW;
+            }
+            if (model.LowPrice != null && model.HighPrice != null)
+            {
+                cateLv3.Metatitle = cateLv3.Metatitle + "-" + "tu-" + model.LowPrice + "-den-" + model.HighPrice + "-trieu";
+            }
+            cateLv3.category_lv1_master_id = model.category_lv1_master_id;
+
+            cateLv3.category_lv3_id = catIdLv3 + 1;
+            cateLv3.IsDeleted = false;
+            cateLv3.CreateDate = DateTime.Now;
+            cateLv3.CreateBy = "Admin";
+            if (cateDao.InsertCategoryLv1(cateLv3))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
         public JsonResult ReturnBrandList()
         {
             var model = new List<Brand>();

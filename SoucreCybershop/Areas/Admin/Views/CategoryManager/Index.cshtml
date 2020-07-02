@@ -226,12 +226,16 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Chọn danh mục cấp 1:</p>
-                            <select id="slc_catelv3">
+                            <select id="slc_catelv3" ng-model="selectionCat" ng-change="ReturnCateLv2()">
                                 <option value="">Chọn danh mục</option>
-                                @foreach (var item in catListLv1)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                }
+                                <option ng-repeat="item in catList"value="{{item.Id}}">{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Chọn danh mục cấp 2: (Chọn danh mục cấp 1 trước)</p>
+                            <select id="slc_catelv3_2">
+                                <option value="">Chọn danh mục</option>
+                                <option ng-repeat="item in cateListLv2" value="{{item.Id}}">{{item.Name}}</option>
                             </select>
                         </div>
                         <div class="col-md-4">

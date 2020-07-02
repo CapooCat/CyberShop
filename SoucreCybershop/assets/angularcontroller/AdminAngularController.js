@@ -114,6 +114,65 @@ app.controller('MyAdminController', function ($scope, $http) {
         }
     }
     $scope.AddCategoryLv2 = function () {
+        var e = document.getElementById("slc_catelv3");
+        var CategoryIdLv1 = e.options[e.selectedIndex].value;
+        var CategoryName = document.getElementById("inp_cateNameLv3").value;
+        var a = document.getElementById("sl_prdTypeLv3");
+        var productTypeKW = a.options[a.selectedIndex].value;
+        var b = document.getElementById("sl_brandNameLv3");
+        var brandKW = b.options[b.selectedIndex].value;
+        var c = document.getElementById("slc_catelv3_2");
+        var CategoryIdLv2 =c.options[c.selectedIndex].value;
+        var lowPrice = document.getElementById("inp_lowPriceLv3").value;
+        var highPrice = document.getElementById("inp_highPriceLv3").value;
+        var productKW = document.getElementById("inp_productKwLv3").value;
+        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2=="") {
+            alert("Không được để trống");
+        }
+        else {
+            $http({
+                url: '/Admin/CategoryManager/AddCategoryLv2',
+                method: "POST",
+                data: {
+                    category_lv1_master_id: CategoryIdLv1,
+                    category_lv2_master_id:CategoryIdLv2,
+                    Name: CategoryName,
+                    ProductTypeKW: productTypeKW,
+                    BrandKW: brandKW,
+                    LowPrice: lowPrice,
+                    HighPrice: highPrice,
+                    ProductKW: productKW
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                alert("Thêm thành công");
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                alert("Thêm thất bại");
+                console.log(response);
+            });
+        }
+    }
+    $scope.ReturnInvoice = function () {
+        $http.get("/Admin/InvoiceManager/ReturnInvoice").then(function (response) {
+            $scope.invoiceList = response.data;
+        });
+    }
+    $scope.ReturnInvoice();
+    $scope.ReturnCateLv2 = function () {
+        switch ($scope.selectionCat) {
+            case "":
+                alert("Vui lòng chọn danh mục cấp 2");
+                break;
+            case $scope.selectionCat:
+                $http.get("/Admin/CategoryManager/ReturnCategoryLv2/" + $scope.selectionCat).then(function (response) {
+                    $scope.cateListLv2 = response.data;
+                });
+                break;
+        }
+    }
+    $scope.AddCategoryLv3 = function () {
         var e = document.getElementById("slc_catelv1");
         var CategoryIdLv1 = e.options[e.selectedIndex].value;
         var CategoryName = document.getElementById("inp_cateNameLv2").value;
@@ -124,7 +183,7 @@ app.controller('MyAdminController', function ($scope, $http) {
         var lowPrice = document.getElementById("inp_lowPriceLv2").value;
         var highPrice = document.getElementById("inp_highPriceLv2").value;
         var productKW = document.getElementById("inp_productKwLv2").value;
-        if (CategoryName == null || CategoryIdLv1==""||productTypeKW=="") {
+        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "") {
             alert("Không được để trống");
         }
         else {
@@ -151,10 +210,4 @@ app.controller('MyAdminController', function ($scope, $http) {
             });
         }
     }
-    $scope.ReturnInvoice = function () {
-        $http.get("/Admin/InvoiceManager/ReturnInvoice").then(function (response) {
-            $scope.invoiceList = response.data;
-        });
-    }
-    $scope.ReturnInvoice();
 });
