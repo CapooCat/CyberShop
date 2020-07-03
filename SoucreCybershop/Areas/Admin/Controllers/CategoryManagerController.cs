@@ -236,7 +236,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 cateLv3.Metatitle = cateLv3.Metatitle + "-" + "tu-" + model.LowPrice + "-den-" + model.HighPrice + "-trieu";
             }
             cateLv3.category_lv1_master_id = model.category_lv1_master_id;
-
+            cateLv3.category_lv2_master_id = model.category_lv2_master_id;
             cateLv3.category_lv3_id = catIdLv3 + 1;
             cateLv3.IsDeleted = false;
             cateLv3.CreateDate = DateTime.Now;

@@ -10,23 +10,23 @@
         <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
-                <input type="text" placeholder="Nhập mã hóa đơn...">
+                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
             </div>
             <div class="col-md-2">
                 <p>Thời gian từ:</p>
-                <input type="date">
+                <input type="date" id="date_from">
             </div>
             <div class="col-md-2">
                 <p>Thời gian đến:</p>
-                <input type="date">
+                <input type="date" id="date_to">
             </div>
             <div class="col-md-2">
                 <p>Tên khách hàng:</p>
-                <input type="text" placeholder="Nhập tên khách hàng...">
+                <input type="text" placeholder="Nhập tên khách hàng..." id="customer_name">
             </div>
             <div class="col-md-2">
                 <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại...">
+                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
             </div>
             <div class="col-md-12">
 
@@ -35,7 +35,7 @@
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
             <button type="button" data-toggle="modal" data-target="#warningModal" class="delete"><i class="fas fa-trash"></i></button>
-            <button style="width: 100px;">Lọc</button>
+            <button style="width: 100px;" ng-click="FilterInvoice()">Lọc</button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">

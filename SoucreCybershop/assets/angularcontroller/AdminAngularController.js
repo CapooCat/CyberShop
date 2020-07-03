@@ -114,19 +114,17 @@ app.controller('MyAdminController', function ($scope, $http) {
         }
     }
     $scope.AddCategoryLv2 = function () {
-        var e = document.getElementById("slc_catelv3");
+        var e = document.getElementById("slc_catelv2");
         var CategoryIdLv1 = e.options[e.selectedIndex].value;
-        var CategoryName = document.getElementById("inp_cateNameLv3").value;
-        var a = document.getElementById("sl_prdTypeLv3");
+        var CategoryName = document.getElementById("inp_cateNameLv2").value;
+        var a = document.getElementById("sl_prdTypeLv2");
         var productTypeKW = a.options[a.selectedIndex].value;
-        var b = document.getElementById("sl_brandNameLv3");
+        var b = document.getElementById("sl_brandNameLv2");
         var brandKW = b.options[b.selectedIndex].value;
-        var c = document.getElementById("slc_catelv3_2");
-        var CategoryIdLv2 =c.options[c.selectedIndex].value;
-        var lowPrice = document.getElementById("inp_lowPriceLv3").value;
-        var highPrice = document.getElementById("inp_highPriceLv3").value;
-        var productKW = document.getElementById("inp_productKwLv3").value;
-        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2=="") {
+        var lowPrice = document.getElementById("inp_lowPriceLv2").value;
+        var highPrice = document.getElementById("inp_highPriceLv2").value;
+        var productKW = document.getElementById("inp_productKwLv2").value;
+        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "") {
             alert("Không được để trống");
         }
         else {
@@ -135,7 +133,6 @@ app.controller('MyAdminController', function ($scope, $http) {
                 method: "POST",
                 data: {
                     category_lv1_master_id: CategoryIdLv1,
-                    category_lv2_master_id:CategoryIdLv2,
                     Name: CategoryName,
                     ProductTypeKW: productTypeKW,
                     BrandKW: brandKW,
@@ -163,7 +160,7 @@ app.controller('MyAdminController', function ($scope, $http) {
     $scope.ReturnCateLv2 = function () {
         switch ($scope.selectionCat) {
             case "":
-                alert("Vui lòng chọn danh mục cấp 2");
+                $scope.cateListLv2 = null;
                 break;
             case $scope.selectionCat:
                 $http.get("/Admin/CategoryManager/ReturnCategoryLv2/" + $scope.selectionCat).then(function (response) {
@@ -173,25 +170,62 @@ app.controller('MyAdminController', function ($scope, $http) {
         }
     }
     $scope.AddCategoryLv3 = function () {
-        var e = document.getElementById("slc_catelv1");
+        var e = document.getElementById("slc_catelv3_1");
         var CategoryIdLv1 = e.options[e.selectedIndex].value;
-        var CategoryName = document.getElementById("inp_cateNameLv2").value;
-        var a = document.getElementById("sl_prdTypeLv2");
+        var d = document.getElementById("slc_catelv3_2");
+        var CategoryIdLv2 = d.options[d.selectedIndex].value;
+        var CategoryName = document.getElementById("inp_cateNameLv3").value;
+        var a = document.getElementById("sl_prdTypeLv3");
         var productTypeKW = a.options[a.selectedIndex].value;
-        var b = document.getElementById("sl_brandNameLv2");
+        var b = document.getElementById("sl_brandNameLv3");
         var brandKW = b.options[b.selectedIndex].value;
-        var lowPrice = document.getElementById("inp_lowPriceLv2").value;
-        var highPrice = document.getElementById("inp_highPriceLv2").value;
-        var productKW = document.getElementById("inp_productKwLv2").value;
-        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "") {
+        var lowPrice = document.getElementById("inp_lowPriceLv3").value;
+        var highPrice = document.getElementById("inp_highPriceLv3").value;
+        var productKW = document.getElementById("inp_productKwLv3").value;
+        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2=="") {
             alert("Không được để trống");
         }
         else {
             $http({
-                url: '/Admin/CategoryManager/AddCategoryLv2',
+                url: '/Admin/CategoryManager/AddCategoryLv3',
                 method: "POST",
                 data: {
                     category_lv1_master_id: CategoryIdLv1,
+                    category_lv2_master_id:CategoryIdLv2,
+                    Name: CategoryName,
+                    ProductTypeKW: productTypeKW,
+                    BrandKW: brandKW,
+                    LowPrice: lowPrice,
+                    HighPrice: highPrice,
+                    ProductKW: productKW
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                alert("Thêm thành công");
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                alert("Thêm thất bại");
+                console.log(response);
+            });
+        }
+    }
+    $scope.FilterInvoice = function () {
+        var invoiceId = document.getElementById("invoice_id").value;
+        var dateFrom = document.getElementById("date_from").value;
+        var dateTo = document.getElementById("date_to").value;
+        var customerName = document.getElementById("customer_name").value;
+        var customerPhone = document.getElementById("customer_phone").value;
+        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2 == "") {
+            alert("Không được để trống");
+        }
+        else {
+            $http({
+                url: '/Admin/InvoiceManager/FilterInvoice',
+                method: "POST",
+                data: {
+                    category_lv1_master_id: CategoryIdLv1,
+                    category_lv2_master_id: CategoryIdLv2,
                     Name: CategoryName,
                     ProductTypeKW: productTypeKW,
                     BrandKW: brandKW,
