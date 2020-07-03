@@ -92,7 +92,8 @@ button:focus {
   position: fixed;
   right: 0;
   bottom: 0;
-  margin: 20px;
+  margin: 30px;
+  margin-bottom: 100px;
   border-radius: 50%;
   border: 2px solid  #1E90FF;
   background-color:  #1E90FF;
@@ -108,6 +109,33 @@ button:focus {
 .GoTop:focus {
   outline: none;
 }
+
+.build-PC {
+  z-index: 1000;
+  transition: .2s;
+  height: 90px;
+  width: 90px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 30px;
+  margin-bottom: 200px;
+  border-radius: 10px;
+  border: 2px solid  #1E90FF;
+  background-color:  #1E90FF;
+  color: #fff;
+}
+
+.build-PC:hover {
+  border: 2px solid  #1E90FF;
+  background-color:  #fff;
+  color: #1E90FF;
+}
+
+.build-PC:focus {
+  outline: none;
+}
+
 
 .wrapper {
   z-index: 999;
@@ -1735,6 +1763,12 @@ footer{
   border-bottom: 2px solid #100c08;
 }
 
+.nav-detail .active-button {
+  border-radius: 10px;
+  color: #1E90FF;
+  border-bottom: 2px solid #1E90FF;
+}
+
 .nav-detail button:hover {
   border-radius: 10px;
   color: #1E90FF;
@@ -1947,6 +1981,12 @@ canvas{
   cursor: pointer;
   outline: none;
   margin-bottom: 10px;
+}
+
+.list-select {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
 }
 
 .product-input p {
