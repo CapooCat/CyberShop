@@ -216,32 +216,26 @@ app.controller('MyAdminController', function ($scope, $http) {
         var dateTo = document.getElementById("date_to").value;
         var customerName = document.getElementById("customer_name").value;
         var customerPhone = document.getElementById("customer_phone").value;
-        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2 == "") {
-            alert("Không được để trống");
-        }
-        else {
             $http({
                 url: '/Admin/InvoiceManager/FilterInvoice',
                 method: "POST",
                 data: {
-                    category_lv1_master_id: CategoryIdLv1,
-                    category_lv2_master_id: CategoryIdLv2,
-                    Name: CategoryName,
-                    ProductTypeKW: productTypeKW,
-                    BrandKW: brandKW,
-                    LowPrice: lowPrice,
-                    HighPrice: highPrice,
-                    ProductKW: productKW
+                    Id: invoiceId,
+                    DateFrom: dateFrom,
+                    DateTo: dateTo,
+                    CustomerName: customerName,
+                    DeliveryPhoneNum: customerPhone
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                alert("Thêm thành công");
+                alert("Lọc thành công");
+                $scope.invoiceList = response.data;
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
-                alert("Thêm thất bại");
+                alert("Lọc thất bại");
                 console.log(response);
             });
-        }
+        
     }
 });
