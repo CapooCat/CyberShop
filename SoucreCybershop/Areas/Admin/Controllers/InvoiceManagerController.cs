@@ -23,7 +23,8 @@ namespace CyberShop.Areas.Admin.Controllers
             {
                 Id = x.Id,
                 User_id=x.User_id,
-                PurchaseDate=x.PurchaseDate.ToString(),
+                BuyDate=x.PurchaseDate.ToString(),
+                PurchaseDate=x.PurchaseDate,
                 DeliveryAddress=x.DeliveryAddress,
                 DeliveryPhoneNum=x.DeliveryPhoneNum,
                 Status=x.Status,
@@ -43,6 +44,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     {
                         Id = item.Id,
                         User_id = item.User_id,
+                        BuyDate = item.BuyDate,
                         PurchaseDate = item.PurchaseDate,
                         DeliveryAddress = item.DeliveryAddress,
                         DeliveryPhoneNum = item.DeliveryPhoneNum,
@@ -60,6 +62,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     {
                         Id = item.Id,
                         User_id = item.User_id,
+                        BuyDate = item.BuyDate,
                         PurchaseDate = item.PurchaseDate,
                         DeliveryAddress = item.DeliveryAddress,
                         DeliveryPhoneNum = item.DeliveryPhoneNum,
@@ -79,15 +82,13 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var lstInvoice = new List<InvoiceManagerViewModel>();
             lstInvoice = data.Invoices.Where(x => ((model.Id == null) || (x.Id == model.Id)))
-                                      .Where(x => (((model.DateFrom == null) && (model.DateTo != null)) || (x.PurchaseDate== dateTo)))
-                                      .Where(x => (((model.DateFrom != null) && (model.DateTo == null)) || (x.PurchaseDate == dateFrom)))
-                                      .Where(x => (((model.DateFrom != null) && (model.DateTo != null)) || (x.PurchaseDate >= dateFrom && x.PurchaseDate <= dateTo)))
-                                      .Where(x => ((model.CustomerName == null) || (x.CustomerName == model.CustomerName)))
+                                      .Where(x => ((model.CustomerName == null) || (x.CustomerName.Contains(model.CustomerName))))
                                       .Where(x => ((model.DeliveryPhoneNum == null) || (x.DeliveryPhoneNum == model.DeliveryPhoneNum)))
                 .Select(x => new InvoiceManagerViewModel {
                     Id = x.Id,
                     User_id = x.User_id,
-                    PurchaseDate = x.PurchaseDate.ToString(),
+                    BuyDate = x.PurchaseDate.ToString(),
+                    PurchaseDate = x.PurchaseDate,
                     DeliveryAddress = x.DeliveryAddress,
                     DeliveryPhoneNum = x.DeliveryPhoneNum,
                     Status = x.Status,
@@ -97,7 +98,22 @@ namespace CyberShop.Areas.Admin.Controllers
                     CreateDate = x.CreateDate,
                     CustomerName = x.CustomerName
                 }).ToList();
-
+            if (model.DateFrom != null && model.DateTo==null)
+            {
+                var dateFrom = DateTime.Parse(model.DateFrom);
+                lstInvoice = lstInvoice.Where(x=>x.PurchaseDate == dateFrom).ToList();
+            }
+            if(model.DateFrom == null && model.DateTo != null)
+            {
+                var dateTo = DateTime.Parse(model.DateTo);
+                lstInvoice = lstInvoice.Where(x => x.PurchaseDate == dateTo).ToList();
+            }
+            if(model.DateFrom != null && model.DateTo != null)
+            {
+                var dateFrom = DateTime.Parse(model.DateFrom);
+                var dateTo = DateTime.Parse(model.DateTo);
+                lstInvoice = lstInvoice.Where(x => x.PurchaseDate >= dateFrom && x.PurchaseDate <= dateTo).ToList();
+            }
             List<object> ReturnData = new List<object>();
             foreach (var item in lstInvoice)
             {
@@ -105,6 +121,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     {
                         Id = item.Id,
                         User_id = item.User_id,
+                        BuyDate = item.BuyDate,
                         PurchaseDate = item.PurchaseDate,
                         DeliveryAddress = item.DeliveryAddress,
                         DeliveryPhoneNum = item.DeliveryPhoneNum,
