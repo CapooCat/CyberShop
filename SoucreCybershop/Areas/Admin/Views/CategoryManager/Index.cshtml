@@ -26,7 +26,7 @@
                         <tbody>
                             <tr ng-repeat="item in catList">
                                 <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv1(item.Id)">{{item.Name}}</a></td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal2"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#suaDanhMuc1"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -287,7 +287,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="suaDanhMuc1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -300,36 +300,13 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tên:</p>
-                            <input type="text" placeholder="Nhập tên danh mục...">
-                        </div>
-                        <div class="col-md-4">
-                            <p>Lọc theo loại sản phẩm:</p>
-                            <select class="list-select">
-                                @foreach (var item in catListLv1)
-                                {
-                                    <option value="@item.Name">@item.Name</option>
-                                }
-                            </select>
+                            <input type="text" placeholder="Sửa tên danh mục...">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Lọc theo hãng sản phẩm:</p>
-                            <input type="text" placeholder="hãng sản phẩm">
-                        </div>
-                        <div class="col-md-4">
-                            <p>Giá tiền dưới:</p>
-                            <input type="text" placeholder="Nhập giá tiền...">
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <p>Giá tiền trên:</p>
-                            <input type="text" placeholder="Nhập giá tiền...">
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <p>Lọc sản phẩm theo từ khóa:</p>
-                            <input type="text" placeholder="Nhập từ khóa...">
+                            <p>Từ khóa</p>
+                            <input type="text" placeholder="Sửa từ khóa...">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button">Thêm</button>

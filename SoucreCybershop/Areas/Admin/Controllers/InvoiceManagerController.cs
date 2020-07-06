@@ -38,8 +38,6 @@ namespace CyberShop.Areas.Admin.Controllers
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {
-                if (item.User_id == null)
-                {
                     ReturnData.Add(new InvoiceManagerViewModel
                     {
                         Id = item.Id,
@@ -55,25 +53,6 @@ namespace CyberShop.Areas.Admin.Controllers
                         CreateDate = item.CreateDate,
                         CustomerName =item.CustomerName
                     });
-                }
-                else
-                {
-                    ReturnData.Add(new InvoiceManagerViewModel
-                    {
-                        Id = item.Id,
-                        User_id = item.User_id,
-                        BuyDate = item.BuyDate,
-                        PurchaseDate = item.PurchaseDate,
-                        DeliveryAddress = item.DeliveryAddress,
-                        DeliveryPhoneNum = item.DeliveryPhoneNum,
-                        Status = item.Status,
-                        Total = item.Total,
-                        IsDeleted = item.IsDeleted,
-                        CreateBy = item.CreateBy,
-                        CreateDate = item.CreateDate,
-                        CustomerName = data.Users.Where(x => x.id == item.User_id).First().Name 
-                    });
-                }
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
