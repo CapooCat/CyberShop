@@ -52,6 +52,81 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ReturnCategoryUpdate(int id)
+        {
+            var model = new List<CategoryManagerViewModel>();
+            model = data.Categories.Where(x => x.Id==id ).Select(x => new CategoryManagerViewModel
+            {
+                Id = x.Id,
+                category_lv2_id = x.category_lv2_id,
+                category_lv3_id = x.category_lv3_id,
+                Name = x.Name,
+                IsDeleted = x.IsDeleted,
+                CreateBy = x.CreateBy,
+                CreateDate = x.CreateDate,
+                Metatitle = x.Metatitle,
+                category_lv1_master_id = x.category_lv1_master_id,
+                category_lv2_master_id = x.category_lv2_master_id
+            }).ToList();
+
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new CategoryManagerViewModel
+                {
+                    Id = item.Id,
+                    category_lv2_id = item.category_lv2_id,
+                    category_lv3_id = item.category_lv3_id,
+                    Name = item.Name,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    Metatitle = item.Metatitle,
+                    category_lv1_master_id = item.category_lv1_master_id,
+                    category_lv2_master_id = item.category_lv2_master_id
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ReturnCategoryUpdateLv2(int id)
+        {
+            var cateLv2 = data.Categories.Where(x => x.Id == id).First();
+            var cateLv1 = data.Categories.Where(x => x.Id == cateLv2.category_lv1_master_id).First().Name;
+            var model = new List<CategoryManagerViewModel>();
+            model = data.Categories.Where(x => x.Id == id).Select(x => new CategoryManagerViewModel
+            {
+                Id = x.Id,
+                category_lv2_id = x.category_lv2_id,
+                category_lv3_id = x.category_lv3_id,
+                Name = x.Name,
+                IsDeleted = x.IsDeleted,
+                CreateBy = x.CreateBy,
+                CreateDate = x.CreateDate,
+                Metatitle = x.Metatitle,
+                category_lv1_master_id = x.category_lv1_master_id,
+                category_lv2_master_id = x.category_lv2_master_id,
+                CateNameLv1= cateLv1
+            }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new CategoryManagerViewModel
+                {
+                    Id = item.Id,
+                    category_lv2_id = item.category_lv2_id,
+                    category_lv3_id = item.category_lv3_id,
+                    Name = item.Name,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    Metatitle = item.Metatitle,
+                    category_lv1_master_id = item.category_lv1_master_id,
+                    category_lv2_master_id = item.category_lv2_master_id,
+                    CateNameLv1 = item.CateNameLv1
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ReturnCategoryLv2(int id) //category_id_lv1
         {
             var model = new List<CategoryManagerViewModel>();

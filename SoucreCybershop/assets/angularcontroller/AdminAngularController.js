@@ -235,7 +235,21 @@ app.controller('MyAdminController', function ($scope, $http) {
                 // Handle error
                 alert("Lọc thất bại");
                 console.log(response);
-            });
-        
+            }); 
+    }
+    $scope.UpdateCategory = function (id) {
+        $http.get("/Admin/CategoryManager/ReturnCategoryUpdate/" + id).then(function (response) {
+            $scope.DataUpdate = angular.fromJson(response.data);
+            $scope.CateUpdate = $scope.DataUpdate[0].Name;
+            $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+        });
+    }
+    $scope.UpdateCategoryLv2 = function (id) {
+        $http.get("/Admin/CategoryManager/ReturnCategoryUpdateLv2/" + id).then(function (response) {
+            $scope.DataUpdate = angular.fromJson(response.data);
+            $scope.CateLv1 = $scope.DataUpdate[0].CateNameLv1;
+            $scope.CateUpdate = $scope.DataUpdate[0].Name;
+            $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+        });
     }
 });
