@@ -30,5 +30,14 @@ namespace Data
             }
             return false;
         }
+        public bool UpdateCategory(Category entity)
+        {
+            if (entity != null)
+            {
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

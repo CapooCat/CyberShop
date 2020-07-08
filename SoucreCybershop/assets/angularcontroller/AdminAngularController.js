@@ -240,16 +240,94 @@ app.controller('MyAdminController', function ($scope, $http) {
     $scope.UpdateCategory = function (id) {
         $http.get("/Admin/CategoryManager/ReturnCategoryUpdate/" + id).then(function (response) {
             $scope.DataUpdate = angular.fromJson(response.data);
+            $scope.CateId = $scope.DataUpdate[0].Id;
             $scope.CateUpdate = $scope.DataUpdate[0].Name;
             $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+        });
+    }
+    $scope.UpdateCategoryPost = function () {
+        var Id = document.getElementById("cate_id_lv1").value;
+        var cateName = document.getElementById("inp_updateCatelv1").value;
+        var Metatitle = document.getElementById("inp_updateMetatitlelv1").value;
+        $http({
+            url: '/Admin/CategoryManager/CategoryUpdatePost',
+            method: "POST",
+            data: {
+                Id: Id,
+                Name: cateName,
+                Metatitle: Metatitle
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            alert("Sửa thành công");
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            alert("Sửa thất bại");
+            console.log(response);
         });
     }
     $scope.UpdateCategoryLv2 = function (id) {
         $http.get("/Admin/CategoryManager/ReturnCategoryUpdateLv2/" + id).then(function (response) {
             $scope.DataUpdate = angular.fromJson(response.data);
+            $scope.CateId = $scope.DataUpdate[0].Id;
             $scope.CateLv1 = $scope.DataUpdate[0].CateNameLv1;
             $scope.CateUpdate = $scope.DataUpdate[0].Name;
             $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+        });
+    }
+    $scope.UpdateCategoryPostLv2 = function () {
+        var Id = document.getElementById("cate_id_lv2").value;
+        var cateName = document.getElementById("inp_updateCatelv2").value;
+        var Metatitle = document.getElementById("inp_updateMetatitlelv2").value;
+        $http({
+            url: '/Admin/CategoryManager/CategoryUpdatePost',
+            method: "POST",
+            data: {
+                Id: Id,
+                Name: cateName,
+                Metatitle: Metatitle
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            alert("Sửa thành công");
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            alert("Sửa thất bại");
+            console.log(response);
+        });
+    }
+    $scope.UpdateCategoryLv3 = function (id) {
+        $http.get("/Admin/CategoryManager/ReturnCategoryUpdateLv3/" + id).then(function (response) {
+            $scope.DataUpdate = angular.fromJson(response.data);
+            $scope.CateId = $scope.DataUpdate[0].Id;
+            $scope.CateLv1 = $scope.DataUpdate[0].CateNameLv1;
+            $scope.CateLv2 = $scope.DataUpdate[0].CateNameLv2;
+            $scope.CateUpdate = $scope.DataUpdate[0].Name;
+            $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+        });
+    }
+    $scope.UpdateCategoryPostLv3 = function () {
+        var Id = document.getElementById("cate_id_lv3").value;
+        var cateName = document.getElementById("inp_updateCatelv3").value;
+        var Metatitle = document.getElementById("inp_updateMetatitlelv3").value;
+        $http({
+            url: '/Admin/CategoryManager/CategoryUpdatePost',
+            method: "POST",
+            data: {
+                Id: Id,
+                Name: cateName,
+                Metatitle: Metatitle
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            alert("Sửa thành công");
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            alert("Sửa thất bại");
+            console.log(response);
         });
     }
 });

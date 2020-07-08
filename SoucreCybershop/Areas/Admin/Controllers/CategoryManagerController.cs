@@ -127,6 +127,48 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ReturnCategoryUpdateLv3(int id)
+        {
+            var cateLv3 = data.Categories.Where(x => x.Id == id).First();
+            var cateLv1 = data.Categories.Where(x => x.Id == cateLv3.category_lv1_master_id).First().Name;
+            var cateLv2 = data.Categories.Where(x => x.category_lv2_id == cateLv3.category_lv2_master_id).First().Name;
+            var model = new List<CategoryManagerViewModel>();
+            model = data.Categories.Where(x => x.Id == id).Select(x => new CategoryManagerViewModel
+            {
+                Id = x.Id,
+                category_lv2_id = x.category_lv2_id,
+                category_lv3_id = x.category_lv3_id,
+                Name = x.Name,
+                IsDeleted = x.IsDeleted,
+                CreateBy = x.CreateBy,
+                CreateDate = x.CreateDate,
+                Metatitle = x.Metatitle,
+                category_lv1_master_id = x.category_lv1_master_id,
+                category_lv2_master_id = x.category_lv2_master_id,
+                CateNameLv1 = cateLv1,
+                CateNameLv2 = cateLv2
+            }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new CategoryManagerViewModel
+                {
+                    Id = item.Id,
+                    category_lv2_id = item.category_lv2_id,
+                    category_lv3_id = item.category_lv3_id,
+                    Name = item.Name,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    Metatitle = item.Metatitle,
+                    category_lv1_master_id = item.category_lv1_master_id,
+                    category_lv2_master_id = item.category_lv2_master_id,
+                    CateNameLv1 = item.CateNameLv1,
+                    CateNameLv2 = item.CateNameLv2
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ReturnCategoryLv2(int id) //category_id_lv1
         {
             var model = new List<CategoryManagerViewModel>();
@@ -340,6 +382,15 @@ namespace CyberShop.Areas.Admin.Controllers
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult CategoryUpdatePost(CategoryManagerViewModel model)
+        {
+            var entity = data.Categories.Find(model.Id);
+            entity.Name = model.Name;
+            entity.Metatitle = model.Metatitle;
+            var updateCate = new CategoriesDao().UpdateCategory(entity);
+            return Json(new { success=true}, JsonRequestBehavior.AllowGet);
         }
     }
 }
