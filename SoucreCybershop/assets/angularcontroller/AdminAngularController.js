@@ -330,6 +330,17 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             console.log(response);
         });
     }
+    $scope.DeleteCategory = function (id) {
+        $scope.DeleteCateId = id;
+    }
+    $scope.DeleteConfirm = function ()
+    {
+        $http.get("/Admin/CategoryManager/DeleteCategory/" + $scope.DeleteCateId).then(function (response) {
+            $scope.getCatList();
+            $scope.getCatListLv2();
+            $scope.getCatListLv3();
+        });
+    }
     $scope.propertyName = 'Id';
     $scope.sortBy = function (propertyName) {
         $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)

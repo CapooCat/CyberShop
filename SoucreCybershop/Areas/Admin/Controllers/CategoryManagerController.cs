@@ -19,7 +19,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnCategory()
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null && x.IsDeleted==false).Select(x => new CategoryManagerViewModel
             {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
@@ -55,7 +55,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnCategoryUpdate(int id)
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.Id==id ).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.Id==id && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
@@ -93,7 +93,7 @@ namespace CyberShop.Areas.Admin.Controllers
             var cateLv2 = data.Categories.Where(x => x.Id == id).First();
             var cateLv1 = data.Categories.Where(x => x.Id == cateLv2.category_lv1_master_id).First().Name;
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.Id == id).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.Id == id && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
@@ -133,7 +133,7 @@ namespace CyberShop.Areas.Admin.Controllers
             var cateLv1 = data.Categories.Where(x => x.Id == cateLv3.category_lv1_master_id).First().Name;
             var cateLv2 = data.Categories.Where(x => x.category_lv2_id == cateLv3.category_lv2_master_id).First().Name;
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.Id == id).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.Id == id && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
@@ -172,7 +172,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnCategoryLv2(int id) //category_id_lv1
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.category_lv1_master_id == id && x.category_lv3_id == null).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.category_lv1_master_id == id && x.category_lv3_id == null && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
@@ -208,7 +208,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnCategoryLv3(int id) //category_id_lv2
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.category_lv2_master_id == id).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.category_lv2_master_id == id && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Id = x.Id,
                 category_lv2_id = x.category_lv2_id,
@@ -244,7 +244,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnNameCategory(int id) //category_id_lv1
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null && x.Id == id).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id == null && x.Id == id && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Name = x.Name,
             }).ToList();
@@ -262,7 +262,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnNameCategoryLv2(int id) //category_id_lv2
         {
             var model = new List<CategoryManagerViewModel>();
-            model = data.Categories.Where(x => x.category_lv2_id == id && x.category_lv3_id == null).Select(x => new CategoryManagerViewModel
+            model = data.Categories.Where(x => x.category_lv2_id == id && x.category_lv3_id == null && x.IsDeleted == false).Select(x => new CategoryManagerViewModel
             {
                 Name = x.Name,
             }).ToList();
@@ -308,7 +308,7 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var cateDao = new CategoriesDao();
             var cateLv2 = new Category();
-            var catIdLv2 = data.Categories.Where(x => x.category_lv3_id == null && x.category_lv2_master_id == null).OrderByDescending(x => x.category_lv2_id).First().category_lv2_id;
+            var catIdLv2 = data.Categories.Where(x => x.category_lv3_id == null && x.category_lv2_master_id == null && x.IsDeleted == false).OrderByDescending(x => x.category_lv2_id).First().category_lv2_id;
             cateLv2.Name = model.Name;
             cateLv2.Metatitle = model.ProductTypeKW;
             if (!String.IsNullOrEmpty(model.BrandKW))
@@ -337,7 +337,7 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var cateDao = new CategoriesDao();
             var cateLv3 = new Category();
-            var catIdLv3 = data.Categories.Where(x => x.category_lv2_id == null).OrderByDescending(x => x.category_lv3_id).First().category_lv3_id;
+            var catIdLv3 = data.Categories.Where(x => x.category_lv2_id == null && x.IsDeleted == false).OrderByDescending(x => x.category_lv3_id).First().category_lv3_id;
             cateLv3.Name = model.Name;
             cateLv3.Metatitle = model.ProductTypeKW;
             if (!String.IsNullOrEmpty(model.BrandKW))
@@ -391,6 +391,13 @@ namespace CyberShop.Areas.Admin.Controllers
             entity.Metatitle = model.Metatitle;
             var updateCate = new CategoriesDao().UpdateCategory(entity);
             return Json(new { success=true}, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult DeleteCategory(int id)
+        {
+            var cateDeleted = data.Categories.Find(id);
+            cateDeleted.IsDeleted = true;
+            var updateCate = new CategoriesDao().UpdateCategory(cateDeleted);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }
