@@ -23,7 +23,8 @@ namespace CyberShop.Areas.Admin.Controllers
             {
                 Id = x.Id,
                 User_id=x.User_id,
-                PurchaseDate=x.PurchaseDate.ToString(),
+                BuyDate=x.PurchaseDate.ToString(),
+                PurchaseDate=x.PurchaseDate,
                 DeliveryAddress=x.DeliveryAddress,
                 DeliveryPhoneNum=x.DeliveryPhoneNum,
                 Status=x.Status,
@@ -37,12 +38,11 @@ namespace CyberShop.Areas.Admin.Controllers
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {
-                if (item.User_id == null)
-                {
                     ReturnData.Add(new InvoiceManagerViewModel
                     {
                         Id = item.Id,
                         User_id = item.User_id,
+                        BuyDate = item.BuyDate,
                         PurchaseDate = item.PurchaseDate,
                         DeliveryAddress = item.DeliveryAddress,
                         DeliveryPhoneNum = item.DeliveryPhoneNum,
@@ -53,13 +53,54 @@ namespace CyberShop.Areas.Admin.Controllers
                         CreateDate = item.CreateDate,
                         CustomerName =item.CustomerName
                     });
-                }
-                else
-                {
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult FilterInvoice(InvoiceManagerViewModel model)
+        {
+            var lstInvoice = new List<InvoiceManagerViewModel>();
+            lstInvoice = data.Invoices.Where(x => ((model.Id == null) || (x.Id == model.Id)))
+                                      .Where(x => ((model.CustomerName == null) || (x.CustomerName.Contains(model.CustomerName))))
+                                      .Where(x => ((model.DeliveryPhoneNum == null) || (x.DeliveryPhoneNum == model.DeliveryPhoneNum)))
+                .Select(x => new InvoiceManagerViewModel {
+                    Id = x.Id,
+                    User_id = x.User_id,
+                    BuyDate = x.PurchaseDate.ToString(),
+                    PurchaseDate = x.PurchaseDate,
+                    DeliveryAddress = x.DeliveryAddress,
+                    DeliveryPhoneNum = x.DeliveryPhoneNum,
+                    Status = x.Status,
+                    Total = x.Total,
+                    IsDeleted = x.IsDeleted,
+                    CreateBy = x.CreateBy,
+                    CreateDate = x.CreateDate,
+                    CustomerName = x.CustomerName
+                }).ToList();
+            if (model.DateFrom != null && model.DateTo==null)
+            {
+                var dateFrom = DateTime.Parse(model.DateFrom);
+                lstInvoice = lstInvoice.Where(x=>x.PurchaseDate == dateFrom).ToList();
+            }
+            if(model.DateFrom == null && model.DateTo != null)
+            {
+                var dateTo = DateTime.Parse(model.DateTo);
+                lstInvoice = lstInvoice.Where(x => x.PurchaseDate == dateTo).ToList();
+            }
+            if(model.DateFrom != null && model.DateTo != null)
+            {
+                var dateFrom = DateTime.Parse(model.DateFrom);
+                var dateTo = DateTime.Parse(model.DateTo);
+                lstInvoice = lstInvoice.Where(x => x.PurchaseDate >= dateFrom && x.PurchaseDate <= dateTo).ToList();
+            }
+            List<object> ReturnData = new List<object>();
+            foreach (var item in lstInvoice)
+            {
                     ReturnData.Add(new InvoiceManagerViewModel
                     {
                         Id = item.Id,
                         User_id = item.User_id,
+                        BuyDate = item.BuyDate,
                         PurchaseDate = item.PurchaseDate,
                         DeliveryAddress = item.DeliveryAddress,
                         DeliveryPhoneNum = item.DeliveryPhoneNum,
@@ -68,9 +109,8 @@ namespace CyberShop.Areas.Admin.Controllers
                         IsDeleted = item.IsDeleted,
                         CreateBy = item.CreateBy,
                         CreateDate = item.CreateDate,
-                        CustomerName = data.Users.Where(x => x.id == item.User_id).First().Name 
+                        CustomerName = item.CustomerName
                     });
-                }
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }

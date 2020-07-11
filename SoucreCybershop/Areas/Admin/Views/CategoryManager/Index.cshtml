@@ -26,7 +26,7 @@
                         <tbody>
                             <tr ng-repeat="item in catList">
                                 <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv1(item.Id)">{{item.Name}}</a></td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal2"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategory(item.Id)" data-target="#suaDanhMuc1"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -50,7 +50,7 @@
                         <tbody>
                             <tr ng-repeat="item in catListLv2">
                                 <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv2(item.category_lv2_id)">{{item.Name}}</a></td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategoryLv2(item.Id)" data-target="#suaDanhMuc2"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -75,7 +75,7 @@
                         <tbody>
                             <tr ng-repeat="item in catListLv3">
                                 <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash" ng-click="DeleteCategory(item.Id)"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategoryLv3(item.Id)" data-target="#suaDanhMuc3"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash" ng-click="DeleteCategory(item.Id)"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -228,21 +228,25 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Chọn danh mục cấp 1:</p>
-                            <select class="list-select">
+                            <select id="slc_catelv3_1" class="list-select" ng-model="selectionCat" ng-change="ReturnCateLv2()">
                                 <option value="">Chọn danh mục</option>
-                                @foreach (var item in catListLv1)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                }
+                                <option ng-repeat="item in catList" value="{{item.Id}}">{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Chọn danh mục cấp 2: (Vui lòng chọn danh mục cấp 1)</p>
+                            <select id="slc_catelv3_2" class="list-select">
+                                <option value="">Chọn danh mục</option>
+                                <option ng-repeat="item in cateListLv2" value="{{item.Id}}">{{item.Name}}</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <p>Tên:</p>
-                            <input type="text" placeholder="Nhập tên danh mục...">
+                            <input type="text" placeholder="Nhập tên danh mục..." id="inp_cateNameLv3">
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select class="list-select">
+                            <select id="sl_prdTypeLv3" class="list-select">
                                 <option value="">Chọn loại sản phẩm</option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -252,13 +256,25 @@
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo hãng sản phẩm:</p>
-                            <select class="list-select">
+                            <select id="sl_brandNameLv3" class="list-select">
                                 <option value="">Chọn hãng sản phẩm</option>
                                 @foreach (var item in brandList)
                                 {
                                     <option value="@item.Metatitle">@item.BrandName</option>
                                 }
                             </select>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Giá tiền dưới: (triệu)</p>
+                            <input type="text" placeholder="Nhập giá tiền..." id="inp_lowPriceLv3">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Giá tiền trên: (triệu)</p>
+                            <input type="text" placeholder="Nhập giá tiền..." id="inp_highPriceLv3">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Lọc sản phẩm theo từ khóa:</p>
+                            <input type="text" placeholder="Nhập từ khóa..." id="inp_productKwLv3">
                         </div>
                     </div>
 
@@ -271,11 +287,11 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="suaDanhMuc1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Sửa danh mục</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sửa danh mục cấp 1</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -284,39 +300,87 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tên:</p>
-                            <input type="text" placeholder="Nhập tên danh mục...">
-                        </div>
-                        <div class="col-md-4">
-                            <p>Lọc theo loại sản phẩm:</p>
-                            <select class="list-select">
-                                @foreach (var item in catListLv1)
-                                {
-                                    <option value="@item.Name">@item.Name</option>
-                                }
-                            </select>
+                            <input type="text" id="inp_updateCatelv1" ng-value="CateUpdate">
+                            <input type="text" id="cate_id_lv1" ng-value="CateId" hidden>
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Lọc theo hãng sản phẩm:</p>
-                            <input type="text" placeholder="hãng sản phẩm">
-                        </div>
-                        <div class="col-md-4">
-                            <p>Giá tiền dưới:</p>
-                            <input type="text" placeholder="Nhập giá tiền...">
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <p>Giá tiền trên:</p>
-                            <input type="text" placeholder="Nhập giá tiền...">
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <p>Lọc sản phẩm theo từ khóa:</p>
-                            <input type="text" placeholder="Nhập từ khóa...">
+                            <p>Từ khóa</p>
+                            <input type="text" id="inp_updateMetatitlelv1" ng-value="MetatitleUpdate">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button">Thêm</button>
+                    <button type="button" ng-click="UpdateCategoryPost()">Sửa</button>
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="suaDanhMuc2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sửa danh mục cấp 2</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                        <div class="col-md-4">
+                            <p>Danh mục lv1</p>
+                            <input type="text" readonly ng-value="CateLv1">
+                            <input type="text" id="cate_id_lv2" ng-value="CateId" hidden>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Tên:</p>
+                            <input type="text" id="inp_updateCatelv2" ng-value="CateUpdate">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Từ khóa</p>
+                            <input type="text" id="inp_updateMetatitlelv2" ng-value="MetatitleUpdate">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="UpdateCategoryPostLv2()">Sửa</button>
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="suaDanhMuc3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sửa danh mục cấp 2</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                        <div class="col-md-4">
+                            <p>Danh mục lv1</p>
+                            <input type="text" readonly ng-value="CateLv1">
+                            <input type="text" id="cate_id_lv3" ng-value="CateId" hidden>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Danh mục lv2</p>
+                            <input type="text" readonly ng-value="CateLv2">
+                        </div>
+                        <div class="col-md-4">
+                            <p>Tên:</p>
+                            <input type="text" id="inp_updateCatelv3" ng-value="CateUpdate">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Từ khóa</p>
+                            <input type="text" id="inp_updateMetatitlelv3" ng-value="MetatitleUpdate">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="UpdateCategoryPostLv3()">Sửa</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
@@ -345,6 +409,6 @@
 
 <script>
     Active = document.getElementById("CategoryManager");
-    Active.className = "active-button"
+    Active.className = "active-button";
 </script>
 

@@ -25,5 +25,7 @@ namespace CyberShop.Areas.Admin.Models
         public string ProductKW { get; set; }
         public int? LowPrice { get; set; }
         public int? HighPrice { get; set; }
+        public string CateNameLv1 { get; set; }
+        public string CateNameLv2 { get; set; }
     }
 }

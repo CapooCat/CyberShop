@@ -10,23 +10,23 @@
         <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
-                <input type="text" placeholder="Nhập mã hóa đơn...">
+                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
             </div>
             <div class="col-md-2">
                 <p>Thời gian từ:</p>
-                <input type="date">
+                <input type="date" id="date_from">
             </div>
             <div class="col-md-2">
                 <p>Thời gian đến:</p>
-                <input type="date">
+                <input type="date" id="date_to">
             </div>
             <div class="col-md-2">
                 <p>Tên khách hàng:</p>
-                <input type="text" placeholder="Nhập tên khách hàng...">
+                <input type="text" placeholder="Nhập tên khách hàng..." id="customer_name">
             </div>
             <div class="col-md-2">
                 <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại...">
+                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
             </div>
             <div class="col-md-12">
 
@@ -35,7 +35,7 @@
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
             <button type="button" data-toggle="modal" data-target="#warningModal" class="delete"><i class="fas fa-trash"></i></button>
-            <button style="width: 100px;">Lọc</button>
+            <button style="width: 100px;" ng-click="FilterInvoice()">Lọc</button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
@@ -48,13 +48,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 3%;"><a href="#"></a></th>
-                                <th style="width: 7%;"><a href="#">Mã hóa đơn</a></th>
-                                <th style="width: 15%;"><a href="#">Tên khách hàng</a></th>
-                                <th style="width: 28%;"><a href="#">Địa chỉ</a></th>
-                                <th style="width: 10%;"><a href="#">Số điện thoại</a></th>
-                                <th style="width: 10%;"><a href="#">Ngày xuất</a></th>
-                                <th style="width: 12%;"><a href="#">Tình trạng</a></th>
-                                <th style="width: 15%;"><a href="#">Hoạt động</a></th>
+                                <th style="width: 7%;"><a href="#" ng-click="sortBy('Id')">Mã hóa đơn</a></th>
+                                <th style="width: 15%;"><a href="#" ng-click="sortBy('CustomerName')" >Tên khách hàng</a></th>
+                                <th style="width: 28%;"><a href="#" ng-click="sortBy('DeliveryAddress')">Địa chỉ</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortBy('DeliveryPhoneNum')">Số điện thoại</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortBy('PurchaseDate')">Ngày xuất</a></th>
+                                <th style="width: 12%;"><a href="#" ng-click="sortBy('Status')">Tình trạng</a></th>
+                                <th style="width: 15%;"><a href="#" >Hoạt động</a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,7 +64,7 @@
                                 <td>{{item.CustomerName}}</td>
                                 <td>{{item.DeliveryAddress}}</td>
                                 <td>{{item.DeliveryPhoneNum}}</td>
-                                <td>{{item.PurchaseDate}}</td>
+                                <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.Status}}</td>
                                 <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
