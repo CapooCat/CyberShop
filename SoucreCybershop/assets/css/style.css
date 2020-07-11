@@ -2247,3 +2247,164 @@ canvas{
   text-align: center;
   border-bottom: 1px solid #DCDCDC;
 }
+
+.PC-Title {
+  margin-top: -1px;
+  border: 1px solid #DCDCDC;
+  padding: 10px 20px;
+}
+
+.PC-Info {
+  margin-top: -1px;
+  margin-left: -1px;
+  border: 1px solid #DCDCDC;
+  padding: 10px 20px;
+}
+
+.PC-Info button {
+  transition: .2s;
+  border: 2px solid #1E90FF;
+  color: #fff;
+  background-color: #1E90FF;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.PC-Info button:hover {
+   color: #1E90FF;
+   background-color: #fff;
+}
+
+.PC-header {
+  margin-bottom: 15px;
+}
+
+.PC-header button {
+  transition: .2s;
+  border: 2px solid #1E90FF;
+  color: #fff;
+  background-color: #1E90FF;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.PC-header button:hover {
+  color: #1E90FF;
+  background-color: #fff;
+}
+
+.PC-footer {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.PC-footer button{
+  transition: .2s;
+  border: 2px solid #1E90FF;
+  color: #fff;
+  background-color: #1E90FF;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.PC-footer button:hover {
+  color: #1E90FF;
+  background-color: #fff;
+}
+.search {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.search button {
+  transition: .2s;
+  padding: 5px 20px;
+  float: left;
+  width: 70px;
+  background: #1E90FF;
+  font-size: 17px;
+  border: 2px solid #1E90FF;
+  border-radius: 0px 10px 10px 0px;
+  color: white;
+  cursor: pointer;
+}
+
+.search button:hover {
+  background-color: #fff;
+  color: #1E90FF;
+}
+
+.search input[type=text]:focus {
+  outline: none;
+}
+
+.search input[type=text] {
+  float: left;
+  width: calc(100% - 70px);
+  margin: auto;
+  border-radius: 10px 0px 0px 10px;
+  text-indent: 10px;
+  padding: 7px;
+  font-size: 17px;
+  border: none;
+}
+
+.PC-Item {
+  margin-top: -1px;
+  margin-left: -1px;
+  border: 1px solid #DCDCDC;
+  padding: 10px 20px;
+}
+
+.PC-Item .Info {
+  border: none;
+  background-color: #fff;
+  float: left;
+  margin-left: 10px;
+  padding: 0;
+}
+
+.PC-Item .Price {
+  font-weight: bold;
+  font-size: 17px;
+  color: #1E90FF;
+}
+
+.PC-Item .delete {
+  transition: .2s;
+  width: 40px;
+  height: 40px;
+  background: red;
+  border: 2px solid red;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px; 
+}
+
+.PC-Item .edit {
+  transition: .2s;
+  width: 40px;
+  height: 40px;
+  background: green;
+  border: 2px solid green;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px; 
+}
+
+.PC-Item .delete:hover {
+  background-color: #fff;
+  color: red;
+}
+
+.PC-Item .edit:hover {
+  background-color: #fff;
+  color: green;
+}
+

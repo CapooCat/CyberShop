@@ -1,0 +1,92 @@
+﻿@model List<CyberShop.Models.DetailProductViewModel>
+
+@{
+    ViewBag.Title = "Build PC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
+}
+
+<section class="container" style="padding-top: 160px; padding-bottom: 50px;">
+    <h3><i class="fas fa-bars" style="margin-right: 10px"></i>Tự build PC</h3>
+    <ul class="breadcrumb Page-address">
+        <li class="breadcrumb-item"><a href="/Home"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
+        <li class="breadcrumb-item active">Tự build PC</li>
+    </ul>
+    <div class="PC-header"><button><i class="fas fa-undo" style="margin-right: 5px;"></i>Reset</button><span style="float: right;">Chi phí dự tính: 0đ</span></div>
+    <div class="row" style="border-top: 3px solid #1E90FF;border-bottom: 3px solid #1E90FF;border-radius:10px;overflow:hidden">
+        
+
+        <div class="col-md-3 PC-Title">Mainboard - Bo mạch chủ</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Mainboard</button></div>
+
+        <div class="col-md-3 PC-Title">CPU - Vi xử lý</div>
+        @*<div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn CPU</button></div>*@
+        <div class="col-md-9 PC-Item">
+            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
+            <div class="Info">
+                ROG Strix GeForce® GTX 1650 4GB GDDR5
+                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
+                <p>Số lượng: 1</p>
+                <div><button class="delete"><i class="fas fa-trash"></i></button><button class="edit"><i class="fas fa-edit"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">RAM - Bộ nhớ trong</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn RAM</button></div>
+
+        <div class="col-md-3 PC-Title">SSD - ổ cứng thể rắn</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn SSD</button></div>
+
+        <div class="col-md-3 PC-Title">HDD - ổ cứng PC</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn HDD</button></div>
+
+        <div class="col-md-3 PC-Title">PSU - Nguồn PC</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn PSU</button></div>
+
+        <div class="col-md-3 PC-Title">VGA - Card màn hình</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn VGA</button></div>
+
+        <div class="col-md-3 PC-Title">Case - Vỏ thùng máy</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Case</button></div>
+
+        <div class="col-md-3 PC-Title">Màn hình</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn màn hình</button></div>
+
+        <div class="col-md-3 PC-Title">Tản nhiệt</div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Tản nhiệt</button></div>
+    </div>
+
+    <div class="PC-footer"><button><i class="fas fa-shopping-cart" style="margin-right: 5px;"></i>Thêm vào giỏ hàng</button></div>
+
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Chọn Mainboard</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="search">
+                        <input id="Search" type="text">
+                        <button><i class="fa fa-search"></i></button>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button">Xóa</button>
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+@section scripts{
+<script type="text/javascript">
+    	
+</script>
+    }
+

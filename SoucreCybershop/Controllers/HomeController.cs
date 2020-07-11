@@ -111,6 +111,7 @@ namespace CyberShop.Controllers
         {
             return View();
         }
+
         public ActionResult SignUp()
         {
             var model = new SignUpViewModel();
