@@ -14,7 +14,7 @@
         }
     }
 })
-app.controller('MyAdminController', function ($scope, $http) {
+app.controller('MyAdminController', function ($scope, $http,$filter) {
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
             $scope.catList = response.data;
@@ -330,4 +330,16 @@ app.controller('MyAdminController', function ($scope, $http) {
             console.log(response);
         });
     }
+    $scope.propertyName = 'Id';
+    $scope.sortBy = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        if ($scope.reverse == false) {
+            $scope.invoiceList = $filter('orderBy')($scope.invoiceList, propertyName);
+        }
+        else {
+            $scope.invoiceList = $filter('orderBy')($scope.invoiceList, '-' + propertyName);
+        }   
+    };
 });
