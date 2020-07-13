@@ -104,11 +104,19 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                alert("Thêm thành công");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
-                alert("Thêm thất bại");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
                 console.log(response);
             });
         }
@@ -142,11 +150,19 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                alert("Thêm thành công");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
-                alert("Thêm thất bại");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
                 console.log(response);
             });
         }
@@ -201,11 +217,19 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                alert("Thêm thành công");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
-                alert("Thêm thất bại");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
                 console.log(response);
             });
         }
@@ -228,12 +252,10 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                alert("Lọc thành công");
                 $scope.invoiceList = response.data;
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
-                alert("Lọc thất bại");
                 console.log(response);
             }); 
     }
@@ -259,11 +281,19 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
-            alert("Sửa thành công");
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã sửa thành công',
+            })
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
-            alert("Sửa thất bại");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Sửa thất bại',
+            })
             console.log(response);
         });
     }
@@ -290,11 +320,19 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
-            alert("Sửa thành công");
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã sửa thành công',
+            })
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
-            alert("Sửa thất bại");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Sửa thất bại',
+            })
             console.log(response);
         });
     }
@@ -322,11 +360,19 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
-            alert("Sửa thành công");
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã sửa thành công',
+            })
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
-            alert("Sửa thất bại");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Sửa thất bại',
+            })
             console.log(response);
         });
     }
