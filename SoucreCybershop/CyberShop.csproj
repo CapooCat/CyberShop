@@ -223,6 +223,7 @@
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CategoryManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceManagerViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductManagerViewModel.cs" />
     <Compile Include="Common\CommonConstantUser.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserInfo.cs" />

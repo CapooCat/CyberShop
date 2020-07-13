@@ -65,80 +65,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="item in productList">
                                 <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.ProductTypeName}}</td>
+                                <td>{{item.Amount}}</td>
+                                <td>{{item.Price | currency:"":0}}đ</td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-
-                        </tbody>
+                      </tbody>
                     </table>
                 </div>
             </div>

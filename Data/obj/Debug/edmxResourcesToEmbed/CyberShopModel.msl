@@ -121,6 +121,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

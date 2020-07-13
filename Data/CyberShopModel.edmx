@@ -136,6 +136,7 @@
           <Property Name="MetaTitle" Type="nvarchar" MaxLength="50" />
           <Property Name="Info" Type="nvarchar(max)" />
           <Property Name="Price" Type="float" />
+          <Property Name="Amount" Type="int" />
           <Property Name="SalePercent" Type="int" />
           <Property Name="MonthWarranty" Type="int" />
           <Property Name="Image" Type="nvarchar(max)" />
@@ -654,6 +655,7 @@
           <NavigationProperty Name="ProductImages" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
           <NavigationProperty Name="Brand" Relationship="ShopPCComponentsModel.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
           <NavigationProperty Name="ProducType" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="Product" ToRole="ProducType" />
+          <Property Name="Amount" Type="Int32" />
         </EntityType>
         <Association Name="FK_Detail_PcSets_Product">
           <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="1" />
@@ -981,6 +983,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

@@ -42,7 +42,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         $scope.getCatList();
         $scope.getCatListLv2();
         $scope.getCatListLv3();
-    $scope.loading = false;
+        $scope.loading = false;
     $scope.DetailCateLv1 = function (id) {
         $http.get("/Admin/CategoryManager/ReturnCategoryLv2/" + id).then(function (response) {
             $scope.loading = true;
@@ -336,6 +336,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
     $scope.DeleteConfirm = function ()
     {
         $http.get("/Admin/CategoryManager/DeleteCategory/" + $scope.DeleteCateId).then(function (response) {
+            alert("Xóa thành công");
             $scope.getCatList();
             $scope.getCatListLv2();
             $scope.getCatListLv3();
@@ -353,4 +354,12 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.invoiceList = $filter('orderBy')($scope.invoiceList, '-' + propertyName);
         }   
     };
+    //--------------PRODUCT_START--------------------//
+    $scope.ReturnProduct = function () {
+        $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
+            $scope.productList = response.data;
+        });
+    }
+    $scope.ReturnProduct();
+    //--------------PRODUCT_END--------------------//
 });

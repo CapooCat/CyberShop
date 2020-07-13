@@ -19,7 +19,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnInvoice()
         {
             var model = new List<InvoiceManagerViewModel>();
-            model = data.Invoices.Select(x => new InvoiceManagerViewModel
+            model = data.Invoices.Where(x=>x.IsDeleted==false).Select(x => new InvoiceManagerViewModel
             {
                 Id = x.Id,
                 User_id=x.User_id,
@@ -93,6 +93,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 var dateTo = DateTime.Parse(model.DateTo);
                 lstInvoice = lstInvoice.Where(x => x.PurchaseDate >= dateFrom && x.PurchaseDate <= dateTo).ToList();
             }
+            lstInvoice = lstInvoice.Where(x => x.IsDeleted == false).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in lstInvoice)
             {

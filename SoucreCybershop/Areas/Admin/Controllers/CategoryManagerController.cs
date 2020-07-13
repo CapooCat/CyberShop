@@ -386,17 +386,19 @@ namespace CyberShop.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult CategoryUpdatePost(CategoryManagerViewModel model)
         {
-            var entity = data.Categories.Find(model.Id);
+            Category entity = new Category();
+            entity = data.Categories.Find(model.Id);
             entity.Name = model.Name;
             entity.Metatitle = model.Metatitle;
-            var updateCate = new CategoriesDao().UpdateCategory(entity);
-            return Json(new { success=true}, JsonRequestBehavior.AllowGet);
+            data.SaveChanges();
+            return Json(new { success=true }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult DeleteCategory(int id)
         {
-            var cateDeleted = data.Categories.Find(id);
-            cateDeleted.IsDeleted = true;
-            var updateCate = new CategoriesDao().UpdateCategory(cateDeleted);
+            Category entity = new Category();
+            entity = data.Categories.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }

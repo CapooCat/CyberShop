@@ -131,6 +131,7 @@
     <Property Name="MetaTitle" Type="nvarchar" MaxLength="50" />
     <Property Name="Info" Type="nvarchar(max)" />
     <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="int" />
     <Property Name="SalePercent" Type="int" />
     <Property Name="MonthWarranty" Type="int" />
     <Property Name="Image" Type="nvarchar(max)" />
