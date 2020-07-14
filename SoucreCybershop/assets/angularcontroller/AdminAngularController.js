@@ -389,7 +389,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         });
     }
     $scope.propertyName = 'Id';
-    $scope.sortBy = function (propertyName) {
+    $scope.sortByInvoice = function (propertyName) {
         $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
         ? !$scope.reverse : false;
         $scope.propertyName = propertyName;
@@ -400,12 +400,24 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.invoiceList = $filter('orderBy')($scope.invoiceList, '-' + propertyName);
         }   
     };
+
     //--------------PRODUCT_START--------------------//
-    $scope.ReturnProduct = function () {
+    $scope.ReturnProductList = function () {
         $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
             $scope.productList = response.data;
         });
     }
-    $scope.ReturnProduct();
+    $scope.ReturnProductList();
+    $scope.sortByProduct = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        if ($scope.reverse == false) {
+            $scope.productList = $filter('orderBy')($scope.productList, propertyName);
+        }
+        else {
+            $scope.productList = $filter('orderBy')($scope.productList, '-' + propertyName);
+        }
+    };
     //--------------PRODUCT_END--------------------//
 });

@@ -22,5 +22,6 @@ namespace CyberShop.Areas.Admin.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> Amount { get; set; }
         public string ProductTypeName { get; set; }
+        public string BrandName { get; set; }
     }
 }

@@ -57,10 +57,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 3%;"><a href="#"></a></th>
-                                <th style="width: 27%;"><a href="#">Tên sản phẩm</a></th>
-                                <th style="width: 20%;"><a href="#">Loại sản phẩm</a></th>
-                                <th style="width: 20%;"><a href="#">Số lượng</a></th>
-                                <th style="width: 20%;"><a href="#">Giá tiền</a></th>
+                                <th style="width: 35%;"><a href="#" ng-click="sortByProduct('ProductName')">Tên sản phẩm</a></th>
+                                <th style="width: 13%;"><a href="#" ng-click="sortByProduct('ProductTypeName')">Loại sản phẩm</a></th>
+                                <th style="width: 15%;"> <a href="#" ng-click="sortByProduct('BrandName')">Hãng sản phẩm</a></th>
+                                <th style="width: 15%;"><a href="#" ng-click="sortByProduct('Price')">Giá tiền (VNĐ)</a></th>
+                                <th style="width: 9%;"><a href="#" ng-click="sortByProduct('Amount')">Số lượng</a></th>
                                 <th style="width: 20%;"><a href="#">Hoạt động</a></th>
                             </tr>
                         </thead>
@@ -69,8 +70,9 @@
                                 <td class="checkbox"><input type="checkbox" value=""></td>
                                 <td>{{item.ProductName}}</td>
                                 <td>{{item.ProductTypeName}}</td>
+                                <td>{{item.BrandName}}</td>
+                                <td>{{item.Price | currency:"":0}}</td>
                                 <td>{{item.Amount}}</td>
-                                <td>{{item.Price | currency:"":0}}đ</td>
                                 <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
                       </tbody>

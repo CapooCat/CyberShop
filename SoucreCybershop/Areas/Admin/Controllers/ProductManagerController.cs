@@ -23,8 +23,9 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnProduct()
         {
             var model = new List<ProductManagerViewModel>();
-            model = (from a in data.Products
-                     join b in data.ProducTypes on a.ProductType_id equals b.Id
+            model = (from b in data.ProducTypes
+                     join a in data.Products on b.Id equals a.ProductType_id
+                     join c in data.Brands on a.Brand_id equals c.Id
                      select new ProductManagerViewModel
                      {
                          id = a.id,
@@ -41,7 +42,8 @@ namespace CyberShop.Areas.Admin.Controllers
                          IsDeleted = a.IsDeleted,
                          CreateBy = a.CreateBy,
                          CreateDate = a.CreateDate,
-                         Amount = a.Amount
+                         Amount = a.Amount,
+                         BrandName=c.BrandName
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -62,7 +64,8 @@ namespace CyberShop.Areas.Admin.Controllers
                     IsDeleted = item.IsDeleted,
                     CreateBy = item.CreateBy,
                     CreateDate = item.CreateDate,
-                    Amount = item.Amount
+                    Amount = item.Amount,
+                    BrandName=item.BrandName
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
