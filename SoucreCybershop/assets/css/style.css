@@ -849,6 +849,7 @@ button:focus {
 
 
 /* Product */
+
 .empty-alert {
   display: none;
   padding-top: 10%;
@@ -1167,7 +1168,18 @@ button:focus {
 .product-img .image-box {
   width: 531px;
   height: 531px;
+  position: relative;
 }
+
+.image-box img {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto auto;
+}
+
 .product-img img {
   display: none;
   max-width: 531px;
@@ -1229,6 +1241,17 @@ button:focus {
   margin-right: 5px;
 }
 
+.product-info .compare {
+
+  border: 2px solid red !important;
+  background-color: red !important;
+}
+
+.product-info .compare:hover {
+  background-color: #fff !important;
+  color: red !important;
+}
+
 .product-info button:hover {
   padding: 8px 16px;
   background-color: #1E90FF;
@@ -1255,7 +1278,9 @@ button:focus {
 }
 
 .word-content {
+  position: relative;
   margin: 0;
+  overflow: hidden;
   border: 2px solid #
   padding: 15px;
   padding-top: 15px;
@@ -2322,7 +2347,7 @@ canvas{
 
 .search button {
   transition: .2s;
-  padding: 5px 20px;
+  padding: 8px 20px;
   float: left;
   width: 70px;
   background: #1E90FF;
@@ -2348,7 +2373,7 @@ canvas{
   margin: auto;
   border-radius: 10px 0px 0px 10px;
   text-indent: 10px;
-  padding: 7px;
+  padding: 10px;
   font-size: 17px;
   border: none;
 }
@@ -2360,7 +2385,7 @@ canvas{
   padding: 10px 20px;
 }
 
-.PC-Item .Info {
+.PC-Item .Info, .PC-Part .Info {
   border: none;
   background-color: #fff;
   float: left;
@@ -2368,7 +2393,7 @@ canvas{
   padding: 0;
 }
 
-.PC-Item .Price {
+.PC-Item .Price, .PC-Part .Price {
   font-weight: bold;
   font-size: 17px;
   color: #1E90FF;
@@ -2408,3 +2433,55 @@ canvas{
   color: green;
 }
 
+.PC-Part {
+  padding-top: 10px;
+  position: relative;
+  border-bottom: 1px solid #DCDCDC;
+  height: 170px;
+  width: 100%;
+}
+
+.PC-Part .add {
+  position: absolute;
+  bottom: 0;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px;
+  margin-right: 5px !important;
+  transition: .2s;
+  padding: 10px 20px;
+  background: #1E90FF;
+  border: 2px solid #1E90FF;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px; 
+}
+
+.PC-Part .add:hover {
+  background-color: #fff;
+  color: #1E90FF;
+}
+
+.header-word-hide {
+  width: 100%;
+  height: 62px;
+  position: absolute;
+  background-color: #fff;
+}
+
+.footer-word-hide {
+  width: 100%;
+  height: 9px;
+  position: absolute;
+  background-color: #fff;
+  bottom: 0;
+}
+
+.hide-scroll {
+  background-color: #fff;
+  position: absolute;
+  width: 34px;
+  height: 100%;
+  right: 0;
+}
