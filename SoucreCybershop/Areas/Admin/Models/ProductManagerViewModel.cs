@@ -7,9 +7,9 @@ namespace CyberShop.Areas.Admin.Models
 {
     public class ProductManagerViewModel
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public int Brand_id { get; set; }
-        public int ProductType_id { get; set; }
+        public int? ProductType_id { get; set; }
         public string ProductName { get; set; }
         public string MetaTitle { get; set; }
         public string Info { get; set; }
@@ -23,5 +23,7 @@ namespace CyberShop.Areas.Admin.Models
         public Nullable<int> Amount { get; set; }
         public string ProductTypeName { get; set; }
         public string BrandName { get; set; }
+        public float? PriceTo { get; set; }
+        public float? PriceFrom { get; set; }
     }
 }

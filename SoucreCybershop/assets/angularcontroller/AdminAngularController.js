@@ -419,5 +419,33 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.productList = $filter('orderBy')($scope.productList, '-' + propertyName);
         }
     };
+    $scope.FilterProduct = function () {
+        var productId = document.getElementById("product_id").value;
+        var productName = document.getElementById("product_name").value;
+        var e = document.getElementById("product_type");
+        var productTypeId = e.options[e.selectedIndex].value;
+        var productBrand = document.getElementById("product_brand").value;
+        var priceFrom = document.getElementById("product_priceFrom").value;
+        var priceTo = document.getElementById("product_priceTo").value;
+        $http({
+            url: '/Admin/ProductManager/FilterProduct',
+            method: "POST",
+            data: {
+                id: productId,
+                ProductName:productName,
+                ProductType_id: productTypeId,
+                BrandName: productBrand,
+                PriceFrom: priceFrom,
+                PriceTo: priceTo
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.productList = response.data;
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            console.log(response);
+        });
+    }
     //--------------PRODUCT_END--------------------//
 });
