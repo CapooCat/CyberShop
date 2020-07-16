@@ -43,7 +43,7 @@ namespace CyberShop.Controllers
                     invoice.PurchaseDate = DateTime.Now;
                     invoice.DeliveryAddress = model.Address + " " + model.City;
                     invoice.DeliveryPhoneNum = model.PhoneNum;
-                    invoice.Status = "Đã hoàn thành";
+                    invoice.Status = "Chưa hoàn thành";
                     invoice.IsDeleted = false;
                     invoice.CreateBy = "Admin";
                     invoice.CreateDate = DateTime.Now;
