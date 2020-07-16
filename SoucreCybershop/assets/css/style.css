@@ -469,7 +469,6 @@ button:focus {
 }
 
 .logo:hover{
-  text-shadow: 0px 0px 16px rgba(30,144,255,0.5);
   color: #1E90FF;
   padding: 0;
   margin: 0;
@@ -1086,8 +1085,11 @@ button:focus {
 }
 
 .login input[type=text]{
-  border: 2px solid gray;
+  margin: 0px 15px 15px;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 15px 20px;
+  height: 60px;
   width: 40%;
   border-radius: 10px;
 }
@@ -1097,10 +1099,12 @@ button:focus {
 }
 
 .login input[type=password]{
-  border: 2px solid gray;
+  height: 60px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 15px 20px;
   width: 40%;
   border-radius: 10px;
+  border: none;
 }
 
 .login input[type=password]:focus{
@@ -1111,6 +1115,7 @@ button:focus {
   transition: .2s;
   border: 2px solid #1E90FF;
   padding: 15px 20px;
+  height: 60px;
   color: white;
   background-color: #1E90FF;
   width: 40%;
@@ -1118,23 +1123,21 @@ button:focus {
 }
 
 .login button:hover{
-  box-shadow: 0px 0px 16px 3px rgba(30,144,255,0.5);
+  background-color: #fff;
+  color: #1E90FF;
 }
 
 .login .second-btn {
   transition: .2s;
-  border: 2px solid #1E90FF;
-  padding: 15px 20px;
-  color: #1E90FF;
-  background-color: #fff;
-  width: 40%;
-  border-radius: 10px;
+  border: 2px solid red;
+  color: #fff;
+  background-color: red;
 }
 
-.login .second-btn:hover {color: #fff;
-  color: #1E90FF;
+.login .second-btn:hover {
+  color: #fff;
+  color: red;
   background-color: #fff;
-  box-shadow: 0px 0px 16px 3px rgba(30,144,255,0.5);
 }
 
 .login button:focus{
@@ -1142,6 +1145,7 @@ button:focus {
 }
 
 .login .facebook-btn {
+  height: 60px;
   display: inline-block;
   text-align: center;
   transition: .2s;
@@ -1349,6 +1353,11 @@ th {
   padding: 20px 10px;
 }
 
+.pay-error div {
+  width: 100%;
+  text-align: center;
+}
+
 .Total-Payment td{
   font-size: 20px;
   font-weight: bold;
@@ -1357,14 +1366,16 @@ th {
 }
 
 .input-info {
-  padding: 20px;
   text-align: center;
 }
 
 .input-info input[type=text] {
   height: 60px;
-  border: 2px solid gray;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border: none;
   padding: 15px 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
   width: 100%;
   border-radius: 10px;
 }
@@ -1398,7 +1409,7 @@ th {
 
 .start-pay {
   text-align: center;
-  margin: 10px;
+  margin: 50px;
 }
 
 .start-pay button {
@@ -1412,7 +1423,6 @@ th {
 }
 
 .start-pay button:hover {
-  width: 30%;
   background-color: #fff;
   border: 2px solid #1E90FF;
   color: #1E90FF;
@@ -1424,7 +1434,7 @@ th {
   color: gray;
   height: 60px;
   border-radius: 10px;
-  border: 2px solid gray;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 
@@ -1435,7 +1445,7 @@ th {
 
 .discount input[type=text] {
   height: 60px;
-  border: 2px solid gray;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   padding: 15px 20px;
   width: 79%;
   border-radius: 10px;
@@ -1512,7 +1522,6 @@ footer{
 }
  
 .footer-distributed .footer-center i{
-  text-shadow: 3px 4px 8px rgba(0,0,0,0.3);
   color: #1E90FF;
   font-size: 25px;
   width: 38px;
@@ -1581,7 +1590,6 @@ footer{
   cursor: pointer;
   background-color: #1E90FF;
   border-radius: 10px;
-  box-shadow: 3px 5px 8px 0px rgba(0,0,0,0.3);
   font-size: 20px;
   color: #ffffff;
   text-align: center;
