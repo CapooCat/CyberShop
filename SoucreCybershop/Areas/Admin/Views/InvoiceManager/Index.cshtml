@@ -125,7 +125,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in listInvoiceDetail">
+                                            <tr ng-repeat="item in listInvoiceDetail" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                                 <td>{{item.ProductName}}</td>
                                                 <td>{{item.Amount}}</td>
                                                 <td>{{item.Price | currency:"":0}}</td>
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="float: right;">Tổng tiền: 8.300.000đ</div>
+                    <div style="float: right;">Tổng tiền: {{bucket.total_price | currency:"":0}}</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button">Sửa</button>
