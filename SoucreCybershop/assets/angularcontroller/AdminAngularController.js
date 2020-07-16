@@ -404,6 +404,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.invoiceList = $filter('orderBy')($scope.invoiceList, '-' + propertyName);
         }   
     };
+    $scope.bucket = { total_price: 0 };
     $scope.EditInvoice = function (id) {
         $http.get("/Admin/InvoiceManager/ReturnInvoiceById/" + id).then(function (response) {
             $scope.dataInvoice = angular.fromJson(response.data);
@@ -411,6 +412,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.phoneNumber = $scope.dataInvoice[0].DeliveryPhoneNum;
             $scope.address = $scope.dataInvoice[0].DeliveryAddress;
             $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + id).then(function (response) {
+                $scope.bucket.total_price = 0;
                 $scope.listInvoiceDetail = response.data;
             });
         });

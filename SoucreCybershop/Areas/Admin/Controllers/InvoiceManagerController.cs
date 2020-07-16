@@ -101,7 +101,7 @@ namespace CyberShop.Areas.Admin.Controllers
             var model = new List<InvoiceDetailMangerViewModel>();
             model = (from a in data.Invoice_Detail
                      join b in data.Products on a.Product_id equals b.id
-                     where a.IsDeleted==false
+                     where a.IsDeleted==false && a.Invoice_id==id
                      select new InvoiceDetailMangerViewModel
                      {
                          Id = a.Id,
@@ -115,7 +115,6 @@ namespace CyberShop.Areas.Admin.Controllers
                          CreateBy = a.CreateBy,
                          CreateDate = a.CreateDate
                      }).ToList();
-
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {
@@ -130,7 +129,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     WarrantyExpires = item.WarrantyExpires,
                     IsDeleted = item.IsDeleted,
                     CreateBy = item.CreateBy,
-                    CreateDate = item.CreateDate
+                    CreateDate = item.CreateDate,
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);

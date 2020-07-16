@@ -17,5 +17,6 @@ namespace CyberShop.Areas.Admin.Models
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ProductName { get; set; }
+        public double? TotalPrice { get; set; }
     }
 }

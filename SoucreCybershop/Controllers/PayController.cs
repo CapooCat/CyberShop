@@ -68,6 +68,7 @@ namespace CyberShop.Controllers
                         inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
                         inDetail.CreateBy = "Admin";
                         inDetail.CreateDate = DateTime.Now;
+                        inDetail.IsDeleted = false;
                         inDetailDao.InsertInvoiceDetail(inDetail);
                     }
                     cart.RemoveAll(x => cart.Any());
