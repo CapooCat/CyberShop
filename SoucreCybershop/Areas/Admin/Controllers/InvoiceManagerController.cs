@@ -96,6 +96,45 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ReturnDetailInvoiceById(int id)
+        {
+            var model = new List<InvoiceDetailMangerViewModel>();
+            model = (from a in data.Invoice_Detail
+                     join b in data.Products on a.Product_id equals b.id
+                     where a.IsDeleted==false
+                     select new InvoiceDetailMangerViewModel
+                     {
+                         Id = a.Id,
+                         Invoice_id = a.Invoice_id,
+                         Product_id = a.Product_id,
+                         ProductName = b.ProductName,
+                         Amount = a.Amount,
+                         Price = a.Price,
+                         WarrantyExpires = a.WarrantyExpires,
+                         IsDeleted = a.IsDeleted,
+                         CreateBy = a.CreateBy,
+                         CreateDate = a.CreateDate
+                     }).ToList();
+
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new InvoiceDetailMangerViewModel
+                {
+                    Id = item.Id,
+                    Invoice_id = item.Invoice_id,
+                    Product_id = item.Product_id,
+                    ProductName = item.ProductName,
+                    Amount = item.Amount,
+                    Price = item.Price,
+                    WarrantyExpires = item.WarrantyExpires,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public JsonResult FilterInvoice(InvoiceManagerViewModel model)
         {

@@ -222,6 +222,7 @@
     <Compile Include="Areas\Admin\Controllers\WarrantyManagerController.cs" />
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CategoryManagerViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\InvoiceDetailMangerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductManagerViewModel.cs" />
     <Compile Include="Common\CommonConstantUser.cs" />
