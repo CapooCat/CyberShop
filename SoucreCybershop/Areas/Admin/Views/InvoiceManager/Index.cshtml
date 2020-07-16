@@ -100,16 +100,85 @@
                             <input type="text" placeholder="Nhập địa chỉ..." id="address" ng-value="address">
                         </div>
                         <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
-                        <div class="col-md-4">
-                            <p>Sản phẩm:</p>
-                            <input type="text">
-                        </div>
-                        <div class="col-md-4">
-                            <p>Số lượng:</p>
-                            <input type="text" placeholder="Nhập số lượng...">
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <button><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px "></i>Thêm</button>
+
+                        <div class="col-md-12" style="text-align: center;">
+                            <button onclick="ShowProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
+                            <div class="Dropdown-Product-Background" id="Product-Background"></div>
+                            <div class="Dropdown-Product" id="Product">
+                                <a href="#" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
+                                <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                                <div class="col-md-4">
+                                    <p>Tìm kiếm sản phẩm:</p>
+                                    <input type="text" placeholder="Nhập từ khóa...">
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Lọc theo loại sản phẩm:</p>
+                                    <select class="list-select">
+                                        <option value="">VGA</option>
+                                        <option value="">SSD</option>
+                                        <option value="">HDD</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Số lượng cần mua:</p>
+                                    <input type="text" placeholder="Nhập số lượng...">
+                                </div>
+                                <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                                    <p>Danh sách sản phẩm:</p>
+                                    <div class="Box" style="padding: 0;margin-top: 10px;">
+                                        <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 40%;"><a href="#">Tên sản phẩm</a></th>
+                                                        <th style="width: 10%;"><a href="#">Loại SP</a></th>
+                                                        <th style="width: 15%;"><a href="#">SL hàng tồn</a></th>
+                                                        <th style="width: 10%;"><a href="#">Bảo hành</a></th>
+                                                        <th style="width: 30%;"><a href="#">Giá tiền</a></th>
+                                                        <th style="width: 5%;text-align: center;"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                        <td>VGA</td>
+                                                        <td>50</td>
+                                                        <td>36 tháng</td>
+                                                        <td>4.150.000đ</td>
+                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                        <td>VGA</td>
+                                                        <td>50</td>
+                                                        <td>36 tháng</td>
+                                                        <td>4.150.000đ</td>
+                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                        <td>VGA</td>
+                                                        <td>50</td>
+                                                        <td>36 tháng</td>
+                                                        <td>4.150.000đ</td>
+                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                                        <td>VGA</td>
+                                                        <td>50</td>
+                                                        <td>36 tháng</td>
+                                                        <td>4.150.000đ</td>
+                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                             <p>Danh sách sản phẩm trong hóa đơn:</p>
@@ -166,6 +235,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 <script>
@@ -175,6 +245,9 @@
     CheckAll = document.getElementById("check-all");
     table = document.getElementById("items-table");
     ItemCheckBox = table.getElementsByTagName("input");
+    Product = document.getElementById("Product");
+    ProductBackground = document.getElementById("Product-Background");
+
 
     function UnCheck() {
         CheckAll.checked = false;
@@ -206,6 +279,16 @@
                     CheckAll.checked = true;
                 }
         }
+    }
+
+    function ShowProduct() {
+        ProductBackground.style.visibility = "visible";
+        Product.style.visibility = "visible";
+    }
+
+    function HideProduct() {
+        ProductBackground.style.visibility = "hidden";
+        Product.style.visibility = "hidden";
     }
 </script>
 

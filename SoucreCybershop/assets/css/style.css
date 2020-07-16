@@ -2493,3 +2493,39 @@ canvas{
   height: 100%;
   right: 0;
 }
+
+.Dropdown-Product-Background {
+  visibility: hidden;
+  background-color: rgba(0,0,0,0.1);
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Dropdown-Product {
+  z-index: 9999;
+  visibility: hidden;
+  padding: 20px;
+  position: fixed;
+  background-color: #fff;
+  width: 800px;
+  height: 530px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  margin: auto auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.exit {
+  position: absolute;
+  margin-top: 5px;
+  margin-right: 14px;
+  top: 0;
+  right: 0;
+}
