@@ -126,7 +126,7 @@
             <td>@item.Amount</td>
             <td>@string.Format("{0:#,##0.00}", item.Price)</td>
             <td>@item.CreateDate</td>
-            @if (item.Status == false)
+            @if (item.Status == "Chưa hoàn thành")
             {<td>Chưa nhận</td> }
             else
             {

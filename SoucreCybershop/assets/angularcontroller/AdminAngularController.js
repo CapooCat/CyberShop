@@ -400,6 +400,17 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.invoiceList = $filter('orderBy')($scope.invoiceList, '-' + propertyName);
         }   
     };
+    $scope.EditInvoice = function (id) {
+        $http.get("/Admin/InvoiceManager/ReturnInvoiceById/" + id).then(function (response) {
+            $scope.dataInvoice = angular.fromJson(response.data);
+            $scope.clientName = $scope.dataInvoice[0].CustomerName;
+            $scope.phoneNumber = $scope.dataInvoice[0].DeliveryPhoneNum;
+            $scope.address = $scope.dataInvoice[0].DeliveryAddress;
+        });
+        $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + id).then(function (response) {
+            $scope.listInvoiceDetail = response.data;
+        });
+    };
 
     //--------------PRODUCT_START--------------------//
     $scope.ReturnProductList = function () {

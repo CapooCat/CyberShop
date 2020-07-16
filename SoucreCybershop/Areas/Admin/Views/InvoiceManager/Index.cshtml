@@ -66,7 +66,7 @@
                                 <td>{{item.DeliveryPhoneNum}}</td>
                                 <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.Status}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -76,7 +76,7 @@
 
 
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="EditInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -86,20 +86,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Họ tên khách hàng:</p>
-                            <input type="text" placeholder="Nhập Họ tên...">
+                            <input type="text" placeholder="Nhập Họ tên..." id="customer_name" ng-value="clientName">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Số điện thoại</p>
-                            <input type="text" placeholder="hãng số điện thoại...">
+                            <input type="text" placeholder="hãng số điện thoại..." id="phone_number" ng-value="DeliveryPhoneNum">
                         </div>
                         <div class="col-md-4">
                             <p>Địa chỉ:</p>
-                            <input type="text" placeholder="Nhập địa chỉ...">
+                            <input type="text" placeholder="Nhập địa chỉ..." id="address" ng-value="DeliveryAddress">
                         </div>
                         <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
                         <div class="col-md-4">
@@ -133,24 +131,6 @@
                                                 <td>4.150.000đ</td>
                                                 <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a></td>
                                             </tr>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>1</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>1</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>1</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a><a href="#"></a></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -158,9 +138,6 @@
                         </div>
                     </div>
                     <div style="float: right;">Tổng tiền: 8.300.000đ</div>
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button">Sửa</button>
