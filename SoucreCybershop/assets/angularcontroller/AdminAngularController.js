@@ -382,7 +382,11 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
     $scope.DeleteConfirm = function ()
     {
         $http.get("/Admin/CategoryManager/DeleteCategory/" + $scope.DeleteCateId).then(function (response) {
-            alert("Xóa thành công");
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
             $scope.getCatList();
             $scope.getCatListLv2();
             $scope.getCatListLv3();
@@ -442,10 +446,12 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             // Handle success
             $scope.productList = response.data;
             console.log(response);
+            
         }).catch(function onError(response) {
             // Handle error
             console.log(response);
         });
     }
+
     //--------------PRODUCT_END--------------------//
 });
