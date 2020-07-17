@@ -68,6 +68,7 @@
     <Compile Include="History.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="HistoryDao.cs" />
     <Compile Include="InOrder.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>

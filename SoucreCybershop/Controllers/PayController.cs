@@ -30,13 +30,16 @@ namespace CyberShop.Controllers
                     //tạo hóa đơn
                     InvoiceDao inDao = new InvoiceDao();
                     var invoice = new Invoice();
+                    var history = new History();
                     var user_session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
                     if (Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
                     {
                         invoice.User_id = user_session.Id;
+                        history.User_id = user_session.Id;
                     }
                     else
                     {
+                        history.User_id = null;
                         invoice.User_id = null;
                         invoice.CustomerName = model.CustomerName;
                     }
@@ -55,6 +58,15 @@ namespace CyberShop.Controllers
                     }
                     invoice.Total = total;
                     inDao.InsertInvoice(invoice);
+                    //Tạo lịch sử
+                    var hisDao = new HistoryDao();
+                    history.Invoice_tag = true;
+                    history.Product_tag = false;
+                    history.User_tag = false;
+                    history.Warehouse_tag = false;
+                    history.IsDeleted = false;
+                    history.CreateDate = DateTime.Now;
+                    hisDao.InsertHistory(history);
                     //Tạo chi tiết hóa đơn
                     Invoice_Detail inDetail = new Invoice_Detail();
                     InvoiceDetailDao inDetailDao = new InvoiceDetailDao();
