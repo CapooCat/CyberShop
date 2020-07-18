@@ -399,7 +399,7 @@
     </div>
 
     <div class="modal fade" id="ProductTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Quản lý loại SP</h5>
@@ -411,15 +411,17 @@
 
 
                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>Tên loại SP:</p>
-                        <input type="text" placeholder="Nhập tên loại sản phẩm...">
+                        <input type="text" placeholder="Nhập tên loại sản phẩm..." id="txt_Type">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>từ khóa:</p>
-                        <input type="text" placeholder="Nhập từ khóa...">
+                        <input type="text" placeholder="Nhập từ khóa..." id="txt_Type_MetaTitle">
                     </div>
-
+                    <div class="col-md-4">
+                        <button ng-click="AddType()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm</button>
+                    </div>
                     <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                         <p>Danh sách các loại SP:</p>
                         <div class="Box" style="padding: 0;margin-top: 10px;">
@@ -427,28 +429,19 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width: 50%;text-align: center;"><a href="#">Tên loại SP</a></th>
-                                            <th style="width: 50%;text-align: center;"><a href="#">Từ khóa</a></th>
+                                            <th style="width: 10%;text-align: center;"><a href="#" ng-click="sortTypeBy('id')">Id</a></th>
+                                            <th style="width: 35%;text-align: center;"><a href="#" ng-click="sortTypeBy('TypeName')">Tên loại SP</a></th>
+                                            <th style="width: 40%;text-align: center;"><a href="#" ng-click="sortTypeBy('MetaTitle')">Từ khóa</a></th>
+                                            <th style="width: 15%;text-align: center;"><a href="#">Hành động</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td style="text-align:center">a</tdstyle="text-align:center">
-                                            <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                        <tr ng-repeat="item in productTypeList | orderBy:TypeName:reverseType">
+                                            <td style="text-align:center">{{item.id}}</td>
+                                            <td style="text-align:center">{{item.TypeName}}</td>
+                                            <td style="text-align:center">{{item.MetaTitle}}</td>
+                                            <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a></td>
                                         </tr>
-                                        <tr>
-                                            <td style="text-align:center">b</td>
-                                            <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center">c</td>
-                                            <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:center">d</td>
-                                            <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                        </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -459,7 +452,6 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button">Xác nhận</button>
                 <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
             </div>
         </div>
@@ -468,7 +460,7 @@
 
 
     <div class="modal fade" id="BrandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Quản lý hãng</h5>
@@ -480,15 +472,17 @@
 
 
                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>Tên hãng:</p>
-                        <input type="text" placeholder="Nhập tên hãng...">
+                        <input type="text" placeholder="Nhập tên hãng..." id="txt_Brand">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <p>Từ khóa:</p>
-                        <input type="text" placeholder="Nhập từ khóa...">
+                        <input type="text" placeholder="Nhập từ khóa..." id="txt_Brand_MetaTitle">
                     </div>
-
+                    <div class="col-md-4">
+                        <button ng-click="AddBrand()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm</button>
+                    </div>
                     <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                     <p>Danh sách các hãng:</p>
                     <div class="Box" style="padding: 0;margin-top: 10px;">
@@ -496,28 +490,19 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th style="width: 50%;text-align: center;"><a href="#">Tên hãng</a></th>
-                                        <th style="width: 50%;text-align: center;"><a href="#">Từ khóa</a></th>
+                                        <th style="width: 10%;text-align: center;"><a href="#" ng-click="sortBrandBy('id')">Id</a></th>
+                                        <th style="width: 40%;text-align: center;"><a href="#" ng-click="sortBrandBy('BrandName')">Tên hãng</a></th>
+                                        <th style="width: 40%;text-align: center;"><a href="#" ng-click="sortBrandBy('MetaTitle')">Từ khóa</a></th>
+                                        <th style="width: 10%;text-align: center;"><a href="#">Hành động</a></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td style="text-align:center">a</td>
-                                        <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
+                                    <tr ng-repeat="item in brandList | orderBy:BrandName:reverseBrand">
+                                        <td style="text-align:center">{{item.id}}</td>
+                                        <td style="text-align:center">{{item.BrandName}}</td>
+                                        <td style="text-align:center">{{item.MetaTitle}}</td>
+                                        <td style="text-align:center;"><a href="#"><i class="fas fa-times"></i></a></td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align:center">b</td>
-                                        <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center">c</td>
-                                        <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center">d</td>
-                                        <td style="text-align:center">ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -528,7 +513,6 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button">Xác nhận</button>
                 <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
             </div>
         </div>

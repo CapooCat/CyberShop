@@ -424,7 +424,21 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.productList = response.data;
         });
     }
+    $scope.ReturnBrandList = function () {
+        $http.get("/Admin/ProductManager/ReturnBrand").then(function (response) {
+            $scope.brandList = response.data;
+        });
+    }
+    $scope.ReturnProductTypeList = function () {
+        $http.get("/Admin/ProductManager/ReturnProductType").then(function (response) {
+            $scope.productTypeList = response.data;
+        });
+    }
+
+    $scope.ReturnProductTypeList();
+    $scope.ReturnBrandList();
     $scope.ReturnProductList();
+
     $scope.sortByProduct = function (propertyName) {
         $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
         ? !$scope.reverse : false;
@@ -465,6 +479,85 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             console.log(response);
         });
     }
+    $scope.sortBrandBy = function (BrandName) {
+        $scope.reverseBrand = ($scope.BrandName === BrandName) ? !$scope.reverseBrand : false;
+        $scope.BrandName = BrandName;
+    };
+    $scope.sortTypeBy = function (TypeName) {
+        $scope.reverseType = ($scope.TypeName === TypeName) ? !$scope.reverseType : false;
+        $scope.TypeName = TypeName;
+    };
+
+    $scope.AddBrand = function () {
+        var Brand = document.getElementById("txt_Brand").value;
+        var MetaTitle = document.getElementById("txt_Brand_MetaTitle").value;
+
+        if (Brand == "" || MetaTitle == "") {
+            alert("Không được để trống");
+        }
+        else {
+            $http({
+                url: '/Admin/ProductManager/AddBrand',
+                method: "POST",
+                data: {
+                    BrandName: Brand,
+                    MetaTitle: MetaTitle
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
+                console.log(response);
+            });
+        }
+    }
+
+    $scope.AddType = function () {
+        var Type = document.getElementById("txt_Type").value;
+        var MetaTitle = document.getElementById("txt_Type_MetaTitle").value;
+
+        if (Type == "" || MetaTitle == "") {
+            alert("Không được để trống");
+        }
+        else {
+            $http({
+                url: '/Admin/ProductManager/AddType',
+                method: "POST",
+                data: {
+                    TypeName: Type,
+                    MetaTitle: MetaTitle
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
+                console.log(response);
+            });
+        }
+    }
+    
 
     //--------------PRODUCT_END--------------------//
 });

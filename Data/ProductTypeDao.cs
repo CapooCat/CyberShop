@@ -14,5 +14,16 @@ namespace Data
             var res = data.ProducTypes.ToList();
             return res;
         }
+
+        public bool InsertType(ProducType entity)
+        {
+            if (entity != null)
+            {
+                data.ProducTypes.Add(entity);
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }
