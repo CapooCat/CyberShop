@@ -14,5 +14,16 @@ namespace Data
             var res = data.Brands.OrderByDescending(x=>x.BrandName).ToList();
             return res;
         }
+
+        public bool InsertBrand(Brand entity)
+        {
+            if (entity != null)
+            {
+                data.Brands.Add(entity);
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -21,6 +21,53 @@ namespace CyberShop.Areas.Admin.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        public JsonResult ReturnBrand()
+        {
+            var model = new List<BrandManagerViewModel>();
+            model = (from a in data.Brands
+                     select new BrandManagerViewModel
+                     {
+                         id = a.Id,
+                         BrandName = a.BrandName,
+                         MetaTitle = a.Metatitle
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new BrandManagerViewModel
+                {
+                    id = item.id,
+                    BrandName = item.BrandName,
+                    MetaTitle = item.MetaTitle
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ReturnProductType()
+        {
+            var model = new List<ProductTypeManagerViewModel>();
+            model = (from a in data.ProducTypes
+                     select new ProductTypeManagerViewModel
+                     {
+                         id = a.Id,
+                         TypeName = a.TypeName,
+                         MetaTitle = a.Metatitle
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductTypeManagerViewModel
+                {
+                    id = item.id,
+                    TypeName = item.TypeName,
+                    MetaTitle = item.MetaTitle
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+
         public JsonResult ReturnProduct()
         {
             var model = new List<ProductManagerViewModel>();
@@ -71,6 +118,39 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult AddBrand(BrandManagerViewModel model)
+        {
+            var BrandDao = new BrandDao();
+            var Brand = new Brand();
+
+            Brand.BrandName = model.BrandName;
+            Brand.Metatitle = model.MetaTitle;
+            Brand.IsDeleted = false;
+            Brand.CreateTime = DateTime.Now;
+            Brand.CreateBy = "Admin";
+            if (BrandDao.InsertBrand(Brand))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
+
+        [HttpPost]
+        public JsonResult AddType(ProductTypeManagerViewModel model)
+        {
+            var TypeDao = new ProductTypeDao();
+            var Type = new ProducType();
+            
+            Type.TypeName = model.TypeName;
+            Type.Metatitle = model.MetaTitle;
+            Type.IsDeleted = false;
+            Type.CreateTime = DateTime.Now;
+            Type.CreateBy = "Admin";
+            if (TypeDao.InsertType(Type))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
+
         [HttpPost]
         public JsonResult FilterProduct(ProductManagerViewModel model)
         {
