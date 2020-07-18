@@ -465,6 +465,28 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             console.log(response);
         });
     }
+    $scope.returnProductId = function (id) {
+        $scope.productId = id;
+    }
+    $scope.UploadImage = function () {
+        var files = document.getElementById("myFile2").files;
+        var product_id= $scope.productId;
+        $http({
+            url: '/Admin/ProductManager/UploadImage',
+            method: "POST",
+            data: {
+                Product_Id: product_id,
+                files: files
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            console.log(response);
+
+        }).catch(function onError(response) {
+            // Handle error
+            console.log(response);
+        });
+    }
 
     //--------------PRODUCT_END--------------------//
 });
