@@ -189,7 +189,7 @@
                                                 <td>{{item.ProductName}}</td>
                                                 <td>{{item.Amount}}</td>
                                                 <td>{{item.Price | currency:"":0}}</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a></td>
+                                                <td style="text-align: center;"><a href="#" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>

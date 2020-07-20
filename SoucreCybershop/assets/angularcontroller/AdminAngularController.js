@@ -437,6 +437,10 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                     text: 'Đã thêm thành công',
                 })
                 console.log(response);
+                $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + InvoiceID).then(function (response) {
+                    $scope.bucket.total_price = 0;
+                    $scope.listInvoiceDetail = response.data;
+                });
             }).catch(function onError(response) {
                 // Handle error
                 Swal.fire({
@@ -446,7 +450,44 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 })
                 console.log(response);
             });
-        }
+    }
+
+    $scope.DeleteDetailProduct = function (id) {
+        $scope.DeleteDetailInvoiceId = id;
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteDetailInvoiceConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+
+    $scope.DeleteDetailInvoiceConfirm = function () {
+        $http.get("/Admin/InvoiceManager/DeleteDetailInvoice/" + $scope.DeleteDetailInvoiceId).then(function (response) {
+            console.log(response);
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + InvoiceID).then(function (response) {
+                $scope.bucket.total_price = 0;
+                $scope.listInvoiceDetail = response.data;
+            });
+        });
+    }
 
     //--------------PRODUCT_START--------------------//
     $scope.ReturnProductList = function () {
