@@ -700,6 +700,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.ReturnProductTypeList();
         });
     }
+    $scope.returnHistory=function() {
+        http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
+            $scope.lstHistory = response.data;
+        });
+    }
 
     //--------------PRODUCT_END--------------------//
 });

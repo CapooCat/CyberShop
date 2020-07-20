@@ -257,5 +257,54 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(new { success = true}, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ReturnHistory()
+        {
+            var model = new List<HistoryViewModel>();
+            model = (from b in data.ProducTypes
+                     join a in data.Products on b.Id equals a.ProductType_id
+                     join c in data.Histories on a.id equals c.Product_id
+                     where c.IsDeleted == false
+                     select new HistoryViewModel
+                     {
+                         Id = c.Id,
+                         User_id = c.User_id,
+                         Description = c.Description,
+                         ProductTypeName = b.TypeName,
+                         ProductName = a.ProductName,
+                         Product_tag = c.Product_tag,
+                         Invoice_tag = c.Invoice_tag,
+                         Warehouse_tag = c.Warehouse_tag,
+                         User_tag = c.User_tag,
+                         IsDeleted = c.IsDeleted,
+                         Product_id = c.Product_id,
+                         CreateDate = a.CreateDate,
+                         Amount = a.Amount,
+                         TotalPrice = c.TotalPrice
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new HistoryViewModel
+                {
+                    Id = item.Id,
+                    User_id = item.User_id,
+                    Description = item.Description,
+                    ProductTypeName = item.ProductTypeName,
+                    ProductName = item.ProductName,
+                    Product_tag = item.Product_tag,
+                    Invoice_tag = item.Invoice_tag,
+                    Warehouse_tag = item.Warehouse_tag,
+                    User_tag = item.User_tag,
+                    IsDeleted = item.IsDeleted,
+                    Product_id = item.Product_id,
+                    CreateDate = item.CreateDate,
+                    Amount = item.Amount,
+                    TotalPrice = item.TotalPrice
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

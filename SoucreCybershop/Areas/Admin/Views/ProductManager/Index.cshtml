@@ -20,7 +20,7 @@
             <div class="col-md-2">
                 <p>Loại sản phẩm:</p>
                 <select id="product_type" class="list-select">
-                    <option value="">Chọn loại sản phẩm</option>
+                    <option value=""style="color:silver">Chọn loại sản phẩm</option>
                     @foreach (var item in prdTypeList)
                     {
                         <option value="@item.Id">@item.TypeName</option>
@@ -107,70 +107,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
+                            <tr ng-repeat="item in lstHistory">
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.ProductTypeName}}</td>
+                                <td>{{item.Amount}}</td>
+                                <td>{{item.TotalPrice | currency:"":0}}</td>
+                                <td>{{item.CreateDate}}</td>
                             </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>VGA</td>
-                                <td>5</td>
-                                <td>20.000.000đ</td>
-                                <td>6/17/2020</td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -338,14 +281,14 @@
                         <input type="text" placeholder="Nhập giá tiền...">
                     </div>
                     <div class="col-md-2" style="text-align: center;margin-right:20px;">
-                        <input type="file" id="myFile2" style="display:none;" accept="image/*" multiple>
+                        <input type="file" name="file" id="myFile2" style="display:none;" accept="image/*" multiple>
                         <button onclick="turnUpload()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm hình ảnh</button>
                     </div>
                     <div class="col-md-2">
                         <button id="rsFile" onclick="resetFile()">Reset</button>
                     </div>
                     <div class="col-md-2">
-                        <button ng-click="UploadImage()">Submit</button>
+                        <button ng-click="UploadFiles()">Submit</button>
                     </div>
                     <div class="col-12">
                         <div id="preview"></div>
@@ -631,4 +574,5 @@
         }
 </script>
 @section scripts{
-    }
+
+        }
