@@ -150,6 +150,24 @@ namespace CyberShop.Areas.Admin.Controllers
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
 
+        public JsonResult DeleteBrand(int id)
+        {
+            Brand entity = new Brand();
+            entity = data.Brands.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteType(int id)
+        {
+            ProducType entity = new ProducType();
+            entity = data.ProducTypes.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult FilterProduct(ProductManagerViewModel model)
         {

@@ -493,7 +493,11 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         var MetaTitle = document.getElementById("txt_Brand_MetaTitle").value;
 
         if (Brand == "" || MetaTitle == "") {
-            alert("Không được để trống");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được bỏ trống',
+            })
         }
         else {
             $http({
@@ -528,7 +532,11 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         var MetaTitle = document.getElementById("txt_Type_MetaTitle").value;
 
         if (Type == "" || MetaTitle == "") {
-            alert("Không được để trống");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được bỏ trống',
+            })
         }
         else {
             $http({
@@ -558,6 +566,69 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         }
     }
     
+    $scope.DeleteBrand = function (id) {
+        $scope.DeleteBrandId = id;
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteBrandConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteBrandConfirm = function () {
+        $http.get("/Admin/ProductManager/DeleteBrand/" + $scope.DeleteBrandId).then(function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $scope.ReturnBrandList();
+        });
+    }
+
+    $scope.DeleteType = function (id) {
+        $scope.DeleteTypeId = id;
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteTypeConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteTypeConfirm = function () {
+        $http.get("/Admin/ProductManager/DeleteType/" + $scope.DeleteTypeId).then(function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $scope.ReturnProductTypeList();
+        });
+    }
 
     //--------------PRODUCT_END--------------------//
 });

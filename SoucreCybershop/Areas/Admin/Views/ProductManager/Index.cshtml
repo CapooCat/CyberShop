@@ -440,7 +440,7 @@
                                             <td style="text-align:center">{{item.id}}</td>
                                             <td style="text-align:center">{{item.TypeName}}</td>
                                             <td style="text-align:center">{{item.MetaTitle}}</td>
-                                            <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a></td>
+                                            <td style="text-align: center;"><a href="#" ng-click="DeleteType(item.id)"><i class="fas fa-times"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -501,7 +501,7 @@
                                         <td style="text-align:center">{{item.id}}</td>
                                         <td style="text-align:center">{{item.BrandName}}</td>
                                         <td style="text-align:center">{{item.MetaTitle}}</td>
-                                        <td style="text-align:center;"><a href="#"><i class="fas fa-times"></i></a></td>
+                                        <td style="text-align:center;"><a href="#" ng-click="DeleteBrand(item.id)"><i class="fas fa-times"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>
