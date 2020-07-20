@@ -660,10 +660,56 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     $scope.returnHistory=function() {
-        http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
+        $http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
             $scope.lstHistory = response.data;
         });
     }
 
     //--------------PRODUCT_END--------------------//
+
+
+
+    //--------------USER_START--------------------//
+    $scope.returnUser = function () {
+        $http.get("/Admin/CustomerManager/ReturnCustomer").then(function (response) {
+            $scope.lstUser = response.data;
+        });
+    }
+    $scope.returnUser();
+    $scope.sortByUser = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        if ($scope.reverse == false) {
+            $scope.lstUser = $filter('orderBy')($scope.lstUser, propertyName);
+        }
+        else {
+            $scope.lstUser = $filter('orderBy')($scope.lstUser, '-' + propertyName);
+        }
+    }
+    $scope.FilterUser = function () {
+        var customer_name = document.getElementById("customer_name").value;
+        var customer_phone = document.getElementById("customer_phone").value;
+        var customer_email = document.getElementById("customer_email").value;
+        var customer_createdate = document.getElementById("customer_createdate").value;
+        $http({
+            url: '/Admin/CustomerManager/FilterUser',
+            method: "POST",
+            data: {
+                Email: customer_email,
+                Name: customer_name,
+                PhoneNum: customer_phone,
+                CreatedDate: customer_createdate
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.lstUser = response.data;
+            console.log(response);
+
+        }).catch(function onError(response) {
+            // Handle error
+            console.log(response);
+        });
+    }
+    //--------------USER_END--------------------//
 });

@@ -49,6 +49,10 @@
     <EntitySetMapping Name="Histories">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.History">
         <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Invoice_id" ColumnName="Invoice_id" />
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="User_tag" ColumnName="User_tag" />

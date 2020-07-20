@@ -58,13 +58,17 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_id" Type="int" />
+    <Property Name="Product_id" Type="int" />
+    <Property Name="Invoice_id" Type="int" />
+    <Property Name="Amount" Type="int" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Product_tag" Type="bit" />
     <Property Name="Invoice_tag" Type="bit" />
     <Property Name="Warehouse_tag" Type="bit" />
     <Property Name="User_tag" Type="bit" />
+    <Property Name="TotalPrice" Type="float" />
     <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateDate" Type="date" />
   </EntityType>
   <EntityType Name="InOrder">
     <Key>
@@ -209,6 +213,18 @@
       </Principal>
       <Dependent Role="Detail_PcSets">
         <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_History_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="History" Type="Self.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="Product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -365,6 +381,10 @@
     <AssociationSet Name="FK_Detail_PcSets_Product" Association="Self.FK_Detail_PcSets_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="Detail_PcSets" EntitySet="Detail_PcSets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_History_Product" Association="Self.FK_History_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="History" EntitySet="History" />
     </AssociationSet>
     <AssociationSet Name="FK_History_User" Association="Self.FK_History_User">
       <End Role="User" EntitySet="User" />
