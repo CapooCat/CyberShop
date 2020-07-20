@@ -32,6 +32,7 @@
         <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice" Width="1.5" PointX="3" PointY="10.875" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_User" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_History_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
