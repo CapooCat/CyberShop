@@ -22,18 +22,37 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var InvoiceDetailDao = new InvoiceDetailDao();
             var InvoiceDetail = new Invoice_Detail();
-
             var list = new List<InvoiceDetailMangerViewModel>();
-            if (list.Exists(x => x.Product_id == model.Product_id))
+            list =  (from a in data.Invoice_Detail
+                     where a.Invoice_id == model.Invoice_id && a.Product_id == model.Product_id
+                     select new InvoiceDetailMangerViewModel
+                     {
+                         Id = a.Id,
+                         Invoice_id = a.Invoice_id,
+                         Product_id = a.Product_id,
+                         IsDeleted = a.IsDeleted
+
+                     }).ToList();
+            if (list.First().IsDeleted == true && list.Count() == 1)
             {
-                foreach (var item in list)
-                {
-                    if (item.Product_id == model.Product_id)
-                    {
-                        item.Amount += 1;
-                    }
-                }
+                var n = list.First().Id;
+                Invoice_Detail entity = new Invoice_Detail();
+                entity = data.Invoice_Detail.Find(n);
+                entity.Amount = 1;
+                entity.IsDeleted = false;
+                data.SaveChanges();
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
+            else if (list.Count() == 1)
+            {
+                var n = list.First().Id;
+                Invoice_Detail entity = new Invoice_Detail();
+                entity = data.Invoice_Detail.Find(n);
+                entity.Amount += 1;
+                data.SaveChanges();
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+            
             else
             {
                 InvoiceDetail.Invoice_id = model.Invoice_id;
@@ -43,11 +62,22 @@ namespace CyberShop.Areas.Admin.Controllers
                 InvoiceDetail.IsDeleted = false;
                 InvoiceDetail.CreateDate = DateTime.Now;
                 InvoiceDetail.CreateBy = "Admin";
+                if (InvoiceDetailDao.InsertInvoiceDetail(InvoiceDetail))
+                { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+                else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
             }
-            if (InvoiceDetailDao.InsertInvoiceDetail(InvoiceDetail))
-            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
-            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
+
+        public JsonResult DeleteDetailInvoice(int id)
+        {
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+
         public JsonResult ReturnInvoice()
         {
             var model = new List<InvoiceManagerViewModel>();
