@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using CyberShop.Areas.Admin.Models;
+using System.IO;
 namespace CyberShop.Areas.Admin.Controllers
 {
     public class ProductManagerController : Controller
@@ -236,6 +237,22 @@ namespace CyberShop.Areas.Admin.Controllers
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        public class ImageFile
+        {
+            public int Product_Id { get; set; }
+            public List<HttpPostedFileBase> files { get; set; }
+        }
+        public JsonResult UploadImage(ImageFile lstImage)
+        {
+            foreach(var file in lstImage.files)
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    file.SaveAs(Path.Combine(Server.MapPath("~/assets/product_image"), file.FileName));
+                }
+            }
+            return Json(new { success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }
