@@ -2,7 +2,12 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
 }
+@using Data;
+
 
 <section id="content" class="admin-content-container">
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 10px;"></i>Quản lý hóa đơn</h3>
@@ -109,67 +114,53 @@
                                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                                 <div class="col-md-4">
                                     <p>Tìm kiếm sản phẩm:</p>
-                                    <input type="text" placeholder="Nhập từ khóa...">
+                                    <input type="text" placeholder="Nhập từ khóa..." ng-model="search.ProductName">
                                 </div>
                                 <div class="col-md-4">
                                     <p>Lọc theo loại sản phẩm:</p>
-                                    <select class="list-select">
-                                        <option value="">VGA</option>
-                                        <option value="">SSD</option>
-                                        <option value="">HDD</option>
+                                    <select class="list-select" ng-model="search.ProductTypeName">
+                                        <option value="">Chọn loại sản phẩm</option>
+                                        @foreach (var item in prdTypeList)
+                                        {
+                                            <option value="@item.TypeName">@item.TypeName</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <p>Số lượng cần mua:</p>
-                                    <input type="text" placeholder="Nhập số lượng...">
+                                        <p>Lọc theo hãng:</p>
+                                        <select class="list-select" ng-model="search.BrandName">
+                                            <option value="">Chọn hãng sản phẩm</option>
+                                            @foreach (var item in brandList)
+                                            {
+                                                <option value="@item.BrandName">@item.BrandName</option>
+                                            }
+                                        </select>
                                 </div>
                                 <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                                     <p>Danh sách sản phẩm:</p>
                                     <div class="Box" style="padding: 0;margin-top: 10px;">
-                                        <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
+                                        <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 320px;">
                                             <table>
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 40%;"><a href="#">Tên sản phẩm</a></th>
                                                         <th style="width: 10%;"><a href="#">Loại SP</a></th>
+                                                        <th style="width: 10%;"><a href="#">Hãng SP</a></th>
                                                         <th style="width: 15%;"><a href="#">SL hàng tồn</a></th>
                                                         <th style="width: 10%;"><a href="#">Bảo hành</a></th>
-                                                        <th style="width: 30%;"><a href="#">Giá tiền</a></th>
+                                                        <th style="width: 20%;"><a href="#">Giá tiền</a></th>
                                                         <th style="width: 5%;text-align: center;"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                        <td>VGA</td>
-                                                        <td>50</td>
-                                                        <td>36 tháng</td>
-                                                        <td>4.150.000đ</td>
-                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                        <td>VGA</td>
-                                                        <td>50</td>
-                                                        <td>36 tháng</td>
-                                                        <td>4.150.000đ</td>
-                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                        <td>VGA</td>
-                                                        <td>50</td>
-                                                        <td>36 tháng</td>
-                                                        <td>4.150.000đ</td>
-                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                        <td>VGA</td>
-                                                        <td>50</td>
-                                                        <td>36 tháng</td>
-                                                        <td>4.150.000đ</td>
-                                                        <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                                    <tr ng-repeat="item in productList | filter:search">
+                                                        <td>{{item.ProductName}}</td>
+                                                        <td>{{item.ProductTypeName}}</td>
+                                                        <td>{{item.BrandName}}</td>
+                                                        <td>{{item.Amount}}</td>
+                                                        <td>{{item.MonthWarranty}}</td>
+                                                        <td>{{item.Price | currency:"":0}}</td>
+                                                        <td style="text-align: center;"><a href="#" ng-click="AddProductToInvoice(item.id, item.Price)"><i class="fas fa-plus"></i></a></td>
                                                     </tr>
 
                                                 </tbody>

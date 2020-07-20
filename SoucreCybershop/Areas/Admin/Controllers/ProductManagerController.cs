@@ -25,6 +25,7 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var model = new List<BrandManagerViewModel>();
             model = (from a in data.Brands
+                     where a.IsDeleted == false
                      select new BrandManagerViewModel
                      {
                          id = a.Id,
@@ -48,6 +49,7 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var model = new List<ProductTypeManagerViewModel>();
             model = (from a in data.ProducTypes
+                     where a.IsDeleted == false
                      select new ProductTypeManagerViewModel
                      {
                          id = a.Id,
@@ -74,6 +76,7 @@ namespace CyberShop.Areas.Admin.Controllers
             model = (from b in data.ProducTypes
                      join a in data.Products on b.Id equals a.ProductType_id
                      join c in data.Brands on a.Brand_id equals c.Id
+                     where c.IsDeleted == false
                      select new ProductManagerViewModel
                      {
                          id = a.id,
@@ -149,6 +152,24 @@ namespace CyberShop.Areas.Admin.Controllers
             if (TypeDao.InsertType(Type))
             { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
+
+        public JsonResult DeleteBrand(int id)
+        {
+            Brand entity = new Brand();
+            entity = data.Brands.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteType(int id)
+        {
+            ProducType entity = new ProducType();
+            entity = data.ProducTypes.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

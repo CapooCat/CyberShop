@@ -16,6 +16,38 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult AddProductToInvoice(InvoiceDetailMangerViewModel model)
+        {
+            var InvoiceDetailDao = new InvoiceDetailDao();
+            var InvoiceDetail = new Invoice_Detail();
+
+            var list = new List<InvoiceDetailMangerViewModel>();
+            if (list.Exists(x => x.Product_id == model.Product_id))
+            {
+                foreach (var item in list)
+                {
+                    if (item.Product_id == model.Product_id)
+                    {
+                        item.Amount += 1;
+                    }
+                }
+            }
+            else
+            {
+                InvoiceDetail.Invoice_id = model.Invoice_id;
+                InvoiceDetail.Product_id = model.Product_id;
+                InvoiceDetail.Price = model.Price;
+                InvoiceDetail.Amount = 1;
+                InvoiceDetail.IsDeleted = false;
+                InvoiceDetail.CreateDate = DateTime.Now;
+                InvoiceDetail.CreateBy = "Admin";
+            }
+            if (InvoiceDetailDao.InsertInvoiceDetail(InvoiceDetail))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
         public JsonResult ReturnInvoice()
         {
             var model = new List<InvoiceManagerViewModel>();

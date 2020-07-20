@@ -10,15 +10,15 @@ namespace Data
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public List<Category> getAllCatgories()
         {
-            return data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id==null).ToList();
+            return data.Categories.Where(x => x.category_lv2_id == null && x.category_lv3_id==null && x.IsDeleted == false).ToList();
         }
         public List<Category> getListCategoryLv2(int categoryLv1_id)
         {
-            return data.Categories.Where(x => x.category_lv1_master_id == categoryLv1_id && x.category_lv3_id==null).ToList();
+            return data.Categories.Where(x => x.category_lv1_master_id == categoryLv1_id && x.category_lv3_id==null && x.IsDeleted == false).ToList();
         }
         public List<Category> getListCategoryLv3(int? categoryLv2_id)
         {
-            return data.Categories.Where(x => x.category_lv2_master_id == categoryLv2_id).ToList();
+            return data.Categories.Where(x => x.category_lv2_master_id == categoryLv2_id && x.IsDeleted == false).ToList();
         }
         public bool InsertCategoryLv1(Category entity)
         {

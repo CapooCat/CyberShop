@@ -1,20 +1,21 @@
 ﻿var app = angular.module('MyAdmin', [])
     .directive('loading', function () {
-        return {
-            restrict: 'E',
-            replace: true,
-            template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
-            link: function (scope, element, attr) {
-                scope.$watch('loading', function (val) {
-                    if (val)
-                        $(element).show();
-                    else
-                        $(element).hide();
-                });
-            }
+    return {
+        restrict: 'E',
+        replace: true,
+        template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
+        link: function (scope, element, attr) {
+            scope.$watch('loading', function (val) {
+                if (val)
+                    $(element).show();
+                else
+                    $(element).hide();
+            });
         }
-    });
-app.controller('MyAdminController', function ($scope, $http,$filter) {
+    }
+})
+app.controller('MyAdminController', function ($scope, $http, $filter) {
+    var InvoiceID = 0;
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
             $scope.catList = response.data;
@@ -406,6 +407,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
     };
     $scope.bucket = { total_price: 0 };
     $scope.EditInvoice = function (id) {
+        InvoiceID = id;
         $http.get("/Admin/InvoiceManager/ReturnInvoiceById/" + id).then(function (response) {
             $scope.dataInvoice = angular.fromJson(response.data);
             $scope.clientName = $scope.dataInvoice[0].CustomerName;
@@ -417,6 +419,34 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             });
         });
     };
+
+    $scope.AddProductToInvoice = function (id, price) {
+            $http({
+                url: '/Admin/InvoiceManager/AddProductToInvoice',
+                method: "POST",
+                data: {
+                    Invoice_id: InvoiceID,
+                    Product_id: id,
+                    Price: price
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
+                console.log(response);
+            });
+        }
 
     //--------------PRODUCT_START--------------------//
     $scope.ReturnProductList = function () {
@@ -479,34 +509,6 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             console.log(response);
         });
     }
-    $scope.returnProductId = function(id)
-    {
-        $scope.product_id = id;
-    }
-    $scope.UploadFiles = function () {
-        //alert($scope.files.length+ "sadasdasdasd")
-        var inputFiles = document.getElementById("myFile2");
-        var files = inputFiles.files;
-        var fdata = new FormData();
-        fdata.append("Product_Id", $scope.product_id);
-        for (var i = 0; i != files.length;i++)
-        {
-            fdata.append("files", files[i]);
-        }
-        $http({
-            url: '/Admin/ProductManager/UploadImage',
-            method: "POST",
-            data: fdata,
-        }).then(function(response) {
-            // Handle success
-            alert($scope.files.length + " files selected ... Write your Upload Code");
-            console.log(response);
-
-        }).catch(function onError(response) {
-            // Handle error
-            console.log(response);
-        });
-    }
     $scope.sortBrandBy = function (BrandName) {
         $scope.reverseBrand = ($scope.BrandName === BrandName) ? !$scope.reverseBrand : false;
         $scope.BrandName = BrandName;
@@ -521,7 +523,11 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         var MetaTitle = document.getElementById("txt_Brand_MetaTitle").value;
 
         if (Brand == "" || MetaTitle == "") {
-            alert("Không được để trống");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được bỏ trống',
+            })
         }
         else {
             $http({
@@ -556,7 +562,11 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         var MetaTitle = document.getElementById("txt_Type_MetaTitle").value;
 
         if (Type == "" || MetaTitle == "") {
-            alert("Không được để trống");
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được bỏ trống',
+            })
         }
         else {
             $http({
@@ -586,6 +596,69 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
         }
     }
     
+    $scope.DeleteBrand = function (id) {
+        $scope.DeleteBrandId = id;
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteBrandConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteBrandConfirm = function () {
+        $http.get("/Admin/ProductManager/DeleteBrand/" + $scope.DeleteBrandId).then(function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $scope.ReturnBrandList();
+        });
+    }
+
+    $scope.DeleteType = function (id) {
+        $scope.DeleteTypeId = id;
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteTypeConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteTypeConfirm = function () {
+        $http.get("/Admin/ProductManager/DeleteType/" + $scope.DeleteTypeId).then(function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $scope.ReturnProductTypeList();
+        });
+    }
 
     //--------------PRODUCT_END--------------------//
 });
