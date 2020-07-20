@@ -1,19 +1,19 @@
 ﻿var app = angular.module('MyAdmin', [])
     .directive('loading', function () {
-    return {
-        restrict: 'E',
-        replace: true,
-        template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
-        link: function (scope, element, attr) {
-            scope.$watch('loading', function (val) {
-                if (val)
-                    $(element).show();
-                else
-                    $(element).hide();
-            });
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<div class="loading"><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="obj"></div><div class="Loading-background"></div></div>',
+            link: function (scope, element, attr) {
+                scope.$watch('loading', function (val) {
+                    if (val)
+                        $(element).show();
+                    else
+                        $(element).hide();
+                });
+            }
         }
-    }
-})
+    });
 app.controller('MyAdminController', function ($scope, $http,$filter) {
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
@@ -474,6 +474,34 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             $scope.productList = response.data;
             console.log(response);
             
+        }).catch(function onError(response) {
+            // Handle error
+            console.log(response);
+        });
+    }
+    $scope.returnProductId = function(id)
+    {
+        $scope.product_id = id;
+    }
+    $scope.UploadFiles = function () {
+        //alert($scope.files.length+ "sadasdasdasd")
+        var inputFiles = document.getElementById("myFile2");
+        var files = inputFiles.files;
+        var fdata = new FormData();
+        fdata.append("Product_Id", $scope.product_id);
+        for (var i = 0; i != files.length;i++)
+        {
+            fdata.append("files", files[i]);
+        }
+        $http({
+            url: '/Admin/ProductManager/UploadImage',
+            method: "POST",
+            data: fdata,
+        }).then(function(response) {
+            // Handle success
+            alert($scope.files.length + " files selected ... Write your Upload Code");
+            console.log(response);
+
         }).catch(function onError(response) {
             // Handle error
             console.log(response);
