@@ -14,7 +14,8 @@
         }
     }
 })
-app.controller('MyAdminController', function ($scope, $http,$filter) {
+app.controller('MyAdminController', function ($scope, $http, $filter) {
+    var InvoiceID = 0;
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
             $scope.catList = response.data;
@@ -406,6 +407,7 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
     };
     $scope.bucket = { total_price: 0 };
     $scope.EditInvoice = function (id) {
+        InvoiceID = id;
         $http.get("/Admin/InvoiceManager/ReturnInvoiceById/" + id).then(function (response) {
             $scope.dataInvoice = angular.fromJson(response.data);
             $scope.clientName = $scope.dataInvoice[0].CustomerName;
@@ -417,6 +419,34 @@ app.controller('MyAdminController', function ($scope, $http,$filter) {
             });
         });
     };
+
+    $scope.AddProductToInvoice = function (id, price) {
+            $http({
+                url: '/Admin/InvoiceManager/AddProductToInvoice',
+                method: "POST",
+                data: {
+                    Invoice_id: InvoiceID,
+                    Product_id: id,
+                    Price: price
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
+                console.log(response);
+            });
+        }
 
     //--------------PRODUCT_START--------------------//
     $scope.ReturnProductList = function () {

@@ -11,7 +11,7 @@ namespace Data
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public List<Brand> ListBrand()
         {
-            var res = data.Brands.OrderByDescending(x=>x.BrandName).ToList();
+            var res = data.Brands.OrderByDescending(x=>x.BrandName).Where(x => x.IsDeleted == false).ToList();
             return res;
         }
 

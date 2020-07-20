@@ -1721,7 +1721,6 @@ footer{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
   padding: 20px 16px;
-  min-height: 200px;
 }
 
 .icon {
@@ -2510,7 +2509,7 @@ canvas{
   padding: 20px;
   position: fixed;
   background-color: #fff;
-  width: 800px;
+  width: 1000px;
   height: 530px;
   left: 0;
   bottom: 0;

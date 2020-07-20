@@ -11,7 +11,7 @@ namespace Data
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public List<ProducType> ListProductType()
         {
-            var res = data.ProducTypes.ToList();
+            var res = data.ProducTypes.Where(x => x.IsDeleted == false).ToList();
             return res;
         }
 
