@@ -255,5 +255,17 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult DeleteInvoiceChecked(List<int> id)
+        {
+            Invoice entity = new Invoice();
+            foreach(var item in id)
+            {
+                entity = data.Invoices.Find(item);
+                entity.IsDeleted = true;
+                data.SaveChanges();
+            }
+            return ReturnInvoice();
+        }
     }
 }

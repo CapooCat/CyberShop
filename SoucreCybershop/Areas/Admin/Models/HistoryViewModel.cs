@@ -11,6 +11,7 @@ namespace CyberShop.Areas.Admin.Models
         public Nullable<int> User_id { get; set; }
         public string Description { get; set; }
         public string ProductTypeName { get; set; }
+        public string ProductName { get; set; }
         public Nullable<bool> Product_tag { get; set; }
         public Nullable<bool> Invoice_tag { get; set; }
         public Nullable<bool> Warehouse_tag { get; set; }

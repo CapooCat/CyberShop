@@ -488,6 +488,69 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         });
     }
+    $scope.DeleteInvoiceChecked = function () {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteInvoiceCheckedConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteInvoiceCheckedConfirm = function () {
+        CheckAll = document.getElementById("check-all");
+        table = document.getElementById("items-table");
+        ItemCheckBox = table.getElementsByTagName("input");
+        var lstId = [];
+        if (CheckAll.checked == true) {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        else
+        {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                   lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        $http({
+            url: '/Admin/InvoiceManager/DeleteInvoiceChecked',
+            method: "POST",
+            data: {
+                id: lstId
+            },
+        }).then(function onSuccess(response) {
+            $scope.invoiceList = response.data;
+            // Handle success
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
+        });
+    }
 
     //--------------PRODUCT_START--------------------//
     $scope.ReturnProductList = function () {
@@ -701,10 +764,118 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     $scope.returnHistory=function() {
-        http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
+        $http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
             $scope.lstHistory = response.data;
+        });
+    }
+    $scope.DeleteProductChecked = function () {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteProductCheckedConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteProductCheckedConfirm = function () {
+        CheckAll = document.getElementById("check-all");
+        table = document.getElementById("items-table");
+        ItemCheckBox = table.getElementsByTagName("input");
+        var lstId = [];
+        if (CheckAll.checked == true) {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        else {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        $http({
+            url: '/Admin/ProductManager/DeleteProductChecked',
+            method: "POST",
+            data: {
+                id: lstId
+            },
+        }).then(function onSuccess(response) {
+            $scope.productList = response.data;
+            // Handle success
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            console.log(response.data);
+        }).catch(function onError(response) {
+            // Handle error
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
         });
     }
 
     //--------------PRODUCT_END--------------------//
+
+
+
+    //--------------USER_START--------------------//
+    $scope.returnUser = function () {
+        $http.get("/Admin/CustomerManager/ReturnCustomer").then(function (response) {
+            $scope.lstUser = response.data;
+        });
+    }
+    $scope.returnUser();
+    $scope.sortByUser = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        if ($scope.reverse == false) {
+            $scope.lstUser = $filter('orderBy')($scope.lstUser, propertyName);
+        }
+        else {
+            $scope.lstUser = $filter('orderBy')($scope.lstUser, '-' + propertyName);
+        }
+    }
+    $scope.FilterUser = function () {
+        var customer_name = document.getElementById("customer_name").value;
+        var customer_phone = document.getElementById("customer_phone").value;
+        var customer_email = document.getElementById("customer_email").value;
+        var customer_createdate = document.getElementById("customer_createdate").value;
+        $http({
+            url: '/Admin/CustomerManager/FilterUser',
+            method: "POST",
+            data: {
+                Email: customer_email,
+                Name: customer_name,
+                PhoneNum: customer_phone,
+                CreatedDate: customer_createdate
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.lstUser = response.data;
+            console.log(response);
+
+        }).catch(function onError(response) {
+            // Handle error
+            console.log(response);
+        });
+    }
+    //--------------USER_END--------------------//
 });
