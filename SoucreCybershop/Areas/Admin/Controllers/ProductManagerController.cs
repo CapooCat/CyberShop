@@ -246,16 +246,43 @@ namespace CyberShop.Areas.Admin.Controllers
             public int Product_Id { get; set; }
             public List<HttpPostedFileBase> files { get; set; }
         }
+        public JsonResult ReturnImage(int id)
+        {
+            var model = new List<ProductImageManagerViewModel>();
+            model = (from a in data.Products
+                     join b in data.ProductImages on a.id equals b.Product_id
+                     where a.IsDeleted == false && b.Product_id==id
+                     select new ProductImageManagerViewModel
+                     {
+                         id = b.id,
+                         Name = b.Name,
+                         Url = b.Url
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductImageManagerViewModel
+                {
+                    id = item.id,
+                    Name = item.Name,
+                    Url = item.Url
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult UploadImage(ImageFile lstImage)
         {
-            foreach(var file in lstImage.files)
+            //Thêm hình mới
+            //....
+            //
+            foreach (var file in lstImage.files)
             {
                 if (file != null && file.ContentLength > 0)
                 {
                     file.SaveAs(Path.Combine(Server.MapPath("~/assets/product_image"), file.FileName));
                 }
             }
-            return Json(new { success = true}, JsonRequestBehavior.AllowGet);
+            return ReturnImage(lstImage.Product_Id);
         }
         public JsonResult ReturnHistory()
         {

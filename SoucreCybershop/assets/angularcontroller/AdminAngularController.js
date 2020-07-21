@@ -830,6 +830,51 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
+    $scope.returnProductId = function(id){
+        $scope.product_id = id;
+        $http.get("/Admin/ProductManager/ReturnImage/"+id).then(function (response) {
+            $scope.lstImage = response.data;
+        });
+    }
+
+    $scope.SelectedFiles=function(files) {
+        $scope.selectedfile = files[0];
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có muốn lưu hình ảnh này ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.UploadFiles();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                document.getElementById("myFile2").value = "";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Lưu thất bại',
+                })
+            }
+        })
+    }
+    $scope.UploadFiles = function () {
+            var fdata = new FormData();
+            fdata.append("Product_Id", $scope.product_id);
+            fdata.append("files", $scope.selectedfile);
+            $http.post("/Admin/ProductManager/UploadImage", fdata, {
+                withCredentials: true,
+                headers: { 'Content-Type': undefined },
+                transformRequest: angular.identity
+            }).then(function onSuccess(response) {
+                $scope.lstImage = response.data;
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                console.log(response);
+            });
+    }
 
     //--------------PRODUCT_END--------------------//
 
