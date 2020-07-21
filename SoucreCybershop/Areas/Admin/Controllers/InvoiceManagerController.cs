@@ -33,24 +33,26 @@ namespace CyberShop.Areas.Admin.Controllers
                          IsDeleted = a.IsDeleted
 
                      }).ToList();
-            if (list.First().IsDeleted == true && list.Count() == 1)
+
+            if (list.Any())
             {
                 var n = list.First().Id;
                 Invoice_Detail entity = new Invoice_Detail();
-                entity = data.Invoice_Detail.Find(n);
-                entity.Amount = 1;
-                entity.IsDeleted = false;
-                data.SaveChanges();
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-            }
-            else if (list.Count() == 1)
-            {
-                var n = list.First().Id;
-                Invoice_Detail entity = new Invoice_Detail();
-                entity = data.Invoice_Detail.Find(n);
-                entity.Amount += 1;
-                data.SaveChanges();
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                if (list.First().IsDeleted == true)
+                {
+                    entity = data.Invoice_Detail.Find(n);
+                    entity.Amount = 1;
+                    entity.IsDeleted = false;
+                    data.SaveChanges();
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    entity = data.Invoice_Detail.Find(n);
+                    entity.Amount += 1;
+                    data.SaveChanges();
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
             }
             
             else

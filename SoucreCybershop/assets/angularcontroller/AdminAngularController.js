@@ -617,9 +617,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         $scope.reverseBrand = ($scope.BrandName === BrandName) ? !$scope.reverseBrand : false;
         $scope.BrandName = BrandName;
     };
-    $scope.sortTypeBy = function (TypeName) {
-        $scope.reverseType = ($scope.TypeName === TypeName) ? !$scope.reverseType : false;
-        $scope.TypeName = TypeName;
+    $scope.sortTypeBy = function (PTypeName) {
+        $scope.reverseType = ($scope.PTypeName === PTypeName) ? !$scope.reverseType : false;
+        $scope.PTypeName = PTypeName;
     };
 
     $scope.AddBrand = function () {
