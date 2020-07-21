@@ -39,7 +39,7 @@
         </div>
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
-            <button type="button" data-toggle="modal" data-target="#warningModal" class="delete"><i class="fas fa-trash"></i></button>
+            <button type="button"class="delete" ng-click="DeleteInvoiceChecked()"><i class="fas fa-trash"></i></button>
             <button style="width: 100px;" ng-click="FilterInvoice()" onclick="UnCheck()">Lọc</button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
@@ -64,7 +64,7 @@
                         </thead>
                         <tbody id="items-table">
                             <tr ng-repeat="item in invoiceList">
-                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()"></td>
+                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
                                 <td>{{item.Id}}</td>
                                 <td>{{item.CustomerName}}</td>
                                 <td>{{item.DeliveryAddress}}</td>

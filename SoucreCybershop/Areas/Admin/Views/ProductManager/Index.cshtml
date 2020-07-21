@@ -48,7 +48,7 @@
             <button style="width: 200px;" data-toggle="modal" data-target="#ProductTypeModal"><i class="fab fa-buffer" style="margin-right: 10px;"></i>Quản lý loại SP</button>
             <button style="width: 200px;" data-toggle="modal" data-target="#BrandModal"><i class="fas fa-certificate" style="margin-right: 10px;"></i>Quản lý hãng</button>
             <button style="width: 200px;" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm sản phẩm</button>
-            <button type="button" data-toggle="modal" data-target="#warningModal" class="delete"><i class="fas fa-trash"></i></button>
+            <button type="button" class="delete"><i class="fas fa-trash" ng-click="DeleteProductChecked()"></i></button>
             <button style="width: 100px;" ng-click="FilterProduct()" onclick="UnCheck()">Lọc</button>
             
         </div>
@@ -74,7 +74,7 @@
                         </thead>
                         <tbody id="items-table">
                             <tr ng-repeat="item in productList">
-                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()"></td>
+                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.id}}"></td>
                                 <td>{{item.id}}</td>
                                 <td>{{item.ProductName}}</td>
                                 <td>{{item.ProductTypeName}}</td>

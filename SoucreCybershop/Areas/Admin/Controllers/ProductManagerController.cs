@@ -304,6 +304,18 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult DeleteProductChecked(List<int> id)
+        {
+            Product entity = new Product();
+            foreach (var item in id)
+            {
+                entity = data.Products.Find(item);
+                entity.IsDeleted = true;
+                data.SaveChanges();
+            }
+            return ReturnProduct();
+        }
 
 
     }

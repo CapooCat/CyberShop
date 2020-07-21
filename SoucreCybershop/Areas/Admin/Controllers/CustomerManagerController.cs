@@ -69,8 +69,8 @@ namespace CyberShop.Areas.Admin.Controllers
                 CreateDate = x.CreateDate
             }).ToList();
             lstUser = lstUser.Where(x => ((model.Name == null) || (x.Name.Contains(model.Name))))
-                                      .Where(x => ((model.PhoneNum == null) || (x.PhoneNum.Contains(model.PhoneNum))))
-                                      .Where(x => ((model.Email == null) || (x.Email.Contains(model.Email))))
+                                      .Where(x => ((model.PhoneNum == null) || (x.PhoneNum==model.PhoneNum)))
+                                      .Where(x => ((model.Email == null) || (x.Email==model.Email)))
                                       .ToList();
 
             if (model.CreatedDate != null)
