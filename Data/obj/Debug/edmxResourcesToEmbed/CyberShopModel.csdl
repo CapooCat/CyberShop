@@ -372,7 +372,7 @@
     <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="PhoneNum" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />

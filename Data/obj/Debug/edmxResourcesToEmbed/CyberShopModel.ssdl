@@ -186,7 +186,7 @@
     <Property Name="Position" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="PhoneNum" Type="nvarchar" MaxLength="15" />
-    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Image" Type="nvarchar" MaxLength="50" />
     <Property Name="IsDeleted" Type="bit" />
