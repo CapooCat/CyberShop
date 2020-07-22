@@ -272,14 +272,17 @@ namespace CyberShop.Areas.Admin.Controllers
         }
         public JsonResult UploadImage(ImageFile lstImage)
         {
-            //Thêm hình mới
-            //....
-            //
             foreach (var file in lstImage.files)
             {
                 if (file != null && file.ContentLength > 0)
                 {
-                    file.SaveAs(Path.Combine(Server.MapPath("~/assets/product_image"), file.FileName));
+                    string path = Path.Combine(Server.MapPath("~/assets/product_image"), file.FileName);
+                    ProductImage entity = new ProductImage();
+                    entity.Name = file.FileName;
+                    entity.Url = "/assets/product_image/"+file.FileName;
+                    entity.Product_id = lstImage.Product_Id;
+                    var pdDao = new ProductImageDao().InsertImage(entity);
+                    file.SaveAs(path);
                 }
             }
             return ReturnImage(lstImage.Product_Id);
