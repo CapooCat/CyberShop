@@ -10,28 +10,28 @@
         <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
-                <input type="text" placeholder="Nhập mã hóa đơn...">
+                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
             </div>
             <div class="col-md-2">
                 <p>Thời gian từ:</p>
-                <input type="date">
+                <input type="date" id="date_from">
             </div>
             <div class="col-md-2">
                 <p>Thời gian đến:</p>
-                <input type="date">
+                <input type="date" id="date_to">
             </div>
             <div class="col-md-2">
                 <p>Tên khách hàng:</p>
-                <input type="text" placeholder="Nhập tên khách hàng...">
+                <input type="text" placeholder="Nhập tên khách hàng..." id="customer_name">
             </div>
             <div class="col-md-2">
                 <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại...">
+                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
             </div>
         </div>
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
-            <button style="width: 100px;">Lọc</button>
+            <button style="width: 100px;" ng-click="FilterInvoice()">Lọc</button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
@@ -43,60 +43,24 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 3%;"><a href="#"></a></th>
-                                <th style="width: 7%;"><a href="#">Mã hóa đơn</a></th>
-                                <th style="width: 10%;"><a href="#">Tên khách hàng</a></th>
-                                <th style="width: 45%;"><a href="#">Địa chỉ</a></th>
-                                <th style="width: 10%;"><a href="#">Số điện thoại</a></th>
-                                <th style="width: 10%;"><a href="#">Ngày xuất</a></th>
+                                <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
+                                <th style="width: 7%;"><a href="#" ng-click="sortByInvoice('Id')">Mã hóa đơn</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('CustomerName')">Tên khách hàng</a></th>
+                                <th style="width: 45%;"><a href="#" ng-click="sortByInvoice('DeliveryAddress')">Địa chỉ</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('DeliveryPhoneNum')">Số điện thoại</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('PurchaseDate')">Ngày xuất</a></th>
                                 <th style="width: 15%;"><a href="#">Hành động</a></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>#1</td>
-                                <td>Trần Thái Đạt</td>
-                                <td>70 Lê Hồng Phong</td>
-                                <td>0904932368</td>
-                                <td>6/17/2020</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i></button></td>
+                        <tbody id="items-table">
+                            <tr ng-repeat="item in invoiceList">
+                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
+                                <td>{{item.Id}}</td>
+                                <td>{{item.CustomerName}}</td>
+                                <td>{{item.DeliveryAddress}}</td>
+                                <td>{{item.DeliveryPhoneNum}}</td>
+                                <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -231,54 +195,35 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
 
                         <div class="col-md-6 info">
-                            <p>Mã hóa đơn: <span>#1</span></p>
-                            <p>Họ và tên: <span>Trần Thái Đạt</span></p>
-                            <p>Số điện thoại: <span>0904932368</span></p>
+                            <p>Mã hóa đơn: <span ng-bind="Invoice_Id"></span></p>
+                            <p>Họ và tên: <span ng-bind="Invoice_CustomerName"></span></p>
+                            <p>Số điện thoại: <span ng-bind="Invoice_DeliveryPhoneNum"></span></p>
                         </div>
                         <div class="col-md-6 info">
-                            <p>Địa chỉ: <span>70 Lê Hồng Phong</span></p>
-                            <p>Tình trạng: <span>Đã hoàn tất</span></p>
-                            <p>Ngày xuất: <span>6/17/2020</span></p>
+                            <p>Địa chỉ: <span ng-bind="Invoice_DeliveryAddress"></span></p>
+                            <p>Tình trạng: <span ng-bind="Invoice_Status"></span></p>
+                            <p>Ngày xuất: <span ng-bind="Invoice_CreateDate.slice(6, -2) | date:'dd/MM/yyyy'"></span></p>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                             <p>Sản phẩm trong hóa đơn: (chọn SP cần bảo hành)</p>
                             <div class="Box" style="padding: 0;margin-top: 10px;">
-                                <div class="admin-table modal-table">
+                                <div id="admin-table-best-sale" class="admin-table modal-table" style="height: 250px;">
                                     <table>
                                         <thead>
                                             <tr>
                                                 <th style="width: 5%;text-align: center;"><a href="#">Chọn</a></th>
-                                                <th style="width: 45%;"><a href="#">Tên hình ảnh</a></th>
+                                                <th style="width: 45%;"><a href="#">Tên sản phẩm</a></th>
+                                                <th style="width: 30%;"><a href="#">Số lượng</a></th>
                                                 <th style="width: 30%;"><a href="#">Bảo hành</a></th>
-                                                <th style="width: 30%;"><a href="#">Tình trạng</a></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr ng-repeat="item in WarrantyInvoiceDetail">
                                                 <td class="checkbox"><input type="radio" value="" name="Selected"></td>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>6/17/2020 -> 6/17/2023</td>
-                                                <td>Còn bảo hành</td>
+                                                <td>{{item.ProductName}}</td>
+                                                <td>{{item.Amount}}</td>
+                                                <td>{{item.WarrantyExpires.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="checkbox"><input type="radio" value="" name="Selected"></td>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>6/17/2020 -> 6/17/2023</td>
-                                                <td>Còn bảo hành</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="checkbox"><input type="radio" value="" name="Selected"></td>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>6/17/2020 -> 6/17/2023</td>
-                                                <td>Còn bảo hành</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="checkbox"><input type="radio" value="" name="Selected"></td>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>6/17/2020 -> 6/17/2023</td>
-                                                <td>Còn bảo hành</td>
-                                            </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -341,6 +286,9 @@
 </section>
 
 <script>
+    CheckAll = document.getElementById("check-all");
+    table = document.getElementById("items-table");
+    ItemCheckBox = table.getElementsByTagName("input");
     Active = document.getElementById("WarrantyManager");
     Active.className = "active-button"
 </script>

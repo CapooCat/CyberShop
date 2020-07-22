@@ -878,4 +878,24 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     //--------------USER_END--------------------//
+
+
+    //--------------WARRANTY_START--------------------//
+
+    $scope.ViewInvoice = function (id) {
+        $http.get("/Admin/WarrantyManager/ReturnInvoiceById/" + id).then(function (response) {
+            $scope.dataInvoice = angular.fromJson(response.data);
+            $scope.Invoice_Id = $scope.dataInvoice[0].Id;
+            $scope.Invoice_CustomerName = $scope.dataInvoice[0].CustomerName;
+            $scope.Invoice_DeliveryPhoneNum = $scope.dataInvoice[0].DeliveryPhoneNum;
+            $scope.Invoice_DeliveryAddress = $scope.dataInvoice[0].DeliveryAddress;
+            $scope.Invoice_Status = $scope.dataInvoice[0].Status;
+            $scope.Invoice_CreateDate = $scope.dataInvoice[0].CreateDate;
+            $http.get("/Admin/WarrantyManager/ReturnDetailInvoiceById/" + id).then(function (response) {
+                $scope.WarrantyInvoiceDetail = response.data;
+            });
+        });
+    };
+
+    //--------------WARRANTY_END--------------------//
 });
