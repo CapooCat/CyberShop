@@ -343,7 +343,14 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return ReturnProduct();
         }
-
+        public JsonResult DeleteProduct(int id)
+        {
+            Product entity = new Product();
+            entity = data.Products.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return ReturnProduct();
+        }
 
     }
 }

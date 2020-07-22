@@ -269,5 +269,13 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return ReturnInvoice();
         }
+        public JsonResult DeleteInvoice(int id)
+        {
+            Invoice entity = new Invoice();
+            entity = data.Invoices.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return ReturnInvoice();
+        }
     }
 }

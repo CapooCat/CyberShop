@@ -97,5 +97,25 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult DeleteUserChecked(List<int> id)
+        {
+            User entity = new User();
+            foreach (var item in id)
+            {
+                entity = data.Users.Find(item);
+                entity.IsDeleted = true;
+                data.SaveChanges();
+            }
+            return ReturnCustomer();
+        }
+        public JsonResult DeleteUser(int id)
+        {
+            User entity = new User();
+            entity = data.Users.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return ReturnCustomer();
+        }
     }
 }

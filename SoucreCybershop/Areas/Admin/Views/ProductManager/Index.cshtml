@@ -20,7 +20,7 @@
             <div class="col-md-2">
                 <p>Loại sản phẩm:</p>
                 <select id="product_type" class="list-select">
-                    <option value=""style="color:silver">Chọn loại sản phẩm</option>
+                    <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                     @foreach (var item in prdTypeList)
                     {
                         <option value="@item.Id">@item.TypeName</option>
@@ -81,7 +81,7 @@
                                 <td>{{item.BrandName}}</td>
                                 <td>{{item.Price | currency:"":0}}</td>
                                 <td>{{item.Amount}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" ng-click="returnProductId(item.id)"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" ng-click="returnProductId(item.id)"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteProduct(item.id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                       </tbody>
                     </table>

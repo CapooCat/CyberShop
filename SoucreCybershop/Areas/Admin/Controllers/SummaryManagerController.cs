@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CyberShop.Areas.Admin.Controllers
 {
-    public class SummaryController : Controller
+    public class SummaryManagerController : Controller
     {
         // GET: Admin/Summary
         [Authorize]

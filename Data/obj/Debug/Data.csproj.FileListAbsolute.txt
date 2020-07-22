@@ -15,6 +15,5 @@ C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.dll
 C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.SqlServer.dll
 C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.xml
 C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.SqlServer.xml
-C:\GitLaravel\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.dll
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.pdb
