@@ -429,14 +429,15 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     };
 
-    $scope.AddProductToInvoice = function (id, price) {
+    $scope.AddProductToInvoice = function (id, price, warranty) {
             $http({
                 url: '/Admin/InvoiceManager/AddProductToInvoice',
                 method: "POST",
                 data: {
                     Invoice_id: InvoiceID,
                     Product_id: id,
-                    Price: price
+                    Price: price,
+                    Product_Warranty: warranty
                 }
             }).then(function onSuccess(response) {
                 // Handle success
