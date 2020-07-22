@@ -19,7 +19,7 @@ button:focus {
 
 .loading {
   color: white;
-  z-index: 1000;
+  z-index: 9999;
   height: 200px;
   width: 200px;
   background-color: rgba(0,0,0,0.9);
@@ -46,7 +46,7 @@ button:focus {
 }
 
 .loading .obj {
-  z-index: 1000;
+  z-index: 9999;
   width: 5px;
   height: 0px;
   background: white;
@@ -83,6 +83,7 @@ button:focus {
   }
 }
 .GoTop {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   display: none;
   z-index: 1000;
   transition: .2s;
@@ -110,6 +111,7 @@ button:focus {
 }
 
 .build-PC {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   z-index: 1000;
   transition: .2s;
   height: 90px;

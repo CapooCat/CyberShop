@@ -17,3 +17,4 @@ C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.dll
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.pdb
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+D:\DoAn\CyberShop\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache

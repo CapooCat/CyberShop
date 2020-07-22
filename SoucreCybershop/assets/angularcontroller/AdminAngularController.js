@@ -16,6 +16,7 @@
 })
 app.controller('MyAdminController', function ($scope, $http, $filter) {
     var InvoiceID = 0;
+    var ProductID = 0;
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
             $scope.catList = response.data;
@@ -39,14 +40,12 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     //LoadCategory
-    $scope.loading = true;
-        $scope.getCatList();
-        $scope.getCatListLv2();
-        $scope.getCatListLv3();
-        $scope.loading = false;
+    $scope.getCatList();
+    $scope.getCatListLv2();
+    $scope.getCatListLv3();
     $scope.DetailCateLv1 = function (id) {
+        $scope.loading = true;
         $http.get("/Admin/CategoryManager/ReturnCategoryLv2/" + id).then(function (response) {
-            $scope.loading = true;
             $scope.catListLv2 = response.data;
             $scope.firstCatIdLv2 = angular.fromJson(response.data);
             $http.get("/Admin/CategoryManager/ReturnCategoryLv3/" + $scope.firstCatIdLv2[0].category_lv2_id).then(function (response) {
@@ -64,8 +63,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     $scope.DetailCateLv2 = function (id) {
+        $scope.loading = true;
         $http.get("/Admin/CategoryManager/ReturnCategoryLv3/" + id).then(function (response) {
-            $scope.loading = true;
             $scope.catListLv3 = response.data;
             $http.get("/Admin/CategoryManager/ReturnNameCategoryLv2/" + id).then(function (response) {
                 $scope.NameJson = angular.fromJson(response.data);
@@ -83,11 +82,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var lowPrice = document.getElementById("inp_lowPrice").value;
         var highPrice = document.getElementById("inp_highPrice").value;
         var productKW = document.getElementById("inp_productKw").value;
+        $scope.loading = true;
         if (CategoryName == null || productTypeKW == "") {
+            $scope.loading = false;
             alert("Không được để trống");
         }
         else if ((CategoryName != null && productTypeKW != "" && lowPrice == null) || (CategoryName != null && productTypeKW != "" && highPrice == null))
         {
+            $scope.loading = false;
             alert("Không được để trống ngày");
         }
         else
@@ -105,6 +107,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
@@ -113,6 +116,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'error',
                     title: 'Thất bại',
@@ -133,7 +137,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var lowPrice = document.getElementById("inp_lowPriceLv2").value;
         var highPrice = document.getElementById("inp_highPriceLv2").value;
         var productKW = document.getElementById("inp_productKwLv2").value;
+        $scope.loading = true;
         if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "") {
+            $scope.loading = false;
             alert("Không được để trống");
         }
         else {
@@ -151,6 +157,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
@@ -159,6 +166,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'error',
                     title: 'Thất bại',
@@ -169,9 +177,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }
     }
     $scope.ReturnInvoice = function () {
+        $scope.loading = true;
         $http.get("/Admin/InvoiceManager/ReturnInvoice").then(function (response) {
             $scope.invoiceList = response.data;
         });
+        $scope.loading = false;
     }
     $scope.ReturnInvoice();
     $scope.ReturnCateLv2 = function () {
@@ -199,7 +209,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var lowPrice = document.getElementById("inp_lowPriceLv3").value;
         var highPrice = document.getElementById("inp_highPriceLv3").value;
         var productKW = document.getElementById("inp_productKwLv3").value;
-        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2=="") {
+        $scope.loading = true;
+        if (CategoryName == null || CategoryIdLv1 == "" || productTypeKW == "" || CategoryIdLv2 == "") {
+            $scope.loading = false;
             alert("Không được để trống");
         }
         else {
@@ -218,6 +230,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
@@ -226,6 +239,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'error',
                     title: 'Thất bại',
@@ -241,7 +255,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var dateTo = document.getElementById("date_to").value;
         var customerName = document.getElementById("customer_name").value;
         var customerPhone = document.getElementById("customer_phone").value;
+        $scope.loading = true;
         if (dateFrom > dateTo) {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Lỗi',
@@ -261,26 +277,31 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 $scope.invoiceList = response.data;
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 console.log(response);
             });
         }
     }
     $scope.UpdateCategory = function (id) {
+        $scope.loading = true;
         $http.get("/Admin/CategoryManager/ReturnCategoryUpdate/" + id).then(function (response) {
             $scope.DataUpdate = angular.fromJson(response.data);
             $scope.CateId = $scope.DataUpdate[0].Id;
             $scope.CateUpdate = $scope.DataUpdate[0].Name;
             $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+            $scope.loading = false;
         });
     }
     $scope.UpdateCategoryPost = function () {
         var Id = document.getElementById("cate_id_lv1").value;
         var cateName = document.getElementById("inp_updateCatelv1").value;
         var Metatitle = document.getElementById("inp_updateMetatitlelv1").value;
+        $scope.loading = true;
         $http({
             url: '/Admin/CategoryManager/CategoryUpdatePost',
             method: "POST",
@@ -291,6 +312,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -299,6 +321,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -308,18 +331,21 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     $scope.UpdateCategoryLv2 = function (id) {
+        $scope.loading = true;
         $http.get("/Admin/CategoryManager/ReturnCategoryUpdateLv2/" + id).then(function (response) {
             $scope.DataUpdate = angular.fromJson(response.data);
             $scope.CateId = $scope.DataUpdate[0].Id;
             $scope.CateLv1 = $scope.DataUpdate[0].CateNameLv1;
             $scope.CateUpdate = $scope.DataUpdate[0].Name;
             $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+            $scope.loading = false;
         });
     }
     $scope.UpdateCategoryPostLv2 = function () {
         var Id = document.getElementById("cate_id_lv2").value;
         var cateName = document.getElementById("inp_updateCatelv2").value;
         var Metatitle = document.getElementById("inp_updateMetatitlelv2").value;
+        $scope.loading = true;
         $http({
             url: '/Admin/CategoryManager/CategoryUpdatePost',
             method: "POST",
@@ -330,6 +356,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -338,6 +365,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -347,6 +375,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         });
     }
     $scope.UpdateCategoryLv3 = function (id) {
+        $scope.loading = true;
         $http.get("/Admin/CategoryManager/ReturnCategoryUpdateLv3/" + id).then(function (response) {
             $scope.DataUpdate = angular.fromJson(response.data);
             $scope.CateId = $scope.DataUpdate[0].Id;
@@ -354,12 +383,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.CateLv2 = $scope.DataUpdate[0].CateNameLv2;
             $scope.CateUpdate = $scope.DataUpdate[0].Name;
             $scope.MetatitleUpdate = $scope.DataUpdate[0].Metatitle;
+            $scope.loading = false;
         });
     }
     $scope.UpdateCategoryPostLv3 = function () {
         var Id = document.getElementById("cate_id_lv3").value;
         var cateName = document.getElementById("inp_updateCatelv3").value;
         var Metatitle = document.getElementById("inp_updateMetatitlelv3").value;
+        $scope.loading = true;
         $http({
             url: '/Admin/CategoryManager/CategoryUpdatePost',
             method: "POST",
@@ -370,6 +401,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -378,6 +410,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -391,7 +424,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     }
     $scope.DeleteConfirm = function ()
     {
+        $scope.loading = true;
         $http.get("/Admin/CategoryManager/DeleteCategory/" + $scope.DeleteCateId).then(function (response) {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -417,12 +452,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.bucket = { total_price: 0 };
     $scope.EditInvoice = function (id) {
         InvoiceID = id;
+        $scope.loading = true;
         $http.get("/Admin/InvoiceManager/ReturnInvoiceById/" + id).then(function (response) {
             $scope.dataInvoice = angular.fromJson(response.data);
             $scope.clientName = $scope.dataInvoice[0].CustomerName;
             $scope.phoneNumber = $scope.dataInvoice[0].DeliveryPhoneNum;
             $scope.address = $scope.dataInvoice[0].DeliveryAddress;
             $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + id).then(function (response) {
+                $scope.loading = false;
                 $scope.bucket.total_price = 0;
                 $scope.listInvoiceDetail = response.data;
             });
@@ -430,6 +467,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     };
 
     $scope.AddProductToInvoice = function (id, price, warranty) {
+        $scope.loading = true;
             $http({
                 url: '/Admin/InvoiceManager/AddProductToInvoice',
                 method: "POST",
@@ -441,6 +479,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
@@ -453,6 +492,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 });
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'error',
                     title: 'Thất bại',
@@ -485,7 +525,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     }
 
     $scope.DeleteDetailInvoiceConfirm = function () {
+        $scope.loading = true;
         $http.get("/Admin/InvoiceManager/DeleteDetailInvoice/" + $scope.DeleteDetailInvoiceId).then(function (response) {
+            $scope.loading = false;
             console.log(response);
             Swal.fire({
                 icon: 'success',
@@ -496,6 +538,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 $scope.bucket.total_price = 0;
                 $scope.listInvoiceDetail = response.data;
             });
+            $scope.loading = false;
         });
     }
     $scope.DeleteInvoiceChecked = function () {
@@ -536,6 +579,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                    lstId.push(ItemCheckBox[i].value);
             }
         }
+        $scope.loading = false;
         $http({
             url: '/Admin/InvoiceManager/DeleteInvoiceChecked',
             method: "POST",
@@ -545,6 +589,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }).then(function onSuccess(response) {
             $scope.invoiceList = response.data;
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -553,6 +598,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -583,6 +629,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
     $scope.DeleteInvoiceConfirm = function () {
+        $scope.loading = true;
         $http({
             url: '/Admin/InvoiceManager/DeleteInvoice',
             method: "POST",
@@ -592,6 +639,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }).then(function onSuccess(response) {
             $scope.invoiceList = response.data;
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -600,6 +648,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -649,7 +698,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var productBrand = document.getElementById("product_brand").value;
         var priceFrom = document.getElementById("product_priceFrom").value;
         var priceTo = document.getElementById("product_priceTo").value;
+        $scope.loading = true;
         if (priceFrom > priceTo) {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Lỗi',
@@ -670,11 +721,13 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 $scope.productList = response.data;
                 console.log(response);
 
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 console.log(response);
             });
         }
@@ -691,8 +744,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.AddBrand = function () {
         var Brand = document.getElementById("txt_Brand").value;
         var MetaTitle = document.getElementById("txt_Brand_MetaTitle").value;
-
+        $scope.loading = true;
         if (Brand == "" || MetaTitle == "") {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -709,6 +763,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
@@ -717,6 +772,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'error',
                     title: 'Thất bại',
@@ -730,8 +786,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.AddType = function () {
         var Type = document.getElementById("txt_Type").value;
         var MetaTitle = document.getElementById("txt_Type_MetaTitle").value;
-
+        $scope.loading = true;
         if (Type == "" || MetaTitle == "") {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -748,6 +805,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
                     title: 'Thành công',
@@ -756,6 +814,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
                 Swal.fire({
                     icon: 'error',
                     title: 'Thất bại',
@@ -788,7 +847,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
     $scope.DeleteBrandConfirm = function () {
+        $scope.loading = true;
         $http.get("/Admin/ProductManager/DeleteBrand/" + $scope.DeleteBrandId).then(function (response) {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -820,7 +881,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
     $scope.DeleteTypeConfirm = function () {
+        $scope.loading = true;
         $http.get("/Admin/ProductManager/DeleteType/" + $scope.DeleteTypeId).then(function (response) {
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -829,8 +892,10 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.ReturnProductTypeList();
         });
     }
-    $scope.returnHistory=function() {
+    $scope.returnHistory = function () {
+        $scope.loading = true;
         $http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
+            $scope.loading = false;
             $scope.lstHistory = response.data;
         });
     }
@@ -871,6 +936,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                     lstId.push(ItemCheckBox[i].value);
             }
         }
+        $scope.loading = true;
         $http({
             url: '/Admin/ProductManager/DeleteProductChecked',
             method: "POST",
@@ -880,6 +946,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }).then(function onSuccess(response) {
             $scope.productList = response.data;
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -888,6 +955,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response.data);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -898,9 +966,21 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     }
     $scope.returnProductId = function(id){
         $scope.product_id = id;
-        $http.get("/Admin/ProductManager/ReturnImage/"+id).then(function (response) {
-            $scope.lstImage = response.data;
-        });
+        $scope.loading = true;
+        $http.get("/Admin/ProductManager/ReturnProductById/" + id).then(function (response) {
+            $scope.dataProduct = angular.fromJson(response.data);
+            $scope.Product_Name = $scope.dataProduct[0].ProductName;
+            $scope.Product_Type = $scope.dataProduct[0].ProductType_id;
+            $scope.Brand = $scope.dataProduct[0].Brand_id;
+            $scope.Sell_Price = $scope.dataProduct[0].Price;
+            $scope.Quantity = $scope.dataProduct[0].Amount;
+            $scope.Doc = $scope.dataProduct[0].Info;
+            $scope.MetaTitle = $scope.dataProduct[0].MetaTitle;
+            $http.get("/Admin/ProductManager/ReturnImage/" + id).then(function (response) {
+                $scope.loading = false;
+                $scope.lstImage = response.data;
+            });
+        }); 
     }
 
     $scope.SelectedFiles=function(files) {
@@ -926,6 +1006,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
     $scope.UploadFiles = function () {
+        $scope.loading = true;
             var fdata = new FormData();
             fdata.append("Product_Id", $scope.product_id);
             fdata.append("files", $scope.selectedfile);
@@ -934,10 +1015,23 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 headers: { 'Content-Type': undefined },
                 transformRequest: angular.identity
             }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Lưu thành công',
+                })
                 $scope.lstImage = response.data;
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Lưu thất bại',
+                })
                 console.log(response);
             });
     }
@@ -963,6 +1057,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
     $scope.DeleteProductConfirm = function () {
+        $scope.loading = true;
         $http({
             url: '/Admin/ProductManager/DeleteProduct',
             method: "POST",
@@ -972,6 +1067,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }).then(function onSuccess(response) {
             $scope.productList = response.data;
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -980,6 +1076,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -988,15 +1085,19 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
+
+
     //--------------PRODUCT_END--------------------//
 
 
 
     //--------------USER_START--------------------//
     $scope.returnUser = function () {
+        $scope.loading = true;
         $http.get("/Admin/CustomerManager/ReturnCustomer").then(function (response) {
             $scope.lstUser = response.data;
         });
+        $scope.loading = false;
     }
     $scope.returnUser();
     $scope.sortByUser = function (propertyName) {
@@ -1015,6 +1116,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var customer_phone = document.getElementById("customer_phone").value;
         var customer_email = document.getElementById("customer_email").value;
         var customer_createdate = document.getElementById("customer_createdate").value;
+        $scope.loading = true;
         $http({
             url: '/Admin/CustomerManager/FilterUser',
             method: "POST",
@@ -1026,11 +1128,13 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         }).then(function onSuccess(response) {
             // Handle success
+            $scope.loading = false;
             $scope.lstUser = response.data;
             console.log(response);
 
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             console.log(response);
         });
     }
@@ -1071,6 +1175,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                     lstId.push(ItemCheckBox[i].value);
             }
         }
+        $scope.loading = true;
         $http({
             url: '/Admin/CustomerManager/DeleteUserChecked',
             method: "POST",
@@ -1080,6 +1185,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }).then(function onSuccess(response) {
             $scope.lstUser = response.data;
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -1088,6 +1194,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -1118,6 +1225,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
     $scope.DeleteUserConfirm = function () {
+        $scope.loading = true;
         $http({
             url: '/Admin/CustomerManager/DeleteUser',
             method: "POST",
@@ -1127,6 +1235,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }).then(function onSuccess(response) {
             $scope.lstUser = response.data;
             // Handle success
+            $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
@@ -1135,6 +1244,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
@@ -1149,6 +1259,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     //--------------WARRANTY_START--------------------//
 
     $scope.ViewInvoice = function (id) {
+        $scope.loading = true;
         $http.get("/Admin/WarrantyManager/ReturnInvoiceById/" + id).then(function (response) {
             $scope.dataInvoice = angular.fromJson(response.data);
             $scope.Invoice_Id = $scope.dataInvoice[0].Id;
@@ -1158,6 +1269,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.Invoice_Status = $scope.dataInvoice[0].Status;
             $scope.Invoice_CreateDate = $scope.dataInvoice[0].CreateDate;
             $http.get("/Admin/WarrantyManager/ReturnDetailInvoiceById/" + id).then(function (response) {
+                $scope.loading = false;
                 $scope.WarrantyInvoiceDetail = response.data;
             });
         });
