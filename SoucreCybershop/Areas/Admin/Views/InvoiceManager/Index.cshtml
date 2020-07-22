@@ -68,7 +68,7 @@
                                 <td>{{item.DeliveryPhoneNum}}</td>
                                 <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.Status}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -228,7 +228,7 @@
 
 <script>
     Active = document.getElementById("InvoiceManager");
-    Active.className = "active-button"
+    Active.className = "active-button";
 
     CheckAll = document.getElementById("check-all");
     table = document.getElementById("items-table");

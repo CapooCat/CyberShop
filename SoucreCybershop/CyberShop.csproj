@@ -218,11 +218,12 @@
     <Compile Include="Areas\Admin\Controllers\InvoiceManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceOutManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductManagerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SummaryManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\WarrantyManagerController.cs" />
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\HistoryViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductImageManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductTypeManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CategoryManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceDetailMangerViewModel.cs" />
@@ -360,7 +361,7 @@
     <Content Include="Areas\Admin\Views\InvoiceManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\InvoiceOutManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductManager\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SummaryManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\WarrantyManager\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
