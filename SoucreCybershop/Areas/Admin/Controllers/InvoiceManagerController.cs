@@ -18,7 +18,7 @@ namespace CyberShop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddProductToInvoice(InvoiceDetailMangerViewModel model)
+        public JsonResult AddProductToInvoice(InvoiceDetailMangerViewModel model, int Product_Warranty)
         {
             var InvoiceDetailDao = new InvoiceDetailDao();
             var InvoiceDetail = new Invoice_Detail();
@@ -42,6 +42,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 {
                     entity = data.Invoice_Detail.Find(n);
                     entity.Amount = 1;
+                    entity.WarrantyExpires = DateTime.Now.AddMonths(Product_Warranty);
                     entity.IsDeleted = false;
                     data.SaveChanges();
                     return Json(new { success = true }, JsonRequestBehavior.AllowGet);
@@ -50,6 +51,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 {
                     entity = data.Invoice_Detail.Find(n);
                     entity.Amount += 1;
+                    entity.WarrantyExpires = DateTime.Now.AddMonths(Product_Warranty);
                     data.SaveChanges();
                     return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                 }
@@ -63,6 +65,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 InvoiceDetail.Amount = 1;
                 InvoiceDetail.IsDeleted = false;
                 InvoiceDetail.CreateDate = DateTime.Now;
+                InvoiceDetail.WarrantyExpires = DateTime.Now.AddMonths(Product_Warranty);
                 InvoiceDetail.CreateBy = "Admin";
                 if (InvoiceDetailDao.InsertInvoiceDetail(InvoiceDetail))
                 { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
