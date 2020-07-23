@@ -1253,6 +1253,68 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
+    $scope.returnUserById = function (id) {
+        $scope.loading = true;
+        $scope.user_id = id;
+        $http.get("/Admin/CustomerManager/ReturnCustomerById/" + id).then(function (response) {
+            $scope.userData = angular.fromJson(response.data);
+            $scope.CustomerName = $scope.userData[0].Name;
+            $scope.CustomerAddress = $scope.userData[0].Address;
+            $scope.CustomerPhone = $scope.userData[0].PhoneNum;
+            $scope.CustomerEmail = $scope.userData[0].Email;
+            $scope.CustomerUserName = $scope.userData[0].Username;
+            $scope.loading = false;
+        });
+    }
+    $scope.UpdateUser = function () {
+        var CustomerName = document.getElementById("user_name").value;
+        var CustomerAdress = document.getElementById("user_address").value;
+        var CustomerPhone = document.getElementById("user_phone").value;
+        var CustomerEmail = document.getElementById("user_email").value;
+        var CustomerUserName = document.getElementById("user_username").value;
+        var CustomerPass = document.getElementById("user_pass").value;
+        $scope.loading = true;
+        $http({
+            url: '/Admin/CustomerManager/UpdateUser',
+            method: "POST",
+            data: {
+                id: $scope.user_id,
+                Name: CustomerName,
+                Address: CustomerAdress,
+                PhoneNum: CustomerPhone,
+                Email: CustomerEmail,
+                Username: CustomerUserName,
+                Password: CustomerPass
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.lstUser = response.data;
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Cập nhật thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Cập nhật thất bại',
+            })
+            console.log(response);
+        });
+    }
+    $scope.returnUserInvoice = function (id) {
+        $scope.bucket = { stt: 0 };
+        $scope.loading = true;
+        $http.get("/Admin/CustomerManager/ReturnDetailInvoiceByUserId/" + id).then(function (response) {
+            $scope.lstInvoiceDetail = response.data;
+            $scope.loading = false;
+        });
+    }
     //--------------USER_END--------------------//
 
 
