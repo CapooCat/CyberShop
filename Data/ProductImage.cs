@@ -18,6 +18,7 @@ namespace Data
         public string Name { get; set; }
         public string Url { get; set; }
         public int Product_id { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Product Product { get; set; }
     }
