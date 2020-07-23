@@ -151,6 +151,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="Url" Type="varchar(max)" Nullable="false" />
     <Property Name="Product_id" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="ProducType">
     <Key>

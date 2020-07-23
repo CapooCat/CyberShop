@@ -90,6 +90,7 @@
     <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Product_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="Detail_PcSets">
     <Key>

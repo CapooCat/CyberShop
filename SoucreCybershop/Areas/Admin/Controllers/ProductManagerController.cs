@@ -304,7 +304,7 @@ namespace CyberShop.Areas.Admin.Controllers
             var model = new List<ProductImageManagerViewModel>();
             model = (from a in data.Products
                      join b in data.ProductImages on a.id equals b.Product_id
-                     where a.IsDeleted == false && b.Product_id==id
+                     where b.IsDeleted == false && b.Product_id==id
                      select new ProductImageManagerViewModel
                      {
                          id = b.id,
@@ -323,6 +323,16 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult DeleteImage(int id)
+        {
+            ProductImage entity = new ProductImage();
+            entity = data.ProductImages.Find(id);
+            entity.IsDeleted = true;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult UploadImage(ImageFile lstImage)
         {
             foreach (var file in lstImage.files)
@@ -334,11 +344,22 @@ namespace CyberShop.Areas.Admin.Controllers
                     entity.Name = file.FileName;
                     entity.Url = "/assets/product_image/"+file.FileName;
                     entity.Product_id = lstImage.Product_Id;
+                    entity.IsDeleted = false;
                     var pdDao = new ProductImageDao().InsertImage(entity);
                     file.SaveAs(path);
                 }
             }
             return ReturnImage(lstImage.Product_Id);
+        }
+
+        [HttpPost]
+        public JsonResult MainImage(ProductManagerViewModel model)
+        {
+            Product entity = new Product();
+            entity = data.Products.Find(model.id);
+            entity.Image= model.Image;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ReturnHistory()
         {
