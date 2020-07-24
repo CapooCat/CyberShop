@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CyberShop.Common;
 using CyberShop.Areas.Admin.Models;
+using Rotativa;
 using Data;
 namespace CyberShop.Areas.Admin.Controllers
 {
@@ -134,10 +135,10 @@ namespace CyberShop.Areas.Admin.Controllers
             Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION] = invoiceOutList;
             return ReturnInvoiceDetailSession();
         }
-        //public ActionResult PrintViewToPdf()
-        //{
-        //    var report = new Rotativa.ActionAsPdf("Index");
-        //    return report;
-        //}
+        public ActionResult PrintViewToPdf()
+        {
+            var report = new Rotativa.ActionAsPdf("Index");
+            return report;
+        }
     }
 }
