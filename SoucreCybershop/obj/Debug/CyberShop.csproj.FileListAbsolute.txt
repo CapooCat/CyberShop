@@ -168,7 +168,7 @@ D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.Http.xml
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\System.Web.Http.WebHost.xml
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Facebook.dll
 D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Facebook.xml
-C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.csprojResolveAssemblyReference.cache
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Rotativa.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\ApplicationInsights.config
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\roslyn\csc.exe
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -211,6 +211,7 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.Twitter.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Web.Infrastructure.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Newtonsoft.Json.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Owin.dll
+C:\GitLaravel\CyberShop\SoucreCybershop\bin\Rotativa.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Net.Http.Formatting.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Helpers.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\System.Web.Http.dll
@@ -254,6 +255,6 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.OAuth.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.Google.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.Twitter.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.csprojResolveAssemblyReference.cache
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.pdb
-D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Rotativa.dll

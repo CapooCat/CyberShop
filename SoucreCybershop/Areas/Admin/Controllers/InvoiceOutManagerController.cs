@@ -23,20 +23,27 @@ namespace CyberShop.Areas.Admin.Controllers
             var sessionInvoiceDetail = Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
             List<InvoiceOutManagerViewModel> model = (List<InvoiceOutManagerViewModel>)sessionInvoiceDetail;
             List<object> ReturnData = new List<object>();
-            foreach (InvoiceOutManagerViewModel item in model)
+            if (model != null)
             {
-                ReturnData.Add(new InvoiceOutManagerViewModel
+                foreach (InvoiceOutManagerViewModel item in model)
                 {
-                    Product_Id = item.Product_Id,
-                    ProductName=item.ProductName,
-                    BrandName=item.BrandName,
-                    ProductTypeName=item.ProductTypeName,
-                    WarrantyMonths=item.WarrantyMonths,
-                    Price=item.Price,
-                    Amount=item.Amount
-                });
+                    ReturnData.Add(new InvoiceOutManagerViewModel
+                    {
+                        Product_Id = item.Product_Id,
+                        ProductName = item.ProductName,
+                        BrandName = item.BrandName,
+                        ProductTypeName = item.ProductTypeName,
+                        WarrantyMonths = item.WarrantyMonths,
+                        Price = item.Price,
+                        Amount = item.Amount
+                    });
+                }
+                return Json(ReturnData, JsonRequestBehavior.AllowGet);
             }
-            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+            else
+            {
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult AddProductToInvoiceOut(int id)
@@ -93,7 +100,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     item.WarrantyMonths = product.First().MonthWarranty;
                     item.BrandName = product.First().BrandName;
                     list.Add(item);
-                    Session[Common.CommonConstantUser.CART_SESSION] = list;
+                    Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION] = list;
                 }
             }
             else
@@ -137,8 +144,28 @@ namespace CyberShop.Areas.Admin.Controllers
         }
         public ActionResult PrintViewToPdf()
         {
-            var report = new Rotativa.ActionAsPdf("Index");
+            var report = new ActionAsPdf("InvoiceOutPdf");
             return report;
+        }
+        public ActionResult InvoiceOutPdf()
+        {
+            var invoiceOut = Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
+            List<InvoiceOutManagerViewModel> invoiceOutList = (List<InvoiceOutManagerViewModel>)invoiceOut;
+            return View(invoiceOutList);
+        }
+        [HttpPost]
+        public JsonResult SubmitInvoiceOut(InvoiceOutManagerViewModel model)
+        {
+            Invoice invoice = new Invoice();
+            invoice.CustomerName = model.CustomerName;
+            invoice.User_id = null;
+            invoice.DeliveryAddress = model.Address;
+            invoice.DeliveryPhoneNum = model.NumberPhone;
+            invoice.IsDeleted = false;
+            invoice.CreateBy = "Admin";
+            invoice.PurchaseDate = DateTime.Now;
+            var invoiceDao = new InvoiceDao().InsertInvoice(invoice);
+            return Json(new { success=true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

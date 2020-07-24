@@ -6,7 +6,6 @@
     var brandList = new BrandDao().ListBrand();
 }
 @using Data;
-
 <section id="content" class="admin-content-container">
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-file-invoice-dollar" style="margin-right: 10px;"></i>Xuất hóa đơn</h3>
     <div class="row" style="margin: 5px;">
@@ -14,22 +13,22 @@
         <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
             <div class="col-md-2">
                 <p>Họ tên khách hàng:</p>
-                <input type="text" placeholder="Nhập Họ tên khách hàng...">
+                <input type="text" placeholder="Nhập Họ tên khách hàng..." id="customer_name">
             </div>
             <div class="col-md-2">
                 <p>Địa chỉ:</p>
-                <input type="text" placeholder="Nhập địa chỉ...">
+                <input type="text" placeholder="Nhập địa chỉ..." id="customer_address">
             </div>
             <div class="col-md-2">
                 <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại...">
+                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
             </div>
             <div class="col-md-2">
                 <p>Email:</p>
-                <input type="text" placeholder="Nhập email...">
+                <input type="text" placeholder="Nhập email..." id="customer_email">
             </div>
             <div class="col-md-12">
-                <a href="/InvoiceOutManager/ConvertToPdf"></a>
+                <a href="/Admin/InvoiceOutManager/PrintViewToPdf">hello</a>
             </div>
         </div>
 
@@ -161,7 +160,7 @@
     </div>
     <div class="col-md-12" style="text-align: center; margin-top: 15px;margin-bottom: 15px;font-size: 20px;">Tổng tiền: 8.300.000đ</div>
     <div class="col-md-12 product-action" style="text-align: center">
-        <button type="button" style="width: 200px;height: 60px;">Xuất hóa đơn</button>
+        <button type="button" style="width: 200px;height: 60px;"">Xuất hóa đơn</button>
     </div>
 </section>
 

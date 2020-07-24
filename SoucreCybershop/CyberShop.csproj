@@ -373,6 +373,7 @@
     <Content Include="Areas\Admin\Views\SummaryManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\WarrantyManager\Index.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Areas\Admin\Views\InvoiceOutManager\InvoiceOutPdf.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -419,6 +420,7 @@
     <Folder Include="assets\product_image\" />
     <Folder Include="bin\roslyn\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Service References\" />
     <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>

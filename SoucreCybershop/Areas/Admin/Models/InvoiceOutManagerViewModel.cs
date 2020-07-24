@@ -14,5 +14,9 @@ namespace CyberShop.Areas.Admin.Models
         public double? Price { get; set; }
         public int Amount { get; set; }
         public int? WarrantyMonths { get; set; }
+        public string CustomerName { get; set; }
+        public string NumberPhone { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
     }
 }
