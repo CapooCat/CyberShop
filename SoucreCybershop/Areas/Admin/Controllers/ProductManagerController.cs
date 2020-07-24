@@ -207,6 +207,27 @@ namespace CyberShop.Areas.Admin.Controllers
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
 
+        public JsonResult AddProduct(ProductManagerViewModel model)
+        {
+            var ProductDao = new ProductDao();
+            var Product = new Product();
+
+            Product.ProductName = model.ProductName;
+            Product.Brand_id = model.Brand_id;
+            Product.ProductType_id = model.ProductType_id;
+            Product.Price = model.Price;
+            Product.Amount = model.Amount;
+            Product.Info = model.Info;
+            Product.MetaTitle = model.MetaTitle;
+            Product.IsDeleted = false;
+            Product.CreateDate = DateTime.Now;
+            Product.CreateBy = "Admin";
+            
+            if (ProductDao.InsertProduct(Product))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
+
         public JsonResult DeleteBrand(int id)
         {
             Brand entity = new Brand();
@@ -299,6 +320,11 @@ namespace CyberShop.Areas.Admin.Controllers
             public int Product_Id { get; set; }
             public List<HttpPostedFileBase> files { get; set; }
         }
+
+        public class TempImage
+        {
+            public List<HttpPostedFileBase> files { get; set; }
+        }
         public JsonResult ReturnImage(int id)
         {
             var model = new List<ProductImageManagerViewModel>();
@@ -350,6 +376,24 @@ namespace CyberShop.Areas.Admin.Controllers
                 }
             }
             return ReturnImage(lstImage.Product_Id);
+        }
+
+        public JsonResult AddTempImage(TempImage lstImage)
+        {
+            var list = new List<TempImagesViewModel>();
+            foreach (var file in lstImage.files)
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    string path = Path.Combine(Server.MapPath("~/assets/product_image"), file.FileName);
+                    var item = new TempImagesViewModel();
+                    item.Name = file.FileName;
+                    item.Url = "/assets/product_image/" + file.FileName;
+                    list.Add(item);
+                    file.SaveAs(path);
+                }
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
