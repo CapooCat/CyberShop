@@ -5,6 +5,7 @@
 
     var prdTypeList = new ProductTypeDao().ListProductType();
     var brandList = new BrandDao().ListBrand();
+
 }
 @using Data;
 <section id="content" class="admin-content-container">
@@ -40,9 +41,6 @@
             <div class="col-md-2">
                 <p>Giá tiền đến:</p>
                 <input type="text" placeholder="Nhập giá tiền đến..." id="product_priceTo">
-            </div>
-            <div class="col-md-12">
-
             </div>
         </div>
 
@@ -139,11 +137,11 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tên sản phẩm:</p>
-                            <input type="text" placeholder="Nhập tên sản phẩm..." id="txt_ProductName">
+                            <input type="text" placeholder="Nhập tên sản phẩm..." id="txt_Add_ProductName">
                         </div>
                         <div class="col-md-4">
                             <p>Loại sản phẩm:</p>
-                            <select class="list-select">
+                            <select class="list-select" id="txt_Add_Type">
                                 <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -153,7 +151,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Hãng:</p>
-                            <select class="list-select">
+                            <select class="list-select" id="txt_Add_Brand">
                                 <option value=""> <text style="color:silver">Chọn hãng</text></option>
                                 @foreach (var item in brandList)
                                 {
@@ -163,23 +161,23 @@
                         </div>
                         <div class="col-md-4">
                             <p>Giá bán:</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="txt_SellPrice">
+                            <input type="text" placeholder="Nhập giá tiền..." id="txt_Add_SellPrice">
                         </div>
                         <div class="col-md-4">
                             <p>Số lượng:</p>
-                            <input type="text" placeholder="Nhập số lượng..." id="txt_Quantity">
+                            <input type="text" placeholder="Nhập số lượng..." id="txt_Add_Quantity">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Mô tả (Google Doc):</p>
-                            <input type="text" placeholder="Nhập link Google Doc..." id="txt_Doc">
+                            <input type="text" placeholder="Nhập link Google Doc..." id="txt_Add_Doc">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Từ khóa:</p>
-                            <input type="text" placeholder="Nhập từ khóa..." id="txt_MetaTitle">
+                            <input type="text" placeholder="Nhập từ khóa..." id="txt_Add_MetaTitle">
                         </div>
                         <div class="col-md-4" style="text-align: center;">
-                            <input type="file" id="myFile1" style="display: none;" accept="image/*" multiple>
-                            <button onclick="upload()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm hình ảnh</button>
+                            <input type="file" id="myFile1" onchange="angular.element(this).scope().AddFiles(this.files)" style="display: none;" accept="image/*" multiple>
+                            <button onclick="Upload()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm hình ảnh</button>
                         </div>
 
                         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
@@ -196,11 +194,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="checkbox"><input type="radio" value="" name="Selected"></td>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td style="text-align: center;"><img style="max-width: 150px;max-height:150px;" src="img/1.png"></td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a></td>
+                                            <tr ng-repeat="item in TempIMG" id="IMG_DATA">
+                                                <td class="checkbox"><input type="radio" value="{{item.Url}}" class="MainIMG" name="Selected"></td>
+                                                <td>{{item.Name}}</td>
+                                                <td style="text-align: center;"><img style="max-width: 150px;max-height:150px;" src="{{item.Url}}"></td>
+                                                <td style="text-align: center;"><a href="#" ng-click="DeleteTempIMG(item.Name)"><i class="fas fa-times"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -212,7 +210,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button">Thêm</button>
+                    <button type="button" ng-click="AddProduct()">Thêm</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
@@ -509,9 +507,13 @@
             document.getElementById("myFile2").value = "";
             document.getElementById("preview").innerHTML = "";
         }
+        function Upload() {
+            document.getElementById("myFile1").click();
+        }
         function turnUpload() {
             document.getElementById("myFile2").click();
         }
+        
 </script>
 @section scripts{
 

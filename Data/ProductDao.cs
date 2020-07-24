@@ -14,5 +14,15 @@ namespace Data
             var res = data.Products.Where(x => x.IsDeleted == false).ToList();
             return res;
         }
+        public bool InsertProduct(Product entity)
+        {
+            if (entity != null)
+            {
+                data.Products.Add(entity);
+                data.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

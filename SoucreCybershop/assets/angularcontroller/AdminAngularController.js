@@ -17,6 +17,8 @@
 app.controller('MyAdminController', function ($scope, $http, $filter) {
     var InvoiceID = 0;
     var ProductID = 0;
+    var n = 0;
+    $scope.TempIMG = [];
 
     
     $scope.getCatList = function () {
@@ -827,6 +829,51 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         }
     }
+
+    $scope.AddProduct = function () {
+        var ProductName = document.getElementById("txt_Add_ProductName").value;
+        var Type = document.getElementById("txt_Add_Type").value;
+        var Brand = document.getElementById("txt_Add_Brand").value;
+        var SellPrice = document.getElementById("txt_Add_SellPrice").value;
+        var Quantity = document.getElementById("txt_Add_Quantity").value;
+        var Doc = document.getElementById("txt_Add_Doc").value;
+        var MetaTitle = document.getElementById("txt_Add_MetaTitle").value;
+
+        $scope.loading = true;
+        if (ProductName == "" || Type == "" || Brand == "" || SellPrice == "" || Quantity == "" || Doc == "" || MetaTitle == "") {
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được bỏ trống',
+            })
+        }
+        else {
+            $http({
+                url: '/Admin/ProductManager/AddProduct',
+                method: "POST",
+                data: {
+                    ProductName: ProductName,
+                    Brand_id: Brand,
+                    ProductType_id: Type,
+                    Price: SellPrice,
+                    Amount: Quantity,
+                    Info: Doc,
+                    MetaTitle: MetaTitle
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                console.log(response);
+            });
+        }
+
+
+    }
     
     $scope.DeleteBrand = function (id) {
         $scope.DeleteBrandId = id;
@@ -1020,6 +1067,65 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
     }
 
+    $scope.AddFiles = function (files) {
+        $scope.addfile = files[0];
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có muốn lưu hình ảnh này ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.TempFiles();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                document.getElementById("myFile1").value = "";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Lưu thất bại',
+                })
+            }
+        })
+    }
+
+    $scope.TempFiles = function () {
+        $scope.loading = true;
+        var fdata = new FormData();
+        fdata.append("files", $scope.addfile);
+        $http.post("/Admin/ProductManager/AddTempImage", fdata, {
+            withCredentials: true,
+            headers: { 'Content-Type': undefined },
+            transformRequest: angular.identity
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.ItemIMG = angular.fromJson(response.data);
+            $scope.TempIMG.push($scope.ItemIMG[0]);
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Lưu thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Lưu thất bại',
+            })
+            console.log(response);
+        });
+    }
+
+    $scope.DeleteTempIMG = function (Name) {
+        var index = $scope.TempIMG.indexOf(Name);
+        $scope.TempIMG.splice(index, 1);
+    }
+
     $scope.SelectedFiles=function(files) {
         $scope.selectedfile = files[0];
         Swal.fire({
@@ -1042,6 +1148,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         })
     }
+
     $scope.UploadFiles = function () {
         $scope.loading = true;
             var fdata = new FormData();
@@ -1096,6 +1203,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         })
     }
+
+
 
     $scope.DeleteImage = function (id) {
         Swal.fire({

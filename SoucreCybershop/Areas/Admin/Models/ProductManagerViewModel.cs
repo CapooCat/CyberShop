@@ -9,7 +9,7 @@ namespace CyberShop.Areas.Admin.Models
     {
         public int? id { get; set; }
         public int Brand_id { get; set; }
-        public int? ProductType_id { get; set; }
+        public int ProductType_id { get; set; }
         public string ProductName { get; set; }
         public string MetaTitle { get; set; }
         public string Info { get; set; }
