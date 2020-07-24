@@ -1432,4 +1432,108 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     };
 
     //--------------WARRANTY_END--------------------//
+    //--------------INVOICE OUT_START--------------------//
+    $scope.AddProductToInvoiceDetail = function (id)
+    {
+        $scope.loading = true;
+        $http.get("/Admin/InvoiceOutManager/AddProductToInvoiceOut/" + id).then(function (response) {
+            $scope.lstInvoiceDetailss = response.data;
+            $scope.loading = false;
+        });
+    }
+    $scope.RemoveItem = function (id) {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.loading = true;
+                $http.get("/Admin/InvoiceOutManager/RemoveItem/" + id).then(function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công',
+                        text: 'Xóa thành công',
+                    })
+                    $scope.lstInvoiceDetailss = response.data;
+                    $scope.loading = false;
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteInvoiceOutChecked = function () {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteInvoiceOutCheckedConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteInvoiceOutCheckedConfirm = function () {
+        CheckAll = document.getElementById("check-all");
+        table = document.getElementById("items-table");
+        ItemCheckBox = table.getElementsByTagName("input");
+        var lstId = [];
+        if (CheckAll.checked == true) {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        else {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceOutManager/DeleteInvoiceOutChecked',
+            method: "POST",
+            data: {
+                id: lstId
+            },
+        }).then(function onSuccess(response) {
+            $scope.lstInvoiceDetailss = response.data;
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
+        });
+    }
+    //--------------INVOICE OUT_END--------------------//
 });

@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
 }
+@using Data;
 
 <section id="content" class="admin-content-container">
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-file-invoice-dollar" style="margin-right: 10px;"></i>Xuất hóa đơn</h3>
@@ -26,14 +29,14 @@
                 <input type="text" placeholder="Nhập email...">
             </div>
             <div class="col-md-12">
-
+                <a href="/InvoiceOutManager/ConvertToPdf"></a>
             </div>
         </div>
 
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
             <button type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
-            <button type="button" data-toggle="modal" data-target="#warningModal" class="delete"><i class="fas fa-trash"></i></button>
+            <button type="button" class="delete" ng-click="DeleteInvoiceOutChecked()"><i class="fas fa-trash"></i></button>
         </div>
 
 
@@ -47,54 +50,26 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 3%;"><a href="#"></a></th>
+                                <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
                                 <th style="width: 27%;"><a href="#">Tên sản phẩm</a></th>
-                                <th style="width: 20%;"><a href="#">Bảo hành</a></th>
-                                <th style="width: 20%;"><a href="#">Số lượng</a></th>
-                                <th style="width: 20%;"><a href="#">Giá tiền</a></th>
+                                <th style="width: 10%;"><a href="#">Loại sản phẩm</a></th>
+                                <th style="width: 10%;"><a href="#">Hãng</a></th>
+                                <th style="width: 10%;"><a href="#">Bảo hành (tháng)</a></th>
+                                <th style="width: 10%;"><a href="#">Số lượng</a></th>
+                                <th style="width: 10%;"><a href="#">Giá tiền (VNĐ)</a></th>
                                 <th style="width: 20%;"><a href="#">Hoạt động</a></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>36 tháng</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>36 tháng</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>36 tháng</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>36 tháng</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox"><input type="checkbox" value=""></td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>36 tháng</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                                <td class="table-product-action"><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash"></i></button><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button></td>
+                        <tbody id="items-table">
+                            <tr ng-repeat="item in lstInvoiceDetailss">
+                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Product_Id}}"></td>
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.ProductTypeName}}</td>
+                                <td>{{item.BrandName}}</td>
+                                <td>{{item.WarrantyMonths}}</td>
+                                <td>{{item.Amount}}</td>
+                                <td>{{item.Price | currency:"":0}}</td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" ng-click="RemoveItem(item.Product_Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -119,22 +94,26 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tìm kiếm sản phẩm:</p>
-                            <input type="text" placeholder="Nhập từ khóa...">
+                            <input type="text" placeholder="Nhập từ khóa..." ng-model="search.ProductName">
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo loại sản phẩm:</p>
-                            <select>
-                                <option value="">VGA</option>
-                                <option value="">SSD</option>
-                                <option value="">HDD</option>
+                            <select class="list-select" ng-model="search.ProductTypeName">
+                                <option value="">Chọn loại sản phẩm</option>
+                            @foreach (var item in prdTypeList)
+                            {
+                                <option value="@item.TypeName">@item.TypeName</option>
+                            }
                             </select>
                         </div>
                         <div class="col-md-4">
                             <p>Lọc theo hãng:</p>
-                            <select>
-                                <option value="">Asus</option>
-                                <option value="">Zotac</option>
-                                <option value="">Xigmatek</option>
+                            <select class="list-select" ng-model="search.BrandName">
+                                <option value="">Chọn hãng sản phẩm</option>
+                            @foreach (var item in brandList)
+                            {
+                                <option value="@item.BrandName">@item.BrandName</option>
+                            }
                             </select>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
@@ -146,44 +125,22 @@
                                             <tr>
                                                 <th style="width: 40%;"><a href="#">Tên sản phẩm</a></th>
                                                 <th style="width: 10%;"><a href="#">Loại SP</a></th>
+                                                <th style="width: 10%;"><a href="#">Hãng SP</a></th>
                                                 <th style="width: 15%;"><a href="#">SL hàng tồn</a></th>
                                                 <th style="width: 10%;"><a href="#">Bảo hành</a></th>
-                                                <th style="width: 30%;"><a href="#">Giá tiền</a></th>
+                                                <th style="width: 20%;"><a href="#">Giá tiền</a></th>
                                                 <th style="width: 5%;text-align: center;"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>VGA</td>
-                                                <td>50</td>
-                                                <td>36 tháng</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>VGA</td>
-                                                <td>50</td>
-                                                <td>36 tháng</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>VGA</td>
-                                                <td>50</td>
-                                                <td>36 tháng</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                                <td>VGA</td>
-                                                <td>50</td>
-                                                <td>36 tháng</td>
-                                                <td>4.150.000đ</td>
-                                                <td style="text-align: center;"><a href="#"><i class="fas fa-plus"></i></a></td>
+                                            <tr ng-repeat="item in productList | filter:search">
+                                                <td>{{item.ProductName}}</td>
+                                                <td>{{item.ProductTypeName}}</td>
+                                                <td>{{item.BrandName}}</td>
+                                                <td>{{item.Amount}}</td>
+                                                <td>{{item.MonthWarranty}}</td>
+                                                <td>{{item.Price | currency:"":0}}</td>
+                                                <td style="text-align: center;"><a href="#" ng-click="AddProductToInvoiceDetail(item.id)"><i class="fas fa-plus"></i></a></td>
                                             </tr>
 
                                         </tbody>
@@ -202,26 +159,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Cảnh báo !!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Bạn chắc chắn muốn xóa chứ ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button">Xóa</button>
-                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-md-12" style="text-align: center; margin-top: 15px;margin-bottom: 15px;font-size: 20px;">Tổng tiền: 8.300.000đ</div>
     <div class="col-md-12 product-action" style="text-align: center">
         <button type="button" style="width: 200px;height: 60px;">Xuất hóa đơn</button>
@@ -230,6 +167,43 @@
 
 <script>
     Active = document.getElementById("InvoiceOutManager");
-    Active.className = "active-button"
+    Active.className = "active-button";
+    CheckAll = document.getElementById("check-all");
+    table = document.getElementById("items-table");
+    ItemCheckBox = table.getElementsByTagName("input");
+    Product = document.getElementById("Product");
+    ProductBackground = document.getElementById("Product-Background");
+    function UnCheck() {
+        CheckAll.checked = false;
+        Check();
+    }
+
+    function Check() {
+        if (CheckAll.checked == true) {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox')
+                    ItemCheckBox[i].checked = true;
+            }
+        } else {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox')
+                    ItemCheckBox[i].checked = false;
+            }
+        }
+    }
+
+    function CheckItem() {
+        n = 0;
+        for (i = 0; ItemCheckBox.length > i; i++) {
+            if (ItemCheckBox[i].type == 'checkbox')
+                if (ItemCheckBox[i].checked == false) {
+                    CheckAll.checked = false;
+                    n = n + 1;
+                } else if (n == 0) {
+                    CheckAll.checked = true;
+                }
+        }
+    }
+
 </script>
 

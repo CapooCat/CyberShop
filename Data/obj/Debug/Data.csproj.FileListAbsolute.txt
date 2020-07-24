@@ -7,6 +7,7 @@ D:\DoAn\CyberShop\CyberShop\Data\bin\Debug\EntityFramework.xml
 D:\DoAn\CyberShop\CyberShop\Data\bin\Debug\EntityFramework.SqlServer.xml
 D:\DoAn\CyberShop\CyberShop\Data\obj\Debug\Data.dll
 D:\DoAn\CyberShop\CyberShop\Data\obj\Debug\Data.pdb
+D:\DoAn\CyberShop\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
 C:\GitLaravel\CyberShop\Data\bin\Debug\Data.dll.config
 C:\GitLaravel\CyberShop\Data\bin\Debug\Data.dll
 C:\GitLaravel\CyberShop\Data\bin\Debug\Data.pdb
@@ -14,7 +15,6 @@ C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.dll
 C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.SqlServer.dll
 C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.xml
 C:\GitLaravel\CyberShop\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\GitLaravel\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.dll
 C:\GitLaravel\CyberShop\Data\obj\Debug\Data.pdb
-C:\GitLaravel\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
-D:\DoAn\CyberShop\CyberShop\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
