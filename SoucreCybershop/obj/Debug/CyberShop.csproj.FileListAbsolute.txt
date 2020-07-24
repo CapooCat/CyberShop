@@ -256,3 +256,4 @@ C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.Twitter.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.dll
 C:\GitLaravel\CyberShop\SoucreCybershop\obj\Debug\CyberShop.pdb
+D:\DoAn\CyberShop\CyberShop\SoucreCybershop\bin\Rotativa.dll
