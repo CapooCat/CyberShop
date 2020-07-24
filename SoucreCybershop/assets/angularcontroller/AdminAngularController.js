@@ -1679,6 +1679,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.loading = false;
         });
     }
+    $scope.ReturnInvoiceoOut = function () {
+        $scope.loading = true;
+        $http.get("/Admin/InvoiceOutManager/ReturnInvoiceDetailSession").then(function (response) {
+            $scope.lstInvoiceDetailss = response.data;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnInvoiceoOut();
     $scope.RemoveItem = function (id) {
         Swal.fire({
             title: 'Cảnh báo',
@@ -1770,6 +1778,31 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 title: 'Thất bại',
                 text: 'Xóa thất bại',
             })
+            console.log(response);
+        });
+    }
+    $scope.SubmitInvoiceOut = function () {
+        var customerName = document.getElementById("customer_name").value;
+        var address = document.getElementById("customer_address").value;
+        var phone = document.getElementById("customer_phone").value;
+        var email = document.getElementById("customer_email").value;
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceOutManager/SubmitInvoice',
+            method: "POST",
+            data: {
+                CustomerName: customerName,
+                Address: address,
+                NumberPhone: phone,
+                Email: email
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
             console.log(response);
         });
     }

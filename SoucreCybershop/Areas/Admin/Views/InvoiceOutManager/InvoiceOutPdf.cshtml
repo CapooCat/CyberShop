@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+@using CyberShop.Common;
+@using CyberShop.Areas.Admin.Models;
+@model List<CyberShop.Areas.Admin.Models.InvoiceOutManagerViewModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InvoiceOutPdf</title>
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+</head>
+<body>
+    <div>
+        <span> Họ tên khách hàng: Trần Huy Đức</span>
+        <span> Số điện thoại: 0933205621</span>
+        <span> Địa chỉ: </span>
+        <span> Email: huyduc2741999@gmail.com</span>
+        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="Box" style="padding: 0;">
+                <div class="chart-title" style="height: 55px;">Hóa đơn sản phẩm</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="myBar"></div>
+                </div>
+                <div class="admin-table" id="admin-table-best-sale" style="height: 500px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
+                                <th style="width: 27%;"><a href="#">Tên sản phẩm</a></th>
+                                <th style="width: 10%;"><a href="#">Loại sản phẩm</a></th>
+                                <th style="width: 10%;"><a href="#">Hãng</a></th>
+                                <th style="width: 10%;"><a href="#">Bảo hành (tháng)</a></th>
+                                <th style="width: 10%;"><a href="#">Số lượng</a></th>
+                                <th style="width: 10%;"><a href="#">Giá tiền (VNĐ)</a></th>
+                                <th style="width: 20%;"><a href="#">Hoạt động</a></th>
+                            </tr>
+                        </thead>
+                        <tbody id="items-table">
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Product_Id}}"></td>
+                                <td>@item.ProductName</td>
+                                <td>@item.ProductTypeName</td>
+                                <td>@item.BrandName</td>
+                                <td>@item.WarrantyMonths</td>
+                                <td>@item.Amount</td>
+                                <td>@item.Price</td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" ng-click="RemoveItem(item.Product_Id)"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://unpkg.com/sticky-table-headers"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="~/assets/angularcontroller/AdminAngularController.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+
+</html>

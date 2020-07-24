@@ -128,6 +128,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CyberShopModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App_Browsers\qt.browser" />
     <None Include="CyberShopModel.edmx.diagram">
       <DependentUpon>CyberShopModel.edmx</DependentUpon>
     </None>
@@ -146,6 +147,10 @@
       <DependentUpon>CyberShopModel.edmx</DependentUpon>
       <LastGenOutput>CyberShopModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
