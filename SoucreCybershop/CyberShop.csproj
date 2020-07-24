@@ -321,6 +321,10 @@
     <Content Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="obj\Debug\CyberShop.csproj.FileListAbsolute.txt" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -363,6 +367,7 @@
     <Content Include="Areas\Admin\Views\ProductManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SummaryManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\WarrantyManager\Index.cshtml" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
