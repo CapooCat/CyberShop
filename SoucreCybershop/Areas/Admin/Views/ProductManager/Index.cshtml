@@ -292,10 +292,6 @@
                         <input type="text" placeholder="Nhập link Google Doc..." ng-value="Doc">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
-                        <p>Giá mua:</p>
-                        <input type="text" placeholder="Nhập giá tiền..." ng-value="Buy_Price">
-                    </div>
-                    <div class="col-md-4" style="text-align: left;">
                         <p>Từ khóa:</p>
                         <input type="text" placeholder="Nhập từ khóa..." ng-value="MetaTitle">
                     </div>
@@ -327,10 +323,10 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="item in lstImage">
-                                            <td class="checkbox"><input type="radio" value="" name="Selected"></td>
+                                            <td class="checkbox"><input type="radio" id="{{item.id}}" name="Selected" value="{{item.Url}}" ng-model="value" ng-Change="MainImage(value)"></td>
                                             <td>{{item.Name}}</td>
                                             <td style="text-align: center;"><img style="max-width: 150px;max-height:150px;" ng-src="{{item.Url}}"></td>
-                                            <td style="text-align: center;"><a href="#"><i class="fas fa-times"></i></a></td>
+                                            <td style="text-align: center;"><a href="#" ng-click="DeleteImage(item.id)"><i class="fas fa-times"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -15,6 +15,7 @@
     <EntitySetMapping Name="ProductImages">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.ProductImage">
         <MappingFragment StoreEntitySet="ProductImage">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Product_id" ColumnName="Product_id" />
           <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Name" ColumnName="Name" />

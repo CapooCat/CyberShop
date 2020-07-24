@@ -17,6 +17,8 @@
 app.controller('MyAdminController', function ($scope, $http, $filter) {
     var InvoiceID = 0;
     var ProductID = 0;
+
+    
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
             $scope.catList = response.data;
@@ -524,6 +526,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         })
     }
 
+
     $scope.DeleteDetailInvoiceConfirm = function () {
         $scope.loading = true;
         $http.get("/Admin/InvoiceManager/DeleteDetailInvoice/" + $scope.DeleteDetailInvoiceId).then(function (response) {
@@ -976,11 +979,45 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.Quantity = $scope.dataProduct[0].Amount;
             $scope.Doc = $scope.dataProduct[0].Info;
             $scope.MetaTitle = $scope.dataProduct[0].MetaTitle;
+            var Image = $scope.dataProduct[0].Image;
             $http.get("/Admin/ProductManager/ReturnImage/" + id).then(function (response) {
                 $scope.loading = false;
                 $scope.lstImage = response.data;
+                $http.get("/Admin/ProductManager/ReturnImage/" + id).then(function (response) {
+                    $scope.ImageData = angular.fromJson(response.data);
+                    for (i = 0; i < $scope.ImageData.length; i++) {
+                        if (Image == $scope.ImageData[i].Url) {
+                            document.getElementById($scope.ImageData[i].id).checked = true;
+                        }
+                    }
+                });
             });
         }); 
+    }
+
+    $scope.MainImage = function (url) {
+        $scope.loading = true;
+            $http({
+                url: '/Admin/ProductManager/MainImage',
+                method: "POST",
+                data: {
+                    Id: $scope.product_id,
+                    Image: url
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'đổi thất bại',
+                })
+                console.log(response);
+            });
     }
 
     $scope.SelectedFiles=function(files) {
@@ -1016,6 +1053,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 transformRequest: angular.identity
             }).then(function onSuccess(response) {
                 // Handle success
+                $http.get("/Admin/ProductManager/ReturnImage/" + $scope.product_id).then(function (response) {
+                    $scope.lstImage = response.data;
+                });
                 $scope.loading = false;
                 Swal.fire({
                     icon: 'success',
@@ -1056,6 +1096,60 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         })
     }
+
+    $scope.DeleteImage = function (id) {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteImageConfirm(id);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+
+    $scope.DeleteImageConfirm = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/ProductManager/DeleteImage',
+            method: "POST",
+            data: {
+                id: id
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $http.get("/Admin/ProductManager/ReturnImage/" + $scope.product_id).then(function (response) {
+                $scope.lstImage = response.data;
+            });
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
+        });
+    }
+
     $scope.DeleteProductConfirm = function () {
         $scope.loading = true;
         $http({
