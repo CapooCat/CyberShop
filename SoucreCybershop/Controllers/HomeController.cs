@@ -96,7 +96,8 @@ namespace CyberShop.Controllers
                              Price=b.Price,
                              MonthWarranty=b.MonthWarranty,
                              Url=a.Url,
-                             BrandName=c.BrandName
+                             BrandName=c.BrandName,
+                             Info = b.Info
                          }).ToList();
             var cate = (from a in data.ProducTypes
                         join b in data.Products on a.Id equals b.ProductType_id

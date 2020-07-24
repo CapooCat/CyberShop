@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-2">
                 <p>Loại sản phẩm:</p>
-                <select id="product_type" class="list-select">
+                <select class="list-select" ng-value="Product_Type_Filter">
                     <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                     @foreach (var item in prdTypeList)
                     {
@@ -137,11 +137,11 @@
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
                             <p>Tên sản phẩm:</p>
-                            <input type="text" placeholder="Nhập tên sản phẩm..." id="txt_Add_ProductName">
+                            <input type="text" placeholder="Nhập tên sản phẩm..." id="txt_Add_ProductName" ng-value="txt_Add_ProductName">
                         </div>
                         <div class="col-md-4">
                             <p>Loại sản phẩm:</p>
-                            <select class="list-select" id="txt_Add_Type">
+                            <select class="list-select" id="txt_Add_Type" ng-value="txt_Add_Type">
                                 <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Hãng:</p>
-                            <select class="list-select" id="txt_Add_Brand">
+                            <select class="list-select" id="txt_Add_Brand" ng-value="txt_Add_Brand">
                                 <option value=""> <text style="color:silver">Chọn hãng</text></option>
                                 @foreach (var item in brandList)
                                 {
@@ -161,19 +161,23 @@
                         </div>
                         <div class="col-md-4">
                             <p>Giá bán:</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="txt_Add_SellPrice">
+                            <input type="text" placeholder="Nhập giá tiền..." id="txt_Add_SellPrice" ng-value="txt_Add_SellPrice">
                         </div>
                         <div class="col-md-4">
                             <p>Số lượng:</p>
-                            <input type="text" placeholder="Nhập số lượng..." id="txt_Add_Quantity">
+                            <input type="text" placeholder="Nhập số lượng..." id="txt_Add_Quantity" ng-value="txt_Add_Quantity">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Mô tả (Google Doc):</p>
-                            <input type="text" placeholder="Nhập link Google Doc..." id="txt_Add_Doc">
+                            <input type="text" placeholder="Nhập link Google Doc..." id="txt_Add_Doc" ng-value="txt_Add_Doc">
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <p>Bảo hành:</p>
+                            <input type="text" placeholder="Nhập tháng bảo hành..." id="txt_Add_Warranty" ng-value="txt_Add_Warranty">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Từ khóa:</p>
-                            <input type="text" placeholder="Nhập từ khóa..." id="txt_Add_MetaTitle">
+                            <input type="text" placeholder="Nhập từ khóa..." id="txt_Add_MetaTitle" ng-value="txt_Add_MetaTitle">
                         </div>
                         <div class="col-md-4" style="text-align: center;">
                             <input type="file" id="myFile1" onchange="angular.element(this).scope().AddFiles(this.files)" style="display: none;" accept="image/*" multiple>
@@ -193,8 +197,8 @@
                                                 <th style="width: 5%;text-align: center;"><a href="#">Xóa</a></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr ng-repeat="item in TempIMG" id="IMG_DATA">
+                                        <tbody id="IMG_DATA">
+                                            <tr ng-repeat="item in TempIMG">
                                                 <td class="checkbox"><input type="radio" value="{{item.Url}}" class="MainIMG" name="Selected"></td>
                                                 <td>{{item.Name}}</td>
                                                 <td style="text-align: center;"><img style="max-width: 150px;max-height:150px;" src="{{item.Url}}"></td>
@@ -267,6 +271,10 @@
                         <input type="text" placeholder="Nhập link Google Doc..." ng-value="Doc">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
+                        <p>Bảo hành:</p>
+                        <input type="text" placeholder="Nhập tháng bảo hành..." ng-value="Warranty">
+                    </div>
+                    <div class="col-md-4" style="text-align: left;">
                         <p>Từ khóa:</p>
                         <input type="text" placeholder="Nhập từ khóa..." ng-value="MetaTitle">
                     </div>
@@ -313,7 +321,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button">Xác nhận</button>
+                <button type="button" ng-click="UpdateProduct()">Xác nhận</button>
                 <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
             </div>
         </div>

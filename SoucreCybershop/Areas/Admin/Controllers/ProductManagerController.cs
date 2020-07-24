@@ -122,6 +122,21 @@ namespace CyberShop.Areas.Admin.Controllers
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ProductUpdate(ProductManagerViewModel model)
+        {
+            Product entity = new Product();
+            entity = data.Products.Find(model.id);
+            entity.Brand_id = model.Brand_id;
+            entity.ProductType_id = model.ProductType_id;
+            entity.ProductName = model.ProductName;
+            entity.MetaTitle = model.MetaTitle;
+            entity.Info = model.Info;
+            entity.Price = model.Price;
+            entity.MonthWarranty = model.MonthWarranty;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult ReturnProductById(int id)
         {
             var model = new List<ProductManagerViewModel>();
@@ -207,6 +222,7 @@ namespace CyberShop.Areas.Admin.Controllers
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
 
+        [HttpPost]
         public JsonResult AddProduct(ProductManagerViewModel model)
         {
             var ProductDao = new ProductDao();
@@ -227,6 +243,22 @@ namespace CyberShop.Areas.Admin.Controllers
             { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
+
+        [HttpPost]
+        public JsonResult AddImage(ProductImageManagerViewModel model)
+        {
+            var ProductImageDao = new ProductImageDao();
+            var ProductImage = new ProductImage();
+
+            ProductImage.Product_id = model.Product_id;
+            ProductImage.Name = model.Name;
+            ProductImage.Url = model.Url;
+            ProductImage.IsDeleted = false;
+            if (ProductImageDao.InsertImage(ProductImage))
+            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+        }
+
 
         public JsonResult DeleteBrand(int id)
         {
