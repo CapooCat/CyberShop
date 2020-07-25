@@ -307,7 +307,7 @@ namespace CyberShop.Areas.Admin.Controllers
             lstProduct = lstProduct.Where(x => ((model.id == null) || (x.id == model.id)))
                                       .Where(x => ((model.ProductName == null) || (x.ProductName.Contains(model.ProductName))))
                                       .Where(x => ((model.BrandName == null) || (x.BrandName.Contains(model.BrandName))))
-                                      .Where(x => ((model.ProductType_id == null) || (x.ProductType_id == model.ProductType_id)))
+                                      //.Where(x => ((model.ProductType_id == null) || (x.ProductType_id == model.ProductType_id)))
                                       .ToList();
             if (model.PriceTo != null && model.PriceFrom == null)
             {

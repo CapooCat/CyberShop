@@ -1686,7 +1686,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.loading = false;
         });
     }
-    $scope.ReturnInvoiceoOut();
+    //$scope.ReturnInvoiceoOut();
     $scope.RemoveItem = function (id) {
         Swal.fire({
             title: 'Cảnh báo',
