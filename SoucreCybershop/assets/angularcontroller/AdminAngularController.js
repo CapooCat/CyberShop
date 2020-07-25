@@ -15,6 +15,8 @@
     }
 })
 app.controller('MyAdminController', function ($scope, $http, $filter) {
+    $scope.txt_Add_Type = "";
+    $scope.txt_Add_Brand = "";
     var InvoiceID = 0;
     var ProductID = 0;
     var n = 0;
@@ -831,6 +833,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     }
 
     $scope.AddProduct = function () {
+        var MaxProductId = 0;
         var ProductName = document.getElementById("txt_Add_ProductName").value;
         var Type = document.getElementById("txt_Add_Type").value;
         var Brand = document.getElementById("txt_Add_Brand").value;
@@ -838,6 +841,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var Quantity = document.getElementById("txt_Add_Quantity").value;
         var Doc = document.getElementById("txt_Add_Doc").value;
         var MetaTitle = document.getElementById("txt_Add_MetaTitle").value;
+        var Warranty = document.getElementById("txt_Add_Warranty").value;
 
         $scope.loading = true;
         if (ProductName == "" || Type == "" || Brand == "" || SellPrice == "" || Quantity == "" || Doc == "" || MetaTitle == "") {
@@ -847,33 +851,139 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 title: 'Thất bại',
                 text: 'Không được bỏ trống',
             })
-        }
-        else {
-            $http({
-                url: '/Admin/ProductManager/AddProduct',
-                method: "POST",
-                data: {
-                    ProductName: ProductName,
-                    Brand_id: Brand,
-                    ProductType_id: Type,
-                    Price: SellPrice,
-                    Amount: Quantity,
-                    Info: Doc,
-                    MetaTitle: MetaTitle
+        } else if ($scope.TempIMG.length == 0) {
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Vui lòng thêm ít nhất 1 hình ảnh',
+            })
+        } else {
+            var m = 0;
+            for (i = 0; $scope.TempIMG.length > i; i++) {
+                if (document.getElementById("IMG_DATA").getElementsByClassName("MainIMG")[i].checked == true)
+                {
+                    $http({
+                        url: '/Admin/ProductManager/AddProduct',
+                        method: "POST",
+                        data: {
+                            ProductName: ProductName,
+                            Brand_id: Brand,
+                            ProductType_id: Type,
+                            Price: SellPrice,
+                            Amount: Quantity,
+                            Info: Doc,
+                            MetaTitle: MetaTitle
+                        }
+                    }).then(function onSuccess(response) {
+                        // Handle success
+                        var j = 0;
+                        $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
+                            $scope.NewId = angular.fromJson(response.data);
+                            for (i = 0; response.data.length > i; i++) {
+                                if (MaxProductId < $scope.NewId[i].id)
+                                    MaxProductId = $scope.NewId[i].id;
+                            }
+                            for (i = 0; $scope.TempIMG.length > i; i++) {
+                                
+                                $http({
+                                    url: '/Admin/ProductManager/AddImage',
+                                    method: "POST",
+                                    data: {
+                                        Product_id: MaxProductId,
+                                        Name: $scope.TempIMG[i].Name,
+                                        Url: $scope.TempIMG[i].Url
+                                    }
+                                }).then(function onSuccess(response) {
+                                    // Handle success
+                                    var MainIMG = "";
+                                    for (i = 0; $scope.TempIMG.length > i; i++) {
+                                        if (document.getElementById("IMG_DATA").getElementsByClassName("MainIMG")[i].checked == true) {
+                                            j = j + 1;
+                                            $http({
+                                                url: '/Admin/ProductManager/MainImage',
+                                                method: "POST",
+                                                data: {
+                                                    Id: MaxProductId,
+                                                    Image: document.getElementById("IMG_DATA").getElementsByClassName("MainIMG")[i].value
+                                                }
+                                            }).then(function onSuccess(response) {
+                                                // Handle success
+                                                if (j >= $scope.TempIMG.length) {
+                                                    $scope.loading = false;
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'Thành công',
+                                                        text: 'thêm thành công',
+                                                    })
+                                                    $scope.txt_Add_ProductName = "";
+                                                    $scope.txt_Add_Type = "";
+                                                    $scope.txt_Add_Brand = "";
+                                                    $scope.txt_Add_SellPrice = "";
+                                                    $scope.txt_Add_Quantity = "";
+                                                    $scope.txt_Add_Doc = "";
+                                                    $scope.txt_Add_MetaTitle = "";
+                                                    $scope.txt_Add_Warranty = "";
+                                                    $scope.TempIMG = [];
+                                                    $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
+                                                        $scope.productList = response.data;
+                                                    });
+                                                }
+                                                console.log(response);
+                                            }).catch(function onError(response) {
+                                                // Handle error
+                                                if (j >= $scope.TempIMG.length) {
+                                                    $scope.loading = false;
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Thất bại',
+                                                        text: 'Thêm thất bại',
+                                                    })
+                                                }
+                                                console.log(response);
+                                            });
+                                        }
+                                    }
+                                    console.log(response);
+                                }).catch(function onError(response) {
+                                    // Handle error
+                                    $scope.loading = false;
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Thất bại',
+                                        text: 'thêm thất bại',
+                                    })
+                                    console.log(response);
+                                });
+                            }
+                        });
+                        console.log(response);
+                    }).catch(function onError(response) {
+                        // Handle error
+                        $scope.loading = false;
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thất bại',
+                            text: 'thêm thất bại',
+                        })
+                        console.log(response);
+                    });
                 }
-            }).then(function onSuccess(response) {
-                // Handle success
-                $scope.loading = false;
-                console.log(response);
-            }).catch(function onError(response) {
-                // Handle error
-                $scope.loading = false;
-                console.log(response);
-            });
+                else {
+                    m += 1;
+                    if (m == $scope.TempIMG.length) {
+                        $scope.loading = false;
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thất bại',
+                            text: 'Vui lòng chọn 1 ảnh chính',
+                        })
+                    }
+                }
+            }
         }
-
-
     }
+    
     
     $scope.DeleteBrand = function (id) {
         $scope.DeleteBrandId = id;
@@ -1026,6 +1136,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.Quantity = $scope.dataProduct[0].Amount;
             $scope.Doc = $scope.dataProduct[0].Info;
             $scope.MetaTitle = $scope.dataProduct[0].MetaTitle;
+            $scope.Warranty = $scope.dataProduct[0].MonthWarranty;
             var Image = $scope.dataProduct[0].Image;
             $http.get("/Admin/ProductManager/ReturnImage/" + id).then(function (response) {
                 $scope.loading = false;
@@ -1040,6 +1151,42 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 });
             });
         }); 
+    }
+
+    $scope.UpdateProduct = function () {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/ProductManager/ProductUpdate',
+            method: "POST",
+            data: {
+                id: $scope.product_id,
+                Brand_id: $scope.Brand,
+                ProductType_id: $scope.Product_Type,
+                ProductName: $scope.Product_Name,
+                MetaTitle: $scope.MetaTitle,
+                Info: $scope.Doc,
+                Price: $scope.Sell_Price,
+                MonthWarranty: $scope.Warranty,
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã sửa thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Sửa thất bại',
+            })
+            console.log(response);
+        });
     }
 
     $scope.MainImage = function (url) {
@@ -1069,25 +1216,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
 
     $scope.AddFiles = function (files) {
         $scope.addfile = files[0];
-        Swal.fire({
-            title: 'Cảnh báo',
-            text: 'Bạn có muốn lưu hình ảnh này ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Có!',
-            cancelButtonText: 'Không'
-        }).then((result) => {
-            if (result.value) {
-                $scope.TempFiles();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                document.getElementById("myFile1").value = "";
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thất bại',
-                    text: 'Lưu thất bại',
-                })
-            }
-        })
+        $scope.TempFiles();
     }
 
     $scope.TempFiles = function () {
