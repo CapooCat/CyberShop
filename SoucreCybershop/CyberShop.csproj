@@ -228,6 +228,7 @@
     <Compile Include="Areas\Admin\Models\CustomerManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\HistoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceOutManagerViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\InvoiceOutPdfViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductImageManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\TempImagesViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductTypeManagerViewModel.cs" />

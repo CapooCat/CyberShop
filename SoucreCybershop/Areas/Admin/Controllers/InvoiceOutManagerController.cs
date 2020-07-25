@@ -149,22 +149,65 @@ namespace CyberShop.Areas.Admin.Controllers
         }
         public ActionResult InvoiceOutPdf()
         {
-            var invoiceOut = Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
-            List<InvoiceOutManagerViewModel> invoiceOutList = (List<InvoiceOutManagerViewModel>)invoiceOut;
-            return View(invoiceOutList);
+            List<InvoiceOutPdfViewModel> invoicePdf = new List<InvoiceOutPdfViewModel>();
+            invoicePdf = (from a in data.ProducTypes
+                                   join b in data.Products on a.Id equals b.ProductType_id
+                                   join c in data.Invoice_Detail on b.id equals c.Product_id
+                                   join d in data.Invoices on c.Invoice_id equals d.Id
+                                   where d.Id == 5
+                                   select new InvoiceOutPdfViewModel
+                                   {
+                                       Id = a.Id,
+                                       ProductName = b.ProductName,
+                                       ProductTypeName = a.TypeName,
+                                       CustomerName = d.CustomerName,
+                                       Price = b.Price,
+                                       PhoneName = d.DeliveryPhoneNum,
+                                       Address= d.DeliveryAddress,
+                                       MonthsWarranty= b.MonthWarranty,
+                                       IsDeleted = c.IsDeleted,
+                                       CreateBy = c.CreateBy,
+                                       CreateDate = c.CreateDate,
+                                       Amount = c.Amount
+                                   }).ToList();
+            return View(invoicePdf);
         }
         [HttpPost]
         public JsonResult SubmitInvoiceOut(InvoiceOutManagerViewModel model)
         {
             Invoice invoice = new Invoice();
+            List<InvoiceOutManagerViewModel> invoiceOutList = (List<InvoiceOutManagerViewModel>)Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
+            double? total = 0;
+            foreach (InvoiceOutManagerViewModel item in invoiceOutList)
+            {
+                total += item.Price * item.Amount;
+            }
             invoice.CustomerName = model.CustomerName;
             invoice.User_id = null;
             invoice.DeliveryAddress = model.Address;
             invoice.DeliveryPhoneNum = model.NumberPhone;
             invoice.IsDeleted = false;
+            invoice.Status = "Chưa hoàn thành";
             invoice.CreateBy = "Admin";
+            invoice.Total = total;
             invoice.PurchaseDate = DateTime.Now;
             var invoiceDao = new InvoiceDao().InsertInvoice(invoice);
+            //Tạo chi tiết hóa đơn
+            Invoice_Detail inDetail = new Invoice_Detail();
+            foreach (InvoiceOutManagerViewModel item in invoiceOutList)
+            {
+                inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
+                inDetail.Product_id = item.Product_Id.Value;
+                inDetail.Amount = item.Amount;
+                inDetail.Price = item.Price;
+                var warranty = Convert.ToInt32(data.Products.First(x => x.id == item.Product_Id).MonthWarranty);
+                inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
+                inDetail.CreateBy = "Admin";
+                inDetail.CreateDate = DateTime.Now;
+                inDetail.IsDeleted = false;
+                var inDetailDao = new InvoiceDetailDao().InsertInvoiceDetail(inDetail);
+            }
+            invoiceOutList.RemoveAll(x => invoiceOutList.Any());
             return Json(new { success=true}, JsonRequestBehavior.AllowGet);
         }
     }
