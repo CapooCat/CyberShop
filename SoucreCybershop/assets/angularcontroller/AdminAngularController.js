@@ -844,7 +844,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var Warranty = document.getElementById("txt_Add_Warranty").value;
 
         $scope.loading = true;
-        if (ProductName == "" || Type == "" || Brand == "" || SellPrice == "" || Quantity == "" || Doc == "" || MetaTitle == "") {
+        if (ProductName == "" || Type == "" || Brand == "" || SellPrice == "" || Quantity == "" || Doc == "" || MetaTitle == "" || Warranty == "") {
             $scope.loading = false;
             Swal.fire({
                 icon: 'error',
@@ -1155,18 +1155,26 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
 
     $scope.UpdateProduct = function () {
         $scope.loading = true;
+        var Brand_id = document.getElementById("Edit_Brand").value;
+        var ProductType_id = document.getElementById("Edit_Product_Type").value;
+        var ProductName = document.getElementById("Edit_Product_Name").value;
+        var MetaTitle = document.getElementById("Edit_MetaTitle").value;
+        var Info = document.getElementById("Edit_Doc").value;
+        var Price = document.getElementById("Edit_Sell_Price").value;
+        var MonthWarranty = document.getElementById("Edit_Warranty").value;
+        console.log(Brand_id, ProductType_id, ProductName, MetaTitle, Info, Price, MonthWarranty);
         $http({
             url: '/Admin/ProductManager/ProductUpdate',
             method: "POST",
             data: {
                 id: $scope.product_id,
-                Brand_id: $scope.Brand,
-                ProductType_id: $scope.Product_Type,
-                ProductName: $scope.Product_Name,
-                MetaTitle: $scope.MetaTitle,
-                Info: $scope.Doc,
-                Price: $scope.Sell_Price,
-                MonthWarranty: $scope.Warranty,
+                Brand_id: Brand_id,
+                ProductType_id: ProductType_id,
+                ProductName: ProductName,
+                MetaTitle: MetaTitle,
+                Info: Info,
+                Price: Price,
+                MonthWarranty: MonthWarranty
             }
         }).then(function onSuccess(response) {
             // Handle success

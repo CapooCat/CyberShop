@@ -97,6 +97,12 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         Number[n-1].className += " active";
     }
 
+    $scope.LoadItems = function (id) {
+        $http.get("/Home/LoadItems/" + id).then(function (response) {
+            $scope.ProductSame = response.data;
+        });
+    }
+
     $scope.Reload = function () {
         if ($a.includes("/Product") != false) {
             $scope.loading = true;

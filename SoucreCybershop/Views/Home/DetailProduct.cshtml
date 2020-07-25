@@ -47,7 +47,7 @@
             <div style="margin-top: 25px;">
                 <button ng-click="AddItem(@Model.FirstOrDefault().id)">Thêm vào giỏ</button>
                 <button ng-click="GoToPay(); AddItem(@Model.FirstOrDefault().id)">Mua ngay</button>
-                <button data-toggle="modal" data-target="#Modal" class="compare">So sánh</button>
+                <button data-toggle="modal" data-target="#Modal" class="compare" ng-click="LoadItems(@Model.FirstOrDefault().ProductType_id)">So sánh</button>
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Chọn sản phẩm</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Chọn sản phẩm muốn so sánh</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -78,39 +78,12 @@
                         <button><i class="fa fa-search"></i></button>
                     </div>
                     <div style="margin-top:20px;overflow: scroll;height:475px;">
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
+                        <div class="PC-Part" ng-repeat="item in ProductSame">
+                            <img style="max-width: 150px;max-height:150px;float: left" src="{{item.Image}}">
                             <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
-                            </div>
-                            <button class="add">Chọn</button>
-                        </div>
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
-                            <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
-                            </div>
-                            <button class="add">Chọn</button>
-                        </div>
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
-                            <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
-                            </div>
-                            <button class="add">Chọn</button>
-                        </div>
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
-                            <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
+                                {{item.ProductName}}
+                                <p class="Price">Giá tiền: {{item.Price | currency:"":0}} VNĐ</p>
+                                <p>Bảo hành: {{item.MonthWarranty}} tháng</p>
                             </div>
                             <button class="add">Chọn</button>
                         </div>
