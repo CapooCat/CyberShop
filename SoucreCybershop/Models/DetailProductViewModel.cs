@@ -9,6 +9,7 @@ namespace CyberShop.Models
     {
         public int id { get; set; }
         public int Brand_id { get; set; }
+        public int ProductType_id { get; set; }
         public Nullable<int> Promotion_id { get; set; }
         public int Categorie_id { get; set; }
         public string ProductName { get; set; }

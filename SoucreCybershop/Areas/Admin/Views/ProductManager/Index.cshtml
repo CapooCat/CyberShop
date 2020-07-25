@@ -236,11 +236,11 @@
                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                     <div class="col-md-4">
                         <p>Tên sản phẩm:</p>
-                        <input type="text" placeholder="Nhập tên sản phẩm..." ng-value="Product_Name">
+                        <input type="text" placeholder="Nhập tên sản phẩm..." id="Edit_Product_Name" ng-value="Product_Name">
                     </div>
                     <div class="col-md-4">
                         <p>Loại sản phẩm:</p>
-                        <select class="list-select" ng-value="Product_Type">
+                        <select class="list-select" id="Edit_Product_Type" ng-value="Product_Type">
                             <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                             @foreach (var item in prdTypeList)
                             {
@@ -250,7 +250,7 @@
                     </div>
                     <div class="col-md-4">
                         <p>Hãng:</p>
-                        <select class="list-select" ng-value="Brand">
+                        <select class="list-select" id="Edit_Brand" ng-value="Brand">
                             <option value=""> <text style="color:silver">Chọn hãng</text></option>
                             @foreach (var item in brandList)
                             {
@@ -260,23 +260,23 @@
                     </div>
                     <div class="col-md-4">
                         <p>Giá bán:</p>
-                        <input type="text" placeholder="Nhập giá tiền..." ng-value="Sell_Price">
+                        <input type="text" placeholder="Nhập giá tiền..." id="Edit_Sell_Price" ng-value="Sell_Price">
                     </div>
                     <div class="col-md-4">
                         <p>Số lượng:</p>
-                        <input type="text" placeholder="Nhập số lượng..." ng-value="Quantity">
+                        <input type="text" placeholder="Nhập số lượng..." id="Edit_Quantity" ng-value="Quantity">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
                         <p>Mô tả (Google Doc):</p>
-                        <input type="text" placeholder="Nhập link Google Doc..." ng-value="Doc">
+                        <input type="text" placeholder="Nhập link Google Doc..." id="Edit_Doc" ng-value="Doc">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
                         <p>Bảo hành:</p>
-                        <input type="text" placeholder="Nhập tháng bảo hành..." ng-value="Warranty">
+                        <input type="text" placeholder="Nhập tháng bảo hành..." id="Edit_Warranty" ng-value="Warranty">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
                         <p>Từ khóa:</p>
-                        <input type="text" placeholder="Nhập từ khóa..." ng-value="MetaTitle">
+                        <input type="text" placeholder="Nhập từ khóa..." id="Edit_MetaTitle" ng-value="MetaTitle">
                     </div>
                     <div class="col-md-4" style="text-align: center;">
                         <input type="file" name="file" onchange="angular.element(this).scope().SelectedFiles(this.files)" id="myFile2" style="display:none;" accept="image/*">

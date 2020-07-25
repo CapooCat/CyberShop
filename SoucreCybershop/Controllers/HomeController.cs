@@ -93,7 +93,8 @@ namespace CyberShop.Controllers
                          {
                              id = b.id,
                              ProductName=b.ProductName,
-                             Price=b.Price,
+                             ProductType_id = b.ProductType_id,
+                             Price =b.Price,
                              MonthWarranty=b.MonthWarranty,
                              Url=a.Url,
                              BrandName=c.BrandName,
@@ -239,6 +240,38 @@ namespace CyberShop.Controllers
                 }
             }
             return Redirect("/");
+        }
+
+        public JsonResult LoadItems(int id)
+        {
+            var model = new List<ProductCategoryViewModel>();
+            model = (from a in data.Products
+                     where a.IsDeleted == false && a.ProductType_id == id
+                     select new ProductCategoryViewModel
+                     {
+                         id = a.id,
+                         ProductName = a.ProductName,
+                         Info = a.Info,
+                         Price = a.Price,
+                         MonthWarranty = a.MonthWarranty,
+                         Image = a.Image,
+                         IsDeleted = a.IsDeleted,
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
     }
 }
