@@ -24,7 +24,7 @@
                 <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone" required>
             </div>
             <div class="col-md-12">
-                <a href="/Admin/InvoiceOutManager/PrintViewToPdf">Print to PDF</a>
+                <a target="_blank" href="/Admin/InvoiceOutManager/PrintViewToPdf" id="PrintToPdf" hidden>Print to PDF</a>
             </div>
         </div>
 
@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody id="items-table">
-                            <tr ng-repeat="item in lstInvoiceDetailss">
+                            <tr ng-repeat="item in lstInvoiceDetailss" ng-init="bucket.invoice_price = bucket.invoice_price+ (item.Price * item.Amount)">
                                 <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Product_Id}}"></td>
                                 <td>{{item.ProductName}}</td>
                                 <td>{{item.ProductTypeName}}</td>
@@ -154,7 +154,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12" style="text-align: center; margin-top: 15px;margin-bottom: 15px;font-size: 20px;">Tổng tiền: 8.300.000đ</div>
+    <div class="col-md-12" style="text-align: center; margin-top: 15px;margin-bottom: 15px;font-size: 20px;">Tổng tiền: {{bucket.invoice_price | currency:"":0}}đ</div>
     <div class="col-md-12 product-action" style="text-align: center">
         <button type="button" style="width: 200px;height: 60px;" ng-click="SubmitInvoiceOut()">Xuất hóa đơn</button>
     </div>

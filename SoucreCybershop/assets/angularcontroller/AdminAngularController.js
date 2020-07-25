@@ -1686,7 +1686,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.loading = false;
         });
     }
-    //$scope.ReturnInvoiceoOut();
+    $scope.ReturnInvoiceoOut();
     $scope.RemoveItem = function (id) {
         Swal.fire({
             title: 'Cảnh báo',
@@ -1781,28 +1781,47 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
+    $scope.bucket = { invoice_price: 0 };
     $scope.SubmitInvoiceOut = function () {
         var customerName = document.getElementById("customer_name").value;
         var address = document.getElementById("customer_address").value;
         var phone = document.getElementById("customer_phone").value;
-        $scope.loading = true;
-        $http({
-            url: '/Admin/InvoiceOutManager/SubmitInvoice',
-            method: "POST",
-            data: {
-                CustomerName: customerName,
-                Address: address,
-                NumberPhone: phone
-            },
-        }).then(function onSuccess(response) {
-            // Handle success
-            $scope.loading = false;
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
-            console.log(response);
-        });
+        var table = document.getElementById("items-table").value;
+        if (table == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Xuất hóa đơn thất bại',
+                text: 'Bạn chưa thêm sản phẩm',
+            });
+        }
+        else if (customerName == "" || address == "" || phone=="")
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Xuất hóa đơn thất bại',
+                text: 'Bạn chưa thêm thông tin khách hàng',
+            });
+        }
+        else {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceOutManager/SubmitInvoiceOut',
+                method: "POST",
+                data: {
+                    CustomerName: customerName,
+                    Address: address,
+                    NumberPhone: phone
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                console.log(response);
+            });
+        }
     }
     //--------------INVOICE OUT_END--------------------//
 });

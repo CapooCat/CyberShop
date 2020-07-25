@@ -149,12 +149,13 @@ namespace CyberShop.Areas.Admin.Controllers
         }
         public ActionResult InvoiceOutPdf()
         {
+            var newInvoiceId = data.Invoices.OrderByDescending(x => x.Id).First().Id;
             List<InvoiceOutPdfViewModel> invoicePdf = new List<InvoiceOutPdfViewModel>();
             invoicePdf = (from a in data.ProducTypes
                                    join b in data.Products on a.Id equals b.ProductType_id
                                    join c in data.Invoice_Detail on b.id equals c.Product_id
                                    join d in data.Invoices on c.Invoice_id equals d.Id
-                                   where d.Id == 5
+                                   where d.Id == newInvoiceId && d.IsDeleted==false
                                    select new InvoiceOutPdfViewModel
                                    {
                                        Id = a.Id,
