@@ -1694,7 +1694,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.loading = false;
         });
     }
-    $scope.ReturnInvoiceoOut();
+    //$scope.ReturnInvoiceoOut();
     $scope.RemoveItem = function (id) {
         Swal.fire({
             title: 'Cảnh báo',
@@ -1793,7 +1793,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var customerName = document.getElementById("customer_name").value;
         var address = document.getElementById("customer_address").value;
         var phone = document.getElementById("customer_phone").value;
-        var email = document.getElementById("customer_email").value;
         $scope.loading = true;
         $http({
             url: '/Admin/InvoiceOutManager/SubmitInvoice',
@@ -1801,8 +1800,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             data: {
                 CustomerName: customerName,
                 Address: address,
-                NumberPhone: phone,
-                Email: email
+                NumberPhone: phone
             },
         }).then(function onSuccess(response) {
             // Handle success

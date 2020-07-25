@@ -58,15 +58,6 @@ namespace CyberShop.Controllers
                     }
                     invoice.Total = total;
                     inDao.InsertInvoice(invoice);
-                    //Tạo lịch sử
-                    var hisDao = new HistoryDao();
-                    history.Invoice_tag = true;
-                    history.Product_tag = false;
-                    history.User_tag = false;
-                    history.Warehouse_tag = false;
-                    history.IsDeleted = false;
-                    history.CreateDate = DateTime.Now;
-                    hisDao.InsertHistory(history);
                     //Tạo chi tiết hóa đơn
                     Invoice_Detail inDetail = new Invoice_Detail();
                     InvoiceDetailDao inDetailDao = new InvoiceDetailDao();
