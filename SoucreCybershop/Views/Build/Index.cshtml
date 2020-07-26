@@ -17,7 +17,7 @@
         
 
         <div class="col-md-3 PC-Title">Mainboard - Bo mạch chủ</div>
-        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Mainboard</button></div>
+        <div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Mainboard"><i class="fas fa-plus" style="margin-right: 5px;" ng-click="SelectPcPart(2)"></i>Chọn Mainboard</button></div>
 
         <div class="col-md-3 PC-Title">CPU - Vi xử lý</div>
         @*<div class="col-md-9 PC-Info"><button data-toggle="modal" data-target="#Modal"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn CPU</button></div>*@
@@ -58,7 +58,7 @@
 
     <div class="PC-footer"><button><i class="fas fa-shopping-cart" style="margin-right: 5px;"></i>Thêm vào giỏ hàng</button></div>
 
-    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="Mainboard" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -68,51 +68,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                     <div class="search">
                         <input id="Search" type="text">
                         <button><i class="fa fa-search"></i></button>
                     </div>
                     <div style="margin-top:20px;overflow: scroll;height:475px;">
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
+                        <div class="PC-Part" ng-repeat="item in PcPartLst">
+                            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{item.Image}}">
                             <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
+                                {{item.ProductName}}
+                                <p class="Price">{{item.Price | currency:"":0}}</p>
+                                <p>{{item.Amount}}</p>
                             </div>
-                            <button class="add">Chọn</button>
+                            <button class="add" ng-click="AddToBuildPCss(item.id)">Chọn</button>
                         </div>
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
-                            <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
-                            </div>
-                            <button class="add">Chọn</button>
-                        </div>
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
-                            <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
-                            </div>
-                            <button class="add">Chọn</button>
-                        </div>
-                        <div class="PC-Part">
-                            <img style="max-width: 150px;max-height:150px;float: left" src="~/assets/img/1.png">
-                            <div class="Info">
-                                ROG Strix GeForce® GTX 1650 4GB GDDR5
-                                <p class="Price">Giá tiền: 4.650.000 VNĐ</p>
-                                <p>Số lượng: 1</p>
-                            </div>
-                            <button class="add">Chọn</button>
-                        </div>
-                    </div>
-                        
-            </div>
+                    </div>         
+                </div>
         </div>
     </div>
         </div>
