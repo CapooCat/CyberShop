@@ -294,6 +294,12 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         });
     }
 
+    $scope.SelectPcPart=function (id)
+    {
+        $http.get("/Build/ReturnPCPart/"+id).then(function (response) {
+            $scope.PcPartLst = response.data;
+        });
+    }
     //$scope.discount_price = 0;
     //var btn_confirm = document.getElementById("ConfirmDiscount");
     //if (btn_confirm != null) {
