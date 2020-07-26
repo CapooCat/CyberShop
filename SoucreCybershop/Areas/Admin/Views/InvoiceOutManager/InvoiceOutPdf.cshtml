@@ -21,73 +21,78 @@
 <body>
     <section class="container">
         <div class="row" style="margin: 5px;">
-            <div class="col-md-12 row" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+            <div class="col-md-12 row" style="padding-top: 10px;padding-bottom: 10px;">
                 <div class="col-md-6">
-                    <a href="/Home" class="logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
+                    <a href="#" class="invoice-logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
                 </div>
-                <div class="col-md-6">
-                    <span>Công ty linh kiện, phụ kiện máy tính CyberShop</span><br />
+                <div class="col-md-6" style="margin-top:25px;">
+                    <span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br />
                     <span>Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span>
                 </div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <div class="col-md-6">
-                    <span> Họ tên khách hàng: @Model.First().CustomerName</span>
+                <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu xuất kho</div>
+                <div class="col-md-12" style="text-align:center;margin-bottom:50px;">ngày 7 tháng 26 năm 2020</div>
+                <div class="col-md-9">
+                    <span><span style="font-weight: bold">Họ tên khách hàng:</span> @Model.First().CustomerName</span>
                 </div>
-                <div class="col-md-6">
-                    <span> Số điện thoại: @Model.First().PhoneName</span>
+                <div class="col-md-3">
+                    <span><span style="font-weight: bold">Mã hóa đơn:</span> @Model.First().Id</span>
                 </div>
-                <div class="col-md-6">
-                    <span> Địa chỉ: @Model.First().Address</span>
+                <div class="col-md-9">
+                    <span><span style="font-weight: bold">Địa chỉ:</span> @Model.First().Address</span>
                 </div>
-                <div class="col-md-6">
-                    <span> Email: </span>
+                <div class="col-md-3">
+                    <span><span style="font-weight: bold">Loại tiền:</span> VNĐ</span>
                 </div>
+                <div class="col-md-12">
+                    <span><span style="font-weight: bold">Số điện thoại:</span> @Model.First().PhoneName</span>
+                </div>
+                <div class="col-md-12">
+                    <span><span style="font-weight: bold">Email:</span> tranthaitat99@gmail.com</span>
+                </div>
+                <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn sản phẩm</div>
             </div>
-            <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
-                <div class="Box" style="padding: 0;">
-                    <div class="chart-title" style="height: 55px;">Hóa đơn sản phẩm</div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="myBar"></div>
-                    </div>
-                    <div class="admin-table" id="admin-table-best-sale">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="width: 40%;"><a href="#">Tên sản phẩm</a></th>
-                                    <th style="width: 20%;"><a href="#">Loại sản phẩm</a></th>
-                                    <th style="width: 10%;"><a href="#">Bảo hành (tháng)</a></th>
-                                    <th style="width: 15%;"><a href="#">Số lượng</a></th>
-                                    <th style="width: 15%;"><a href="#">Giá tiền (VNĐ)</a></th>
-                                </tr>
-                            </thead>
-                            <tbody id="items-table">
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.ProductName</td>
-                                        <td>@item.ProductTypeName</td>
-                                        <td>@item.MonthsWarranty</td>
-                                        <td>@item.Amount</td>
-                                        <td>@item.Price</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="col-md-12" style="margin-bottom: 25px;">
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Tên sản phẩm</th>
+                            <th style="width: 20%;">Loại sản phẩm</th>
+                            <th style="width: 10%;">Bảo hành (tháng)</th>
+                            <th style="width: 15%;">Số lượng</th>
+                            <th style="width: 15%;">Giá tiền (VNĐ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.ProductTypeName</td>
+                                <td>@item.MonthsWarranty</td>
+                                <td>@item.Amount</td>
+                                <td>@item.Price</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">1.000.000</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <div class="col-md-12" style="text-align:center;font-size:20px;margin-bottom: 20px;">ngày ....... tháng ....... năm .......</div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Thủ kho<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người giao hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người nhận hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Kinh doanh<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
         </div>
-</section>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <script src="https://unpkg.com/sticky-table-headers"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-        <script src="~/assets/angularcontroller/AdminAngularController.js"></script>
-        <script src="~/assets/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://unpkg.com/sticky-table-headers"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="~/assets/angularcontroller/AdminAngularController.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 
 </html>

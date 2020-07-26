@@ -2529,3 +2529,25 @@ canvas{
   top: 0;
   right: 0;
 }
+
+.invoice-logo {
+  font-size: 50px;
+  color: black;
+  text-decoration: underline;
+}
+
+.invoice-table {
+  margin: 0;
+  border-radius: 0px;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+}
+
+.invoice-table th {
+  color: black;
+  background-color: #fff;
+  border: 2px solid black;
+}
+
+.invoice-table td {
+  border: 2px solid black;
+}
