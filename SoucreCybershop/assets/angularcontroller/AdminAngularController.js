@@ -1683,11 +1683,13 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     {
         $scope.loading = true;
         $http.get("/Admin/InvoiceOutManager/AddProductToInvoiceOut/" + id).then(function (response) {
-            $scope.lstInvoiceDetailss = response.data;
+            $scope.ReturnInvoiceoOut();
             $scope.loading = false;
         });
     }
+    $scope.bucket={total_price_invoice : 0};
     $scope.ReturnInvoiceoOut = function () {
+        $scope.bucket.total_price_invoice = 0;
         $scope.loading = true;
         $http.get("/Admin/InvoiceOutManager/ReturnInvoiceDetailSession").then(function (response) {
             $scope.lstInvoiceDetailss = response.data;
@@ -1712,7 +1714,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                         title: 'Thành công',
                         text: 'Xóa thành công',
                     })
-                    $scope.lstInvoiceDetailss = response.data;
+                    $scope.ReturnInvoiceoOut();
                     $scope.loading = false;
                 });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -1769,7 +1771,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 id: lstId
             },
         }).then(function onSuccess(response) {
-            $scope.lstInvoiceDetailss = response.data;
+            $scope.ReturnInvoiceoOut();
             // Handle success
             $scope.loading = false;
             Swal.fire({
@@ -1789,13 +1791,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
-    $scope.bucket = { invoice_price: 0 };
     $scope.SubmitInvoiceOut = function () {
         var customerName = document.getElementById("customer_name").value;
         var address = document.getElementById("customer_address").value;
         var phone = document.getElementById("customer_phone").value;
-        var table = document.getElementById("items-table").value;
-        if (table == "") {
+        if ($scope.lstInvoiceDetailss == "" || $scope.lstInvoiceDetailss == null || $scope.lstInvoiceDetailss=="{}") {
             Swal.fire({
                 icon: 'error',
                 title: 'Xuất hóa đơn thất bại',
@@ -1822,6 +1822,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 },
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.ReturnInvoiceoOut();
+                document.getElementById("PrintToPdf").click();
                 $scope.loading = false;
                 console.log(response);
             }).catch(function onError(response) {

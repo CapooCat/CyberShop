@@ -42,7 +42,7 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             else
             {
-                return Json(new { }, JsonRequestBehavior.AllowGet);
+                return Json("", JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -190,11 +190,13 @@ namespace CyberShop.Areas.Admin.Controllers
             invoice.IsDeleted = false;
             invoice.Status = "Chưa hoàn thành";
             invoice.CreateBy = "Admin";
+            invoice.CreateDate = DateTime.Now;
             invoice.Total = total;
             invoice.PurchaseDate = DateTime.Now;
             var invoiceDao = new InvoiceDao().InsertInvoice(invoice);
             //Tạo chi tiết hóa đơn
             Invoice_Detail inDetail = new Invoice_Detail();
+            Product product = new Product();
             foreach (InvoiceOutManagerViewModel item in invoiceOutList)
             {
                 inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
@@ -207,6 +209,10 @@ namespace CyberShop.Areas.Admin.Controllers
                 inDetail.CreateDate = DateTime.Now;
                 inDetail.IsDeleted = false;
                 var inDetailDao = new InvoiceDetailDao().InsertInvoiceDetail(inDetail);
+
+                product = data.Products.Find(item.Product_Id);
+                product.Amount = product.Amount - item.Amount;
+                data.SaveChanges();
             }
             invoiceOutList.RemoveAll(x => invoiceOutList.Any());
             return Json(new { success=true}, JsonRequestBehavior.AllowGet);
