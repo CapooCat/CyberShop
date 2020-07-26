@@ -1662,7 +1662,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
 
     $scope.ViewInvoice = function (id) {
         $scope.loading = true;
-        $http.get("/Admin/WarrantyManager/ReturnInvoiceById/" + id).then(function (response) {
+        $http.get("/Admin/InvoiceManager/ReturnViewInvoiceById/" + id).then(function (response) {
             $scope.dataInvoice = angular.fromJson(response.data);
             $scope.Invoice_Id = $scope.dataInvoice[0].Id;
             $scope.Invoice_CustomerName = $scope.dataInvoice[0].CustomerName;
@@ -1670,7 +1670,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.Invoice_DeliveryAddress = $scope.dataInvoice[0].DeliveryAddress;
             $scope.Invoice_Status = $scope.dataInvoice[0].Status;
             $scope.Invoice_CreateDate = $scope.dataInvoice[0].CreateDate;
-            $http.get("/Admin/WarrantyManager/ReturnDetailInvoiceById/" + id).then(function (response) {
+            $http.get("/Admin/InvoiceManager/ReturnViewDetailInvoiceById/" + id).then(function (response) {
                 $scope.loading = false;
                 $scope.WarrantyInvoiceDetail = response.data;
             });

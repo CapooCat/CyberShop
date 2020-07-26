@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
     <title>@ViewBag.Title</title>
 </head>
-<body onresize="resize()" ng-app="MyAdmin" ng-controller="MyAdminController">
+<body onresize="Resize()" ng-app="MyAdmin" ng-controller="MyAdminController">
     <!-- Header -->
 
     <header>
@@ -35,7 +35,7 @@
                         <li><button id="ProductManager"onclick="window.location.href='/Admin/ProductManager'">Quản lý sản phẩm</button></li>
                         <li><button id="InvoiceManager" onclick="window.location.href='/Admin/InvoiceManager'">Quản lý hóa đơn</button></li>
                         <li><button id="CategoryManager" onclick="window.location.href='/Admin/CategoryManager'">Quản lý danh mục</button></li>
-                        <li><button id="WarrantyManager" onclick="window.location.href='/Admin/WarrantyManager'">Quản lý bảo hành</button></li>
+                        <li><button id="WarrantyManager" onclick="window.location.href = '/Admin/InvoiceInManager'">Quản lý hóa đơn nhập</button></li>
                     </div>
                     <a class="drop active" onclick='show_more(1);'>Bán hàng</a>
                     <div class="nav-detail" style="visibility: visible;">
@@ -49,7 +49,6 @@
                     <a class="drop active" onclick='show_more(3);'>Tổng quan</a>
                     <div class="nav-detail" style="visibility: visible;">
                         <li><button id="SummaryManager" onclick="window.location.href='/Admin/SummaryManager'">Thống kê</button></li>
-                        <li><button>Thu chi</button></li>
                     </div>
                 </div>
                 <div id="Push" class="push">
