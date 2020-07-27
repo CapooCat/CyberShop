@@ -528,7 +528,7 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                $scope.cartList = resposne.data;
+                $scope.cartList = response.data;
                 $scope.loading = false;
                 console.log(response);
             }).catch(function onError(response) {
