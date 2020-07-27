@@ -10,21 +10,21 @@
         <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box">
                 <div class="icon"><i class="fas fa-dollar-sign"></i></div>
-                <p class="unit">1.000.000 VNĐ</p>
+                <p class="unit">{{turnOver | currency:"":0}} VNĐ</p>
                 <p class="box-title">Tổng doanh thu</p>
             </div>
         </div>
         <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box">
                 <div class="icon"><i class="fas fa-users"></i></div>
-                <p class="unit">10</p>
+                <p class="unit">{{UserAmount}}</p>
                 <p class="box-title">Số khách hàng mới</p>
             </div>
         </div>
         <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box">
                 <div class="icon"><i class="fas fa-boxes"></i></div>
-                <p class="unit">200</p>
+                <p class="unit">{{totalProductSell}}</p>
                 <p class="box-title">Số sản phẩm bán được</p>
             </div>
         </div>
@@ -50,50 +50,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>5</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
-                            </tr>
-                            <tr>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>4.150.000đ</td>
+                            <tr ng-repeat="item in lstBestSeller">
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.Amount}}</td>
+                                <td>{{item.Price}}đ</td>
                             </tr>
                         </tbody>
                     </table>
@@ -102,7 +62,7 @@
         </div>
         <div class="col-md-8" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
-                <div class="chart-title" style="height: 55px;">Khách hàng mới</div>
+                <div class="chart-title" style="height: 55px;">Giao dịch mới</div>
                 <div class="progress-container">
                     <div class="progress-bar" id="newBar"></div>
                 </div>
@@ -110,110 +70,20 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 20%;"><a href="#">Tên khách hàng</a></th>
+                                <th style="width: 23%;"><a href="#">Tên khách hàng</a></th>
                                 <th style="width: 10%;"><a href="#">SĐT</a></th>
-                                <th style="width: 30%;"><a href="#">Địa chỉ</a></th>
-                                <th style="width: 20%;"><a href="#">Sản phẩm mua</a></th>
-                                <th style="width: 8%;"><a href="#">Số lượng</a></th>
-                                <th style="width: 12%;"><a href="#">Thời gian mua</a></th>
+                                <th style="width: 33%;"><a href="#">Địa chỉ</a></th>
+                                <th style="width: 20%;"><a href="#">Tổng thanh toán</a></th>
+                                <th style="width: 14%;"><a href="#">Thời gian mua</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
-                            </tr>
-                            <tr>
-                                <td>Trần Thái Đạt</td>
-                                <td>0976812670</td>
-                                <td>123 Lê Hồng Phong</td>
-                                <td>ROG Strix GeForce® GTX 1650 4GB GDDR5</td>
-                                <td>1</td>
-                                <td>26/05/2020</td>
+                            <tr ng-repeat="item in lstNewDeal">
+                                <td>{{item.CustomerName}}</td>
+                                <td>{{item.DeliveryPhoneNum}}</td>
+                                <td>{{item.DeliveryAddress}}</td>
+                                <td>{{item.Total | currency:"":0}}</td>
+                                <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                             </tr>
                         </tbody>
                     </table>

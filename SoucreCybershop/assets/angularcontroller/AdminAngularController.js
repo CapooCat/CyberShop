@@ -1834,4 +1834,51 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         }
     }
     //--------------INVOICE OUT_END--------------------//
+
+    //----------------SUMMARY_START--------------------//
+    $scope.ReturnTurnover=function()
+    {
+        $scope.loading = true;
+        $http.get("/Admin/SummaryManager/ReturnTurnover").then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            $scope.turnOver = $scope.temp.totalTurnover;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnCustomerAmount = function () {
+        $scope.loading = true;
+        $http.get("/Admin/SummaryManager/ReturnCustomerAmount").then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            $scope.UserAmount = $scope.temp.totalUser;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnTotalProductSell = function () {
+        $scope.loading = true;
+        $http.get("/Admin/SummaryManager/ReturnTotalProductSell").then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            $scope.totalProductSell = $scope.temp.totalProductSell;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnBestSeller = function () {
+        $scope.loading = true;
+        $http.get("/Admin/SummaryManager/ReturnBestSeller").then(function (response) {
+            $scope.lstBestSeller = response.data;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnNewDeal = function () {
+        $scope.loading = true;
+        $http.get("/Admin/SummaryManager/ReturnNewDeal").then(function (response) {
+            $scope.lstNewDeal = response.data;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnTurnover();
+    $scope.ReturnCustomerAmount();
+    $scope.ReturnTotalProductSell();
+    $scope.ReturnBestSeller();
+    $scope.ReturnNewDeal();
+    //----------------SUMMARY_END--------------------//
 });
