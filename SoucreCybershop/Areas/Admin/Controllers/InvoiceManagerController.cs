@@ -360,5 +360,25 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult Confirm(InvoiceManagerViewModel model)
+        {
+            Invoice entity = new Invoice();
+            entity = data.Invoices.Find(model.Id);
+            entity.Status = model.Status;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateInvoice(InvoiceManagerViewModel model)
+        {
+            Invoice entity = new Invoice();
+            entity = data.Invoices.Find(model.Id);
+            entity.DeliveryAddress = model.DeliveryAddress;
+            entity.DeliveryPhoneNum = model.DeliveryPhoneNum;
+            entity.CustomerName = model.CustomerName;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
