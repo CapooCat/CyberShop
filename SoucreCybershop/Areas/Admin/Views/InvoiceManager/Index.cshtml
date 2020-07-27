@@ -56,7 +56,7 @@
                                 <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('DeliveryPhoneNum')">Số điện thoại</a></th>
                                 <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('PurchaseDate')">Ngày xuất</a></th>
                                 <th style="width: 12%;"><a href="#" ng-click="sortByInvoice('Status')">Tình trạng</a></th>
-                                <th style="width: 15%;"><a href="#" >Hoạt động</a></th>
+                                <th style="width: 15%;"><a href="#" >Hành động</a></th>
                             </tr>
                         </thead>
                         <tbody id="items-table">
@@ -68,7 +68,7 @@
                                 <td>{{item.DeliveryPhoneNum}}</td>
                                 <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.Status}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -222,6 +222,65 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="ViewInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Bảo hành</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+
+                    <div class="col-md-6 info">
+                        <p>Mã hóa đơn: <span ng-bind="Invoice_Id"></span></p>
+                        <p>Họ và tên: <span ng-bind="Invoice_CustomerName"></span></p>
+                        <p>Số điện thoại: <span ng-bind="Invoice_DeliveryPhoneNum"></span></p>
+                    </div>
+                    <div class="col-md-6 info">
+                        <p>Địa chỉ: <span ng-bind="Invoice_DeliveryAddress"></span></p>
+                        <p>Tình trạng: <span ng-bind="Invoice_Status"></span></p>
+                        <p>Ngày xuất: <span ng-bind="Invoice_CreateDate.slice(6, -2) | date:'dd/MM/yyyy'"></span></p>
+                    </div>
+                    <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                        <p>Sản phẩm trong hóa đơn: (chọn SP cần bảo hành)</p>
+                        <div class="Box" style="padding: 0;margin-top: 10px;">
+                            <div id="admin-table-best-sale" class="admin-table modal-table" style="height: 250px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 45%;"><a href="#">Tên sản phẩm</a></th>
+                                            <th style="width: 30%;"><a href="#">Số lượng</a></th>
+                                            <th style="width: 30%;"><a href="#">Bảo hành</a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in WarrantyInvoiceDetail">
+                                            <td>{{item.ProductName}}</td>
+                                            <td>{{item.Amount}}</td>
+                                            <td>{{item.WarrantyExpires.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+            </div>
+        </div>
+    </div>
     </div>
 
 </section>

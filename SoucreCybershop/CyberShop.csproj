@@ -223,7 +223,7 @@
     <Compile Include="Areas\Admin\Controllers\InvoiceOutManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\SummaryManagerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\WarrantyManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InvoiceInManagerController.cs" />
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\HistoryViewModel.cs" />
@@ -374,7 +374,7 @@
     <Content Include="Areas\Admin\Views\InvoiceOutManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SummaryManager\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\WarrantyManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceInManager\Index.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\InvoiceOutManager\InvoiceOutPdf.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
