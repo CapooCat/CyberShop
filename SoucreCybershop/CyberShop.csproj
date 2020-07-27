@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\SummaryManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceInManagerController.cs" />
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\BestSellerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\HistoryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceOutManagerViewModel.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductHomeViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SignUpViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
