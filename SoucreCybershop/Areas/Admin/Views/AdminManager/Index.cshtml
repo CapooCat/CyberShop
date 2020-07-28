@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Category Manager";
+
+    var catListLv1 = new CategoriesDao().getAllCatgories();
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
+}
+@using Data;
+<section id="content" class="admin-content-container">
+    <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-users-cog" style="margin-right: 10px;"></i>Quản lý tài khoản Admin</h3>
+
+</section>
+
+<script>
+    Active = document.getElementById("AdminManager");
+    Active.className = "active-button";
+</script>
+

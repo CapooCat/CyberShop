@@ -676,7 +676,9 @@ button:focus {
 }
 
 /* Cart */
+
 .dropdown-cart {
+  position: relative;
   margin-top: 50px;
   left: 45%;
   right: 10%;
@@ -687,6 +689,10 @@ button:focus {
   z-index: 1;
   transition: 0.1s 0.2s;
   opacity: 0;
+}
+
+.dropdown-cart::-webkit-scrollbar {
+  display: none;
 }
 
 .dropdown-cart table {
@@ -708,7 +714,6 @@ button:focus {
 }
 
 .cart {
-  cursor: pointer;
   float: left;
   overflow: hidden;
   -webkit-user-select: none;

@@ -37,14 +37,15 @@
                         <li><button id="CategoryManager" onclick="window.location.href='/Admin/CategoryManager'">Quản lý danh mục</button></li>
                         <li><button id="InvoiceInManager" onclick="window.location.href = '/Admin/InvoiceInManager'">Quản lý hóa đơn nhập</button></li>
                     </div>
-                    <a class="drop active" onclick='show_more(1);'>Bán hàng</a>
+                    <a class="drop active" onclick='show_more(1);'>Kinh doanh</a>
                     <div class="nav-detail" style="visibility: visible;">
-                        <li><button id="InvoiceOutManager" onclick="window.location.href='/Admin/InvoiceOutManager'">Xuất hóa đơn</button></li>
+                        <li><button id="InvoiceOutManager" onclick="window.location.href='/Admin/InvoiceOutManager'">Lập hóa đơn xuất</button></li>
+                        <li><button id="AddInvoiceInManager" onclick="window.location.href='/Admin/AddInvoiceInManager'">Lập hóa đơn nhập</button></li>
                     </div>
                     <a class="drop active" onclick='show_more(2);'>Tài khoản</a>
                     <div class="nav-detail" style="visibility: visible;">
                         <li><button id="CustomerManager" onclick="window.location.href='/Admin/CustomerManager'">Quản lý tài khoản khách hàng</button></li>
-                        <li><button>Quản lý tài khoản admin</button></li>
+                        <li><button id="AdminManager" onclick="window.location.href='/Admin/AdminManager'">Quản lý tài khoản admin</button></li>
                     </div>
                     <a class="drop active" onclick='show_more(3);'>Tổng quan</a>
                     <div class="nav-detail" style="visibility: visible;">
@@ -137,10 +138,6 @@
 					el.addEventListener("scroll", tableFixHead)
 					);
 
-
-				$(document).ready(function() {
-
-					});
 
         function upload() {
           $('#myFile').click();
