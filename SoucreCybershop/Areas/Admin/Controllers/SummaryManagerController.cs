@@ -120,5 +120,29 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ReturnTurnoverChart()
+        {
+            List<object> ReturnData = new List<object>();
+            for (int i = 1; i <= 12; i++)
+            {
+                var model = data.Invoices.Where(x => x.PurchaseDate.Value.Year == 2020 && x.PurchaseDate.Value.Month == i).ToList();
+                if (model != null)
+                {
+                    double? totalInMonth = 0;
+                    foreach (var item in model)
+                    {
+                        totalInMonth += item.Total;
+                    }
+                    totalInMonth = totalInMonth / 1000000;
+                    ReturnData.Add(totalInMonth);
+                }
+                else
+                {
+                    double? totalInMonth = 0;
+                    ReturnData.Add(totalInMonth);
+                }
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
     }
 }

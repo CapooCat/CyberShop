@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-8" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
-                <div class="chart-title">Doanh thu</div>
+                <div class="chart-title">Doanh thu năm 2020</div>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -44,16 +44,16 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 50%;"><a href="#">Tên sản phẩm</a></th>
-                                <th style="width: 20%;"><a href="#">Số lượng</a></th>
-                                <th style="width: 30%;"><a href="#">Giá tiền</a></th>
+                                <th style="width: 50%;"><a href="#" ng-click="sortByBestSeller('ProductName')">Tên sản phẩm</a></th>
+                                <th style="width: 20%;"><a href="#" ng-click="sortByBestSeller('SellAmount')">Số lượng</a></th>
+                                <th style="width: 30%;"><a href="#" ng-click="sortByBestSeller('Price')">Giá tiền (VNĐ)</a></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in lstBestSeller">
                                 <td>{{item.ProductName}}</td>
-                                <td>{{item.Amount}}</td>
-                                <td>{{item.Price}}đ</td>
+                                <td>{{item.SellAmount}}</td>
+                                <td>{{item.Price | currency:"":0}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -70,11 +70,11 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 23%;"><a href="#">Tên khách hàng</a></th>
-                                <th style="width: 10%;"><a href="#">SĐT</a></th>
-                                <th style="width: 33%;"><a href="#">Địa chỉ</a></th>
-                                <th style="width: 20%;"><a href="#">Tổng thanh toán</a></th>
-                                <th style="width: 14%;"><a href="#">Thời gian mua</a></th>
+                                <th style="width: 23%;"><a href="#" ng-click="sortByNewDeal('CustomerName')">Tên khách hàng</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByNewDeal('DeliveryPhoneNum')">SĐT</a></th>
+                                <th style="width: 33%;"><a href="#" ng-click="sortByNewDeal('DeliveryAddress')">Địa chỉ</a></th>
+                                <th style="width: 20%;"><a href="#" ng-click="sortByNewDeal('Total')">Tổng thanh toán</a></th>
+                                <th style="width: 14%;"><a href="#" ng-click="sortByNewDeal('PurchaseDate')">Thời gian mua</a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,56 +106,57 @@
 </section>
 @section scripts{
     <script>
-        $(document).ready(function () {
-            Resize();
-        });
-        function Resize() {
-            $(document).ready(function () {
-                    $("#admin-table-best-sale").css({
-                        'height': ($("#myChart").height() + 'px')
-                    });
-            });
-        }
-    var ctx = document.getElementById("myChart");
-			ctx.style = "-webkit-tap-highlight-color: transparent;";
-			Chart.defaults.global.defaultFontFamily = 'Oswald';
-			Chart.defaults.global.defaultFontSize = 14;
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-					datasets: [{ 
-						label: '# of Votes',
-						data: [12, 19, 3, 5, 2, 3],
-						backgroundColor: [
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)'
-						],
-						borderColor: [
-						'rgba(30, 144, 255,1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)'
-						],
-						borderWidth: 2,
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero:true,
+        //$(document).ready(function () {
+        //    Resize();
+        //});
+        //function Resize() {
+        //    $(document).ready(function () {
+        //            $("#admin-table-best-sale").css({
+        //                'height': ($("#myChart").height() + 'px')
+        //            });
+        //    });
+        //}
+
+    //var ctx = document.getElementById("myChart");
+	//		ctx.style = "-webkit-tap-highlight-color: transparent;";
+	//		Chart.defaults.global.defaultFontFamily = 'Oswald';
+	//		Chart.defaults.global.defaultFontSize = 14;
+	//		var myChart = new Chart(ctx, {
+	//			type: 'line',
+	//			data: {
+	//				labels: ["T1", "T2", "T3", "T4", "T5", "T6","T7","T8","T9","T10","T11","T12"],
+	//				datasets: [{ 
+	//					label: 'Triệu VNĐ',
+	//					data: $scope.chartData,
+	//					backgroundColor: [
+	//					'rgba(30, 144, 255, 0.5)',
+	//					'rgba(30, 144, 255, 0.5)',
+	//					'rgba(30, 144, 255, 0.5)',
+	//					'rgba(30, 144, 255, 0.5)',
+	//					'rgba(30, 144, 255, 0.5)',
+	//					'rgba(30, 144, 255, 0.5)'
+	//					],
+	//					borderColor: [
+	//					'rgba(30, 144, 255,1)',
+	//					'rgba(30, 144, 255, 1)',
+	//					'rgba(30, 144, 255, 1)',
+	//					'rgba(30, 144, 255, 1)',
+	//					'rgba(30, 144, 255, 1)',
+	//					'rgba(30, 144, 255, 1)'
+	//					],
+	//					borderWidth: 2,
+	//				}]
+	//			},
+	//			options: {
+	//				scales: {
+	//					yAxes: [{
+	//						ticks: {
+	//							beginAtZero:true,
 								
-							}
-						}]
-					}
-				}
-			});
+	//						}
+	//					}]
+	//				}
+	//			}
+	//		});
       </script>
     }
