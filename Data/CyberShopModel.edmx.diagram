@@ -9,10 +9,7 @@
         <EntityTypeShape EntityType="ShopPCComponentsModel.ProductImage" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="ShopPCComponentsModel.ProducTypeCategoryy" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Detail_PcSets" Width="1.5" PointX="5.25" PointY="16" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.History" Width="1.5" PointX="3" PointY="15.625" />
-        <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder" Width="1.5" PointX="3" PointY="19.25" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder_Detail" Width="1.5" PointX="5.25" PointY="12" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Category" Width="1.5" PointX="9.625" PointY="13.875" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Category_Category" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice_Detail" Width="1.5" PointX="5.25" PointY="8" />
@@ -27,12 +24,11 @@
         <AssociationConnector Association="ShopPCComponentsModel.FK_ProducType_Category1" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Product_ProducType" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.User" Width="1.5" PointX="0.75" PointY="14.625" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_History_User" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_User" />
         <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice" Width="1.5" PointX="3" PointY="10.875" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" />
         <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_User" />
-        <AssociationConnector Association="ShopPCComponentsModel.FK_History_Product" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder" Width="1.5" PointX="5.375" PointY="4" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
