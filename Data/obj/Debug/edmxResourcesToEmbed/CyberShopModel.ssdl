@@ -52,30 +52,12 @@
     <Property Name="CreateTime" Type="date" />
     <Property Name="CreateBy" Type="nvarchar" MaxLength="15" />
   </EntityType>
-  <EntityType Name="History">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="User_id" Type="int" />
-    <Property Name="Product_id" Type="int" />
-    <Property Name="Invoice_id" Type="int" />
-    <Property Name="Amount" Type="int" />
-    <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="Product_tag" Type="bit" />
-    <Property Name="Invoice_tag" Type="bit" />
-    <Property Name="Warehouse_tag" Type="bit" />
-    <Property Name="User_tag" Type="bit" />
-    <Property Name="TotalPrice" Type="float" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="CreateDate" Type="date" />
-  </EntityType>
   <EntityType Name="InOrder">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CreateBy_User_id" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
     <Property Name="Info" Type="nvarchar(max)" />
     <Property Name="Total" Type="float" />
     <Property Name="IsDeleted" Type="bit" />
@@ -180,7 +162,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Username" Type="nchar" MaxLength="50" />
     <Property Name="Password" Type="nchar" MaxLength="50" />
     <Property Name="UserType" Type="nvarchar" MaxLength="50" />
@@ -217,30 +199,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_History_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="History" Type="Self.History" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="History">
-        <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_History_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="History" Type="Self.History" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="History">
-        <PropertyRef Name="User_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_InOrder_Detail_InOrder">
     <End Role="InOrder" Type="Self.InOrder" Multiplicity="0..1" />
     <End Role="InOrder_Detail" Type="Self.InOrder_Detail" Multiplicity="*" />
@@ -262,18 +220,6 @@
       </Principal>
       <Dependent Role="InOrder_Detail">
         <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_InOrder_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="InOrder" Type="Self.InOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="InOrder">
-        <PropertyRef Name="CreateBy_User_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -365,7 +311,6 @@
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Detail_PcSets" EntityType="Self.Detail_PcSets" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InOrder" EntityType="Self.InOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InOrder_Detail" EntityType="Self.InOrder_Detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
@@ -383,14 +328,6 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="Detail_PcSets" EntitySet="Detail_PcSets" />
     </AssociationSet>
-    <AssociationSet Name="FK_History_Product" Association="Self.FK_History_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="History" EntitySet="History" />
-    </AssociationSet>
-    <AssociationSet Name="FK_History_User" Association="Self.FK_History_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="History" EntitySet="History" />
-    </AssociationSet>
     <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="Self.FK_InOrder_Detail_InOrder">
       <End Role="InOrder" EntitySet="InOrder" />
       <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
@@ -398,10 +335,6 @@
     <AssociationSet Name="FK_InOrder_Detail_Product" Association="Self.FK_InOrder_Detail_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_InOrder_User" Association="Self.FK_InOrder_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="InOrder" EntitySet="InOrder" />
     </AssociationSet>
     <AssociationSet Name="FK_Invoice_Detail_Invoice" Association="Self.FK_Invoice_Detail_Invoice">
       <End Role="Invoice" EntitySet="Invoice" />
