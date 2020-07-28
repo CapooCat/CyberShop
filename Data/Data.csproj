@@ -65,7 +65,6 @@
     <Compile Include="Detail_PcSets.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HistoryDao.cs" />
     <Compile Include="InOrder.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
