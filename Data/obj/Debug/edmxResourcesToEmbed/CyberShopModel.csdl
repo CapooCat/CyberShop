@@ -14,13 +14,7 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="ProductImages" EntityType="ShopPCComponentsModel.ProductImage" />
     <EntitySet Name="Detail_PcSets" EntityType="ShopPCComponentsModel.Detail_PcSets" />
-    <EntitySet Name="Histories" EntityType="ShopPCComponentsModel.History" />
-    <EntitySet Name="InOrders" EntityType="ShopPCComponentsModel.InOrder" />
     <EntitySet Name="InOrder_Detail" EntityType="ShopPCComponentsModel.InOrder_Detail" />
-    <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder">
-      <End Role="InOrder" EntitySet="InOrders" />
-      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
-    </AssociationSet>
     <EntitySet Name="Categories" EntityType="ShopPCComponentsModel.Category" />
     <AssociationSet Name="FK_Category_Category" Association="ShopPCComponentsModel.FK_Category_Category">
       <End Role="Category" EntitySet="Categories" />
@@ -59,14 +53,6 @@
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
     <EntitySet Name="Users" EntityType="ShopPCComponentsModel.User" />
-    <AssociationSet Name="FK_History_User" Association="ShopPCComponentsModel.FK_History_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="History" EntitySet="Histories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_InOrder_User" Association="ShopPCComponentsModel.FK_InOrder_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="InOrder" EntitySet="InOrders" />
-    </AssociationSet>
     <EntitySet Name="Invoices" EntityType="ShopPCComponentsModel.Invoice" />
     <AssociationSet Name="FK_Invoice_Detail_Invoice" Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice">
       <End Role="Invoice" EntitySet="Invoices" />
@@ -76,9 +62,10 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Invoice" EntitySet="Invoices" />
     </AssociationSet>
-    <AssociationSet Name="FK_History_Product" Association="ShopPCComponentsModel.FK_History_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="History" EntitySet="Histories" />
+    <EntitySet Name="InOrders" EntityType="ShopPCComponentsModel.InOrder" />
+    <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder">
+      <End Role="InOrder" EntitySet="InOrders" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ProductImage">
@@ -116,40 +103,6 @@
     <Property Name="CreateBy" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_Detail_PcSets_Product" FromRole="Detail_PcSets" ToRole="Product" />
   </EntityType>
-  <EntityType Name="History">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="User_id" Type="Int32" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Product_tag" Type="Boolean" />
-    <Property Name="Invoice_tag" Type="Boolean" />
-    <Property Name="Warehouse_tag" Type="Boolean" />
-    <Property Name="User_tag" Type="Boolean" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="User" Relationship="ShopPCComponentsModel.FK_History_User" FromRole="History" ToRole="User" />
-    <Property Name="Product_id" Type="Int32" />
-    <Property Name="Invoice_id" Type="Int32" />
-    <Property Name="Amount" Type="Int32" />
-    <Property Name="TotalPrice" Type="Double" />
-    <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_History_Product" FromRole="History" ToRole="Product" />
-  </EntityType>
-  <EntityType Name="InOrder">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CreateBy_User_id" Type="Int32" />
-    <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Total" Type="Double" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="Status" Type="Boolean" />
-    <Property Name="CreateDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder" ToRole="InOrder_Detail" />
-    <NavigationProperty Name="User" Relationship="ShopPCComponentsModel.FK_InOrder_User" FromRole="InOrder" ToRole="User" />
-  </EntityType>
   <EntityType Name="InOrder_Detail">
     <Key>
       <PropertyRef Name="Id" />
@@ -161,21 +114,9 @@
     <Property Name="Amount" Type="Int32" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="InOrder" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder_Detail" ToRole="InOrder" />
     <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_Product" FromRole="InOrder_Detail" ToRole="Product" />
+    <NavigationProperty Name="InOrder" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder_Detail" ToRole="InOrder" />
   </EntityType>
-  <Association Name="FK_InOrder_Detail_InOrder">
-    <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="0..1" />
-    <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="InOrder_Detail">
-        <PropertyRef Name="InOrder_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="Id" />
@@ -246,7 +187,6 @@
     <NavigationProperty Name="Brand" Relationship="ShopPCComponentsModel.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="ProducType" Relationship="ShopPCComponentsModel.FK_Product_ProducType" FromRole="Product" ToRole="ProducType" />
     <Property Name="Amount" Type="Int32" />
-    <NavigationProperty Name="Histories" Relationship="ShopPCComponentsModel.FK_History_Product" FromRole="Product" ToRole="History" />
   </EntityType>
   <Association Name="FK_Detail_PcSets_Product">
     <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="1" />
@@ -378,34 +318,8 @@
     <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="CreateDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Histories" Relationship="ShopPCComponentsModel.FK_History_User" FromRole="User" ToRole="History" />
-    <NavigationProperty Name="InOrders" Relationship="ShopPCComponentsModel.FK_InOrder_User" FromRole="User" ToRole="InOrder" />
     <NavigationProperty Name="Invoices" Relationship="ShopPCComponentsModel.FK_Invoice_User" FromRole="User" ToRole="Invoice" />
   </EntityType>
-  <Association Name="FK_History_User">
-    <End Type="ShopPCComponentsModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="ShopPCComponentsModel.History" Role="History" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="History">
-        <PropertyRef Name="User_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_InOrder_User">
-    <End Type="ShopPCComponentsModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="InOrder">
-        <PropertyRef Name="CreateBy_User_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Invoice">
     <Key>
       <PropertyRef Name="Id" />
@@ -448,15 +362,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_History_Product">
-    <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="ShopPCComponentsModel.History" Role="History" Multiplicity="*" />
+  <EntityType Name="InOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder" ToRole="InOrder_Detail" />
+  </EntityType>
+  <Association Name="FK_InOrder_Detail_InOrder">
+    <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="0..1" />
+    <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="id" />
+      <Principal Role="InOrder">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="History">
-        <PropertyRef Name="Product_id" />
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="InOrder_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

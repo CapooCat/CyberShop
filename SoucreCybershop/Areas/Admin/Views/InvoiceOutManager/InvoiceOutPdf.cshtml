@@ -30,7 +30,7 @@
                     <span>Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span>
                 </div>
                 <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu xuất kho</div>
-                <div class="col-md-12" style="text-align:center;margin-bottom:50px;">ngày 7 tháng 26 năm 2020</div>
+                <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
                 <div class="col-md-9">
                     <span><span style="font-weight: bold">Họ tên khách hàng:</span> @Model.First().CustomerName</span>
                 </div>
@@ -70,7 +70,7 @@
                                 <td>@item.ProductTypeName</td>
                                 <td>@item.MonthsWarranty</td>
                                 <td>@item.Amount</td>
-                                <td>@item.Price</td>
+                                <td>@string.Format("{0:#,##0.00}",item.Price)</td>
                             </tr>
                         }
                         <tr>

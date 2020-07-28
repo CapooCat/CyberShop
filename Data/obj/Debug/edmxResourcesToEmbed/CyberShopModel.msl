@@ -47,38 +47,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Histories">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.History">
-        <MappingFragment StoreEntitySet="History">
-          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Invoice_id" ColumnName="Invoice_id" />
-          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="User_tag" ColumnName="User_tag" />
-          <ScalarProperty Name="Warehouse_tag" ColumnName="Warehouse_tag" />
-          <ScalarProperty Name="Invoice_tag" ColumnName="Invoice_tag" />
-          <ScalarProperty Name="Product_tag" ColumnName="Product_tag" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="InOrders">
-      <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder">
-        <MappingFragment StoreEntitySet="InOrder">
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Info" ColumnName="Info" />
-          <ScalarProperty Name="CreateBy_User_id" ColumnName="CreateBy_User_id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="InOrder_Detail">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder_Detail">
         <MappingFragment StoreEntitySet="InOrder_Detail">
@@ -203,6 +171,19 @@
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
           <ScalarProperty Name="User_id" ColumnName="User_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InOrders">
+      <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder">
+        <MappingFragment StoreEntitySet="InOrder">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

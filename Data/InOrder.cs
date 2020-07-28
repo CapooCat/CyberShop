@@ -21,7 +21,7 @@ namespace Data
         }
     
         public int Id { get; set; }
-        public Nullable<int> CreateBy_User_id { get; set; }
+        public string CreateBy { get; set; }
         public string Info { get; set; }
         public Nullable<double> Total { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
@@ -30,6 +30,5 @@ namespace Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOrder_Detail> InOrder_Detail { get; set; }
-        public virtual User User { get; set; }
     }
 }
