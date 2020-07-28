@@ -35,7 +35,7 @@
                         <li><button id="ProductManager"onclick="window.location.href='/Admin/ProductManager'">Quản lý sản phẩm</button></li>
                         <li><button id="InvoiceManager" onclick="window.location.href='/Admin/InvoiceManager'">Quản lý hóa đơn</button></li>
                         <li><button id="CategoryManager" onclick="window.location.href='/Admin/CategoryManager'">Quản lý danh mục</button></li>
-                        <li><button id="WarrantyManager" onclick="window.location.href = '/Admin/InvoiceInManager'">Quản lý hóa đơn nhập</button></li>
+                        <li><button id="InvoiceInManager" onclick="window.location.href = '/Admin/InvoiceInManager'">Quản lý hóa đơn nhập</button></li>
                     </div>
                     <a class="drop active" onclick='show_more(1);'>Bán hàng</a>
                     <div class="nav-detail" style="visibility: visible;">
@@ -271,6 +271,10 @@
 			                CheckAll.checked = true;
 			            }
 			    }
+			}
+
+			function ResetTXT() {
+			    $('#search_input').find(':input').val('');
 			}
     </script>
     @RenderSection("scripts", false)

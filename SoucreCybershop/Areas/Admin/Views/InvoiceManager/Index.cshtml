@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý hóa đơn";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
     var prdTypeList = new ProductTypeDao().ListProductType();
@@ -12,7 +12,7 @@
 <section id="content" class="admin-content-container">
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 10px;"></i>Quản lý hóa đơn</h3>
     <div class="row" style="margin: 5px;">
-        <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+        <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;" id="search_input">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
                 <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
@@ -38,6 +38,7 @@
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
             <button type="button"class="delete" ng-click="DeleteInvoiceChecked()"><i class="fas fa-trash"></i></button>
             <button style="width: 100px;" ng-click="FilterInvoice()" onclick="UnCheck()">Lọc</button>
+            <button onclick="ResetTXT();" ng-click="FilterInvoice()"><i class="fas fa-redo-alt"></i></button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
@@ -61,14 +62,16 @@
                         </thead>
                         <tbody id="items-table">
                             <tr ng-repeat="item in invoiceList">
-                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
+                                <td class="checkbox" ng-if="item.Status=='Chưa hoàn thành'"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
+                                <td class="checkbox" ng-if="item.Status=='Đã hoàn thành'"><i class="fas fa-check-circle"></i></td>
                                 <td>{{item.Id}}</td>
                                 <td>{{item.CustomerName}}</td>
                                 <td>{{item.DeliveryAddress}}</td>
                                 <td>{{item.DeliveryPhoneNum}}</td>
                                 <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.Status}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" ng-if="item.Status=='Chưa hoàn thành'"><button data-toggle="modal" class="edit" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id, item.Status)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" ng-if="item.Status=='Đã hoàn thành'"><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -197,7 +200,7 @@
                     <div style="float: right;">Tổng tiền: {{bucket.total_price | currency:"":0}}</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button">Sửa</button>
+                    <button type="button" ng-click="UpdateInvoice()">Xác nhận</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
@@ -228,7 +231,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Bảo hành</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết hóa đơn</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -276,8 +279,9 @@
 
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+            <div  class="modal-footer">
+                <button id="ConfirmInvoice" ng-click="confirm()">Xác nhận thành công</button>
+                <button class="second-btn" data-dismiss="modal">Thoát</button>
             </div>
         </div>
     </div>
