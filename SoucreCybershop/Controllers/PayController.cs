@@ -30,7 +30,6 @@ namespace CyberShop.Controllers
                     //tạo hóa đơn
                     InvoiceDao inDao = new InvoiceDao();
                     var invoice = new Invoice();
-                    var history = new History();
                     var user_session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
                     if (Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
                     {
