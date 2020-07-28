@@ -447,7 +447,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         else {
             $scope.invoiceList = $filter('orderBy')($scope.invoiceList, '-' + propertyName);
         }   
-    };
+    }
     $scope.bucket = { total_price: 0 };
 
     $scope.AddProductToInvoice = function (id, price, warranty) {
@@ -1981,6 +1981,80 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.loading = false;
         });
     }
+    $scope.ReturnTurnoverChart = function () {
+        $scope.loading = true;
+        $http.get("/Admin/SummaryManager/ReturnTurnoverChart").then(function (response) {
+            $scope.TurnoverChart = response.data;
+            var chartData = [];
+            chartData = angular.fromJson(response.data);
+            var ctx = document.getElementById("myChart");
+            ctx.style = "-webkit-tap-highlight-color: transparent;";
+            Chart.defaults.global.defaultFontFamily = 'Oswald';
+            Chart.defaults.global.defaultFontSize = 14;
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
+                    datasets: [{
+                        label: 'Triệu VNĐ',
+                        data: chartData,
+                        backgroundColor: [
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)',
+						'rgba(30, 144, 255, 0.5)'
+                        ],
+                        borderColor: [
+						'rgba(30, 144, 255,1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)',
+						'rgba(30, 144, 255, 1)'
+                        ],
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+
+                            }
+                        }]
+                    }
+                }
+            });
+            document.getElementById("admin-table-best-sale").style.height = document.getElementById("myChart").style.height;
+            $scope.loading = false;
+        });
+    }
+    $scope.sortByBestSeller = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        if ($scope.reverse == false) {
+            $scope.lstBestSeller = $filter('orderBy')($scope.lstBestSeller, propertyName);
+        }
+        else {
+            $scope.lstBestSeller = $filter('orderBy')($scope.lstBestSeller, '-' + propertyName);
+        }
+    }
+    $scope.sortByNewDeal = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+        ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        if ($scope.reverse == false) {
+            $scope.lstNewDeal = $filter('orderBy')($scope.lstNewDeal, propertyName);
+        }
+        else {
+            $scope.lstNewDeal = $filter('orderBy')($scope.lstNewDeal, '-' + propertyName);
+        }
+    }
+    $scope.ReturnTurnoverChart();
     $scope.ReturnTurnover();
     $scope.ReturnCustomerAmount();
     $scope.ReturnTotalProductSell();
