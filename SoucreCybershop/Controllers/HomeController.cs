@@ -83,6 +83,28 @@ namespace CyberShop.Controllers
             Session[CommonConstantUser.USER_SESSION] = null;
             return Redirect("/");
         }
+
+        public ActionResult InstallmentTerm()
+        {
+            return View();
+        }
+
+        public ActionResult TransportTerm()
+        {
+            return View();
+        }
+
+        public ActionResult WarrantyTerm()
+        {
+            return View();
+        }
+
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
+
+
         public ActionResult DetailProduct(int id)
         {
             var model = (from a in data.ProductImages
