@@ -8,7 +8,7 @@ using CyberShop.Areas.Admin.Models;
 
 namespace CyberShop.Areas.Admin.Controllers
 {
-    public class InvoiceInManagerController : Controller
+    public class AddInvoiceInManagerController : Controller
     {
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         // GET: Admin/WarrantyManager

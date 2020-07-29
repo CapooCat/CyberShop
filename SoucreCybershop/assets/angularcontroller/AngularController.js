@@ -244,10 +244,21 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
     }
     
     $scope.FetchCart = function () {
-        console.log(BuyNow);
+        var Items = document.getElementById("cart-layout");
+        var Element = document.getElementById("cart-content");
         var url = "/Pay";
         $http.get("/Cart/ReturnCartItem").then(function (response) {
             $scope.cartList = response.data;
+            $http.get("/Cart/ReturnCartItem").then(function (response) {
+                if (Items.offsetHeight > 500)
+                {
+                    Element.style.height = "500px";
+                    Element.style.overflowY = "auto";
+                }
+                else {
+                    Element.style.height = "auto";
+                }
+            });
             if (BuyNow == true) {
                 $window.location.href = url;
             } else {
@@ -258,6 +269,7 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
     $scope.bucket = { total_amount: 0 };
     $scope.FetchCart();
     $scope.AddItem = function (id) {
+        
         $scope.loading = true;
         $http.get("/Cart/AddItem/" + id).then(function (response) {
             $scope.bucket.total_amount = 0;
