@@ -1012,6 +1012,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var ProductType_id = document.getElementById("Edit_Product_Type").value;
         var ProductName = document.getElementById("Edit_Product_Name").value;
         var MetaTitle = document.getElementById("Edit_MetaTitle").value;
+        var Quantity = document.getElementById("Edit_Quantity").value;
         var Info = document.getElementById("Edit_Doc").value;
         var Price = document.getElementById("Edit_Sell_Price").value;
         var MonthWarranty = document.getElementById("Edit_Warranty").value;
@@ -1025,6 +1026,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 ProductType_id: ProductType_id,
                 ProductName: ProductName,
                 MetaTitle: MetaTitle,
+                Amount: Quantity,
                 Info: Info,
                 Price: Price,
                 MonthWarranty: MonthWarranty
@@ -1037,6 +1039,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 title: 'Thành công',
                 text: 'Đã sửa thành công',
             })
+            $scope.ReturnProductList();
             $("[data-dismiss=modal]").trigger({ type: "click" });
             console.log(response);
         }).catch(function onError(response) {
@@ -1597,13 +1600,20 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             },
         }).then(function onSuccess(response) {
             // Handle success
-            $scope.lstUser = response.data;
             $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Cập nhật thành công',
-            })
+            if (response.data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Cập nhật thành công',
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Không đủ số lượng hàng để xác nhận',
+                })
+            }
             $scope.ViewInvoice(GetInvoiceId, "Đã Hoàn Thành");
             $scope.ReturnInvoice();
             console.log(response);

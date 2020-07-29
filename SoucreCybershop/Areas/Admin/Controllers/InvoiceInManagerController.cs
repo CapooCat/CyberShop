@@ -276,7 +276,6 @@ namespace CyberShop.Areas.Admin.Controllers
             data.SaveChanges();
             Product Productentity = new Product();
 
-
             var prdList = new List<InvoiceInDetailManagerViewModel>();
             prdList = (from a in data.InOrder_Detail
                      join b in data.Products on a.Product_id equals b.id
@@ -289,7 +288,7 @@ namespace CyberShop.Areas.Admin.Controllers
             foreach (var item in prdList)
             {
                 Productentity = data.Products.Find(item.Product_id);
-                Productentity.Amount += Productentity.Amount + item.Amount;
+                Productentity.Amount = Productentity.Amount + item.Amount;
                 data.SaveChanges();
             }
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);

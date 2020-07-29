@@ -129,6 +129,7 @@ namespace CyberShop.Areas.Admin.Controllers
             entity.Brand_id = model.Brand_id;
             entity.ProductType_id = model.ProductType_id;
             entity.ProductName = model.ProductName;
+            entity.Amount = model.Amount;
             entity.MetaTitle = model.MetaTitle;
             entity.Info = model.Info;
             entity.Price = model.Price;

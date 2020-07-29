@@ -363,11 +363,47 @@ namespace CyberShop.Areas.Admin.Controllers
 
         public JsonResult Confirm(InvoiceManagerViewModel model)
         {
+            var NotEnoughStock = false;
             Invoice entity = new Invoice();
-            entity = data.Invoices.Find(model.Id);
-            entity.Status = model.Status;
-            data.SaveChanges();
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            Product Productentity = new Product();
+
+            var prdList = new List<InvoiceDetailMangerViewModel>();
+            prdList = (from a in data.Invoice_Detail
+                       join b in data.Products on a.Product_id equals b.id
+                       where a.IsDeleted == false && a.Invoice_id == model.Id
+                       select new InvoiceDetailMangerViewModel
+                       {
+                           Product_id = a.Product_id,
+                           Amount = a.Amount,
+                       }).ToList();
+            foreach (var item in prdList)
+            {
+                Productentity = data.Products.Find(item.Product_id);
+                if (Productentity.Amount < item.Amount)
+                {
+                    NotEnoughStock = true; break;
+                }
+            }
+            if (NotEnoughStock == false)
+            {
+                foreach (var item in prdList)
+                {
+                    Productentity = data.Products.Find(item.Product_id);
+                    Productentity.Amount = Productentity.Amount - item.Amount;
+                    data.SaveChanges();
+                }
+            }
+            if (NotEnoughStock == true)
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                entity = data.Invoices.Find(model.Id);
+                entity.Status = model.Status;
+                data.SaveChanges();
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult UpdateInvoice(InvoiceManagerViewModel model)
