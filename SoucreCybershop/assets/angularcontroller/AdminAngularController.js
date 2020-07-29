@@ -1781,8 +1781,19 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
-
     //--------------INVOICE_END--------------------//
+    //--------------INVOICE_IN_START--------------------//
+
+    $scope.ReturnInvoiceIn = function () {
+        $scope.loading = true;
+        $http.get("/Admin/InvoiceInManager/ReturnInvoiceIn").then(function (response) {
+            $scope.invoiceInList = response.data;
+        });
+        $scope.loading = false;
+    }
+    $scope.ReturnInvoiceIn();
+
+    //--------------INVOICE_IN_END--------------------//
     //--------------INVOICE OUT_START--------------------//
     $scope.AddProductToInvoiceDetail = function (id)
     {
