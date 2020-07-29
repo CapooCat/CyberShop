@@ -450,82 +450,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     }
     $scope.bucket = { total_price: 0 };
 
-    $scope.AddProductToInvoice = function (id, price, warranty) {
-        $scope.loading = true;
-            $http({
-                url: '/Admin/InvoiceManager/AddProductToInvoice',
-                method: "POST",
-                data: {
-                    Invoice_id: InvoiceID,
-                    Product_id: id,
-                    Price: price,
-                    Product_Warranty: warranty
-                }
-            }).then(function onSuccess(response) {
-                // Handle success
-                $scope.loading = false;
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành công',
-                    text: 'Đã thêm thành công',
-                })
-                console.log(response);
-                $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + InvoiceID).then(function (response) {
-                    $scope.bucket.total_price = 0;
-                    $scope.listInvoiceDetail = response.data;
-                });
-            }).catch(function onError(response) {
-                // Handle error
-                $scope.loading = false;
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thất bại',
-                    text: 'Thêm thất bại',
-                })
-                console.log(response);
-            });
-    }
-
-    $scope.DeleteDetailProduct = function (id) {
-        $scope.DeleteDetailInvoiceId = id;
-        Swal.fire({
-            title: 'Cảnh báo',
-            text: 'Bạn có chắc muốn xóa ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Có!',
-            cancelButtonText: 'Không'
-        }).then((result) => {
-            if (result.value) {
-                $scope.DeleteDetailInvoiceConfirm();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thất bại',
-                    text: 'Xóa thất bại',
-                })
-            }
-        })
-    }
-
-
-    $scope.DeleteDetailInvoiceConfirm = function () {
-        $scope.loading = true;
-        $http.get("/Admin/InvoiceManager/DeleteDetailInvoice/" + $scope.DeleteDetailInvoiceId).then(function (response) {
-            $scope.loading = false;
-            console.log(response);
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + InvoiceID).then(function (response) {
-                $scope.bucket.total_price = 0;
-                $scope.listInvoiceDetail = response.data;
-            });
-            $scope.loading = false;
-        });
-    }
     $scope.DeleteInvoiceChecked = function () {
         Swal.fire({
             title: 'Cảnh báo',
@@ -592,56 +516,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
-    $scope.DeleteInvoice = function (id) {
-        $scope.invoice_id = id;
-        Swal.fire({
-            title: 'Cảnh báo',
-            text: 'Bạn có chắc muốn xóa ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Có!',
-            cancelButtonText: 'Không'
-        }).then((result) => {
-            if (result.value) {
-                $scope.DeleteInvoiceConfirm();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thất bại',
-                    text: 'Xóa thất bại',
-                })
-            }
-        })
-    }
-    $scope.DeleteInvoiceConfirm = function () {
-        $scope.loading = true;
-        $http({
-            url: '/Admin/InvoiceManager/DeleteInvoice',
-            method: "POST",
-            data: {
-                id: $scope.invoice_id
-            },
-        }).then(function onSuccess(response) {
-            $scope.invoiceList = response.data;
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'error',
-                title: 'Thất bại',
-                text: 'Xóa thất bại',
-            })
-            console.log(response);
-        });
-    }
+    
 
     //--------------PRODUCT_START--------------------//
     $scope.ReturnProductList = function () {
@@ -1781,9 +1656,137 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             console.log(response);
         });
     }
+
+        $scope.AddProductToInvoice = function (id, price, warranty) {
+        $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceManager/AddProductToInvoice',
+                method: "POST",
+                data: {
+                    Invoice_id: InvoiceID,
+                    Product_id: id,
+                    Price: price,
+                    Product_Warranty: warranty
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
+                console.log(response);
+                $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + InvoiceID).then(function (response) {
+                    $scope.bucket.total_price = 0;
+                    $scope.listInvoiceDetail = response.data;
+                });
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Thêm thất bại',
+                })
+                console.log(response);
+            });
+        }
+
+        $scope.DeleteDetailProduct = function (id) {
+            $scope.DeleteDetailInvoiceId = id;
+            Swal.fire({
+                title: 'Cảnh báo',
+                text: 'Bạn có chắc muốn xóa ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có!',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.value) {
+                    $scope.DeleteDetailInvoiceConfirm();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Xóa thất bại',
+                    })
+                }
+            })
+        }
+
+
+        $scope.DeleteDetailInvoiceConfirm = function () {
+            $scope.loading = true;
+            $http.get("/Admin/InvoiceManager/DeleteDetailInvoice/" + $scope.DeleteDetailInvoiceId).then(function (response) {
+                $scope.loading = false;
+                console.log(response);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                $http.get("/Admin/InvoiceManager/ReturnDetailInvoiceById/" + InvoiceID).then(function (response) {
+                    $scope.bucket.total_price = 0;
+                    $scope.listInvoiceDetail = response.data;
+                });
+                $scope.loading = false;
+            });
+        }
+
+        $scope.DeleteInvoice = function (id) {
+            $scope.invoice_id = id;
+            Swal.fire({
+                title: 'Cảnh báo',
+                text: 'Bạn có chắc muốn xóa ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có!',
+                cancelButtonText: 'Không'
+            }).then((result) => {
+                if (result.value) {
+                    $scope.DeleteInvoiceConfirm();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Xóa thất bại',
+                    })
+                }
+            })
+        }
+        $scope.DeleteInvoiceConfirm = function () {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceManager/DeleteInvoice',
+                method: "POST",
+                data: {
+                    id: $scope.invoice_id
+                },
+            }).then(function onSuccess(response) {
+                $scope.invoiceList = response.data;
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        }
     //--------------INVOICE_END--------------------//
     //--------------INVOICE_IN_START--------------------//
-
+    var InvoiceInID = 0;
     $scope.ReturnInvoiceIn = function () {
         $scope.loading = true;
         $http.get("/Admin/InvoiceInManager/ReturnInvoiceIn").then(function (response) {
@@ -1792,6 +1795,300 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         $scope.loading = false;
     }
     $scope.ReturnInvoiceIn();
+
+    $scope.sortByInvoiceIn = function (Name) {
+        $scope.reverseName = ($scope.Name === Name) ? !$scope.reverseName : false;
+        $scope.Name = Name;
+    };
+
+    $.fn.modal.Constructor.prototype._enforceFocus = function () { };
+
+    $scope.EditInvoiceIn = function (id) {
+        InvoiceInID = id;
+        $scope.loading = true;
+            $http.get("/Admin/InvoiceInManager/ReturnDetailInvoiceInById/" + id).then(function (response) {
+                $scope.loading = false;
+                $scope.bucket.total_price = 0;
+                $scope.listInvoiceInDetail = response.data;
+            });
+    };
+
+    $scope.EnterInformation = function (id) {
+        var Amount;
+        var Price;
+
+        swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+          {
+              title: 'Bước 1',
+              text: 'Nhập số lượng sản phẩm cần nhập',
+              preConfirm: function (value) {
+                  Amount = value;
+              }
+          },
+
+          {
+              title: 'Bước 2',
+              text: 'Nhập giá tiền mua sản phẩm',
+              preConfirm: function (value) {
+                  Price = value;
+              }
+          }
+        ]).then((result) => {
+            if (result.value) {
+                if (Amount == "" || Price == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Không được để trống',
+                    })
+                } else {
+                    $scope.AddProductToInvoiceIn(id, Price, Amount);
+                }
+            }
+        })
+    }
+
+    $scope.AddProductToInvoiceIn = function (id, price, amount) {
+        $scope.loading = true;
+        amount = parseInt(amount);
+        $http({
+            url: '/Admin/InvoiceInManager/AddProductToInvoiceIn',
+            method: "POST",
+            data: {
+                InOrder_id: InvoiceInID,
+                Product_id: id,
+                Price: price,
+                Amount: amount
+            }
+        }).then(function onSuccess(response) {
+            // Handle success
+            console.log(response);
+            $http.get("/Admin/InvoiceInManager/ReturnDetailInvoiceInById/" + InvoiceInID).then(function (response) {
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã thêm thành công',
+                })
+                $scope.bucket.total_price = 0;
+                $scope.ReturnInvoiceIn();
+                $scope.listInvoiceInDetail = response.data;
+            });
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Thêm thất bại',
+            })
+            console.log(response);
+        });
+    }
+
+    $scope.FilterInvoiceIn = function () {
+        var OrderId = document.getElementById("invoiceIn_id").value;
+        var dateFrom = document.getElementById("date_from").value;
+        var dateTo = document.getElementById("date_to").value;
+        var InProduct = document.getElementById("in_product_search").value;
+        $scope.loading = true;
+        if (dateFrom > dateTo) {
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Thời gian từ không được lớn hơn Thời gian đến',
+            })
+        }
+        else {
+            $http({
+                url: '/Admin/InvoiceInManager/FilterInvoiceIn',
+                method: "POST",
+                data: {
+                    Id: OrderId,
+                    DateFrom: dateFrom,
+                    DateTo: dateTo,
+                    Product_id: InProduct
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                $scope.invoiceInList = response.data;
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                console.log(response);
+            });
+        }
+    }
+
+    $scope.DeleteDetailProductIn = function (id) {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteDetailInvoiceInConfirm(id);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+
+
+    $scope.DeleteDetailInvoiceInConfirm = function (id) {
+        $scope.loading = true;
+        $http.get("/Admin/InvoiceInManager/DeleteDetailInvoiceIn/" + id).then(function (response) {
+            $scope.loading = false;
+            console.log(response);
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $http.get("/Admin/InvoiceInManage/ReturnDetailInvoiceInById/" + InvoiceInID).then(function (response) {
+                $scope.bucket.total_price = 0;
+                $scope.listInvoiceInDetail = response.data;
+            });
+            $scope.loading = false;
+        });
+    }
+
+    $scope.ViewInvoiceIn = function (id, Status) {
+        InvoiceInID = id;
+        GetStatus = Status;
+        if (Status == "Chưa hoàn thành") { document.getElementById("ConfirmInvoice").disabled = false; document.getElementById("ConfirmInvoice").style.display = "block"; }
+        else { document.getElementById("ConfirmInvoice").disabled = true; document.getElementById("ConfirmInvoice").style.display = "none"; }
+
+        $scope.loading = true;
+        $http.get("/Admin/InvoiceInManager/ReturnInvoiceInById/" + id).then(function (response) {
+            $scope.dataInvoice = angular.fromJson(response.data);
+            $scope.InvoiceIn_Id = $scope.dataInvoice[0].Id;
+            $scope.InvoiceIn_Status = $scope.dataInvoice[0].Status;
+            $scope.InvoiceIn_CreateDate = $scope.dataInvoice[0].CreateDate;
+            $http.get("/Admin/InvoiceInManager/ReturnDetailInvoiceInById/" + id).then(function (response) {
+                $scope.loading = false;
+                $scope.listInvoiceInDetail = response.data;
+            });
+        });
+    };
+
+    $scope.confirmIn = function () {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xác nhận ? sau khi xác nhận bạn sẽ không thể sửa hoặc xóa hóa đơn này',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.CompletedIn();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xác nhận thất bại',
+                })
+            }
+        })
+    }
+
+    $scope.CompletedIn = function () {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceInManager/Confirm',
+            method: "POST",
+            data: {
+                Id: InvoiceInID,
+                Status: "Đã hoàn thành",
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Cập nhật thành công',
+            })
+            $scope.ViewInvoiceIn(InvoiceInID, "Đã Hoàn Thành");
+            $scope.ReturnInvoiceIn();
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Cập nhật thất bại',
+            })
+            console.log(response);
+        });
+    }
+
+    $scope.DeleteInvoiceIn = function (id) {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteInvoiceInConfirm(id);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteInvoiceInConfirm = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceInManager/DeleteInvoiceIn',
+            method: "POST",
+            data: {
+                id: id
+            },
+        }).then(function onSuccess(response) {
+            $scope.invoiceInList = response.data;
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
+        });
+    }
 
     //--------------INVOICE_IN_END--------------------//
     //--------------INVOICE OUT_START--------------------//

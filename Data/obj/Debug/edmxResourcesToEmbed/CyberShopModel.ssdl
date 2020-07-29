@@ -61,7 +61,7 @@
     <Property Name="Info" Type="nvarchar(max)" />
     <Property Name="Total" Type="float" />
     <Property Name="IsDeleted" Type="bit" />
-    <Property Name="Status" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
     <Property Name="CreateDate" Type="date" />
   </EntityType>
   <EntityType Name="InOrder_Detail">

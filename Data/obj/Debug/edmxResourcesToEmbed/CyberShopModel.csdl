@@ -371,7 +371,7 @@
     <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Total" Type="Double" />
     <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="Status" Type="Boolean" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder" ToRole="InOrder_Detail" />
   </EntityType>

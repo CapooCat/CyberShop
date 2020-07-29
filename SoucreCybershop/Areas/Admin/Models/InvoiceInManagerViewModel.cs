@@ -14,5 +14,9 @@ namespace CyberShop.Areas.Admin.Models
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string Status { get; set; }
+        public string DateFrom { get; set; }
+        public string DateTo { get; set; }
+        public int? Product_id { get; set; }
+
     }
 }

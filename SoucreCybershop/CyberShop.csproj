@@ -230,6 +230,7 @@
     <Compile Include="Areas\Admin\Models\BestSellerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\HistoryViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\InvoiceInDetailManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceOutManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceOutPdfViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductImageManagerViewModel.cs" />

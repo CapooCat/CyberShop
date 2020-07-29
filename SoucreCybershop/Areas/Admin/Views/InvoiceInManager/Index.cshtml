@@ -26,7 +26,7 @@
                 <input type="date" id="date_to">
             </div>
             <div class="col-md-2">
-                <p>Sản phẩm:</p>
+                <p>Sản phẩm trong hoá đơn :</p>
                 <select class="list-select" id="in_product_search">
                     <option value=""> <text style="color:silver">Chọn sản phẩm</text></option>
                     @foreach (var item in prdList)
@@ -40,7 +40,7 @@
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
             <button type="button" class="delete" ng-click="DeleteInvoiceInChecked()"><i class="fas fa-trash"></i></button>
             <button style="width: 100px;" ng-click="FilterInvoiceIn()" onclick="UnCheck()">Lọc</button>
-            <button onclick="ResetTXT();" ng-click="FilterProduct()"><i class="fas fa-redo-alt"></i></button>
+            <button onclick="ResetTXT();" ng-click="FilterInvoiceIn()"><i class="fas fa-redo-alt"></i></button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
@@ -54,23 +54,24 @@
                             <tr>
                                 <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
                                 <th style="width: 7%;"><a href="#" ng-click="sortByInvoiceIn('Id')">Mã hóa đơn</a></th>
-                                <th style="width: 15%;"><a href="#" ng-click="sortByInvoiceIn('CustomerName')">Tên khách hàng</a></th>
-                                <th style="width: 28%;"><a href="#" ng-click="sortByInvoiceIn('DeliveryAddress')">Địa chỉ</a></th>
-                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoiceIn('DeliveryPhoneNum')">Số điện thoại</a></th>
-                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoiceIn('PurchaseDate')">Ngày xuất</a></th>
+                                <th style="width: 23%;"><a href="#" ng-click="sortByInvoiceIn('Total')">Tổng tiền</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoiceIn('CreateDate')">Ngày lập</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoiceIn('CreateBy')">Tạo bởi</a></th>
                                 <th style="width: 12%;"><a href="#" ng-click="sortByInvoiceIn('Status')">Tình trạng</a></th>
                                 <th style="width: 15%;"><a href="#">Hành động</a></th>
                             </tr>
                         </thead>
                         <tbody id="items-table">
-                            <tr ng-repeat="item in invoiceInList">
-                                <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
+                            <tr ng-repeat="item in invoiceInList | orderBy:Name:reverseName">
+                                <td class="checkbox" ng-if="item.Status=='Chưa hoàn thành'"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
+                                <td class="checkbox" ng-if="item.Status=='Đã hoàn thành'"><i class="fas fa-check-circle"></i></td>
                                 <td>{{item.Id}}</td>
                                 <td>{{item.Total | currency:"":0}}</td>
                                 <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.CreateBy}}</td>
                                 <td>{{item.Status}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" ng-if="item.Status=='Chưa hoàn thành'"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoiceIn(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoiceIn(item.Id, item.Status)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoiceIn(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" ng-if="item.Status=='Đã hoàn thành'"><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoiceIn(item.Id, item.Status)"><i class="fas fa-eye"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -91,20 +92,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
-                        <div class="col-md-3">
-                            <p>Họ tên khách hàng:</p>
-                            <input type="text" placeholder="Nhập Họ tên..." id="client_name" ng-value="clientName">
-                        </div>
-                        <div class="col-md-3" style="text-align: left;">
-                            <p>Số điện thoại</p>
-                            <input type="text" placeholder="hãng số điện thoại..." id="phone_number" ng-value="phoneNumber">
-                        </div>
-                        <div class="col-md-6">
-                            <p>Địa chỉ:</p>
-                            <input type="text" placeholder="Nhập địa chỉ..." id="address" ng-value="address">
-                        </div>
-                        <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
-
                         <div class="col-md-12" style="text-align: center;">
                             <button onclick="ShowProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
                             <div class="Dropdown-Product-Background" id="Product-Background"></div>
@@ -142,12 +129,11 @@
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th style="width: 40%;"><a href="#">Tên sản phẩm</a></th>
+                                                            <th style="width: 50%;"><a href="#">Tên sản phẩm</a></th>
                                                             <th style="width: 10%;"><a href="#">Loại SP</a></th>
                                                             <th style="width: 10%;"><a href="#">Hãng SP</a></th>
                                                             <th style="width: 15%;"><a href="#">SL hàng tồn</a></th>
-                                                            <th style="width: 10%;"><a href="#">Bảo hành</a></th>
-                                                            <th style="width: 20%;"><a href="#">Giá tiền</a></th>
+                                                            <th style="width: 20%;"><a href="#">Bảo hành</a></th>
                                                             <th style="width: 5%;text-align: center;"></th>
                                                         </tr>
                                                     </thead>
@@ -158,8 +144,7 @@
                                                             <td>{{item.BrandName}}</td>
                                                             <td>{{item.Amount}}</td>
                                                             <td>{{item.MonthWarranty}}</td>
-                                                            <td>{{item.Price | currency:"":0}}</td>
-                                                            <td style="text-align: center;"><a href="#" ng-click="AddProductToInvoice(item.id, item.Price,item.MonthWarranty)"><i class="fas fa-plus"></i></a></td>
+                                                            <td style="text-align: center;"><a href="#" ng-click="EnterInformation(item.id)"><i class="fas fa-plus"></i></a></td>
                                                         </tr>
 
                                                     </tbody>
@@ -184,11 +169,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in listInvoiceDetail" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
+                                            <tr ng-repeat="item in listInvoiceInDetail" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                                 <td>{{item.ProductName}}</td>
                                                 <td>{{item.Amount}}</td>
                                                 <td>{{item.Price | currency:"":0}}</td>
-                                                <td style="text-align: center;"><a href="#" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
+                                                <td style="text-align: center;"><a href="#" ng-click="DeleteDetailProductIn(item.Id)"><i class="fas fa-times"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -199,7 +184,6 @@
                     <div style="float: right;">Tổng tiền: {{bucket.total_price | currency:"":0}}</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button">Sửa</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
@@ -239,16 +223,12 @@
 
 
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
-
                         <div class="col-md-6 info">
-                            <p>Mã hóa đơn: <span ng-bind="Invoice_Id"></span></p>
-                            <p>Họ và tên: <span ng-bind="Invoice_CustomerName"></span></p>
-                            <p>Số điện thoại: <span ng-bind="Invoice_DeliveryPhoneNum"></span></p>
+                            <p>Mã hóa đơn: <span ng-bind="InvoiceIn_Id"></span></p>
+                            <p>Trạng thái: <span ng-bind="InvoiceIn_Status"></span></p>
                         </div>
                         <div class="col-md-6 info">
-                            <p>Địa chỉ: <span ng-bind="Invoice_DeliveryAddress"></span></p>
-                            <p>Tình trạng: <span ng-bind="Invoice_Status"></span></p>
-                            <p>Ngày xuất: <span ng-bind="Invoice_CreateDate.slice(6, -2) | date:'dd/MM/yyyy'"></span></p>
+                            <p>Ngày lập: <span ng-bind="InvoiceIn_CreateDate.slice(6, -2) | date:'dd/MM/yyyy'"></span></p>
                         </div>
                         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                             <p>Sản phẩm trong hóa đơn: (chọn SP cần bảo hành)</p>
@@ -263,10 +243,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in WarrantyInvoiceDetail">
+                                            <tr ng-repeat="item in listInvoiceInDetail">
                                                 <td>{{item.ProductName}}</td>
                                                 <td>{{item.Amount}}</td>
-                                                <td>{{item.WarrantyExpires.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+                                                <td>{{item.Price | currency:"":0}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -279,6 +259,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <button id="ConfirmInvoice" ng-click="confirmIn()">Xác nhận thành công</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
