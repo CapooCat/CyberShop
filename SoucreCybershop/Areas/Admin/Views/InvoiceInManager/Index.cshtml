@@ -5,16 +5,17 @@
 
     var prdTypeList = new ProductTypeDao().ListProductType();
     var brandList = new BrandDao().ListBrand();
+    var prdList = new ProductDao().ListProduct();
 }
 @using Data;
 
 <section id="content" class="admin-content-container">
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-dolly-flatbed" style="margin-right: 10px;"></i>Quản lý hóa đơn nhập</h3>
     <div class="row" style="margin: 5px;">
-        <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+        <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;" id="search_input">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
-                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
+                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoiceIn_id">
             </div>
             <div class="col-md-2">
                 <p>Thời gian từ:</p>
@@ -25,18 +26,21 @@
                 <input type="date" id="date_to">
             </div>
             <div class="col-md-2">
-                <p>Tên khách hàng:</p>
-                <input type="text" placeholder="Nhập tên khách hàng..." id="customer_name">
-            </div>
-            <div class="col-md-2">
-                <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
+                <p>Sản phẩm:</p>
+                <select class="list-select" id="in_product_search">
+                    <option value=""> <text style="color:silver">Chọn sản phẩm</text></option>
+                    @foreach (var item in prdList)
+                    {
+                        <option value="@item.id">@item.ProductName</option>
+                    }
+                </select>
             </div>
         </div>
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
-            <button type="button" class="delete" ng-click="DeleteInvoiceChecked()"><i class="fas fa-trash"></i></button>
-            <button style="width: 100px;" ng-click="FilterInvoice()" onclick="UnCheck()">Lọc</button>
+            <button type="button" class="delete" ng-click="DeleteInvoiceInChecked()"><i class="fas fa-trash"></i></button>
+            <button style="width: 100px;" ng-click="FilterInvoiceIn()" onclick="UnCheck()">Lọc</button>
+            <button onclick="ResetTXT();" ng-click="FilterProduct()"><i class="fas fa-redo-alt"></i></button>
         </div>
         <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
             <div class="Box" style="padding: 0;">
@@ -49,23 +53,22 @@
                         <thead>
                             <tr>
                                 <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
-                                <th style="width: 7%;"><a href="#" ng-click="sortByInvoice('Id')">Mã hóa đơn</a></th>
-                                <th style="width: 15%;"><a href="#" ng-click="sortByInvoice('CustomerName')">Tên khách hàng</a></th>
-                                <th style="width: 28%;"><a href="#" ng-click="sortByInvoice('DeliveryAddress')">Địa chỉ</a></th>
-                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('DeliveryPhoneNum')">Số điện thoại</a></th>
-                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('PurchaseDate')">Ngày xuất</a></th>
-                                <th style="width: 12%;"><a href="#" ng-click="sortByInvoice('Status')">Tình trạng</a></th>
+                                <th style="width: 7%;"><a href="#" ng-click="sortByInvoiceIn('Id')">Mã hóa đơn</a></th>
+                                <th style="width: 15%;"><a href="#" ng-click="sortByInvoiceIn('CustomerName')">Tên khách hàng</a></th>
+                                <th style="width: 28%;"><a href="#" ng-click="sortByInvoiceIn('DeliveryAddress')">Địa chỉ</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoiceIn('DeliveryPhoneNum')">Số điện thoại</a></th>
+                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoiceIn('PurchaseDate')">Ngày xuất</a></th>
+                                <th style="width: 12%;"><a href="#" ng-click="sortByInvoiceIn('Status')">Tình trạng</a></th>
                                 <th style="width: 15%;"><a href="#">Hành động</a></th>
                             </tr>
                         </thead>
                         <tbody id="items-table">
-                            <tr ng-repeat="item in invoiceList">
+                            <tr ng-repeat="item in invoiceInList">
                                 <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
                                 <td>{{item.Id}}</td>
-                                <td>{{item.CustomerName}}</td>
-                                <td>{{item.DeliveryAddress}}</td>
-                                <td>{{item.DeliveryPhoneNum}}</td>
-                                <td>{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+                                <td>{{item.Total | currency:"":0}}</td>
+                                <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+                                <td>{{item.CreateBy}}</td>
                                 <td>{{item.Status}}</td>
                                 <td class="table-product-action"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
