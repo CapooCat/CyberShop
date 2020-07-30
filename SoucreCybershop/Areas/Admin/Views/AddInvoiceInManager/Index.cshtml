@@ -11,7 +11,7 @@
     <div class="row" style="margin: 5px;">
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
             <button type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
-            <button type="button" class="delete" ng-click="DeleteInvoiceOutChecked()"><i class="fas fa-trash"></i></button>
+            <button type="button" class="delete" ng-click="DeleteInvoiceInCheckedConfirm()"><i class="fas fa-trash"></i></button>
         </div>
 
 
@@ -36,7 +36,7 @@
                             </tr>
                         </thead>
                         <tbody id="items-table">
-                            <tr ng-repeat="item in lstInvoiceDetailss" ng-init="bucket.total_price_invoice = bucket.total_price_invoice+ (item.Price * item.Amount)">
+                            <tr ng-repeat="item in lstInvoiceInss" ng-init="bucket.total_price_invoice = bucket.total_price_invoice+ (item.Price * item.Amount)">
                                 <td class="checkbox"><input type="checkbox" onchange="CheckItem()" value="{{item.Product_Id}}"></td>
                                 <td>{{item.ProductName}}</td>
                                 <td>{{item.ProductTypeName}}</td>
@@ -44,7 +44,7 @@
                                 <td>{{item.WarrantyMonths}}</td>
                                 <td>{{item.Amount}}</td>
                                 <td>{{item.Price | currency:"":0}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" ng-click="RemoveItem(item.Product_Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" ng-click="RemoveItemCreateInvoiceIn(item.Product_Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -115,7 +115,7 @@
                                                 <td>{{item.Amount}}</td>
                                                 <td>{{item.MonthWarranty}}</td>
                                                 <td>{{item.Price | currency:"":0}}</td>
-                                                <td style="text-align: center;"><a href="#" ng-click="AddProductToInvoiceDetail(item.id)"><i class="fas fa-plus"></i></a></td>
+                                                <td style="text-align: center;"><a href="#" ng-click="TestExistInvoiceIn(item.id)"><i class="fas fa-plus"></i></a></td>
                                             </tr>
 
                                         </tbody>
@@ -136,7 +136,7 @@
     </div>
     <div class="col-md-12" style="text-align: center; margin-top: 15px;margin-bottom: 15px;font-size: 20px;">Tổng tiền: {{bucket.total_price_invoice | currency:"":0}}đ</div>
     <div class="col-md-12 product-action" style="text-align: center">
-        <button type="button" style="width: 200px;height: 60px;" ng-click="SubmitInvoiceOut()">Lập hóa đơn nhập</button>
+        <button type="button" style="width: 200px;height: 60px;" ng-click="Test()">Lập hóa đơn nhập</button>
     </div>
 </section>
 
