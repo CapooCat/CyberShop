@@ -23,33 +23,40 @@
     <section class="container">
         <div class="row" style="margin: 5px;">
             <div class="col-md-12 row" style="padding-top: 10px;padding-bottom: 10px;">
-                <div class="col-md-6">
-                    <a href="#" class="invoice-logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
-                </div>
-                <div class="col-md-6" style="margin-top:25px;">
-                    <span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br />
-                    <span>Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span>
+                <div class="col-md-12">
+                    <table class="invincible-col">
+                        <thead>
+                            <tr>
+                                <th style="padding:0;text-align: left;width:50%;"><a href="#" class="invoice-logo" style="font-weight:normal;"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a></th>
+                                <th style="padding-bottom:0px;text-align: left;width:50%;"><span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br /><span style="font-weight:normal;">Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
                 <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu xuất kho</div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
-                <div class="col-md-9">
-                    <span><span style="font-weight: bold">Họ tên khách hàng:</span> @Model.First().CustomerName</span>
-                </div>
-                <div class="col-md-3">
-                    <span><span style="font-weight: bold">Mã hóa đơn:</span> @Model.First().Id</span>
-                </div>
-                <div class="col-md-9">
-                    <span><span style="font-weight: bold">Địa chỉ:</span> @Model.First().Address</span>
-                </div>
-                <div class="col-md-3">
-                    <span><span style="font-weight: bold">Loại tiền:</span> VNĐ</span>
-                </div>
+
                 <div class="col-md-12">
-                    <span><span style="font-weight: bold">Số điện thoại:</span> @Model.First().PhoneName</span>
+                    <table class="invincible-col">
+                        <thead>
+                            <tr>
+                                <th style="padding:0;text-align: left;width:80%;font-weight:normal"><span><span style="font-weight: bold">Họ tên khách hàng:</span> @Model.First().CustomerName</span></th>
+                                <th style="padding:0;text-align: left;width:80%;font-weight:normal"><span><span style="font-weight: bold">Mã hóa đơn:</span> @Model.First().Id</span></th>
+                            </tr>
+                            <tr>
+                                <th style="padding:0;text-align: left;width:80%;font-weight:normal"><span><span style="font-weight: bold">Địa chỉ:</span> @Model.First().Address</span></th>
+                                <th style="padding:0;text-align: left;width:80%;font-weight:normal"><span><span style="font-weight: bold">Loại tiền:</span> VNĐ</span></th>
+                            </tr>
+                            <tr>
+                                <th style="padding:0;text-align: left;font-weight:normal"><span><span style="font-weight: bold">Số điện thoại:</span> @Model.First().PhoneName</span></th>
+                            </tr>
+                            <tr>
+                                <th style="padding:0;text-align: left;font-weight:normal"><span><span style="font-weight: bold">Email:</span> tranthaitat99@gmail.com</span></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-                <div class="col-md-12">
-                    <span><span style="font-weight: bold">Email:</span> tranthaitat99@gmail.com</span>
-                </div>
+
                 <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn sản phẩm</div>
             </div>
             <div class="col-md-12" style="margin-bottom: 25px;">
@@ -76,16 +83,32 @@
                             total += item.Amount * item.Price;
                         }
                         <tr>
-                            <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">@string.Format("{0:#,##0}", total)</span></td>
+                            <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">@string.Format("{0:#,##0}",total)</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-12" style="text-align:center;font-size:20px;margin-bottom: 20px;">ngày ....... tháng ....... năm .......</div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Thủ kho<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người giao hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người nhận hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Kinh doanh<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-12" style="margin-bottom: 25px;">
+                <table class="invincible-col">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Thủ kho</th>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Người giao hàng</th>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Người nhận hàng</th>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Kinh doanh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
