@@ -2556,3 +2556,19 @@ canvas{
 .invoice-table td {
   border: 2px solid black;
 }
+
+.invincible-col {
+  margin: 0;
+  border-radius: 0px;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+}
+
+.invincible-col th {
+  color: black;
+  background-color: #fff;
+  border: none;
+}
+
+.invincible-col td {
+  border: none;
+}
