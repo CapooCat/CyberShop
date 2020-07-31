@@ -1,0 +1,100 @@
+﻿
+@{
+    Layout = null;
+    double? total = 0;
+}
+@using CyberShop.Common;
+@using CyberShop.Areas.Admin.Models;
+@model List<CyberShop.Areas.Admin.Models.InvoiceOutPdfViewModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InvoiceOutPdf</title>
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+</head>
+<body>
+    <section class="container">
+        <div class="row" style="margin: 5px;">
+            <div class="col-md-12 row" style="padding-top: 10px;padding-bottom: 10px;">
+                <div class="col-md-6">
+                    <a href="#" class="invoice-logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
+                </div>
+                <div class="col-md-6" style="margin-top:25px;">
+                    <span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br />
+                    <span>Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span>
+                </div>
+                <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu xuất kho</div>
+                <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
+                <div class="col-md-9">
+                    <span><span style="font-weight: bold">Họ tên khách hàng:</span> @Model.First().CustomerName</span>
+                </div>
+                <div class="col-md-3">
+                    <span><span style="font-weight: bold">Mã hóa đơn:</span> @Model.First().Id</span>
+                </div>
+                <div class="col-md-9">
+                    <span><span style="font-weight: bold">Địa chỉ:</span> @Model.First().Address</span>
+                </div>
+                <div class="col-md-3">
+                    <span><span style="font-weight: bold">Loại tiền:</span> VNĐ</span>
+                </div>
+                <div class="col-md-12">
+                    <span><span style="font-weight: bold">Số điện thoại:</span> @Model.First().PhoneName</span>
+                </div>
+                <div class="col-md-12">
+                    <span><span style="font-weight: bold">Email:</span> tranthaitat99@gmail.com</span>
+                </div>
+                <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn sản phẩm</div>
+            </div>
+            <div class="col-md-12" style="margin-bottom: 25px;">
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Tên sản phẩm</th>
+                            <th style="width: 20%;">Loại sản phẩm</th>
+                            <th style="width: 10%;">Bảo hành (tháng)</th>
+                            <th style="width: 15%;">Số lượng</th>
+                            <th style="width: 15%;">Giá tiền (VNĐ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.ProductTypeName</td>
+                                <td>@item.MonthsWarranty</td>
+                                <td>@item.Amount</td>
+                                <td>@string.Format("{0:#,##0}", item.Price)</td>
+                            </tr>
+                            total += item.Amount * item.Price;
+                        }
+                        <tr>
+                            <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">@string.Format("{0:#,##0}", total)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" style="text-align:center;font-size:20px;margin-bottom: 20px;">ngày ....... tháng ....... năm .......</div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Thủ kho<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người giao hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người nhận hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Kinh doanh<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://unpkg.com/sticky-table-headers"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="~/assets/angularcontroller/AdminAngularController.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+
+</html>

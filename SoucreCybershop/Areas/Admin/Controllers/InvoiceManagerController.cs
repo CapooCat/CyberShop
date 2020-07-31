@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using CyberShop.Areas.Admin.Models;
+using Rotativa;
 namespace CyberShop.Areas.Admin.Controllers
 {
     public class InvoiceManagerController : Controller
@@ -415,6 +416,36 @@ namespace CyberShop.Areas.Admin.Controllers
             entity.CustomerName = model.CustomerName;
             data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PrintViewToPdf(int id)
+        {
+            var report = new ActionAsPdf("InvoiceOutPdf",new { id=id});
+            return report;
+        }
+        public ActionResult InvoiceOutPdf(int id)
+        {
+            List<InvoiceOutPdfViewModel> invoicePdf = new List<InvoiceOutPdfViewModel>();
+            invoicePdf = (from a in data.ProducTypes
+                          join b in data.Products on a.Id equals b.ProductType_id
+                          join c in data.Invoice_Detail on b.id equals c.Product_id
+                          join d in data.Invoices on c.Invoice_id equals d.Id
+                          where d.Id == id && d.IsDeleted == false
+                          select new InvoiceOutPdfViewModel
+                          {
+                              Id = a.Id,
+                              ProductName = b.ProductName,
+                              ProductTypeName = a.TypeName,
+                              CustomerName = d.CustomerName,
+                              Price = b.Price,
+                              PhoneName = d.DeliveryPhoneNum,
+                              Address = d.DeliveryAddress,
+                              MonthsWarranty = b.MonthWarranty,
+                              IsDeleted = c.IsDeleted,
+                              CreateBy = c.CreateBy,
+                              CreateDate = c.CreateDate,
+                              Amount = c.Amount
+                          }).ToList();
+            return View(invoicePdf);
         }
     }
 }

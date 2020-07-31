@@ -387,6 +387,7 @@
     <Content Include="Areas\Admin\Views\AdminManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AddInvoiceInManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AddInvoiceInManager\InvoiceInPdf.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceManager\InvoiceOutPdf.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
