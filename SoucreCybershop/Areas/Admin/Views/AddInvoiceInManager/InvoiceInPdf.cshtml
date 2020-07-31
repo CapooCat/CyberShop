@@ -1,10 +1,11 @@
 ﻿
 @{
     Layout = null;
+    double? total = 0;
 }
 @using CyberShop.Common;
 @using CyberShop.Areas.Admin.Models;
-@model List<CyberShop.Areas.Admin.Models.InvoiceOutPdfViewModel>
+@model List<CyberShop.Areas.Admin.Models.InvoiceInPdfViewModel>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,35 +30,20 @@
                     <span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br />
                     <span>Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span>
                 </div>
-                <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu xuất kho</div>
+                <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu nhập kho</div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
-                <div class="col-md-9">
-                    <span><span style="font-weight: bold">Họ tên khách hàng:</span> @Model.First().CustomerName</span>
-                </div>
-                <div class="col-md-3">
-                    <span><span style="font-weight: bold">Mã hóa đơn:</span> @Model.First().Id</span>
-                </div>
-                <div class="col-md-9">
-                    <span><span style="font-weight: bold">Địa chỉ:</span> @Model.First().Address</span>
-                </div>
-                <div class="col-md-3">
-                    <span><span style="font-weight: bold">Loại tiền:</span> VNĐ</span>
-                </div>
                 <div class="col-md-12">
-                    <span><span style="font-weight: bold">Số điện thoại:</span> @Model.First().PhoneName</span>
+                    <span><span style="font-weight: bold">Khách hàng:</span> Công ty TNHH linh kiện máy tính CyberShop</span>
                 </div>
-                <div class="col-md-12">
-                    <span><span style="font-weight: bold">Email:</span> tranthaitat99@gmail.com</span>
-                </div>
-                <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn sản phẩm</div>
+                <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn nhập sản phẩm</div>
             </div>
             <div class="col-md-12" style="margin-bottom: 25px;">
                 <table class="invoice-table">
                     <thead>
                         <tr>
                             <th style="width: 40%;">Tên sản phẩm</th>
-                            <th style="width: 20%;">Loại sản phẩm</th>
-                            <th style="width: 10%;">Bảo hành (tháng)</th>
+                            <th style="width: 15%;">Hãng</th>
+                            <th style="width: 15%;">Loại sản phẩm</th>
                             <th style="width: 15%;">Số lượng</th>
                             <th style="width: 15%;">Giá tiền (VNĐ)</th>
                         </tr>
@@ -67,14 +53,15 @@
                         {
                             <tr>
                                 <td>@item.ProductName</td>
+                                <td>@item.BrandName</td>
                                 <td>@item.ProductTypeName</td>
-                                <td>@item.MonthsWarranty</td>
                                 <td>@item.Amount</td>
-                                <td>@string.Format("{0:#,##0.00}", item.Price)</td>
+                                <td>@string.Format("{0:#,##0}", item.Price)</td>
                             </tr>
+                            total += item.Amount * item.Price;
                         }
                         <tr>
-                            <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">1.000.000</span></td>
+                            <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">@string.Format("{0:#,##0}", total)</span></td>
                         </tr>
                     </tbody>
                 </table>
