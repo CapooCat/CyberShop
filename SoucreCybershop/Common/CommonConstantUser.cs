@@ -12,5 +12,6 @@ namespace CyberShop.Common
         public static string CART_SESSION = "CART_SESSION";
         public static string ADMIN_SESSION = "ADMIN_SESSION";
         public static string INVOICEDETAIL_SESSION = "INVOICEDETAIL_SESSION";
+        public static string INVOICEIN_SESSION = "INVOICEIN_SESSION";
     }
 }

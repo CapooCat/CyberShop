@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using CyberShop.Areas.Admin.Models;
-
+using Rotativa;
 namespace CyberShop.Areas.Admin.Controllers
 {
     public class InvoiceInManagerController : Controller
@@ -39,7 +39,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     Id = item.Id,
                     Status = item.Status,
                     Total = item.Total,
-                    IsDeleted =item.IsDeleted,
+                    IsDeleted = item.IsDeleted,
                     CreateBy = item.CreateBy,
                     CreateDate = item.CreateDate
                 });
@@ -65,7 +65,8 @@ namespace CyberShop.Areas.Admin.Controllers
                                   CreateBy = c.CreateBy,
                                   CreateDate = c.CreateDate,
                               }).ToList();
-            } else
+            }
+            else
             {
                 lstInvoice = data.InOrders.Where(x => ((model.Id == null) || (x.Id == model.Id)))
                 .Select(x => new InvoiceInManagerViewModel
@@ -278,13 +279,13 @@ namespace CyberShop.Areas.Admin.Controllers
 
             var prdList = new List<InvoiceInDetailManagerViewModel>();
             prdList = (from a in data.InOrder_Detail
-                     join b in data.Products on a.Product_id equals b.id
-                     where a.IsDeleted == false && a.InOrder_id == model.Id
-                     select new InvoiceInDetailManagerViewModel
-                     {
-                         Product_id = a.Product_id,
-                         Amount = a.Amount,
-                     }).ToList();
+                       join b in data.Products on a.Product_id equals b.id
+                       where a.IsDeleted == false && a.InOrder_id == model.Id
+                       select new InvoiceInDetailManagerViewModel
+                       {
+                           Product_id = a.Product_id,
+                           Amount = a.Amount,
+                       }).ToList();
             foreach (var item in prdList)
             {
                 Productentity = data.Products.Find(item.Product_id);

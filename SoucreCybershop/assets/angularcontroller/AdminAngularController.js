@@ -2101,6 +2101,237 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     }
 
     //--------------INVOICE_IN_END--------------------//
+    //-------------CREATE-INVOICE_IN_START--------------------//
+    $scope.ReturnInvoiceInSession = function () {
+        $http.get("/Admin/AddInvoiceInManager/ReturnInvoiceInSession").then(function (response) {
+            $scope.lstInvoiceInss = response.data;
+            });
+    }
+    $scope.TestExistInvoiceIn = function (id) {
+        $http.get("/Admin/AddInvoiceInManager/TestExistInvoiceIn/"+id).then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            var exist = $scope.temp.success;
+            console.log(exist);
+            var Amount;
+            var Price = 0;
+            if(exist==true)
+            {
+                        swal.mixin({
+                            input: 'text',
+                            confirmButtonText: 'Next &rarr;',
+                            showCancelButton: true,
+                            progressSteps: ['1']
+                        }).queue([
+                  {
+                      title: 'Sản phẩm đã có trong hóa đơn',
+                      text: 'Nhập số lượng sản phẩm cần nhập',
+                      preConfirm: function (value) {
+                          Amount = value;
+                      }
+                  }
+                        ]).then((result) => {
+                            if (result.value) {
+                                if (Amount == "" ) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Thất bại',
+                                        text: 'Không được để trống',
+                                    })
+                                } else {
+                                    $scope.AddProductToCreateInvoiceIn(id, Price, Amount);
+                                }
+                            }
+                        })
+            }
+            else
+            {
+                $scope.EnterInformationInvoiceIn(id);
+            }
+        });
+    }
+
+    $scope.EnterInformationInvoiceIn = function (id) {
+        var Amount;
+        var Price;
+
+        swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Next &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2']
+        }).queue([
+          {
+              title: 'Bước 1',
+              text: 'Nhập số lượng sản phẩm cần nhập',
+              preConfirm: function (value) {
+                  Amount = value;
+              }
+          },
+
+          {
+              title: 'Bước 2',
+              text: 'Nhập giá tiền mua sản phẩm',
+              preConfirm: function (value) {
+                  Price = value;
+              }
+          }
+        ]).then((result) => {
+            if (result.value) {
+                if (Amount == "" || Price == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Không được để trống',
+                    })
+                } else {
+                    $scope.AddProductToCreateInvoiceIn(id, Price, Amount);
+                }
+            }
+        })
+    }
+    $scope.AddProductToCreateInvoiceIn = function (id, price, amount) {
+        $scope.loading = true;
+        amount = parseInt(amount);
+        $http({
+            url: '/Admin/AddInvoiceInManager/AddProductToCreateInvoiceIn',
+            method: "POST",
+            data: {
+                Product_id: id,
+                Price: price,
+                Amount: amount
+            }
+        }).then(function onSuccess(response) {
+            $scope.loading = false;
+            // Handle success
+            console.log(response);
+            $scope.bucket.total_price_invoice = 0;
+            $scope.ReturnInvoiceInSession();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Thêm thất bại',
+            })
+            console.log(response);
+        });
+    }
+    $scope.DeleteInvoiceInChecked = function () {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteInvoiceInCheckedConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.DeleteInvoiceInCheckedConfirm = function () {
+        CheckAll = document.getElementById("check-all");
+        table = document.getElementById("items-table");
+        ItemCheckBox = table.getElementsByTagName("input");
+        var lstId = [];
+        if (CheckAll.checked == true) {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        else {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        $scope.loading = true;
+        $http({
+            url: '/Admin/AddInvoiceInManager/DeleteInvoiceInChecked',
+            method: "POST",
+            data: {
+                id: lstId
+            },
+        }).then(function onSuccess(response) {
+            $scope.bucket.total_price_invoice = 0;
+            $scope.ReturnInvoiceInSession();
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
+        });
+    }
+    $scope.RemoveItemCreateInvoiceIn = function (id) {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.loading = true;
+                $http.get("/Admin/AddInvoiceInManager/RemoveItem/" + id).then(function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công',
+                        text: 'Xóa thành công',
+                    })
+                    $scope.bucket.total_price_invoice = 0;
+                    $scope.ReturnInvoiceInSession();
+                    $scope.loading = false;
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+    $scope.SubmitInvoiceIn = function () {
+        if ($scope.lstInvoiceInss == "" || $scope.lstInvoiceInss == null || $scope.lstInvoiceInss == "{}") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Xuất hóa đơn thất bại',
+                text: 'Bạn chưa thêm sản phẩm',
+            });
+        }
+        else {
+            $scope.loading = true;
+            $http.get("/Admin/AddInvoiceInManager/SubmitInvoiceIn").then(function (response) {
+                $scope.bucket.total_price_invoice = 0;
+                $scope.ReturnInvoiceInSession();
+                document.getElementById("PrintInvoiceInPdf").click();
+            });
+        }
+    }
+        $scope.ReturnInvoiceInSession();
+    //-------------CREATE-INVOICE_IN_END--------------------//
     //--------------INVOICE OUT_START--------------------//
     $scope.AddProductToInvoiceDetail = function (id)
     {
@@ -2379,4 +2610,4 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.ReturnBestSeller();
     $scope.ReturnNewDeal();
     //----------------SUMMARY_END--------------------//
-});
+    });

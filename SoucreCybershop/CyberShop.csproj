@@ -220,7 +220,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoryManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminManagerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AddInvoiceInManager.cs" />
+    <Compile Include="Areas\Admin\Controllers\AddInvoiceInManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceOutManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductManagerController.cs" />
@@ -230,7 +230,9 @@
     <Compile Include="Areas\Admin\Models\BestSellerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\HistoryViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\InvoiceInCreateViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceInDetailManagerViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\InvoiceInPdfViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceOutManagerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\InvoiceOutPdfViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductImageManagerViewModel.cs" />
@@ -384,6 +386,7 @@
     <Content Include="Areas\Admin\Views\InvoiceOutManager\InvoiceOutPdf.cshtml" />
     <Content Include="Areas\Admin\Views\AdminManager\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AddInvoiceInManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AddInvoiceInManager\InvoiceInPdf.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
