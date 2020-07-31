@@ -23,12 +23,15 @@
     <section class="container">
         <div class="row" style="margin: 5px;">
             <div class="col-md-12 row" style="padding-top: 10px;padding-bottom: 10px;">
-                <div class="col-md-6">
-                    <a href="#" class="invoice-logo"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a>
-                </div>
-                <div class="col-md-6" style="margin-top:25px;">
-                    <span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br />
-                    <span>Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span>
+                <div class="col-md-12">
+                    <table class="invincible-col">
+                        <thead>
+                            <tr>
+                                <th style="padding:0;text-align: left;width:50%;"><a href="#" class="invoice-logo" style="font-weight:normal;"><span><i class="fas fa-dragon"></i> Cyber</span>shop</a></th>
+                                <th style="padding-bottom:0px;text-align: left;width:50%;"><span style="font-weight:bold;">CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ CÔNG NGHỆ CYBERSHOP</span><br /><span style="font-weight:normal;">Đ/c: abc Nguyễn An Ninh, Phường 10, Quận 5, TPHCM</span></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
                 <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu nhập kho</div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
@@ -67,10 +70,26 @@
                 </table>
             </div>
             <div class="col-md-12" style="text-align:center;font-size:20px;margin-bottom: 20px;">ngày ....... tháng ....... năm .......</div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Thủ kho<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người giao hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Người nhận hàng<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
-            <div class="col-md-3" style="text-align:center;font-size:20px;font-weight: bold">Kinh doanh<p style="font-weight: normal;font-size:16px">(Ký,họ tên)</p></div>
+            <div class="col-md-12" style="margin-bottom: 25px;">
+                <table class="invincible-col">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Thủ kho</th>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Người giao hàng</th>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Người nhận hàng</th>
+                            <th style="width: 25%;text-align:center;font-size:20px;font-weight: bold;padding:0;">Kinh doanh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                            <td style="font-weight: normal;font-size:16px;padding:0;">(Ký,họ tên)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
