@@ -1547,6 +1547,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.ViewInvoice = function (id, Status) {
         GetInvoiceId = id;
         GetStatus = Status;
+        $scope.invoice_id=id;
         if (Status == "Chưa hoàn thành") { document.getElementById("ConfirmInvoice").disabled = false; document.getElementById("ConfirmInvoice").style.display = "block"; }
         else { document.getElementById("ConfirmInvoice").disabled = true; document.getElementById("ConfirmInvoice").style.display = "none"; }
 
@@ -1565,7 +1566,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         });
     };
-
+    $scope.PrintInvoiceById = function () {
+        var link = document.getElementById("PrintInvoice");
+        link.setAttribute('href', "/Admin/InvoiceManager/PrintViewToPdf/" + $scope.invoice_id);
+        link.click();
+    }
 
 
     $scope.confirm = function () {

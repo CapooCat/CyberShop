@@ -429,7 +429,7 @@ namespace CyberShop.Areas.Admin.Controllers
                           join b in data.Products on a.Id equals b.ProductType_id
                           join c in data.Invoice_Detail on b.id equals c.Product_id
                           join d in data.Invoices on c.Invoice_id equals d.Id
-                          where d.Id == id && d.IsDeleted == false
+                          where d.Id == id && c.IsDeleted == false && d.IsDeleted==false
                           select new InvoiceOutPdfViewModel
                           {
                               Id = a.Id,
