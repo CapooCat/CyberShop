@@ -905,6 +905,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.ReturnProductTypeList();
         });
     }
+
+    
     $scope.returnHistory = function () {
         $scope.loading = true;
         $http.get("/Admin/ProductManager/ReturnHistory").then(function (response) {
@@ -912,6 +914,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.lstHistory = response.data;
         });
     }
+    $scope.returnHistory();
+
+
     $scope.DeleteProductChecked = function () {
         Swal.fire({
             title: 'Cảnh báo',

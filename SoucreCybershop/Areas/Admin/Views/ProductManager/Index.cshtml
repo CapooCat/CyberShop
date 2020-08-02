@@ -113,7 +113,7 @@
                                 <td>{{item.ProductTypeName}}</td>
                                 <td>{{item.Amount}}</td>
                                 <td>{{item.TotalPrice | currency:"":0}}</td>
-                                <td>{{item.CreateDate}}</td>
+                                <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                             </tr>
                         </tbody>
                     </table>
