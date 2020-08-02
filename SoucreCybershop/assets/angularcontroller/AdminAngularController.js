@@ -1986,6 +1986,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.ViewInvoiceIn = function (id, Status) {
         InvoiceInID = id;
         GetStatus = Status;
+        $scope.invoicein = id;
         if (Status == "Chưa hoàn thành") { document.getElementById("ConfirmInvoice").disabled = false; document.getElementById("ConfirmInvoice").style.display = "block"; }
         else { document.getElementById("ConfirmInvoice").disabled = true; document.getElementById("ConfirmInvoice").style.display = "none"; }
 
@@ -2001,7 +2002,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         });
     };
-
+    $scope.PrintInvoiceInById = function () {
+        var link = document.getElementById("PrintInvoiceIn");
+        link.setAttribute('href', "/Admin/InvoiceInManager/PrintViewToPdf/" + $scope.invoicein);
+        link.click();
+    }
     $scope.confirmIn = function () {
         Swal.fire({
             title: 'Cảnh báo',
