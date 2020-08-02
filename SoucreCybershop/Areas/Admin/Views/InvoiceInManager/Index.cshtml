@@ -239,7 +239,7 @@
                                             <tr>
                                                 <th style="width: 45%;"><a href="#">Tên sản phẩm</a></th>
                                                 <th style="width: 30%;"><a href="#">Số lượng</a></th>
-                                                <th style="width: 30%;"><a href="#">Bảo hành</a></th>
+                                                <th style="width: 30%;"><a href="#">Giá tiền</a></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -259,7 +259,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button id="Print"><i class="fas fa-print" style="padding-right:10px;"></i>In hóa đơn</button>
+                    <button id="Print" ng-click="PrintInvoiceInById()"><i class="fas fa-print" style="padding-right:10px;"></i>In hóa đơn</button>
+                    <a target="_blank" href="/Admin/InvoiceInManager/PrintViewToPdf" id="PrintInvoiceIn" hidden></a>
                     <button id="ConfirmInvoice" ng-click="confirmIn()">Xác nhận thành công</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>

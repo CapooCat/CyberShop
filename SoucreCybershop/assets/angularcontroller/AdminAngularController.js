@@ -1552,6 +1552,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.ViewInvoice = function (id, Status) {
         GetInvoiceId = id;
         GetStatus = Status;
+        $scope.invoice_id=id;
         if (Status == "Chưa hoàn thành") { document.getElementById("ConfirmInvoice").disabled = false; document.getElementById("ConfirmInvoice").style.display = "block"; }
         else { document.getElementById("ConfirmInvoice").disabled = true; document.getElementById("ConfirmInvoice").style.display = "none"; }
 
@@ -1570,7 +1571,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         });
     };
-
+    $scope.PrintInvoiceById = function () {
+        var link = document.getElementById("PrintInvoice");
+        link.setAttribute('href', "/Admin/InvoiceManager/PrintViewToPdf/" + $scope.invoice_id);
+        link.click();
+    }
 
 
     $scope.confirm = function () {
@@ -1986,6 +1991,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.ViewInvoiceIn = function (id, Status) {
         InvoiceInID = id;
         GetStatus = Status;
+        $scope.invoicein = id;
         if (Status == "Chưa hoàn thành") { document.getElementById("ConfirmInvoice").disabled = false; document.getElementById("ConfirmInvoice").style.display = "block"; }
         else { document.getElementById("ConfirmInvoice").disabled = true; document.getElementById("ConfirmInvoice").style.display = "none"; }
 
@@ -2001,7 +2007,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         });
     };
-
+    $scope.PrintInvoiceInById = function () {
+        var link = document.getElementById("PrintInvoiceIn");
+        link.setAttribute('href', "/Admin/InvoiceInManager/PrintViewToPdf/" + $scope.invoicein);
+        link.click();
+    }
     $scope.confirmIn = function () {
         Swal.fire({
             title: 'Cảnh báo',

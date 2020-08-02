@@ -303,5 +303,33 @@ namespace CyberShop.Areas.Admin.Controllers
             data.SaveChanges();
             return ReturnInvoiceIn();
         }
+        public ActionResult PrintViewToPdf(int id)
+        {
+            var report = new ActionAsPdf("InvoiceInPdf", new { id = id });
+            return report;
+        }
+        public ActionResult InvoiceInPdf(int id)
+        {
+            List<InvoiceInPdfViewModel> invoicePdf = new List<InvoiceInPdfViewModel>();
+            invoicePdf = (from a in data.Brands
+                          join b in data.Products on a.Id equals b.ProductType_id
+                          join c in data.InOrder_Detail on b.id equals c.Product_id
+                          join d in data.ProducTypes on b.ProductType_id equals d.Id
+                          where c.InOrder_id == id && c.IsDeleted == false
+                          select new InvoiceInPdfViewModel
+                          {
+                              Id = a.Id,
+                              ProductName = b.ProductName,
+                              BrandName = a.BrandName,
+                              ProductTypeName = d.TypeName,
+                              Price = c.Price,
+                              BrandPhone = a.PhoneNumber,
+                              Address = a.Address,
+                              IsDeleted = c.IsDeleted,
+                              CreateDate = c.CreateDate,
+                              Amount = c.Amount
+                          }).ToList();
+            return View(invoicePdf);
+        }
     }
 }
