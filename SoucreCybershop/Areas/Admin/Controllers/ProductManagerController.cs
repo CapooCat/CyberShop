@@ -76,7 +76,7 @@ namespace CyberShop.Areas.Admin.Controllers
             model = (from b in data.ProducTypes
                      join a in data.Products on b.Id equals a.ProductType_id
                      join c in data.Brands on a.Brand_id equals c.Id
-                     where c.IsDeleted == false
+                     where a.IsDeleted == false
                      select new ProductManagerViewModel
                      {
                          id = a.id,
@@ -445,7 +445,7 @@ namespace CyberShop.Areas.Admin.Controllers
                      join a in data.Products on b.Id equals a.ProductType_id
                      join c in data.InOrder_Detail on a.id equals c.Product_id
                      join d in data.InOrders on c.InOrder_id equals d.Id
-                     where d.IsDeleted == false && d.Status == "Đã hoàn thành"
+                     where c.IsDeleted == false && d.Status == "Đã hoàn thành"
                      select new HistoryViewModel
                      {
                          Id = c.Id,

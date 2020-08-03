@@ -629,6 +629,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                     title: 'Thành công',
                     text: 'Đã thêm thành công',
                 })
+                $scope.ReturnBrandList();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -671,6 +672,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                     title: 'Thành công',
                     text: 'Đã thêm thành công',
                 })
+                $scope.ReturnProductTypeList();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -1245,6 +1247,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 title: 'Thành công',
                 text: 'Đã xóa thành công',
             })
+            $scope.ReturnProductList();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -2204,6 +2207,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             }
         })
     }
+
     $scope.AddProductToCreateInvoiceIn = function (id, price, amount) {
         $scope.loading = true;
         amount = parseInt(amount);
@@ -2506,6 +2510,10 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     //--------------INVOICE OUT_END--------------------//
 
     //----------------SUMMARY_START--------------------//
+    $scope.turnOver = "0";
+    $scope.UserAmount = "0";
+    $scope.totalProductSell = "0";
+
     $scope.ReturnTurnover=function()
     {
         $scope.loading = true;
@@ -2515,6 +2523,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             $scope.loading = false;
         });
     }
+    
     $scope.ReturnCustomerAmount = function () {
         $scope.loading = true;
         $http.get("/Admin/SummaryManager/ReturnCustomerAmount").then(function (response) {
@@ -2625,4 +2634,98 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.ReturnBestSeller();
     $scope.ReturnNewDeal();
     //----------------SUMMARY_END--------------------//
+
+    //----------------ADMIN_MANAGER_START--------------------//
+    $scope.RequestChangePass = function (username) {
+        if (document.getElementById("old_pass").value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được để trống',
+            })
+        } else {
+            var Password = document.getElementById("old_pass").value;
+            $scope.loading = true;
+            $http({
+                url: '/Admin/AdminManager/CheckPassword',
+                method: "POST",
+                data: {
+                    Password: Password,
+                    Username: username
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                if (response.data.success == false) {
+                    $scope.loading = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Mật khẩu không đúng',
+                    })
+                } else {
+                    $scope.loading = false;
+                    document.getElementById("new_pass").disabled = false;
+                    document.getElementById("re_enter_pass").disabled = false;
+                    document.getElementById("Confirm_change").className = "";
+                    document.getElementById("Confirm_change").disabled = false;
+                    console.log(response);
+                }
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Đã xảy ra lỗi',
+                })
+                console.log(response);
+            });
+        }
+    }
+
+    $scope.ChangePass = function(username) {
+        if(document.getElementById("new_pass").value == "" && document.getElementById("re_enter_pass").value == "")
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được để trống',
+            })
+        } else if (document.getElementById("new_pass").value != document.getElementById("re_enter_pass").value) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Nhập lại mật khẩu không chính xác',
+            })
+        } else {
+            var newPassword = document.getElementById("new_pass").value;
+            $scope.loading = true;
+            $http({
+                url: '/Admin/AdminManager/ChangePassword',
+                method: "POST",
+                data: {
+                    Password: newPassword,
+                    Username: username
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Thay đổi mật khẩu thành công',
+                })
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Đã xảy ra lỗi',
+                })
+                console.log(response);
+            });
+        }
+    }
+    //----------------ADMIN_MANAGER_END--------------------//
     });
