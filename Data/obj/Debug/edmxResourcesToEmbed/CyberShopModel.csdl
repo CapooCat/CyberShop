@@ -307,8 +307,8 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
