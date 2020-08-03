@@ -51,11 +51,10 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult FilterInvoiceIn(InvoiceInManagerViewModel model)
         {
             var lstInvoice = new List<InvoiceInManagerViewModel>();
-            if (model.Product_id != null)
-            {
+            
                 lstInvoice = (from a in data.InOrder_Detail
                               join c in data.InOrders on a.InOrder_id equals c.Id
-                              where a.IsDeleted == false && a.Product_id == model.Product_id
+                              where a.IsDeleted == false && ( (model.Product_id == null) || (a.Product_id == model.Product_id) ) && ( (model.Id == null) || (c.Id == model.Id) )
                               select new InvoiceInManagerViewModel
                               {
                                   Id = c.Id,
@@ -65,20 +64,7 @@ namespace CyberShop.Areas.Admin.Controllers
                                   CreateBy = c.CreateBy,
                                   CreateDate = c.CreateDate,
                               }).ToList();
-            }
-            else
-            {
-                lstInvoice = data.InOrders.Where(x => ((model.Id == null) || (x.Id == model.Id)))
-                .Select(x => new InvoiceInManagerViewModel
-                {
-                    Id = x.Id,
-                    Status = x.Status,
-                    Total = x.Total,
-                    IsDeleted = x.IsDeleted,
-                    CreateBy = x.CreateBy,
-                    CreateDate = x.CreateDate
-                }).ToList();
-            }
+            
             if (model.DateFrom != null && model.DateTo == null)
             {
                 var dateFrom = DateTime.Parse(model.DateFrom);

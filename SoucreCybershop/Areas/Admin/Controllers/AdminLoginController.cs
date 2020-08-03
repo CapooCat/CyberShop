@@ -29,7 +29,7 @@ namespace CyberShop.Areas.Admin.Controllers
             UserDao userDao = new UserDao();
             if(ModelState.IsValid)
             {
-                if (userDao.KTTaiKhoan(model.Username) && userDao.KTMatKhau(Encryptor.MD5Hash(model.Password)) && userDao.IsAdmin(model.Username))
+                if (userDao.KTTaiKhoan(model.Username) && userDao.KTMatKhau(Encryptor.MD5Hash(model.Password), model.Username) && userDao.IsAdmin(model.Username))
                 {
                     var ident = new ClaimsIdentity(
                     new[] { 

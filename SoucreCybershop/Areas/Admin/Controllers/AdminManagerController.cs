@@ -23,7 +23,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult CheckPassword(AdminViewModel model)
         {
             UserDao userDao = new UserDao();
-            if(userDao.KTTaiKhoan(model.Username) && userDao.KTMatKhau(Encryptor.MD5Hash(model.Password)) && userDao.IsAdmin(model.Username))
+            if(userDao.KTTaiKhoan(model.Username) && userDao.KTMatKhau(Encryptor.MD5Hash(model.Password), model.Username) && userDao.IsAdmin(model.Username))
             {
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             } else
@@ -44,6 +44,38 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ChangeInfo(AdminViewModel model)
+        {
+            User entity = new User();
+            entity = data.Users.Where(x => x.Username == model.Username).SingleOrDefault();
+            entity.Email = model.Email;
+            entity.PhoneNum = model.PhoneNum;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LoadInfo(string id)
+        {
+            var model = new List<AdminViewModel>();
+            model = data.Users.Where(x => x.IsDeleted == false && x.Username.Contains(id)).Select(x => new AdminViewModel
+            {
+                PhoneNum = x.PhoneNum,
+                Email = x.Email,
+            }).ToList();
+
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new AdminViewModel
+                {
+                    PhoneNum = item.PhoneNum,
+                    Email = item.Email,
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
     }
 }

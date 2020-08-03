@@ -45,9 +45,9 @@ namespace Data
                 return false;
             }
         }
-        public bool KTMatKhau(string mk)
+        public bool KTMatKhau(string mk, string tk)
         {
-            var res = data.Users.Where(x => x.Password == mk).Count();
+            var res = data.Users.Where(x => x.Password == mk && x.Username == tk).Count();
             if (res > 0)
             {
                 return true;

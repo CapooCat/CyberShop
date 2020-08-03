@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý admin";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Quản lý Admin";
 
@@ -17,11 +17,11 @@
     <div class="col-md-12 row product-input justify-content-center" style="padding-top: 10px;padding-bottom: 10px; text-align: center;" id="search_input">
         <div class="col-md-2">
             <p>Số điện thoại:</p>
-            <input type="text" placeholder="Nhập số điện thoại..." id="admin_phone" disabled>
+            <input type="text" placeholder="Nhập số điện thoại..." ng-value="admin_phone" id="admin_phone" disabled>
         </div>
         <div class="col-md-2">
             <p>Email:</p>
-            <input type="text" placeholder="Nhập Email.." id="admin_email" disabled>
+            <input type="text" placeholder="Nhập Email.." ng-value="admin_email" id="admin_email" disabled>
         </div>
         <div class="product-action" style="margin-right: 10px;">
             <button id="cancel_btn" onclick="Cancel();" class="delete admin-user-edit" style="width:60px;height:60px"><i class="fas fa-times"></i></button>
@@ -80,10 +80,10 @@
         </div>
     </div>
 </section>
-
 <script>
     Active = document.getElementById("AdminManager");
     Active.className = "active-button";
+
 
     function OpenPassChangeModal() {
         document.getElementById("new_pass").disabled = true;
@@ -104,15 +104,23 @@
     }
 
     function SubmitInfoChange() {
-        alert('abc');
+        var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+        scope.ChangeInfo('@name');
+    }
+
+    function LoadAdminInfo() {
+        var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+        scope.LoadInfo('@name');
     }
 
     function Cancel() {
         document.getElementById("admin_phone").disabled = true;
         document.getElementById("admin_email").disabled = true;
-        document.getElementById("cancel_btn").style.display = "none"; 
+        document.getElementById("cancel_btn").style.display = "none";
         document.getElementById("Fix_Info_btn").innerHTML = "Sửa thông tin";
         document.getElementById("Fix_Info_btn").removeEventListener("click", SubmitInfoChange);
     }
+
+
 </script>
 

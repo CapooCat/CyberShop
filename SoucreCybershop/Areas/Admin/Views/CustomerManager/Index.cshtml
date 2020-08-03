@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý tài khoản khách hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -144,16 +144,16 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width: 10%;text-align: center;"><a href="#">Mã hóa đơn</a></th>
-                                            <th style="width: 30%;"><a href="#">Tên sản phẩm</a></th>
-                                            <th style="width: 10%;"><a href="#">Số lượng</a></th>
-                                            <th style="width: 25%;"><a href="#">Gía tiền</a></th>
-                                            <th style="width: 25%;"><a href="#">Ngày mua</a></th>
+                                            <th style="width: 10%;text-align: center;"><a ng-click="SortHistory('Invoice_id')" href="#">Mã hóa đơn</a></th>
+                                            <th style="width: 30%;"><a ng-click="SortHistory('ProductName')" href="#">Tên sản phẩm</a></th>
+                                            <th style="width: 10%;"><a ng-click="SortHistory('Amount')" href="#">Số lượng</a></th>
+                                            <th style="width: 25%;"><a ng-click="SortHistory('Price')" href="#">Gía tiền</a></th>
+                                            <th style="width: 25%;"><a ng-click="SortHistory('CreateDate')" href="#">Ngày mua</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="item in lstInvoiceDetail" ng-init="bucket.stt = bucket.stt + 1">
-                                            <td>#{{$index + 1}}</td>
+                                        <tr ng-repeat="item in lstInvoiceDetail | orderBy:HistoryInvoice:reverseHistoryInvoice">
+                                            <td>{{item.Invoice_id}}</td>
                                             <td>{{item.ProductName}}</td>
                                             <td>{{item.Amount}}</td>
                                             <td>{{item.Price | currency:"":0}}</td>
