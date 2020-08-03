@@ -2007,7 +2007,7 @@ canvas{
   width: 0%;
 }
 
-.product-input input[type=text], select, input[type=date] {
+.product-input input[type=text], select, input[type=date], input[type=password] {
   cursor: auto !important;
   width: 100%;
   height: 60px;
@@ -2571,4 +2571,20 @@ canvas{
 
 .invincible-col td {
   border: none;
+}
+
+.admin-user-edit {
+  display: none;
+}
+
+.Disabled {
+  background-color: gray !important;
+  border: 2px solid gray !important;
+  color: white !important;
+}
+
+.Disabled:hover{
+  background-color: gray !important;
+  border: 2px solid gray !important;
+  color: white !important;
 }

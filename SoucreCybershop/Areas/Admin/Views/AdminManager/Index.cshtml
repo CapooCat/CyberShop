@@ -2,20 +2,117 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Category Manager";
+    ViewBag.Title = "Quản lý Admin";
 
-    var catListLv1 = new CategoriesDao().getAllCatgories();
-    var prdTypeList = new ProductTypeDao().ListProductType();
-    var brandList = new BrandDao().ListBrand();
+    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+    var name = identity.Claims.Where(x => x.Type == ClaimTypes.Name).Select(x => x.Value).SingleOrDefault();
 }
-@using Data;
-<section id="content" class="admin-content-container">
-    <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-users-cog" style="margin-right: 10px;"></i>Quản lý tài khoản Admin</h3>
+@using System.Security.Claims;
+@using Microsoft.AspNet.Identity;
+@using System.Threading;
 
+<section id="content" class="admin-content-container">
+    <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-users-cog" style="margin-right: 10px;"></i>Quản lý Admin</h3>
+    <h3 style="text-align:center;margin:50px;">Thông tin admin</h3>
+    <div class="col-md-12 row product-input justify-content-center" style="padding-top: 10px;padding-bottom: 10px; text-align: center;" id="search_input">
+        <div class="col-md-2">
+            <p>Số điện thoại:</p>
+            <input type="text" placeholder="Nhập số điện thoại..." id="admin_phone" disabled>
+        </div>
+        <div class="col-md-2">
+            <p>Email:</p>
+            <input type="text" placeholder="Nhập Email.." id="admin_email" disabled>
+        </div>
+        <div class="product-action" style="margin-right: 10px;">
+            <button id="cancel_btn" onclick="Cancel();" class="delete admin-user-edit" style="width:60px;height:60px"><i class="fas fa-times"></i></button>
+        </div>
+        <div>
+            <button id="Fix_Info_btn" onclick="RequestInfoChange();">Sửa thông tin</button>
+        </div>
+        <div class="col-md-12">
+            <button data-toggle="modal" data-target="#PasswordModal" onclick="OpenPassChangeModal();">Đổi mật khẩu</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="PasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Đổi mật khẩu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+
+
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                    <div class="col-md-12">
+                        <p>Nhập mật khẩu cũ:</p>
+                        <input style="width:100%;margin-left:0;margin-right:0" type="password" placeholder="Nhập mật khẩu cũ..." id="old_pass">
+                    </div>
+                    <div class="col-md-12">
+                        <button ng-click="RequestChangePass('@name')">Yêu cầu đổi mật khẩu</button>
+                    </div>
+                    <div class="col-md-12">
+                        <p>Mật khẩu mới:</p>
+                        <input style="width:100%;margin-left:0;margin-right:0" type="password" placeholder="Nhập mật khẩu mới..." id="new_pass">
+                    </div>
+                    <div class="col-md-12">
+                        <p>Nhập lại mật khẩu:</p>
+                        <input style="width:100%;margin-left:0;margin-right:0" type="password" placeholder="Nhập lại mật khẩu..." id="re_enter_pass">
+                    </div>
+                    <div class="col-md-12">
+                        <button id="Confirm_change" ng-click="ChangePass('@name')">Xác nhận</button>
+                    </div>
+                </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script>
     Active = document.getElementById("AdminManager");
     Active.className = "active-button";
+
+    function OpenPassChangeModal() {
+        document.getElementById("new_pass").disabled = true;
+        document.getElementById("re_enter_pass").disabled = true;
+        document.getElementById("Confirm_change").disabled = true;
+        document.getElementById("Confirm_change").className = "Disabled";
+        document.getElementById("new_pass").value = "";
+        document.getElementById("re_enter_pass").value = "";
+        document.getElementById("old_pass").value = "";
+    }
+
+    function RequestInfoChange() {
+        document.getElementById("admin_phone").disabled = false;
+        document.getElementById("admin_email").disabled = false;
+        document.getElementById("cancel_btn").style.display = "block";
+        document.getElementById("Fix_Info_btn").innerHTML = "Xác nhận";
+        document.getElementById("Fix_Info_btn").addEventListener("click", SubmitInfoChange)
+    }
+
+    function SubmitInfoChange() {
+        alert('abc');
+    }
+
+    function Cancel() {
+        document.getElementById("admin_phone").disabled = true;
+        document.getElementById("admin_email").disabled = true;
+        document.getElementById("cancel_btn").style.display = "none"; 
+        document.getElementById("Fix_Info_btn").innerHTML = "Sửa thông tin";
+        document.getElementById("Fix_Info_btn").removeEventListener("click", SubmitInfoChange);
+    }
 </script>
 
