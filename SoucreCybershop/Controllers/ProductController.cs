@@ -30,7 +30,7 @@ namespace CyberShop.Controllers
             List<CategoryViewModel> model = new List<CategoryViewModel>();
             model = (from a in data.Categories
                      from b in data.ProducTypes
-                     where a.Metatitle == metatitle && metatitle.Contains(b.Metatitle)
+                     where a.Metatitle == metatitle
                      select new CategoryViewModel
                      {
                          CateName = b.TypeName,
