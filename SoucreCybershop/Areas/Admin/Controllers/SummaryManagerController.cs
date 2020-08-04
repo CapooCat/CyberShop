@@ -67,7 +67,7 @@ namespace CyberShop.Areas.Admin.Controllers
                          ProductName=x.Key.ProductName,
                          Price=x.Key.Price,
                          SellAmount=x.Sum(b=>b.Amount)
-                     }).ToList();
+                     }).OrderByDescending(x=>x.SellAmount).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {

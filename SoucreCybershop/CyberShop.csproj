@@ -320,6 +320,7 @@
     <Content Include="assets\js\owl.carousel.min.js" />
     <Content Include="assets\js\popper.min.js" />
     <Content Include="assets\js\tendina.min.js" />
+    <Content Include="assets\sound\ringtones.mp3" />
     <Content Include="assets\webfonts\fa-brands-400.svg" />
     <Content Include="assets\webfonts\fa-regular-400.svg" />
     <Content Include="assets\webfonts\fa-solid-900.svg" />
