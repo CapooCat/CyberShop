@@ -60,18 +60,18 @@
                 <div id="Push" class="push">
                     <a onclick="MenuClick();" style="cursor: pointer;"><i class="fas fa-bars" style="font-size: 22px;"></i></a>
                     <div class="user" style="float: right;">
-                        <a style="float: right;" href="#"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@name</a>
+                        <a style="float: right;" href="javascript:void(0);"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@name</a>
                         <div class="dropdown-user" style="right: 10px;">
                             <a href="/Admin/AdminLogin/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
                         </div>
                     </div>
                     <div class="notification">
-                        <a style="float: right;border-right: 2px solid #DCDCDC" href="#"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> {{TotalNotification}} </span>Thông báo</a>
+                        <a style="float: right;border-right: 2px solid #DCDCDC" href="javascript:void(0);"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> {{TotalNotification}} </span>Thông báo</a>
                         <div class="dropdown-notification">
                             <div class="wall-background no-select">Thông báo</div>
                             <div class="unread-notification no-select">Có {{TotalNotification}} thông báo mới</div>
                             <div class="notification-content">
-                                <a class="notification-item" ng-click="GoToInvoiceManager();" href="#" ng-repeat="item in Notification">
+                                <a class="notification-item" ng-click="GoToInvoiceManager();" href="javascript:void(0);" ng-repeat="item in Notification">
                                     <div class="notification-icon"><i class="fas fa-archive"></i></div>
                                     <div style="text-align: left;margin-left: 60px;color: #1E90FF;"><span style="font-weight: bold;">Khách hàng {{item.CustomerName}}</span><span class="Time">{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</span></div>
                                     <div class="notification-info">{{item.CustomerName}} yêu cầu xác nhận đơn hàng mã <span style="font-weight: bold;">#{{item.Id}}</span></div>

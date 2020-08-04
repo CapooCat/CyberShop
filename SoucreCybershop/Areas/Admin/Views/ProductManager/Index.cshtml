@@ -64,13 +64,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
-                                <th style="width: 6%;"><a href="#" ng-click="sortByProduct('id')">Id</a></th>
-                                <th style="width: 35%;"><a href="#" ng-click="sortByProduct('ProductName')">Tên sản phẩm</a></th>
-                                <th style="width: 13%;"><a href="#" ng-click="sortByProduct('ProductTypeName')">Loại sản phẩm</a></th>
-                                <th style="width: 12%;"> <a href="#" ng-click="sortByProduct('BrandName')">Hãng sản phẩm</a></th>
-                                <th style="width: 12%;"><a href="#" ng-click="sortByProduct('Price')">Giá tiền (VNĐ)</a></th>
-                                <th style="width: 9%;"><a href="#" ng-click="sortByProduct('Amount')">Số lượng</a></th>
-                                <th style="width: 20%;"><a href="#">Hoạt động</a></th>
+                                <th style="width: 6%;"><a href="javascript:void(0);" ng-click="sortByProduct('id')">Id</a></th>
+                                <th style="width: 35%;"><a href="javascript:void(0);" ng-click="sortByProduct('ProductName')">Tên sản phẩm</a></th>
+                                <th style="width: 13%;"><a href="javascript:void(0);" ng-click="sortByProduct('ProductTypeName')">Loại sản phẩm</a></th>
+                                <th style="width: 12%;"> <a href="javascript:void(0);" ng-click="sortByProduct('BrandName')">Hãng sản phẩm</a></th>
+                                <th style="width: 12%;"><a href="javascript:void(0);" ng-click="sortByProduct('Price')">Giá tiền (VNĐ)</a></th>
+                                <th style="width: 9%;"><a href="javascript:void(0);" ng-click="sortByProduct('Amount')">Số lượng</a></th>
+                                <th style="width: 20%;"><a href="javascript:void(0);">Hoạt động</a></th>
                             </tr>
                         </thead>
                         <tbody id="items-table">
@@ -100,15 +100,15 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 30%;"><a href="#">Tên sản phẩm</a></th>
-                                <th style="width: 20%;"><a href="#">Loại sản phẩm</a></th>
-                                <th style="width: 20%;"><a href="#">Số lượng</a></th>
-                                <th style="width: 20%;"><a href="#">Tổng thanh toán</a></th>
-                                <th style="width: 20%;"><a href="#">Thời gian</a></th>
+                                <th style="width: 30%;"><a ng-click="sortProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                <th style="width: 20%;"><a ng-click="sortProduct('ProductTypeName')" href="javascript:void(0);">Loại sản phẩm</a></th>
+                                <th style="width: 20%;"><a ng-click="sortProduct('Amount')" href="javascript:void(0);">Số lượng</a></th>
+                                <th style="width: 20%;"><a ng-click="sortProduct('TotalPrice')" href="javascript:void(0);">Tổng thanh toán</a></th>
+                                <th style="width: 20%;"><a ng-click="sortProduct('CreateDate')" href="javascript:void(0);">Thời gian</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in lstHistory">
+                            <tr ng-repeat="item in lstHistory | orderBy:ProductN:reverseProduct">
                                 <td>{{item.ProductName}}</td>
                                 <td>{{item.ProductTypeName}}</td>
                                 <td>{{item.Amount}}</td>
@@ -192,10 +192,10 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th style="width: 10%;text-align: center;"><a href="#">Ảnh chính</a></th>
-                                                <th style="width: 45%;"><a href="#">Tên hình ảnh</a></th>
-                                                <th style="width: 30%;"><a href="#">Hình ảnh</a></th>
-                                                <th style="width: 5%;text-align: center;"><a href="#">Xóa</a></th>
+                                                <th style="width: 10%;text-align: center;"><a href="javascript:void(0);">Ảnh chính</a></th>
+                                                <th style="width: 45%;"><a href="javascript:void(0);">Tên hình ảnh</a></th>
+                                                <th style="width: 30%;"><a href="javascript:void(0);">Hình ảnh</a></th>
+                                                <th style="width: 5%;text-align: center;"><a href="javascript:void(0);">Xóa</a></th>
                                             </tr>
                                         </thead>
                                         <tbody id="IMG_DATA">
@@ -203,7 +203,7 @@
                                                 <td class="checkbox"><input type="radio" value="{{item.Url}}" class="MainIMG" name="Selected"></td>
                                                 <td>{{item.Name}}</td>
                                                 <td style="text-align: center;"><img style="max-width: 150px;max-height:150px;" src="{{item.Url}}"></td>
-                                                <td style="text-align: center;"><a href="#" ng-click="DeleteTempIMG(item.Name)"><i class="fas fa-times"></i></a></td>
+                                                <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteTempIMG(item.Name)"><i class="fas fa-times"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -299,10 +299,10 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width: 10%;text-align: center;"><a href="#">Ảnh chính</a></th>
-                                            <th style="width: 45%;"><a href="#">Tên hình ảnh</a></th>
-                                            <th style="width: 30%;"><a href="#">Hình ảnh</a></th>
-                                            <th style="width: 5%;text-align: center;"><a href="#">Xóa</a></th>
+                                            <th style="width: 10%;text-align: center;"><a href="javascript:void(0);">Ảnh chính</a></th>
+                                            <th style="width: 45%;"><a href="javascript:void(0);">Tên hình ảnh</a></th>
+                                            <th style="width: 30%;"><a href="javascript:void(0);">Hình ảnh</a></th>
+                                            <th style="width: 5%;text-align: center;"><a href="javascript:void(0);">Xóa</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -310,7 +310,7 @@
                                             <td class="checkbox"><input type="radio" id="{{item.id}}" name="Selected" value="{{item.Url}}" ng-model="value" ng-Change="MainImage(value)"></td>
                                             <td>{{item.Name}}</td>
                                             <td style="text-align: center;"><img style="max-width: 150px;max-height:150px;" ng-src="{{item.Url}}"></td>
-                                            <td style="text-align: center;"><a href="#" ng-click="DeleteImage(item.id)"><i class="fas fa-times"></i></a></td>
+                                            <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteImage(item.id)"><i class="fas fa-times"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -360,10 +360,10 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width: 10%;text-align: center;"><a href="#" ng-click="sortTypeBy('id')">Id</a></th>
-                                            <th style="width: 35%;text-align: center;"><a href="#" ng-click="sortTypeBy('TypeName')">Tên loại SP</a></th>
-                                            <th style="width: 40%;text-align: center;"><a href="#" ng-click="sortTypeBy('MetaTitle')">Từ khóa</a></th>
-                                            <th style="width: 15%;text-align: center;"><a href="#">Hành động</a></th>
+                                            <th style="width: 10%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('id')">Id</a></th>
+                                            <th style="width: 35%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('TypeName')">Tên loại SP</a></th>
+                                            <th style="width: 40%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('MetaTitle')">Từ khóa</a></th>
+                                            <th style="width: 15%;text-align: center;"><a href="javascript:void(0);">Hành động</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -371,7 +371,7 @@
                                             <td style="text-align:center">{{item.id}}</td>
                                             <td style="text-align:center">{{item.TypeName}}</td>
                                             <td style="text-align:center">{{item.MetaTitle}}</td>
-                                            <td style="text-align: center;"><a href="#" ng-click="DeleteType(item.id)"><i class="fas fa-times"></i></a></td>
+                                            <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteType(item.id)"><i class="fas fa-times"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -421,10 +421,10 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%;text-align: center;"><a href="#" ng-click="sortBrandBy('id')">Id</a></th>
-                                        <th style="width: 40%;text-align: center;"><a href="#" ng-click="sortBrandBy('BrandName')">Tên hãng</a></th>
-                                        <th style="width: 40%;text-align: center;"><a href="#" ng-click="sortBrandBy('MetaTitle')">Từ khóa</a></th>
-                                        <th style="width: 10%;text-align: center;"><a href="#">Hành động</a></th>
+                                        <th style="width: 10%;text-align: center;"><a href="javascript:void(0);" ng-click="sortBrandBy('id')">Id</a></th>
+                                        <th style="width: 40%;text-align: center;"><a href="javascript:void(0);" ng-click="sortBrandBy('BrandName')">Tên hãng</a></th>
+                                        <th style="width: 40%;text-align: center;"><a href="javascript:void(0);" ng-click="sortBrandBy('MetaTitle')">Từ khóa</a></th>
+                                        <th style="width: 10%;text-align: center;"><a href="javascript:void(0);">Hành động</a></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -432,7 +432,7 @@
                                         <td style="text-align:center">{{item.id}}</td>
                                         <td style="text-align:center">{{item.BrandName}}</td>
                                         <td style="text-align:center">{{item.MetaTitle}}</td>
-                                        <td style="text-align:center;"><a href="#" ng-click="DeleteBrand(item.id)"><i class="fas fa-times"></i></a></td>
+                                        <td style="text-align:center;"><a href="javascript:void(0);" ng-click="DeleteBrand(item.id)"><i class="fas fa-times"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -452,26 +452,6 @@
 
 
 
-
-    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Cảnh báo !!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Bạn chắc chắn muốn xóa chứ ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button">Xóa</button>
-                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <script>

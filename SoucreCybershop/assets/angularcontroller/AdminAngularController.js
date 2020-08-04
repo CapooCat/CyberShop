@@ -674,6 +674,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         $scope.reverseProduct = ($scope.ProductN === ProductN) ? !$scope.reverseProduct : false;
         $scope.ProductN = ProductN;
     };
+    $scope.sortInvoiceProduct = function (InProduct) {
+        $scope.reverseInProduct = ($scope.InProduct === InProduct) ? !$scope.reverseInProduct : false;
+        $scope.InProduct = InProduct;
+    };
+    $scope.sortViewInProduct = function (ViewInProduct) {
+        $scope.reverseViewInProduct = ($scope.ViewInProduct === ViewInProduct) ? !$scope.reverseViewInProduct : false;
+        $scope.ViewInProduct = ViewInProduct;
+    };
     $scope.SortHistory = function (HistoryInvoice) {
         $scope.reverseHistoryInvoice = ($scope.HistoryInvoice === HistoryInvoice) ? !$scope.reverseHistoryInvoice : false;
         $scope.HistoryInvoice = HistoryInvoice;
@@ -1653,6 +1661,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             $scope.Invoice_CreateDate = $scope.dataInvoice[0].CreateDate;
             $http.get("/Admin/InvoiceManager/ReturnViewDetailInvoiceById/" + id).then(function (response) {
                 $scope.loading = false;
+                $scope.bucket.total_price = 0;
                 $scope.WarrantyInvoiceDetail = response.data;
             });
         });
@@ -2048,8 +2057,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var dateFrom = document.getElementById("date_from").value;
         var dateTo = document.getElementById("date_to").value;
         var InProduct = document.getElementById("in_product_search").value;
-        console.log(dateFrom);
-        console.log(dateTo);
         $scope.loading = true;
         if (dateFrom > dateTo && dateFrom != "" && dateTo != "") {
             $scope.loading = false;
@@ -2137,6 +2144,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             $scope.InvoiceIn_CreateDate = $scope.dataInvoice[0].CreateDate;
             $http.get("/Admin/InvoiceInManager/ReturnDetailInvoiceInById/" + id).then(function (response) {
                 $scope.loading = false;
+                $scope.bucket.total_price = 0;
                 $scope.listInvoiceInDetail = response.data;
             });
         });
@@ -2236,6 +2244,73 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Đã xóa thành công',
             })
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Xóa thất bại',
+            })
+            console.log(response);
+        });
+    }
+
+    $scope.DeleteInvoiceInChecked = function () {
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteInvoiceInCheckedConfirm();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
+    }
+
+    $scope.DeleteInvoiceInCheckedConfirm = function () {
+        CheckAll = document.getElementById("check-all");
+        table = document.getElementById("items-table");
+        ItemCheckBox = table.getElementsByTagName("input");
+        var lstId = [];
+        if (CheckAll.checked == true) {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        else {
+            for (i = 0; ItemCheckBox.length > i; i++) {
+                if (ItemCheckBox[i].type == 'checkbox' && ItemCheckBox[i].checked == true)
+                    lstId.push(ItemCheckBox[i].value);
+            }
+        }
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceInManager/DeleteInvoiceInChecked',
+            method: "POST",
+            data: {
+                id: lstId
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đã xóa thành công',
+            })
+            $scope.ReturnInvoiceIn();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -2367,7 +2442,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             console.log(response);
         });
     }
-    $scope.DeleteInvoiceInChecked = function () {
+    $scope.DeleteAddInvoiceInChecked = function () {
         Swal.fire({
             title: 'Cảnh báo',
             text: 'Bạn có chắc muốn xóa ?',
@@ -2377,7 +2452,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             cancelButtonText: 'Không'
         }).then((result) => {
             if (result.value) {
-                $scope.DeleteInvoiceInCheckedConfirm();
+                $scope.DeleteAddInvoiceInCheckedConfirm();
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire({
                     icon: 'error',
@@ -2387,7 +2462,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             }
         })
     }
-    $scope.DeleteInvoiceInCheckedConfirm = function () {
+
+    $scope.DeleteAddInvoiceInCheckedConfirm = function () {
         CheckAll = document.getElementById("check-all");
         table = document.getElementById("items-table");
         ItemCheckBox = table.getElementsByTagName("input");
@@ -2433,6 +2509,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             console.log(response);
         });
     }
+
     $scope.RemoveItemCreateInvoiceIn = function (id) {
         Swal.fire({
             title: 'Cảnh báo',
