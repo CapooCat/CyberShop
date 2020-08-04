@@ -183,6 +183,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã thêm thành công',
                 })
+                $scope.getCatList();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -233,6 +234,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã thêm thành công',
                 })
+                $scope.getCatListLv2();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -299,6 +301,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã thêm thành công',
                 })
+                $scope.getCatListLv3();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -485,12 +488,29 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         });
     }
     $scope.DeleteCategory = function (id) {
-        $scope.DeleteCateId = id;
+        Swal.fire({
+            title: 'Cảnh báo',
+            text: 'Bạn có chắc muốn xóa ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Có!',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.value) {
+                $scope.DeleteConfirm(id);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+            }
+        })
     }
-    $scope.DeleteConfirm = function ()
+    $scope.DeleteConfirm = function (id)
     {
         $scope.loading = true;
-        $http.get("/Admin/CategoryManager/DeleteCategory/" + $scope.DeleteCateId).then(function (response) {
+        $http.get("/Admin/CategoryManager/DeleteCategory/" + id).then(function (response) {
             $scope.loading = false;
             Swal.fire({
                 icon: 'success',
@@ -554,33 +574,42 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                    lstId.push(ItemCheckBox[i].value);
             }
         }
-        $scope.loading = false;
-        $http({
-            url: '/Admin/InvoiceManager/DeleteInvoiceChecked',
-            method: "POST",
-            data: {
-                id: lstId
-            },
-        }).then(function onSuccess(response) {
-            $scope.invoiceList = response.data;
-            // Handle success
+        console.log(lstId);
+        if (lstId && lstId.length) {
             $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
+            $http({
+                url: '/Admin/InvoiceManager/DeleteInvoiceChecked',
+                method: "POST",
+                data: {
+                    id: lstId
+                },
+            }).then(function onSuccess(response) {
+                $scope.invoiceList = response.data;
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Xóa thất bại',
+                text: 'không có hóa đơn nào được chọn',
             })
-            console.log(response);
-        });
+        }
     }
     
 
@@ -871,6 +900,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                                                     $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
                                                         $scope.productList = response.data;
                                                     });
+                                                    $("[data-dismiss=modal]").trigger({ type: "click" });
                                                 }
                                                 console.log(response);
                                             }).catch(function onError(response) {
@@ -1044,33 +1074,41 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     lstId.push(ItemCheckBox[i].value);
             }
         }
-        $scope.loading = true;
-        $http({
-            url: '/Admin/ProductManager/DeleteProductChecked',
-            method: "POST",
-            data: {
-                id: lstId
-            },
-        }).then(function onSuccess(response) {
-            $scope.productList = response.data;
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            console.log(response.data);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
+        if (lstId && lstId.length) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/ProductManager/DeleteProductChecked',
+                method: "POST",
+                data: {
+                    id: lstId
+                },
+            }).then(function onSuccess(response) {
+                $scope.productList = response.data;
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                console.log(response.data);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Xóa thất bại',
+                text: 'Không có sản phẩm nào được chọn',
             })
-            console.log(response);
-        });
+        }
     }
 
     $scope.returnProductId = function(id){
@@ -1114,7 +1152,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
 
         Price = parseFloat(Price.replace(/\,/g, ''));
 
-        console.log(Brand_id, ProductType_id, ProductName, MetaTitle, Info, Price, MonthWarranty);
         $http({
             url: '/Admin/ProductManager/ProductUpdate',
             method: "POST",
@@ -1137,6 +1174,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Đã sửa thành công',
             })
+            $scope.Product_Name = "";
+            $scope.Product_Type = "";
+            $scope.Brand = "";
+            $scope.Sell_Price = "";
+            $scope.Quantity = "";
+            $scope.Doc = "";
+            $scope.Warranty = "";
+            $scope.MetaTitle = "";
             $scope.ReturnProductList();
             $("[data-dismiss=modal]").trigger({ type: "click" });
             console.log(response);
@@ -1471,33 +1516,42 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     lstId.push(ItemCheckBox[i].value);
             }
         }
-        $scope.loading = true;
-        $http({
-            url: '/Admin/CustomerManager/DeleteUserChecked',
-            method: "POST",
-            data: {
-                id: lstId
-            },
-        }).then(function onSuccess(response) {
-            $scope.lstUser = response.data;
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
+        console.log(lstId);
+        if (lstId && lstId.length) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/CustomerManager/DeleteUserChecked',
+                method: "POST",
+                data: {
+                    id: lstId
+                },
+            }).then(function onSuccess(response) {
+                $scope.lstUser = response.data;
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Xóa thất bại',
+                text: 'Không có tài khoản nào được chọn',
             })
-            console.log(response);
-        });
+        }
     }
     $scope.DeleteUser = function (id) {
         $scope.user_id = id;
@@ -2295,33 +2349,41 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     lstId.push(ItemCheckBox[i].value);
             }
         }
-        $scope.loading = true;
-        $http({
-            url: '/Admin/InvoiceInManager/DeleteInvoiceInChecked',
-            method: "POST",
-            data: {
-                id: lstId
-            },
-        }).then(function onSuccess(response) {
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            $scope.ReturnInvoiceIn();
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
+        if (lstId && lstId.length) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceInManager/DeleteInvoiceInChecked',
+                method: "POST",
+                data: {
+                    id: lstId
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                $scope.ReturnInvoiceIn();
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Xóa thất bại',
+                text: 'Không có hóa đơn nào được chọn',
             })
-            console.log(response);
-        });
+        }
     }
 
     //--------------INVOICE_IN_END--------------------//
@@ -2480,34 +2542,42 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     lstId.push(ItemCheckBox[i].value);
             }
         }
-        $scope.loading = true;
-        $http({
-            url: '/Admin/AddInvoiceInManager/DeleteInvoiceInChecked',
-            method: "POST",
-            data: {
-                id: lstId
-            },
-        }).then(function onSuccess(response) {
-            $scope.bucket.total_price_invoice = 0;
-            $scope.ReturnInvoiceInSession();
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
+        if (lstId && lstId.length) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/AddInvoiceInManager/DeleteInvoiceInChecked',
+                method: "POST",
+                data: {
+                    id: lstId
+                },
+            }).then(function onSuccess(response) {
+                $scope.bucket.total_price_invoice = 0;
+                $scope.ReturnInvoiceInSession();
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Xóa thất bại',
+                text: 'Không có sản phẩm nào được chọn',
             })
-            console.log(response);
-        });
+        }
     }
 
     $scope.RemoveItemCreateInvoiceIn = function (id) {
@@ -2646,33 +2716,41 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     lstId.push(ItemCheckBox[i].value);
             }
         }
-        $scope.loading = true;
-        $http({
-            url: '/Admin/InvoiceOutManager/DeleteInvoiceOutChecked',
-            method: "POST",
-            data: {
-                id: lstId
-            },
-        }).then(function onSuccess(response) {
-            $scope.ReturnInvoiceoOut();
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã xóa thành công',
-            })
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
-            $scope.loading = false;
+        if (lstId && lstId.length) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceOutManager/DeleteInvoiceOutChecked',
+                method: "POST",
+                data: {
+                    id: lstId
+                },
+            }).then(function onSuccess(response) {
+                $scope.ReturnInvoiceoOut();
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã xóa thành công',
+                })
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Xóa thất bại',
+                })
+                console.log(response);
+            });
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Xóa thất bại',
+                text: 'Không có sản phẩm nào được chọn',
             })
-            console.log(response);
-        });
+        }
     }
     $scope.SubmitInvoiceOut = function () {
         var customerName = document.getElementById("customer_name").value;
@@ -2770,48 +2848,50 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             var chartData = [];
             chartData = angular.fromJson(response.data);
             var ctx = document.getElementById("myChart");
-            ctx.style = "-webkit-tap-highlight-color: transparent;";
-            Chart.defaults.global.defaultFontFamily = 'Oswald';
-            Chart.defaults.global.defaultFontSize = 14;
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
-                    datasets: [{
-                        label: 'Triệu VNĐ',
-                        data: chartData,
-                        backgroundColor: [
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)',
-						'rgba(30, 144, 255, 0.5)'
-                        ],
-                        borderColor: [
-						'rgba(30, 144, 255,1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)',
-						'rgba(30, 144, 255, 1)'
-                        ],
-                        borderWidth: 2,
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-
-                            }
+            if (ctx != null) {
+                ctx.style = "-webkit-tap-highlight-color: transparent;";
+                Chart.defaults.global.defaultFontFamily = 'Oswald';
+                Chart.defaults.global.defaultFontSize = 14;
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
+                        datasets: [{
+                            label: 'Triệu VNĐ',
+                            data: chartData,
+                            backgroundColor: [
+                            'rgba(30, 144, 255, 0.5)',
+                            'rgba(30, 144, 255, 0.5)',
+                            'rgba(30, 144, 255, 0.5)',
+                            'rgba(30, 144, 255, 0.5)',
+                            'rgba(30, 144, 255, 0.5)',
+                            'rgba(30, 144, 255, 0.5)'
+                            ],
+                            borderColor: [
+                            'rgba(30, 144, 255,1)',
+                            'rgba(30, 144, 255, 1)',
+                            'rgba(30, 144, 255, 1)',
+                            'rgba(30, 144, 255, 1)',
+                            'rgba(30, 144, 255, 1)',
+                            'rgba(30, 144, 255, 1)'
+                            ],
+                            borderWidth: 2,
                         }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+
+                                }
+                            }]
+                        }
                     }
-                }
-            });
-            document.getElementById("admin-table-best-sale").style.height = document.getElementById("myChart").style.height;
-            $scope.loading = false;
+                });
+                document.getElementById("admin-table-best-sale").style.height = document.getElementById("myChart").style.height;
+                $scope.loading = false;
+            }
         });
     }
     $scope.sortByBestSeller = function (propertyName) {

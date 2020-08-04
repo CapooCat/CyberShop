@@ -22,5 +22,6 @@ namespace CyberShop.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> Amount { get; set; }
         public string TypeName { get; set; }
+        public string CheckStatus { get; set; }
     }
 }

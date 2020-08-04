@@ -542,7 +542,7 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                 }
             }).then(function onSuccess(response) {
                 // Handle success
-                $scope.cartList = response.data;
+                $scope.FetchCart();
                 $scope.loading = false;
                 console.log(response);
             }).catch(function onError(response) {

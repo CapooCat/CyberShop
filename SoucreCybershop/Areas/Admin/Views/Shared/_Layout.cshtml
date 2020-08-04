@@ -106,6 +106,22 @@
 				Table = document.getElementById("admin-table-best-sale");
 				TableNew = document.getElementById("admin-table-new-customers");
 
+				$('.numberonly').on('keypress', function (e) {
+				    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+				}).on('paste', function (e) {
+				    var cb = e.originalEvent.clipboardData || window.clipboardData;
+				    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
+				});
+
+				$('.currency').on('input', function (e) {
+				    $(this).val(formatCurrency(this.value.replace(/[,]/g, '')));
+				}).on('keypress', function (e) {
+				    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+				}).on('paste', function (e) {
+				    var cb = e.originalEvent.clipboardData || window.clipboardData;
+				    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
+				});
+
 
 				var height = [];
 				for(i = 0; i < Dropdown.length; i++)
@@ -228,24 +244,27 @@
 				}
 			}
 
+			if (Table != null) {
+			    Table.onscroll = function () { myFunction() };
 
-			Table.onscroll = function() {myFunction()};
-
-			function myFunction() {
-				var winScroll = Table.scrollTop || Table.scrollTop;
-				var height = Table.scrollHeight - Table.clientHeight;
-				var scrolled = (winScroll / height) * 100;
-				document.getElementById("myBar").style.width = scrolled + "%";
+			    function myFunction() {
+			        var winScroll = Table.scrollTop || Table.scrollTop;
+			        var height = Table.scrollHeight - Table.clientHeight;
+			        var scrolled = (winScroll / height) * 100;
+			        document.getElementById("myBar").style.width = scrolled + "%";
+			    }
 			}
+			if (TableNew != null) {
+			    TableNew.onscroll = function () { myFunctionNew() };
 
-			TableNew.onscroll = function() {myFunctionNew()};
-
-			function myFunctionNew() {
-				var winScroll = TableNew.scrollTop || TableNew.scrollTop;
-				var height = TableNew.scrollHeight - TableNew.clientHeight;
-				var scrolled = (winScroll / height) * 100;
-				document.getElementById("newBar").style.width = scrolled + "%";
+			    function myFunctionNew() {
+			        var winScroll = TableNew.scrollTop || TableNew.scrollTop;
+			        var height = TableNew.scrollHeight - TableNew.clientHeight;
+			        var scrolled = (winScroll / height) * 100;
+			        document.getElementById("newBar").style.width = scrolled + "%";
+			    }
 			}
+			
 
 		
 			function UnCheck() {
@@ -284,20 +303,11 @@
 			    $('#search_input').find(':input').val('');
 			}
 
-			$('.currency').on('input', function (e) {
-			    $(this).val(formatCurrency(this.value.replace(/[,]/g, '')));
-			}).on('keypress', function (e) {
-			    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
-			}).on('paste', function (e) {
-			    var cb = e.originalEvent.clipboardData || window.clipboardData;
-			    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
-			});
-
 			function FormatIt(price) {
 			    document.getElementById("Edit_Sell_Price").value = formatCurrency(price.replace(/[,]/g, ''));
 			}
 
-        function formatCurrency(number) {
+            function formatCurrency(number) {
 			    var n = number.split('').reverse().join("");
 			    var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
 			    return n2.split('').reverse().join('');

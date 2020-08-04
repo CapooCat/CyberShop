@@ -26,7 +26,7 @@
                         <tbody>
                             <tr ng-repeat="item in catList">
                                 <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv1(item.Id)">{{item.Name}}</a></td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategory(item.Id)" data-target="#suaDanhMuc1"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategory(item.Id)" data-target="#suaDanhMuc1"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -50,7 +50,7 @@
                         <tbody>
                             <tr ng-repeat="item in catListLv2">
                                 <td><a href="javascript:void(0)" style="color:black" ng-click="DetailCateLv2(item.category_lv2_id)">{{item.Name}}</a></td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategoryLv2(item.Id)" data-target="#suaDanhMuc2"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategoryLv2(item.Id)" data-target="#suaDanhMuc2"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -75,7 +75,7 @@
                         <tbody>
                             <tr ng-repeat="item in catListLv3">
                                 <td>{{item.Name}}</td>
-                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategoryLv3(item.Id)" data-target="#suaDanhMuc3"><i class="fas fa-edit"></i></button><button class="delete" data-toggle="modal" data-target="#warningModal"><i class="fas fa-trash" ng-click="DeleteCategory(item.Id)"></i></button></td>
+                                <td class="table-product-action" style="text-align: center;"><button data-toggle="modal" ng-click="UpdateCategoryLv3(item.Id)" data-target="#suaDanhMuc3"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteCategory(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -165,12 +165,12 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <p>Giá tiền dưới: (triệu)</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="inp_lowPriceLv2">
+                            <p>Giá tiền dưới: (triệu) VD: nhập 10 sẽ là 10 triệu</p>
+                            <input type="text" class="numberonly" placeholder="Nhập giá tiền..." id="inp_lowPriceLv2">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Giá tiền trên: (triệu)</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="inp_highPriceLv2">
+                            <p>Giá tiền trên: (triệu) VD: nhập 10 sẽ là 10 triệu</p>
+                            <input type="text" class="numberonly" placeholder="Nhập giá tiền..." id="inp_highPriceLv2">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Lọc sản phẩm theo từ khóa:</p>
@@ -237,12 +237,12 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <p>Giá tiền dưới: (triệu)</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="inp_lowPriceLv3">
+                            <p>Giá tiền dưới: (triệu) VD: nhập 10 sẽ là 10 triệu</p>
+                            <input class="numberonly" type="text" placeholder="Nhập giá tiền..." id="inp_lowPriceLv3">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Giá tiền trên: (triệu)</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="inp_highPriceLv3">
+                            <p>Giá tiền trên: (triệu) VD: nhập 10 sẽ là 10 triệu</p>
+                            <input class="numberonly" type="text" placeholder="Nhập giá tiền..." id="inp_highPriceLv3">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Lọc sản phẩm theo từ khóa:</p>
@@ -353,25 +353,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" ng-click="UpdateCategoryPostLv3()">Sửa</button>
-                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Cảnh báo !!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Bạn chắc chắn muốn xóa chứ ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="DeleteConfirm()" data-dismiss="modal">Xóa</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>

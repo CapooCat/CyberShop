@@ -24,7 +24,6 @@
             <div class="Info">
                 {{MainName}}
                 <p class="Price">Giá tiền: {{MainPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(MainId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -36,7 +35,6 @@
             <div class="Info">
                 {{CPUName}}
                 <p class="Price">Giá tiền: {{CPUPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(CPUId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -48,7 +46,6 @@
             <div class="Info">
                 {{RamName}}
                 <p class="Price">Giá tiền: {{RamPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(RamId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -60,7 +57,6 @@
             <div class="Info">
                 {{SSDName}}
                 <p class="Price">Giá tiền: {{SSDPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(SSDId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -72,7 +68,6 @@
             <div class="Info">
                 {{HDDName}}
                 <p class="Price">Giá tiền: {{HDDPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(HDDId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -84,7 +79,6 @@
             <div class="Info">
                 {{PSUName}}
                 <p class="Price">Giá tiền: {{PSUPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(PSUId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -96,7 +90,6 @@
             <div class="Info">
                 {{VGAName}}
                 <p class="Price">Giá tiền: {{VGAPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(VGAId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -108,7 +101,6 @@
             <div class="Info">
                 {{CaseName}}
                 <p class="Price">Giá tiền: {{CasePrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(CaseId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -120,7 +112,6 @@
             <div class="Info">
                 {{MonitorName}}
                 <p class="Price">Giá tiền: {{MonitorPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(MonitorId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -132,7 +123,6 @@
             <div class="Info">
                 {{CoolerName}}
                 <p class="Price">Giá tiền: {{CoolerPrice | currency:"":0}} VNĐ</p>
-                <p>Số lượng: 1</p>
                 <div><button class="delete" ng-click="DeletePcPart(CoolerId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -159,10 +149,11 @@
                             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{item.Image}}">
                             <div class="Info">
                                 {{item.ProductName}}
-                                <p class="Price">{{item.Price | currency:"":0}}</p>
-                                <p>{{item.Amount}}</p>
+                                <p class="Price">Giá tiền: {{item.Price | currency:"":0}} VNĐ</p>
+                                <p ng-if="item.CheckStatus=='còn hàng'">Tình trạng: <span style="font-weight:bold;color:#1E90FF">{{item.CheckStatus}}</span></p>
+                                <p ng-if="item.CheckStatus=='hết hàng'">Tình trạng: <span style="font-weight:bold;color:red">{{item.CheckStatus}}</span></p>
                             </div>
-                            <button class="add" data-dismiss="modal" ng-click="AddToBuildPC(item.id)">Chọn</button>
+                            <button ng-if="item.CheckStatus=='còn hàng'" class="add" data-dismiss="modal" ng-click="AddToBuildPC(item.id)">Chọn</button>
                         </div>
                     </div>         
                 </div>

@@ -15,7 +15,7 @@
         <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;" id="search_input">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
-                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
+                <input type="text" class="numberonly" placeholder="Nhập mã hóa đơn..." id="invoice_id">
             </div>
             <div class="col-md-2">
                 <p>Thời gian từ:</p>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-2">
                 <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
+                <input type="text" class="numberonly" placeholder="Nhập số điện thoại..." id="customer_phone">
             </div>
             <div class="col-md-2">
                 <p>Trạng thái:</p>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-md-3" style="text-align: left;">
                             <p>Số điện thoại</p>
-                            <input type="text" placeholder="hãng số điện thoại..." id="phone_number" ng-value="phoneNumber">
+                            <input type="text" class="numberonly" placeholder="số điện thoại..." id="phone_number" ng-value="phoneNumber">
                         </div>
                         <div class="col-md-6">
                             <p>Địa chỉ:</p>
@@ -359,5 +359,6 @@
         ProductBackground.style.visibility = "hidden";
         Product.style.visibility = "hidden";
     }
+
 </script>
 

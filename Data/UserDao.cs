@@ -11,7 +11,7 @@ namespace Data
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public bool KTTaiKhoan(string tk)
         {
-            var res = data.Users.Where(x => x.Username == tk).Count();
+            var res = data.Users.Where(x => x.Username == tk && x.IsDeleted == false).Count();
             if(res>0)
             {
                 return true;
@@ -23,8 +23,20 @@ namespace Data
         }
         public bool IsAdmin(string tk)
         {
-            var res = data.Users.Where(x => x.Username == tk).First().UserType;
+            var res = data.Users.Where(x => x.Username == tk && x.IsDeleted == false).First().UserType;
             if (res == "admin")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool NotAdmin(string tk)
+        {
+            var res = data.Users.Where(x => x.Username == tk && x.IsDeleted == false).First().UserType;
+            if (res != "admin")
             {
                 return true;
             }
@@ -35,7 +47,7 @@ namespace Data
         }
         public bool KTEmail(string email)
         {
-            var res = data.Users.Where(x => x.Username == email).Count();
+            var res = data.Users.Where(x => x.Username == email && x.IsDeleted == false).Count();
             if (res > 0)
             {
                 return true;
@@ -47,7 +59,7 @@ namespace Data
         }
         public bool KTMatKhau(string mk, string tk)
         {
-            var res = data.Users.Where(x => x.Password == mk && x.Username == tk).Count();
+            var res = data.Users.Where(x => x.Password == mk && x.Username == tk && x.IsDeleted == false).Count();
             if (res > 0)
             {
                 return true;

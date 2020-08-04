@@ -48,7 +48,7 @@
             <button style="width: 200px;" data-toggle="modal" data-target="#ProductTypeModal"><i class="fab fa-buffer" style="margin-right: 10px;"></i>Quản lý loại SP</button>
             <button style="width: 200px;" data-toggle="modal" data-target="#BrandModal"><i class="fas fa-certificate" style="margin-right: 10px;"></i>Quản lý hãng</button>
             <button style="width: 200px;" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm sản phẩm</button>
-            <button type="button" class="delete"><i class="fas fa-trash" ng-click="DeleteProductChecked()"></i></button>
+            <button type="button" ng-click="DeleteProductChecked()" class="delete"><i class="fas fa-trash""></i></button>
             <button style="width: 100px;" ng-click="FilterProduct()" onclick="UnCheck()">Lọc</button>
             <button onclick="ResetTXT();" ng-click="FilterProduct()"><i class="fas fa-redo-alt"></i></button>
             
@@ -166,7 +166,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Số lượng:</p>
-                            <input type="text" placeholder="Nhập số lượng..." id="txt_Add_Quantity" ng-value="txt_Add_Quantity">
+                            <input type="text" class="numberonly" placeholder="Nhập số lượng..." id="txt_Add_Quantity" ng-value="txt_Add_Quantity">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Mô tả (Google Doc):</p>
@@ -174,7 +174,7 @@
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Bảo hành:</p>
-                            <input type="text" placeholder="Nhập tháng bảo hành..." id="txt_Add_Warranty" ng-value="txt_Add_Warranty">
+                            <input type="text" class="numberonly" placeholder="Nhập tháng bảo hành..." id="txt_Add_Warranty" ng-value="txt_Add_Warranty">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
                             <p>Từ khóa:</p>
@@ -265,7 +265,7 @@
                     </div>
                     <div class="col-md-4">
                         <p>Số lượng:</p>
-                        <input type="text" placeholder="Nhập số lượng..." id="Edit_Quantity" ng-value="Quantity">
+                        <input type="text" class="numberonly" placeholder="Nhập số lượng..." id="Edit_Quantity" ng-value="Quantity">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
                         <p>Mô tả (Google Doc):</p>
@@ -273,7 +273,7 @@
                     </div>
                     <div class="col-md-4" style="text-align: left;">
                         <p>Bảo hành:</p>
-                        <input type="text" placeholder="Nhập tháng bảo hành..." id="Edit_Warranty" ng-value="Warranty">
+                        <input type="text" class="numberonly" placeholder="Nhập tháng bảo hành..." id="Edit_Warranty" ng-value="Warranty">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
                         <p>Từ khóa:</p>
@@ -460,8 +460,7 @@
     CheckAll = document.getElementById("check-all");
     table = document.getElementById("items-table");
     ItemCheckBox = table.getElementsByTagName("input");
-</script>
-<script>
+
         function previewImages() {
 
             var preview = document.querySelector('#preview');
