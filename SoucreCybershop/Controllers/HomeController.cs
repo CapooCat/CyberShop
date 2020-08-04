@@ -55,7 +55,7 @@ namespace CyberShop.Controllers
             {
                 if (userDao.KTTaiKhoan(model.Username))
                 {
-                    if (userDao.KTMatKhau(Encryptor.MD5Hash(model.Password)))
+                    if (userDao.KTMatKhau(Encryptor.MD5Hash(model.Password), model.Username))
                     {
                         var user = userDao.getInfo(model.Username);
                         var userSession = new UserInfo();

@@ -14,14 +14,90 @@
         }
     }
 })
-app.controller('MyAdminController', function ($scope, $http, $filter) {
+app.controller('MyAdminController', function ($scope, $http, $filter, $interval) {
     $scope.txt_Add_Type = "";
     $scope.txt_Add_Brand = "";
     var InvoiceID = 0;
     var ProductID = 0;
     var n = 0;
+    var stoptime;
+    var stop;
+    var audio = new Audio('../assets/sound/ringtones.mp3');
     $scope.TempIMG = [];
+    $scope.TotalNotification = 0;
 
+    $scope.dismiss = function () {
+        $("#notification-popup").removeClass("fadein").addClass("fadeout");
+        $interval.cancel(stop);
+        document.cookie = "Status=Đang chờ xem";
+        location.href = '/Admin/InvoiceManager';
+    }
+
+    $scope.GoToInvoiceManager = function () {
+        $interval.cancel(stop);
+        document.cookie = "Status=Đang chờ xem";
+        location.href = '/Admin/InvoiceManager';
+    }
+
+    $scope.CheckNotification = function () {
+        $http.get("/Admin/InvoiceManager/Notification").then(function (response) {
+            $scope.Notification = response.data;
+            if (Object.keys(response.data).length > $scope.TotalNotification) {
+                    var invoiceId = document.getElementById("invoice_id").value;
+                    var dateFrom = document.getElementById("date_from").value;
+                    var dateTo = document.getElementById("date_to").value;
+                    var customerName = document.getElementById("customer_name").value;
+                    var customerPhone = document.getElementById("customer_phone").value;
+                    var status = document.getElementById("status_invoice").value;
+                    if (dateFrom > dateTo) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Thời gian từ không được lớn hơn Thời gian đến',
+                        })
+                    }
+                    else {
+                        $http({
+                            url: '/Admin/InvoiceManager/FilterInvoice',
+                            method: "POST",
+                            data: {
+                                Id: invoiceId,
+                                DateFrom: dateFrom,
+                                DateTo: dateTo,
+                                CustomerName: customerName,
+                                DeliveryPhoneNum: customerPhone,
+                                Status: status
+                            }
+                        }).then(function onSuccess(response) {
+                            // Handle success
+                            $scope.invoiceList = response.data;
+                            console.log(response);
+                        }).catch(function onError(response) {
+                            // Handle error
+                            console.log(response);
+                        });
+                    }
+                
+                audio.play();
+                $("#notification-popup").removeClass("hide");
+                $("#notification-popup").removeClass("fadeout").addClass("fadein");
+                stop = $interval(function () { $("#notification-popup").removeClass("fadein").addClass("fadeout"); $interval.cancel(stop); }, 8000);
+            }
+            $scope.TotalNotification = Object.keys(response.data).length;
+        });
+    }
+    $scope.ReturnNotification = function () {
+        $http.get("/Admin/InvoiceManager/Notification").then(function (response) {
+            
+            $scope.Notification = response.data;
+            $scope.TotalNotification = Object.keys(response.data).length;
+            $interval.cancel(stoptime);
+            stoptime = $interval($scope.CheckNotification, 8000);
+        });
+    }
+    $scope.ReturnNotification();
+
+    
     
     $scope.getCatList = function () {
         $http.get("/Admin/CategoryManager/ReturnCategory").then(function (response) {
@@ -254,6 +330,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         var dateTo = document.getElementById("date_to").value;
         var customerName = document.getElementById("customer_name").value;
         var customerPhone = document.getElementById("customer_phone").value;
+        var status = document.getElementById("status_invoice").value;
         $scope.loading = true;
         if (dateFrom > dateTo) {
             $scope.loading = false;
@@ -272,7 +349,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                     DateFrom: dateFrom,
                     DateTo: dateTo,
                     CustomerName: customerName,
-                    DeliveryPhoneNum: customerPhone
+                    DeliveryPhoneNum: customerPhone,
+                    Status: status
                 }
             }).then(function onSuccess(response) {
                 // Handle success
@@ -599,6 +677,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
     $scope.sortTypeBy = function (PTypeName) {
         $scope.reverseType = ($scope.PTypeName === PTypeName) ? !$scope.reverseType : false;
         $scope.PTypeName = PTypeName;
+    };
+    $scope.sortProduct = function (ProductN) {
+        $scope.reverseProduct = ($scope.ProductN === ProductN) ? !$scope.reverseProduct : false;
+        $scope.ProductN = ProductN;
+    };
+    $scope.SortHistory = function (HistoryInvoice) {
+        $scope.reverseHistoryInvoice = ($scope.HistoryInvoice === HistoryInvoice) ? !$scope.reverseHistoryInvoice : false;
+        $scope.HistoryInvoice = HistoryInvoice;
     };
 
     $scope.AddBrand = function () {
@@ -1547,8 +1633,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
         $scope.loading = true;
         $http.get("/Admin/InvoiceManager/ReturnInvoice").then(function (response) {
             $scope.invoiceList = response.data;
+            $scope.loading = false;
         });
-        $scope.loading = false;
     }
     $scope.ReturnInvoice();
 
@@ -1807,6 +1893,52 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
                 console.log(response);
             });
         }
+
+        $scope.SeenThenEdit = function (id) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceManager/Seen',
+                method: "POST",
+                data: {
+                    Id: id,
+                    Status: "Chưa hoàn thành"
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                console.log(response);
+                $scope.EditInvoice(id);
+                $scope.FilterInvoice();
+                $scope.ReturnNotification();
+            }).catch(function onError(response) {
+                // Handle error
+                console.log(response);
+            });
+        }
+
+        $scope.SeenThenView = function (id) {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/InvoiceManager/Seen',
+                method: "POST",
+                data: {
+                    Id: id,
+                    Status: "Chưa hoàn thành"
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                console.log(response);
+                $scope.ViewInvoice(id, response.data.Status);
+                $scope.FilterInvoice();
+                $scope.ReturnNotification();
+            }).catch(function onError(response) {
+                // Handle error
+                console.log(response);
+            });
+        }
+
+
     //--------------INVOICE_END--------------------//
     //--------------INVOICE_IN_START--------------------//
     var InvoiceInID = 0;
@@ -2727,5 +2859,57 @@ app.controller('MyAdminController', function ($scope, $http, $filter) {
             });
         }
     }
+
+    $scope.LoadInfo = function (username) {
+        $scope.loading = true;
+        $http.get("/Admin/AdminManager/LoadInfo/" + username).then(function (response) {
+            $scope.loading = false;
+            $scope.dataAdmin = angular.fromJson(response.data);
+            $scope.admin_phone = $scope.dataAdmin[0].PhoneNum;
+            $scope.admin_email = $scope.dataAdmin[0].Email;
+        });
+    }
+
+    $scope.ChangeInfo = function (username) {
+        var Phone = document.getElementById("admin_phone").value;
+        var Email = document.getElementById("admin_email").value;
+        if (Phone != "" && Email != "") {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/AdminManager/ChangeInfo',
+                method: "POST",
+                data: {
+                    Username: username,
+                    Email: Email,
+                    phoneNum: Phone
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Thay đổi thông tin thành công',
+                })
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Đã xảy ra lỗi',
+                })
+                console.log(response);
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được để trống',
+            })
+        } 
+    }
+
+
     //----------------ADMIN_MANAGER_END--------------------//
     });

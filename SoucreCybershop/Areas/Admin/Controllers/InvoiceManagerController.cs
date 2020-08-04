@@ -209,6 +209,7 @@ namespace CyberShop.Areas.Admin.Controllers
             lstInvoice = data.Invoices.Where(x => ((model.Id == null) || (x.Id == model.Id)))
                                       .Where(x => ((model.CustomerName == null) || (x.CustomerName.Contains(model.CustomerName))))
                                       .Where(x => ((model.DeliveryPhoneNum == null) || (x.DeliveryPhoneNum == model.DeliveryPhoneNum)))
+                                      .Where(x => ((model.Status == null) || (x.Status == model.Status)))
                 .Select(x => new InvoiceManagerViewModel {
                     Id = x.Id,
                     User_id = x.User_id,
@@ -417,6 +418,15 @@ namespace CyberShop.Areas.Admin.Controllers
             data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Seen(InvoiceManagerViewModel model)
+        {
+            Invoice entity = new Invoice();
+            entity = data.Invoices.Find(model.Id);
+            entity.Status = model.Status;
+            data.SaveChanges();
+            return Json(new { Status = "Chưa hoàn thành" }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult PrintViewToPdf(int id)
         {
             var report = new ActionAsPdf("InvoiceOutPdf",new { id=id});
@@ -446,6 +456,47 @@ namespace CyberShop.Areas.Admin.Controllers
                               Amount = c.Amount
                           }).ToList();
             return View(invoicePdf);
+        }
+
+        public JsonResult Notification()
+        {
+            var model = new List<InvoiceManagerViewModel>();
+            model = data.Invoices.Where(x => x.IsDeleted == false && x.Status == "Đang chờ xem").Select(x => new InvoiceManagerViewModel
+            {
+                Id = x.Id,
+                User_id = x.User_id,
+                BuyDate = x.PurchaseDate.ToString(),
+                PurchaseDate = x.PurchaseDate,
+                DeliveryAddress = x.DeliveryAddress,
+                DeliveryPhoneNum = x.DeliveryPhoneNum,
+                Status = x.Status,
+                Total = x.Total,
+                IsDeleted = x.IsDeleted,
+                CreateBy = x.CreateBy,
+                CreateDate = x.CreateDate,
+                CustomerName = x.CustomerName
+            }).ToList();
+
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new InvoiceManagerViewModel
+                {
+                    Id = item.Id,
+                    User_id = item.User_id,
+                    BuyDate = item.BuyDate,
+                    PurchaseDate = item.PurchaseDate,
+                    DeliveryAddress = item.DeliveryAddress,
+                    DeliveryPhoneNum = item.DeliveryPhoneNum,
+                    Status = item.Status,
+                    Total = item.Total,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                    CustomerName = item.CustomerName
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
     }
 }

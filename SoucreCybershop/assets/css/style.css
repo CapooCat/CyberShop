@@ -2588,3 +2588,48 @@ canvas{
   border: 2px solid gray !important;
   color: white !important;
 }
+
+.notification-popup {
+  user-select: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  transition: .5s;
+  background-color: #fff;
+  width: 300px;
+  height: 80px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 30px;
+  border-radius: 10px;
+  z-index: 99999;
+  border-bottom: 3px solid #1E90FF;
+}
+
+@-webkit-keyframes fadeout{
+    0%{opacity:.5s;visibility:visible;}
+    99%{opacity:0;}
+    100%{opacity:0;visibility: hidden;}
+}
+.fadeout {
+    -webkit-animation:fadeout .5s linear;
+    visibility:hidden;
+}
+@-webkit-keyframes fadein{
+    0%{opacity:0;visibility:visible;}
+    100%{opacity:1;}
+}
+.fadein {
+    -webkit-animation:fadein .5s linear;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.notification-popup:hover {
+  background-color: #efefef;
+}

@@ -183,8 +183,24 @@ namespace CyberShop.Areas.Admin.Controllers
             {
                 total += item.Price * item.Amount;
             }
+
+            var CheckAccount = new List<CustomerManagerViewModel>();
+            CheckAccount = data.Users.Where(x => x.IsDeleted == false && x.PhoneNum == model.NumberPhone).Select(x => new CustomerManagerViewModel
+            {
+                id = x.id
+            }).ToList();
+
+            if (CheckAccount.Count > 0)
+            {
+                foreach (var item in CheckAccount)
+                {
+                    invoice.User_id = item.id;
+                }
+            } else
+            {
+                invoice.User_id = null;
+            }
             invoice.CustomerName = model.CustomerName;
-            invoice.User_id = null;
             invoice.DeliveryAddress = model.Address;
             invoice.DeliveryPhoneNum = model.NumberPhone;
             invoice.IsDeleted = false;
@@ -211,7 +227,6 @@ namespace CyberShop.Areas.Admin.Controllers
                 var inDetailDao = new InvoiceDetailDao().InsertInvoiceDetail(inDetail);
 
                 product = data.Products.Find(item.Product_Id);
-                product.Amount = product.Amount - item.Amount;
                 data.SaveChanges();
             }
             invoiceOutList.RemoveAll(x => invoiceOutList.Any());

@@ -129,16 +129,16 @@
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th style="width: 50%;"><a href="#">Tên sản phẩm</a></th>
-                                                            <th style="width: 10%;"><a href="#">Loại SP</a></th>
-                                                            <th style="width: 10%;"><a href="#">Hãng SP</a></th>
-                                                            <th style="width: 15%;"><a href="#">SL hàng tồn</a></th>
-                                                            <th style="width: 20%;"><a href="#">Bảo hành</a></th>
+                                                            <th style="width: 50%;"><a ng-click="sortProduct('ProductName')" href="#">Tên sản phẩm</a></th>
+                                                            <th style="width: 10%;"><a ng-click="sortProduct('ProductTypeName')" href="#">Loại SP</a></th>
+                                                            <th style="width: 10%;"><a ng-click="sortProduct('BrandName')" href="#">Hãng SP</a></th>
+                                                            <th style="width: 15%;"><a ng-click="sortProduct('Amount')" href="#">SL hàng tồn</a></th>
+                                                            <th style="width: 20%;"><a ng-click="sortProduct('MonthWarranty')" href="#">Bảo hành</a></th>
                                                             <th style="width: 5%;text-align: center;"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="item in productList | filter:search">
+                                                        <tr ng-repeat="item in productList | filter:search | orderBy:ProductN:reverseProduct">
                                                             <td>{{item.ProductName}}</td>
                                                             <td>{{item.ProductTypeName}}</td>
                                                             <td>{{item.BrandName}}</td>
@@ -146,7 +146,6 @@
                                                             <td>{{item.MonthWarranty}}</td>
                                                             <td style="text-align: center;"><a href="#" ng-click="EnterInformation(item.id)"><i class="fas fa-plus"></i></a></td>
                                                         </tr>
-
                                                     </tbody>
                                                 </table>
                                             </div>
