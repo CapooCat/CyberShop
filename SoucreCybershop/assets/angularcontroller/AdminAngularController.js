@@ -43,6 +43,14 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         $http.get("/Admin/InvoiceManager/Notification").then(function (response) {
             $scope.Notification = response.data;
             if (Object.keys(response.data).length > $scope.TotalNotification) {
+                $scope.NewNotification = Object.keys(response.data).length - $scope.TotalNotification;
+                audio.play();
+                $("#notification-popup").removeClass("hide");
+                $("#notification-popup").removeClass("fadeout").addClass("fadein");
+                stop = $interval(function () { $("#notification-popup").removeClass("fadein").addClass("fadeout"); $interval.cancel(stop); }, 8000);
+
+
+                if (window.location.pathname == "/Admin/InvoiceManager") {
                     var invoiceId = document.getElementById("invoice_id").value;
                     var dateFrom = document.getElementById("date_from").value;
                     var dateTo = document.getElementById("date_to").value;
@@ -77,21 +85,15 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                             console.log(response);
                         });
                     }
-                
-                audio.play();
-                $("#notification-popup").removeClass("hide");
-                $("#notification-popup").removeClass("fadeout").addClass("fadein");
-                stop = $interval(function () { $("#notification-popup").removeClass("fadein").addClass("fadeout"); $interval.cancel(stop); }, 8000);
+                }
             }
             $scope.TotalNotification = Object.keys(response.data).length;
         });
     }
     $scope.ReturnNotification = function () {
         $http.get("/Admin/InvoiceManager/Notification").then(function (response) {
-            
             $scope.Notification = response.data;
             $scope.TotalNotification = Object.keys(response.data).length;
-            $interval.cancel(stoptime);
             stoptime = $interval($scope.CheckNotification, 8000);
         });
     }
@@ -157,22 +159,11 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
     }
     $scope.AddCategory = function () {
         var CategoryName = document.getElementById("inp_cateNameLv1").value;
-        var a = document.getElementById("sl_prdTypeLv1");
-        var productTypeKW = a.options[a.selectedIndex].value;
-        var b = document.getElementById("sl_brandNameLv1");
-        var brandKW = b.options[b.selectedIndex].value;
-        var lowPrice = document.getElementById("inp_lowPrice").value;
-        var highPrice = document.getElementById("inp_highPrice").value;
         var productKW = document.getElementById("inp_productKw").value;
         $scope.loading = true;
-        if (CategoryName == null || productTypeKW == "") {
+        if (CategoryName == null || productKW == "") {
             $scope.loading = false;
             alert("Không được để trống");
-        }
-        else if ((CategoryName != null && productTypeKW != "" && lowPrice == null) || (CategoryName != null && productTypeKW != "" && highPrice == null))
-        {
-            $scope.loading = false;
-            alert("Không được để trống ngày");
         }
         else
         {
@@ -181,10 +172,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 method: "POST",
                 data: {
                     Name: CategoryName,
-                    ProductTypeKW: productTypeKW,
-                    BrandKW: brandKW,
-                    LowPrice: lowPrice,
-                    HighPrice: highPrice,
                     ProductKW: productKW
                 }
             }).then(function onSuccess(response) {
@@ -1636,7 +1623,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             $scope.loading = false;
         });
     }
-    $scope.ReturnInvoice();
+
 
     $scope.ViewInvoice = function (id, Status) {
         GetInvoiceId = id;
@@ -2475,6 +2462,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         else {
             $scope.loading = true;
             $http.get("/Admin/AddInvoiceInManager/SubmitInvoiceIn").then(function (response) {
+                $scope.loading = false;
                 $scope.bucket.total_price_invoice = 0;
                 $scope.ReturnInvoiceInSession();
                 document.getElementById("PrintInvoiceInPdf").click();

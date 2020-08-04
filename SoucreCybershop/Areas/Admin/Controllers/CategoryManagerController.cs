@@ -283,19 +283,7 @@ namespace CyberShop.Areas.Admin.Controllers
             var cateDao = new CategoriesDao();
             var cateLv1 = new Category();
             cateLv1.Name = model.Name;
-            cateLv1.Metatitle = model.ProductTypeKW;
-            if (!String.IsNullOrEmpty(model.BrandKW))
-            {
-                cateLv1.Metatitle = cateLv1.Metatitle + "-" + model.BrandKW;
-            }
-            if (!String.IsNullOrEmpty(model.ProductKW))
-            {
-                cateLv1.Metatitle = cateLv1.Metatitle + "-" + model.ProductKW;
-            }
-            if (model.LowPrice != null && model.HighPrice != null)
-            {
-                cateLv1.Metatitle = cateLv1.Metatitle + "-" + "tu-" + model.LowPrice + "-den-" + model.HighPrice + "-trieu";
-            }
+            cateLv1.Metatitle = model.ProductKW;
             cateLv1.IsDeleted = false;
             cateLv1.CreateDate = DateTime.Now;
             cateLv1.CreateBy = "Admin";

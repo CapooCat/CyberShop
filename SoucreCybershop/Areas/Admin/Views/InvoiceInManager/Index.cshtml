@@ -69,7 +69,8 @@
                                 <td>{{item.Total | currency:"":0}}</td>
                                 <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                 <td>{{item.CreateBy}}</td>
-                                <td>{{item.Status}}</td>
+                                <td ng-if="item.Status=='Chưa hoàn thành'"><div class="pending">{{item.Status}}</div></td>
+                                <td ng-if="item.Status=='Đã hoàn thành'"><div class="complete">{{item.Status}}</div></td>
                                 <td class="table-product-action" ng-if="item.Status=='Chưa hoàn thành'"><button data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoiceIn(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoiceIn(item.Id, item.Status)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoiceIn(item.Id)"><i class="fas fa-trash"></i></button></td>
                                 <td class="table-product-action" ng-if="item.Status=='Đã hoàn thành'"><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoiceIn(item.Id, item.Status)"><i class="fas fa-eye"></i></button></td>
                             </tr>

@@ -103,7 +103,9 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         });
     }
 
+
     $scope.Reload = function () {
+        var Amount = Number(document.getElementById("item_amount").value);
         if ($a.includes("/Product") != false) {
             $scope.loading = true;
             $http.get("/Product/SanPham").then(function (res) {
@@ -130,8 +132,8 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                     $scope.paginate = [];
                     $scope.data = [];
                     var PageNum = 1;
-                    while ((Length - 12) > 0) {
-                        Length = Length - 12;
+                    while ((Length - Amount) > 0) {
+                        Length = Length - Amount;
                         PageNum = PageNum + 1;
                         $scope.paginate.push(PageNum);
                     }
@@ -141,10 +143,10 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                     for (i = 0; i <= Page; i++) {
                         if (EndPageIndex < Length) {
                             if (BeginPageIndex == EndPageIndex)
-                                EndPageIndex = EndPageIndex + 12;
+                                EndPageIndex = EndPageIndex + Amount;
                             else {
-                                BeginPageIndex = BeginPageIndex + 12;
-                                EndPageIndex = EndPageIndex + 12;
+                                BeginPageIndex = BeginPageIndex + Amount;
+                                EndPageIndex = EndPageIndex + Amount;
                             }
                         }
                         if (EndPageIndex >= Length) {
@@ -189,8 +191,8 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                         $scope.datalist = [];
                         $scope.paginate = [];
                         var PageNum = 1;
-                        while ((Length - 12) > 0) {
-                            Length = Length - 12;
+                        while ((Length - Amount) > 0) {
+                            Length = Length - Amount;
                             PageNum = PageNum + 1;
                             $scope.paginate.push(PageNum);
                         }
@@ -200,10 +202,10 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
                         for (i = 0; i <= Page; i++) {
                             if (EndPageIndex < Length) {
                                 if (BeginPageIndex == EndPageIndex)
-                                    EndPageIndex = EndPageIndex + 12;
+                                    EndPageIndex = EndPageIndex + Amount;
                                 else {
-                                    BeginPageIndex = BeginPageIndex + 12;
-                                    EndPageIndex = EndPageIndex + 12;
+                                    BeginPageIndex = BeginPageIndex + Amount;
+                                    EndPageIndex = EndPageIndex + Amount;
                                 }
                             }
                             if (EndPageIndex >= Length) {
