@@ -68,12 +68,12 @@ namespace CyberShop.Areas.Admin.Controllers
             if (model.DateFrom != null && model.DateTo == null)
             {
                 var dateFrom = DateTime.Parse(model.DateFrom);
-                lstInvoice = lstInvoice.Where(x => x.CreateDate == dateFrom).ToList();
+                lstInvoice = lstInvoice.Where(x => x.CreateDate >= dateFrom).ToList();
             }
             if (model.DateFrom == null && model.DateTo != null)
             {
                 var dateTo = DateTime.Parse(model.DateTo);
-                lstInvoice = lstInvoice.Where(x => x.CreateDate == dateTo).ToList();
+                lstInvoice = lstInvoice.Where(x => x.CreateDate <= dateTo).ToList();
             }
             if (model.DateFrom != null && model.DateTo != null)
             {

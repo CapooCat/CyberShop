@@ -227,12 +227,12 @@ namespace CyberShop.Areas.Admin.Controllers
             if (model.DateFrom != null && model.DateTo==null)
             {
                 var dateFrom = DateTime.Parse(model.DateFrom);
-                lstInvoice = lstInvoice.Where(x=>x.PurchaseDate == dateFrom).ToList();
+                lstInvoice = lstInvoice.Where(x=>x.PurchaseDate >= dateFrom).ToList();
             }
             if(model.DateFrom == null && model.DateTo != null)
             {
                 var dateTo = DateTime.Parse(model.DateTo);
-                lstInvoice = lstInvoice.Where(x => x.PurchaseDate == dateTo).ToList();
+                lstInvoice = lstInvoice.Where(x => x.PurchaseDate <= dateTo).ToList();
             }
             if(model.DateFrom != null && model.DateTo != null)
             {

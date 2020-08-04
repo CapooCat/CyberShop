@@ -26,6 +26,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
     $scope.TempIMG = [];
     $scope.TotalNotification = 0;
 
+
     $scope.dismiss = function () {
         $("#notification-popup").removeClass("fadein").addClass("fadeout");
         $interval.cancel(stop);
@@ -319,7 +320,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var customerPhone = document.getElementById("customer_phone").value;
         var status = document.getElementById("status_invoice").value;
         $scope.loading = true;
-        if (dateFrom > dateTo) {
+        if (dateFrom > dateTo && dateFrom != "" && dateTo != "") {
             $scope.loading = false;
             Swal.fire({
                 icon: 'error',
@@ -623,6 +624,10 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var productBrand = document.getElementById("product_brand").value;
         var priceFrom = document.getElementById("product_priceFrom").value;
         var priceTo = document.getElementById("product_priceTo").value;
+
+        priceFrom = parseFloat(priceFrom.replace(/\,/g, ''));
+        priceTo = parseFloat(priceTo.replace(/\,/g, ''));
+
         $scope.loading = true;
         if (priceFrom > priceTo) {
             $scope.loading = false;
@@ -770,6 +775,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var Doc = document.getElementById("txt_Add_Doc").value;
         var MetaTitle = document.getElementById("txt_Add_MetaTitle").value;
         var Warranty = document.getElementById("txt_Add_Warranty").value;
+
+        SellPrice = parseFloat(SellPrice.replace(/\,/g, ''));
 
         $scope.loading = true;
         if (ProductName == "" || Type == "" || Brand == "" || SellPrice == "" || Quantity == "" || Doc == "" || MetaTitle == "" || Warranty == "") {
@@ -1057,6 +1064,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             console.log(response);
         });
     }
+
     $scope.returnProductId = function(id){
         $scope.product_id = id;
         $scope.loading = true;
@@ -1065,7 +1073,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             $scope.Product_Name = $scope.dataProduct[0].ProductName;
             $scope.Product_Type = $scope.dataProduct[0].ProductType_id;
             $scope.Brand = $scope.dataProduct[0].Brand_id;
-            $scope.Sell_Price = $scope.dataProduct[0].Price;
             $scope.Quantity = $scope.dataProduct[0].Amount;
             $scope.Doc = $scope.dataProduct[0].Info;
             $scope.MetaTitle = $scope.dataProduct[0].MetaTitle;
@@ -1096,6 +1103,9 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var Info = document.getElementById("Edit_Doc").value;
         var Price = document.getElementById("Edit_Sell_Price").value;
         var MonthWarranty = document.getElementById("Edit_Warranty").value;
+
+        Price = parseFloat(Price.replace(/\,/g, ''));
+
         console.log(Brand_id, ProductType_id, ProductName, MetaTitle, Info, Price, MonthWarranty);
         $http({
             url: '/Admin/ProductManager/ProductUpdate',
@@ -2038,8 +2048,10 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var dateFrom = document.getElementById("date_from").value;
         var dateTo = document.getElementById("date_to").value;
         var InProduct = document.getElementById("in_product_search").value;
+        console.log(dateFrom);
+        console.log(dateTo);
         $scope.loading = true;
-        if (dateFrom > dateTo) {
+        if (dateFrom > dateTo && dateFrom != "" && dateTo != "") {
             $scope.loading = false;
             Swal.fire({
                 icon: 'error',
