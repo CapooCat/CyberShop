@@ -34,6 +34,7 @@ namespace CyberShop.Controllers
                     if (Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
                     {
                         invoice.User_id = user_session.Id;
+                        invoice.CustomerName = model.CustomerName;
                     }
                     else
                     {
@@ -70,11 +71,6 @@ namespace CyberShop.Controllers
                         inDetail.CreateDate = DateTime.Now;
                         inDetail.IsDeleted = false;
                         inDetailDao.InsertInvoiceDetail(inDetail);
-
-                        Product product = new Product();
-                        product = data.Products.Find(item.id);
-                        product.Amount = product.Amount - item.Quanlity;
-                        data.SaveChanges();
                     }
                     cart.RemoveAll(x => cart.Any());
                     ViewBag.Success = "yes";
