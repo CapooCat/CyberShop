@@ -36,11 +36,11 @@
             </div>
             <div class="col-md-2">
                 <p>Giá tiền từ:</p>
-                <input type="text" placeholder="Nhập giá tiền từ..." id="product_priceFrom">
+                <input class="currency" type="text" placeholder="Nhập giá tiền từ..." id="product_priceFrom">
             </div>
             <div class="col-md-2">
                 <p>Giá tiền đến:</p>
-                <input type="text" placeholder="Nhập giá tiền đến..." id="product_priceTo">
+                <input class="currency" type="text" placeholder="Nhập giá tiền đến..." id="product_priceTo">
             </div>
         </div>
 
@@ -82,7 +82,7 @@
                                 <td>{{item.BrandName}}</td>
                                 <td>{{item.Price | currency:"":0}}</td>
                                 <td>{{item.Amount}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" ng-click="returnProductId(item.id)"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteProduct(item.id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" id="{{item.Price}}" onclick="FormatIt(this.id);" ng-click="returnProductId(item.id)"><i class="fas fa-edit"></i></button><button class="delete" ng-click="DeleteProduct(item.id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                       </tbody>
                     </table>
@@ -162,7 +162,7 @@
                         </div>
                         <div class="col-md-4">
                             <p>Giá bán:</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="txt_Add_SellPrice" ng-value="txt_Add_SellPrice">
+                            <input class="currency" type="text" placeholder="Nhập giá tiền..." id="txt_Add_SellPrice" ng-value="txt_Add_SellPrice">
                         </div>
                         <div class="col-md-4">
                             <p>Số lượng:</p>
@@ -261,7 +261,7 @@
                     </div>
                     <div class="col-md-4">
                         <p>Giá bán:</p>
-                        <input type="text" placeholder="Nhập giá tiền..." id="Edit_Sell_Price" ng-value="Sell_Price">
+                        <input class="currency" type="text" placeholder="Nhập giá tiền..." id="Edit_Sell_Price" ng-value="Sell_Price">
                     </div>
                     <div class="col-md-4">
                         <p>Số lượng:</p>

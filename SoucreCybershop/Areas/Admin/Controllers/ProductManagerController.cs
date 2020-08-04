@@ -312,11 +312,11 @@ namespace CyberShop.Areas.Admin.Controllers
                                       .ToList();
             if (model.PriceTo != null && model.PriceFrom == null)
             {
-                lstProduct = lstProduct.Where(x => x.Price == model.PriceTo).ToList();
+                lstProduct = lstProduct.Where(x => x.Price <= model.PriceTo).ToList();
             }
             if (model.PriceTo == null && model.PriceFrom != null)
             {
-                lstProduct = lstProduct.Where(x => x.Price == model.PriceFrom).ToList();
+                lstProduct = lstProduct.Where(x => x.Price >= model.PriceFrom).ToList();
             }
             if (model.PriceTo != null && model.PriceFrom != null)
             {
