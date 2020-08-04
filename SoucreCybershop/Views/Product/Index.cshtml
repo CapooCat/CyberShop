@@ -13,12 +13,17 @@
         <li class="breadcrumb-item active">Tất cả sản phẩm</li>
     </ul>
     <div class="sort">
-        <button  ng-click="SortBy(1);Change(1); Reload()" class="clickDo active">Giá tăng dần</button>
-        <button  ng-click="SortBy(2);Change(1); Reload()" class="clickDo">Giá giảm dần</button>
-        <button  ng-click="SortBy(3);Change(1); Reload()" class="clickDo">A -> Z</button>
-        <button  ng-click="SortBy(4);Change(1); Reload()" class="clickDo">Z -> A</button>
-        <button  ng-click="SortBy(5);Change(1); Reload()" class="clickDo">Mới đến cũ</button>
-        <button  ng-click="SortBy(6);Change(1); Reload()" class="clickDo">Cũ đến mới</button>
+        <button style="margin-left:0" ng-click="SortBy(1);Change(1); Reload()" class="clickDo active">Giá tăng dần</button>
+        <button ng-click="SortBy(2);Change(1); Reload()" class="clickDo">Giá giảm dần</button>
+        <button ng-click="SortBy(3);Change(1); Reload()" class="clickDo">A -> Z</button>
+        <button ng-click="SortBy(4);Change(1); Reload()" class="clickDo">Z -> A</button>
+        <button ng-click="SortBy(5);Change(1); Reload()" class="clickDo">Mới đến cũ</button>
+        <button ng-click="SortBy(6);Change(1); Reload()" class="clickDo">Cũ đến mới</button>
+        <div style="float: right">
+            <span style="margin-right:10px">Sản phẩm hiển thị:</span>
+            <input type="text" value="12" id="item_amount">
+            <button ng-click="Change(1); Reload()">Lọc</button>
+        </div>
     </div>
 
     <div>

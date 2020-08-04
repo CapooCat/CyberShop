@@ -890,7 +890,7 @@ button:focus {
 .sort {
   margin-bottom: 15px;
   margin-top: 30px;
-  text-align: center;
+  text-align: left;
 }
 
 .sort button {
@@ -923,6 +923,20 @@ button:focus {
 
 .sort button:focus {
   outline: none;
+}
+
+.sort input[type=text] {
+  cursor: auto !important;
+  width: 60px;
+  height: 44px;
+  color: #000;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 10px;
 }
 
 .Page-address {
@@ -2595,7 +2609,7 @@ canvas{
   align-items: center;
   justify-content: center;
   display: flex;
-  transition: .5s;
+  transition: .2s;
   background-color: #fff;
   width: 300px;
   height: 80px;
@@ -2610,20 +2624,20 @@ canvas{
 }
 
 @-webkit-keyframes fadeout{
-    0%{opacity:.5s;visibility:visible;}
+    0%{opacity:.2s;transform:none;visibility:visible;}
     99%{opacity:0;}
-    100%{opacity:0;visibility: hidden;}
+    100%{opacity:0;transform:translate(200px);visibility: hidden;}
 }
 .fadeout {
-    -webkit-animation:fadeout .5s linear;
+    -webkit-animation:fadeout .2s linear;
     visibility:hidden;
 }
 @-webkit-keyframes fadein{
-    0%{opacity:0;visibility:visible;}
-    100%{opacity:1;}
+    0%{opacity:0;transform:translate(200px);visibility:visible;}
+    100%{opacity:1;transform:none;}
 }
 .fadein {
-    -webkit-animation:fadein .5s linear;
+    -webkit-animation:fadein .2s linear;
 }
 
 .hide {
@@ -2631,5 +2645,30 @@ canvas{
 }
 
 .notification-popup:hover {
-  background-color: #efefef;
+  -webkit-font-smoothing: subpixel-antialiased;
+  transform: scale(1.1,1.1);
+}
+
+.pending {
+  padding: 4px 4px;
+  background-color: red;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.waiting {
+  padding: 4px 4px;
+  background-color: #e1ad01;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.complete {
+ padding: 4px 4px;
+ background-color: #1E90FF;
+ color: #fff;
+ border-radius: 10px;
+ text-align: center;
 }

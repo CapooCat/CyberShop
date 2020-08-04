@@ -103,34 +103,6 @@
                             <p>Tên:</p>
                             <input type="text" placeholder="Nhập tên danh mục..." id="inp_cateNameLv1">
                         </div>
-                        <div class="col-md-4">
-                            <p>Lọc theo loại sản phẩm:</p>
-                            <select id="sl_prdTypeLv1" class="list-select">
-                                <option value="">Chọn loại sản phẩm</option>
-                                @foreach (var item in prdTypeList)
-                                {
-                                    <option value="@item.Metatitle">@item.TypeName</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Lọc theo hãng sản phẩm:</p>
-                            <select id="sl_brandNameLv1" class="list-select">
-                                <option value="">Chọn hãng sản phẩm</option>
-                                @foreach (var item in brandList)
-                                {
-                                    <option value="@item.Metatitle">@item.BrandName</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Giá tiền dưới: (triệu)</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="inp_lowPrice">
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <p>Giá tiền trên: (triệu)</p>
-                            <input type="text" placeholder="Nhập giá tiền..." id="inp_highPrice">
-                        </div>
                         <div class="col-md-4" style="text-align: left;" id="inp_productKw">
                             <p>Lọc sản phẩm theo từ khóa:</p>
                             <input type="text" placeholder="Nhập từ khóa...">

@@ -10,6 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,7 +28,7 @@
         <button onclick="topFunction();return false;" id="myBtn" class="GoTop"><i class="fas fa-arrow-up"></i></button>
         <div class="notification-popup hide" id="notification-popup" ng-click="dismiss()">
             <div class="notification-icon" style="margin-right: 15px;"><i class="fas fa-archive"></i></div>
-            <div>Có thông báo đặt hàng mới</div>
+            <div>Có {{NewNotification}} thông báo đặt hàng mới</div>
         </div>
         <div class="wrapper">
             <div id="logo" class="menu-logo no-select"><span><i class="fas fa-dragon"></i> Cyber</span>shop</div>
@@ -128,11 +129,29 @@
           $('#myFile').click();
         }
 
+        function GetCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
         $(document).ready(function () {
             if (window.location.pathname == "/Admin/AdminManager")
-            LoadAdminInfo();
-            if (window.location.pathname == "/Admin/InvoiceManager")
-            ViewNewOrder();
+                LoadAdminInfo();
+            if (GetCookie("Status") != "" || GetCookie("Status") != null) {
+                if (window.location.pathname == "/Admin/InvoiceManager")
+                { ViewNewOrder(); }
+            } else if (window.location.pathname == "/Admin/InvoiceManager") { ViewOrder(); }
         });
         
 

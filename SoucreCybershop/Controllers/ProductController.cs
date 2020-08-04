@@ -60,7 +60,7 @@ namespace CyberShop.Controllers
             Value = System.Uri.UnescapeDataString(Value);
             var model = new List<ProductCategoryViewModel>();
             model = (from a in data.Products
-                     where a.ProductName.Contains(Value)
+                     where a.ProductName.Contains(Value) && a.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = a.id,
@@ -104,7 +104,7 @@ namespace CyberShop.Controllers
             model = (from a in data.Categories
                      join b in data.ProducTypes on a.Id equals b.Category_id
                      join c in data.Products on b.Id equals c.ProductType_id
-                     where a.Metatitle == metatitle
+                     where a.Metatitle == metatitle && c.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = c.id,
@@ -156,7 +156,7 @@ namespace CyberShop.Controllers
             var model = new List<ProductCategoryViewModel>();
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
-                     where a.Metatitle == metatitle
+                     where a.Metatitle == metatitle && b.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = b.id,
@@ -200,7 +200,7 @@ namespace CyberShop.Controllers
             var model = new List<ProductCategoryViewModel>();
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
-                     where b.MetaTitle.Contains(metatitle)
+                     where b.MetaTitle.Contains(metatitle) && b.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = b.id,
@@ -244,7 +244,7 @@ namespace CyberShop.Controllers
             int PriceToSort = Convert.ToInt32(number + "000000");
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
-                     where b.MetaTitle.Contains(type) && b.Price < PriceToSort
+                     where b.MetaTitle.Contains(type) && b.Price < PriceToSort && b.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = b.id,
@@ -288,7 +288,7 @@ namespace CyberShop.Controllers
             int PriceToSort = Convert.ToInt32(number + "000000");
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
-                     where b.MetaTitle.Contains(type) && b.Price > PriceToSort
+                     where b.MetaTitle.Contains(type) && b.Price > PriceToSort && b.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = b.id,
@@ -333,7 +333,7 @@ namespace CyberShop.Controllers
             int PriceToSortTo = Convert.ToInt32(NumberTo + "000000");
             model = (from a in data.ProducTypes
                      join b in data.Products on a.Id equals b.ProductType_id
-                     where b.MetaTitle.Contains(type) && b.Price > PriceToSortFrom && b.Price < PriceToSortTo
+                     where b.MetaTitle.Contains(type) && b.Price > PriceToSortFrom && b.Price < PriceToSortTo && b.IsDeleted == false
                      select new ProductCategoryViewModel
                      {
                          id = b.id,
@@ -373,7 +373,7 @@ namespace CyberShop.Controllers
 
         public JsonResult SanPham()
         {
-            var productList = data.Products.ToList();
+            var productList = data.Products.Where(x => x.IsDeleted == false).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in productList)
             {
