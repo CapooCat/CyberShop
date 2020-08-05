@@ -1,9 +1,12 @@
 ﻿@model List<CyberShop.Models.DetailProductViewModel>
 
 @{
-    ViewBag.Title = "Detail Product";
+    ViewBag.Title = @Model.FirstOrDefault().ProductName;
     Layout = "~/Views/Shared/_Layout.cshtml";
     Session.Add(CyberShop.Common.CommonConstantUser.URL_REFERRER, Request.Url);
+
+    string DocSingle = @Model.FirstOrDefault().Info + "?embedded=false";
+    string DocSideBySide = @Model.FirstOrDefault().Info + "?embedded=true";
 }
 
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
@@ -56,8 +59,7 @@
         <h1 class="header-word-hide">Mô tả sản phẩm</h1>
         <div class="hide-scroll"></div>
         <div class="footer-word-hide"></div>
-            <iframe src="@Model.FirstOrDefault().Info" width="100%" height="1000" style="border: none;margin-bottom: -42px;"></iframe>
-        
+                <iframe src="@DocSingle" width="100%" height="1000" style="border: none;margin-bottom: -42px;"></iframe>
     </div>
 
     <div style="margin-top: 25px;" class="fb-comments" data-href="http://{{Domain}}/Home/DetailProduct/@Model.FirstOrDefault().id" data-numposts="5" data-width="100%"></div>
@@ -106,7 +108,7 @@
                 </div>
                 <div class="col-md-12" style="padding: 0;">
                     <div class="word-content" style="border: none;margin-top: 0;padding-top: 0;">
-                        <iframe src="@Model.FirstOrDefault().Info" class="google-doc" style="border: none;"></iframe>
+                        <iframe src="@DocSideBySide" class="google-doc" style="border: none;"></iframe>
                     </div>
                 </div>
             </div>
@@ -127,7 +129,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
 </section>

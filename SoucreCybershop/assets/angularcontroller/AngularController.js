@@ -113,7 +113,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
             $scope.ItemSelectedPrice = $scope.temp[0].Price;
             $scope.ItemSelectedName = $scope.temp[0].ProductName;
             $scope.ItemSelectedId = $scope.temp[0].id;
-            $scope.currentProjectUrl = $sce.trustAsResourceUrl($scope.temp[0].Info);
+            $scope.currentProjectUrl = $sce.trustAsResourceUrl($scope.temp[0].Info + "?embedded=true");
             $scope.loading = false;
             document.getElementById("modal-side-by-side").style.visibility = "visible";
         });
@@ -125,7 +125,9 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
 
 
     $scope.Reload = function () {
-        var Amount = Number(document.getElementById("item_amount").value);
+        var Amount = 0;
+        if(Number(document.getElementById("item_amount") != null))
+            Amount = Number(document.getElementById("item_amount").value);
         if ($a.includes("/Product") != false) {
             $scope.loading = true;
             $http.get("/Product/SanPham").then(function (res) {

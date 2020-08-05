@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using CyberShop.Models;
+
 namespace CyberShop.Controllers
 {
     public class PayController : Controller
@@ -14,6 +15,17 @@ namespace CyberShop.Controllers
         public ActionResult Index()
         {
             var model = new CustomerOrderViewModel();
+            var user_session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+            if (Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
+            {
+                model = data.Users.Where(x => x.id == user_session.Id).Select(x => new CustomerOrderViewModel
+                {
+                    CustomerName = x.Name,
+                    Address = x.Address,
+                    Email = x.Email,
+                    PhoneNum = x.PhoneNum
+                }).FirstOrDefault();
+            }
             return View(model);
         }
         [HttpPost]
@@ -24,6 +36,10 @@ namespace CyberShop.Controllers
                 if (Session[CyberShop.Common.CommonConstantUser.CART_SESSION] == null)
                 {
                     ModelState.AddModelError("", "Không thể thanh toán vì không có sản phẩm");
+                }
+                if (model.Address == "" || model.PhoneNum == "" || model.CustomerName == "" || model.Email == "")
+                {
+                    ModelState.AddModelError("", "Không được bỏ trống");
                 }
                 else
                 {

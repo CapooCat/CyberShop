@@ -3082,4 +3082,20 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
 
 
     //----------------ADMIN_MANAGER_END--------------------//
+
+    //----------------BUILD_MANAGER_START--------------------//
+
+
+
+    $scope.ReturnPC = function () {
+        $scope.loading = true;
+        $http.get("/Admin/BuildManager/ReturnPC").then(function (response) {
+            $scope.PClist = response.data;
+            $scope.loading = false;
+        });
+    }
+    $scope.ReturnPC();
+
+
+    //----------------BUILD_MANAGER_END--------------------//
     });

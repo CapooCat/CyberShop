@@ -10,6 +10,143 @@
 @using Data;
 <section id="content" class="admin-content-container">
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-desktop" style="margin-right: 10px;"></i>Quản lý máy bộ</h3>
+    <div class="row" style="margin: 5px;">
+        <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="Box" style="padding: 0;">
+                <div class="chart-title" style="height: 55px;">Máy bộ</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="myBar"></div>
+                </div>
+                <div class="admin-table" id="admin-table-best-sale" style="height: 400px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 70%;"><a href="javascript:void(0);" ng-click="sortByProduct('ProductName')">Tên máy bộ</a></th>
+                                <th style="width: 20%;color: #1E90FF">hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="items-table">
+                            <tr ng-repeat="item in PClist">
+                                <td>{{item.ProductName}}</td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" onclick="FormatIt(this.id);" ng-click=""><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 row" style="padding-top: 10px;padding-bottom: 10px;">
+        <div class="col-md-3 PC-Title">Mainboard - Bo mạch chủ</div>
+        <div class="col-md-9 PC-Info" id="mainSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(2)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Mainboard</button></div>
+        <div class="col-md-9 PC-Item" id="mainItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{MainImage}}">
+            <div class="Info">
+                {{MainName}}
+                <p class="Price">Giá tiền: {{MainPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(MainId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">CPU - Vi xử lý</div>
+        <div class="col-md-9 PC-Info" id="cpuSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(3)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn CPU</button></div>
+        <div class="col-md-9 PC-Item" id="cpuItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{CPUImage}}">
+            <div class="Info">
+                {{CPUName}}
+                <p class="Price">Giá tiền: {{CPUPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(CPUId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">RAM - Bộ nhớ trong</div>
+        <div class="col-md-9 PC-Info" id="ramSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(5)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn RAM</button></div>
+        <div class="col-md-9 PC-Item" id="ramItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{RamImage}}">
+            <div class="Info">
+                {{RamName}}
+                <p class="Price">Giá tiền: {{RamPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(RamId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">SSD - ổ cứng thể rắn</div>
+        <div class="col-md-9 PC-Info" id="ssdSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(9)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn SSD</button></div>
+        <div class="col-md-9 PC-Item" id="ssdItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" src="{{SSDImage}}">
+            <div class="Info">
+                {{SSDName}}
+                <p class="Price">Giá tiền: {{SSDPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(SSDId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">HDD - ổ cứng PC</div>
+        <div class="col-md-9 PC-Info" id="hddSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(8)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn HDD</button></div>
+        <div class="col-md-9 PC-Item" id="hddItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{HDDImage}}">
+            <div class="Info">
+                {{HDDName}}
+                <p class="Price">Giá tiền: {{HDDPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(HDDId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">PSU - Nguồn PC</div>
+        <div class="col-md-9 PC-Info" id="psuSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(4)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn PSU</button></div>
+        <div class="col-md-9 PC-Item" id="psuItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" src="{{PSUImage}}">
+            <div class="Info">
+                {{PSUName}}
+                <p class="Price">Giá tiền: {{PSUPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(PSUId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">VGA - Card màn hình</div>
+        <div class="col-md-9 PC-Info" id="vgaSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(1)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn VGA</button></div>
+        <div class="col-md-9 PC-Item" id="vgaItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" src="{{VGAImage}}">
+            <div class="Info">
+                {{VGAName}}
+                <p class="Price">Giá tiền: {{VGAPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(VGAId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">Case - Vỏ thùng máy</div>
+        <div class="col-md-9 PC-Info" id="caseSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(6)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Case</button></div>
+        <div class="col-md-9 PC-Item" id="caseItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{CaseImage}}">
+            <div class="Info">
+                {{CaseName}}
+                <p class="Price">Giá tiền: {{CasePrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(CaseId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">Màn hình</div>
+        <div class="col-md-9 PC-Info" id="monitorSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(12)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn màn hình</button></div>
+        <div class="col-md-9 PC-Item" id="monitorItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{MonitorImage}}">
+            <div class="Info">
+                {{MonitorName}}
+                <p class="Price">Giá tiền: {{MonitorPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(MonitorId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 PC-Title">Tản nhiệt</div>
+        <div class="col-md-9 PC-Info" id="coolSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(7)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Tản nhiệt</button></div>
+        <div class="col-md-9 PC-Item" id="coolItem" hidden>
+            <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{CoolerImage}}">
+            <div class="Info">
+                {{CoolerName}}
+                <p class="Price">Giá tiền: {{CoolerPrice | currency:"":0}} VNĐ</p>
+                <div><button class="delete" ng-click="DeletePcPart(CoolerId)"><i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+    </div>
+    </div>
 </section>
 
 <script>
