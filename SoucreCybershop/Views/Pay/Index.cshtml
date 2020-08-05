@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Thanh toán";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model CyberShop.Models.CustomerOrderViewModel
@@ -77,17 +77,21 @@
             <div style="color:red;" ng-show="formThanhToan.CustomerName.$touched && formThanhToan.CustomerName.$invalid">Bạn chưa nhập họ tên</div>
             <div style="color:red;" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</div>
         </div>
+        <div class="error" id="Post_Error">
+            <ul>
+                @Html.ValidationSummary(false, "", "alert alert-danger")
+            </ul>
+        </div>
         <div class="row">
-                
             <div class="col-md-6 input-info">
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.CustomerName, new { @type = "text", @placeholder = "Họ và tên...", @name = "search",@ng_model="CustomerName",@required=true, })
-                    
+                    @Html.TextBoxFor(model => model.CustomerName, new { @type = "text", @placeholder = "Họ và tên...", @name = "search", @required=true, })
+
                 </div>
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.Email, new { @type = "text", @placeholder = "Email...", @name = "search", @ng_model = "Email", @required = true, })
+                    @Html.TextBoxFor(model => model.Email, new { @type = "text", @placeholder = "Email...", @name = "search", @required = true, })
 
-                    </div>
+                </div>
                     @*<div class="discount">
                 @Html.TextBoxFor(model => model.Discount, new { @type = "text", @placeholder = "Mã giảm giá...",@id="input_cpn" })
                 <div class="tick-mark" hidden id="tickmark">
@@ -102,19 +106,18 @@
                     <h3 style="text-align: center; margin: 30px;">Phương thức thanh toán</h3>
                     <div class="pay-method" style="text-align: center;">
                         <button id="tt1" class="active" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-wallet"></i>@Html.RadioButtonFor(model => model.Payment, "Thanh toán khi nhận hàng", new { @value = "Thanh toán khi nhận hàng", @checked = true, @style = "display:none", })</div>Thanh toán khi nhận hàng</button>
-                        <button id="tt2" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-money-check-alt"></i></div>Thanh toán qua ngân hàng</button>
                     </div>
                 </div>
             <div class="col-md-6 input-info">
                 
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.PhoneNum, new { @type = "text", @placeholder = "Số điện thoại...", @name = "search", @ng_model = "PhoneNum", @required = true,@id="key", })
-                    
+                    @Html.TextBoxFor(model => model.PhoneNum, new { @type = "text", @placeholder = "Số điện thoại...", @name = "search", @required = true,@id="key", @class = "numberonly", })
+
                 </div>
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.Address, new { @type = "text", @placeholder = "Địa chỉ...", @name = "search", @ng_model = "Address", @required = true, })
+                    @Html.TextBoxFor(model => model.Address, new { @type = "text", @placeholder = "Địa chỉ...", @name = "search", @required = true, })
 
-                    </div>
+                </div>
 
                     @*<div class="form-group">
             @*<select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
@@ -146,6 +149,14 @@
 </section>
 @section scripts{
     <script>
+        var x = document.getElementById("Post_Error");
+        var list = x.getElementsByTagName("UL")[0];
+        if (list.getElementsByTagName("LI")[0].innerHTML != "") {
+            x.style.display = 'inline-block';
+        } else {
+            x.style.display = 'none';
+        }
+
         document.getElementById('giaohang').addEventListener('click', function (e) {
             e.preventDefault();
             document.getElementById("giaohang").className = "active";
@@ -168,8 +179,7 @@
         document.getElementById("tt2").addEventListener('click', function (e) {
             e.preventDefault();
         });
-    </script>
-    <script>
+
     var close = document.getElementsByClassName("closebtn");
     var i;
 
@@ -180,8 +190,6 @@
         setTimeout(function(){ div.style.display = "none"; }, 600);
       }
     }
-    </script>
-    <script type="text/javascript">
 	    var myInput = document.getElementById('key');
 	    myInput.addEventListener('keypress', function(e) {
       var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;

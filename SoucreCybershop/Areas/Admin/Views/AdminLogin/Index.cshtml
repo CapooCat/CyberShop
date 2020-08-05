@@ -28,8 +28,10 @@
         <div id="logo" class="menu-logo no-select" style="z-index: 9999;position: fixed;background: rgba(0,0,0,0.0);transition: none;text-align: left;margin-left: 15px;margin-top: 5px;"><span><i class="fas fa-dragon"></i> Cyber</span>shop</div>
         <div class="login-admin">
             <div class="login-admin-title">Đăng nhập</div>
-            <div class="err">
-            @Html.ValidationSummary(false, "", "alert alert-danger")
+            <div class="error-admin" id="Post_Error">
+                <ul>
+                    @Html.ValidationSummary(false, "", "alert alert-danger")
+                </ul>
             </div>
             @using (Html.BeginForm("Index", "AdminLogin", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
             {
@@ -51,6 +53,14 @@
         </div>
 </div>
 
-
+        <script>
+        var x = document.getElementById("Post_Error");
+        var list = x.getElementsByTagName("UL")[0];
+        if (list.getElementsByTagName("LI")[0].innerHTML != "") {
+            x.style.display = 'inline-block';
+        } else {
+            x.style.display = 'none';
+        }
+        </script>
 </body>
 </html>

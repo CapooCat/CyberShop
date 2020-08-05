@@ -101,9 +101,15 @@ namespace CyberShop
            );
 
             routes.MapRoute(
+            name: "SideBySide",
+            url: "Home/LoadItems/{Tid}/{Pid}",
+            defaults: new { controller = "Home", action = "LoadItems", Tid = UrlParameter.Optional, Pid = UrlParameter.Optional}
+          );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional}
             );
 
         }

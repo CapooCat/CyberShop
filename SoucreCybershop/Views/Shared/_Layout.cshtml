@@ -242,6 +242,13 @@
 
 
     <script>
+        $('.numberonly').on('keypress', function (e) {
+            if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+        }).on('paste', function (e) {
+            var cb = e.originalEvent.clipboardData || window.clipboardData;
+            if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
+        });
+
         var totalcat = document.getElementsByClassName("more-content-items");
         for (i = 0; i < totalcat.length; i++) {
             totalcat[i].style.display = "none";
