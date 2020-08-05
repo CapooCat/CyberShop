@@ -223,6 +223,7 @@
     <Compile Include="Areas\Admin\Controllers\AddInvoiceInManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceOutManagerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BuildManager.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\SummaryManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\InvoiceInManagerController.cs" />
@@ -390,6 +391,7 @@
     <Content Include="Areas\Admin\Views\AddInvoiceInManager\InvoiceInPdf.cshtml" />
     <Content Include="Areas\Admin\Views\InvoiceManager\InvoiceOutPdf.cshtml" />
     <Content Include="Areas\Admin\Views\InvoiceInManager\InvoiceInPdf.cshtml" />
+    <Content Include="Areas\Admin\Views\BuildManager\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

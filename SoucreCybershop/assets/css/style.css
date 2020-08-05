@@ -1991,8 +1991,9 @@ canvas{
 }
 
 .admin-table th{
+    user-select: none;
     text-align: left;
-    color: #000;
+    color: #fff;
     font-weight: normal;
     background-color: #fff;
     margin: 0;
@@ -2022,6 +2023,7 @@ canvas{
 }
 
 .product-input input[type=text], select, input[type=date], input[type=password] {
+  transition: .2s;
   cursor: auto !important;
   width: 100%;
   height: 60px;
@@ -2034,6 +2036,7 @@ canvas{
   outline: none;
   margin-bottom: 10px;
 }
+
 
 .list-select {
   margin-left: 0;

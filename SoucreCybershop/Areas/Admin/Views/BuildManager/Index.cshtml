@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
+
+}
+@using Data;
+<section id="content" class="admin-content-container">
+    <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-desktop" style="margin-right: 10px;"></i>Quản lý máy bộ</h3>
+</section>
+
+<script>
+    Active = document.getElementById("BuildManager");
+    Active.className = "active-button"
+        
+</script>
+@section scripts{
+
+        }

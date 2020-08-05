@@ -691,6 +691,19 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             });
         }
     }
+    $scope.sortlvl1 = function (catListLv1) {
+        $scope.reversecatListLv1 = ($scope.catListLv1 === catListLv1) ? !$scope.reversecatListLv1 : false;
+        $scope.catListLv1 = catListLv1;
+    };
+    $scope.sortlvl2 = function (catListLv2) {
+        $scope.reversecatListLv2 = ($scope.catListLv2 === catListLv2) ? !$scope.reversecatListLv2 : false;
+        $scope.catListLv2 = catListLv2;
+    };
+    $scope.sortlvl3 = function (catListLv3) {
+        $scope.reversecatListLv3 = ($scope.catListLv3 === catListLv3) ? !$scope.reversecatListLv3 : false;
+        $scope.catListLv3 = catListLv3;
+    };
+
     $scope.sortBrandBy = function (BrandName) {
         $scope.reverseBrand = ($scope.BrandName === BrandName) ? !$scope.reverseBrand : false;
         $scope.BrandName = BrandName;
