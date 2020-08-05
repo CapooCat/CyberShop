@@ -2675,3 +2675,66 @@ canvas{
  border-radius: 10px;
  text-align: center;
 }
+
+.side-left {
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: .2s;
+  height: 90%;
+  width: 40%;
+  position: fixed;
+  margin: 2.5%;
+  margin-left: 8%;
+  left: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background-color:  #fff;
+  color: #fff;
+}
+
+.side-right {
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: .2s;
+  height: 90%;
+  width: 40%;
+  position: fixed;
+  margin: 2.5%;
+  margin-right: 8%;
+  right: 0;
+  bottom: 0 ;
+  border-radius: 10px;
+  background-color:  #fff;
+  color: #fff;
+}
+
+.side-by-side {
+  visibility: hidden;
+}
+
+.google-doc {
+  width: 100%;
+  height: 60vh;
+}
+
+.go-btn {
+  text-align: right;
+  margin: 10px;
+} 
+
+.go-btn button {
+  transition: .2s;
+  width: 100px;
+  border-radius: 10px;
+  border: 2px solid #1E90FF;
+  background-color: #1E90FF;
+  height: 45px;
+  color: #fff;
+}
+
+.go-btn button:hover {
+  background-color: #fff;
+  color: #1E90FF;
+}

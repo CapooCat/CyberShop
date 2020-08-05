@@ -188,11 +188,43 @@ namespace CyberShop.Controllers
             return View(model);
         }
 
-        public JsonResult LoadItems(int id)
+        public JsonResult LoadItems(int Tid, int Pid)
         {
             var model = new List<ProductCategoryViewModel>();
             model = (from a in data.Products
-                     where a.IsDeleted == false && a.ProductType_id == id
+                     where a.IsDeleted == false && a.ProductType_id == Tid && a.id != Pid
+                     select new ProductCategoryViewModel
+                     {
+                         id = a.id,
+                         ProductName = a.ProductName,
+                         Info = a.Info,
+                         Price = a.Price,
+                         MonthWarranty = a.MonthWarranty,
+                         Image = a.Image,
+                         IsDeleted = a.IsDeleted,
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new ProductCategoryViewModel
+                {
+                    id = item.id,
+                    ProductName = item.ProductName,
+                    Info = item.Info,
+                    Price = item.Price,
+                    MonthWarranty = item.MonthWarranty,
+                    Image = item.Image,
+                    IsDeleted = item.IsDeleted,
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult OpenItemDoc(int id)
+        {
+            var model = new List<ProductCategoryViewModel>();
+            model = (from a in data.Products
+                     where a.IsDeleted == false && a.id == id
                      select new ProductCategoryViewModel
                      {
                          id = a.id,

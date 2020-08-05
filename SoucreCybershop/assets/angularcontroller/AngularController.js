@@ -14,7 +14,7 @@
                 }
             }
         })
-app.controller('MyController', function ($scope, $http, $window, $q) {
+app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
     var Page = 0;
     var SortType = 1;
     var BuyNow = false;
@@ -97,10 +97,30 @@ app.controller('MyController', function ($scope, $http, $window, $q) {
         Number[n-1].className += " active";
     }
 
-    $scope.LoadItems = function (id) {
-        $http.get("/Home/LoadItems/" + id).then(function (response) {
+    $scope.LoadItems = function (Tid, Pid) {
+        $scope.loading = true;
+        $http.get("/Home/LoadItems/" + Tid + "/" + Pid).then(function (response) {
             $scope.ProductSame = response.data;
+            $scope.loading = false;
         });
+    }
+    $scope.ItemSelectedId = 0;
+    $scope.OpenItemDoc = function (id) {
+        $scope.loading = true;
+        $http.get("/Home/OpenItemDoc/" + id).then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            $scope.ItemSelectedImage = $scope.temp[0].Image;
+            $scope.ItemSelectedPrice = $scope.temp[0].Price;
+            $scope.ItemSelectedName = $scope.temp[0].ProductName;
+            $scope.ItemSelectedId = $scope.temp[0].id;
+            $scope.currentProjectUrl = $sce.trustAsResourceUrl($scope.temp[0].Info);
+            $scope.loading = false;
+            document.getElementById("modal-side-by-side").style.visibility = "visible";
+        });
+    }
+
+    $scope.Xem = function () {
+        $window.location.href = '/Home/DetailProduct/' + $scope.ItemSelectedId;
     }
 
 

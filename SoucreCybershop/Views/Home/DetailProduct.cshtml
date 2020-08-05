@@ -47,7 +47,7 @@
             <div style="margin-top: 25px;">
                 <button ng-click="AddItem(@Model.FirstOrDefault().id)">Thêm vào giỏ</button>
                 <button ng-click="GoToPay(); AddItem(@Model.FirstOrDefault().id)">Mua ngay</button>
-                <button data-toggle="modal" data-target="#Modal" class="compare" ng-click="LoadItems(@Model.FirstOrDefault().ProductType_id)">So sánh</button>
+                <button data-toggle="modal" data-target="#Modal" class="compare" ng-click="LoadItems(@Model.FirstOrDefault().ProductType_id, @Model.FirstOrDefault().id)">So sánh</button>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                 <div class="modal-body">
 
                     <div class="search">
-                        <input id="Search" type="text">
+                        <input placeholder="Tìm kiếm..." type="text" ng-model="search.ProductName">
                         <button><i class="fa fa-search"></i></button>
                     </div>
                     <div style="margin-top:20px;overflow: scroll;height:475px;">
@@ -85,7 +85,7 @@
                                 <p class="Price">Giá tiền: {{item.Price | currency:"":0}} VNĐ</p>
                                 <p>Bảo hành: {{item.MonthWarranty}} tháng</p>
                             </div>
-                            <button class="add">Chọn</button>
+                            <button class="add" ng-click="OpenItemDoc(item.id);">Chọn</button>
                         </div>
                     </div>
 
@@ -94,9 +94,52 @@
         </div>
     </div>
 
+    <div class="row side-by-side" id="modal-side-by-side" style="position: fixed; z-index: 9999;">
+        <div class="col-md-12" style="background-color: #000;opacity: 0.2;top: 0;bottom:0;left: 0; right:0;position:fixed"></div>
+        <a href="javascript:void(0);" onclick="CloseModal();" style="right:0;top:0;position:fixed;margin: 0.5% ;transition: .2s;color: #fff; font-size: 20px;"><i class="fas fa-times"></i></a>
+        <div class="col-md-6">
+            <div class="side-left row">
+                <div class="col-md-12" style="text-align: center; padding: 0;">
+                    <img style="max-height: 200px;" src="@Model.FirstOrDefault().Url">
+                    <p style="font-weight: bold;color: #000;font-size: 20px;margin: 0;">@Model.FirstOrDefault().ProductName</p>
+                    <p style="font-weight: bold;color: #1E90FF; font-size: 20px;margin: 0;">@string.Format("{0:#,##0}", @Model.FirstOrDefault().Price) VNĐ</p>
+                </div>
+                <div class="col-md-12" style="padding: 0;">
+                    <div class="word-content" style="border: none;margin-top: 0;padding-top: 0;">
+                        <iframe src="@Model.FirstOrDefault().Info" class="google-doc" style="border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="side-right row">
+                    <div class="col-md-12 go-btn" style="padding: 0;position: absolute; right: 0; top: 0;"><button ng-click="Xem()">Xem</button></div>
+                    <div class="col-md-12" style="text-align: center; padding: 0;">
+                        <img style="max-height: 200px;" src="{{ItemSelectedImage}}">
+                        <p style="font-weight: bold;color: #000;font-size: 20px;margin: 0;">{{ItemSelectedName}}</p>
+                        <p style="font-weight: bold;color: #1E90FF;font-size: 20px;margin: 0;">{{ItemSelectedPrice | currency:"":0}} VNĐ</p>
+                    </div>
+                    <div class="col-md-12" style="padding: 0;">
+                        <div class="word-content" style="border: none;margin-top: 0;padding-top: 0;">
+                            <iframe ng-src="{{currentProjectUrl}}" class="google-doc" style="border: none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </section>
 @section scripts{
 <script type="text/javascript">
+
+    function CloseModal() {
+        document.getElementById("modal-side-by-side").style.visibility = "hidden";
+    }
+
+
+
 				var slideIndex = 1;
 				var Timer = window.setTimeout(AutoSlide, 3000);
 				ShowCurrentSlide(slideIndex);
