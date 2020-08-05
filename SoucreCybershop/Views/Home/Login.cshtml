@@ -34,9 +34,10 @@
             <a href="#">quên mật khẩu ?</a>
         </h6>
     </div>
+</section>
 
-    @section scripts{
-        <script>
+@section scripts{
+    <script>
         var x = document.getElementById("Post_Error");
         var list = x.getElementsByTagName("UL")[0];
         if (list.getElementsByTagName("LI")[0].innerHTML != "") {
@@ -44,7 +45,6 @@
         } else {
             x.style.display = 'none';
         }
-        </script>
-    }
-</section>
+    </script>
+}
 

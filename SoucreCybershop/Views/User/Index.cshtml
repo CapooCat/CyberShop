@@ -93,7 +93,7 @@
                     <h6>
                         @*<input type="text" placeholder="Số điện thoại..." name="search">*@
                         @Html.LabelFor(model => model.PhoneNum)
-                        @Html.TextBoxFor(model => model.PhoneNum, new{ @*@name = "search"*@ @id = "key" })
+                        @Html.TextBoxFor(model => model.PhoneNum, new{ @*@name = "search"*@ @id = "key", @class = "numberonly", })
                     </h6>
                     <h6>
                         @*<input type="text" placeholder="Địa chỉ..." name="search">*@
