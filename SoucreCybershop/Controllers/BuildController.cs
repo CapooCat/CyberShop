@@ -37,11 +37,15 @@ namespace CyberShop.Controllers
                          CreateDate = a.CreateDate,
                          IsDeleted = a.IsDeleted,
                          MonthWarranty = a.MonthWarranty,
-                         SalePercent = a.SalePercent
+                         SalePercent = a.SalePercent,
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {
+                if (item.Amount > 0)
+                {
+                    item.CheckStatus = "còn hàng";
+                } else { item.CheckStatus = "hết hàng";  }
                 ReturnData.Add(new ProductViewModel
                 {
                     id = item.id,
@@ -58,7 +62,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     IsDeleted = item.IsDeleted,
                     MonthWarranty = item.MonthWarranty,
-                    SalePercent = item.SalePercent
+                    SalePercent = item.SalePercent,
+                    CheckStatus = item.CheckStatus
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);

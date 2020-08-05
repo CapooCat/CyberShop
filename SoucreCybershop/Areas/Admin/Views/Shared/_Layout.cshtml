@@ -38,6 +38,7 @@
                     <a class="drop active" onclick='show_more(0);'>Quản lý</a>
                     <div class="nav-detail" style="visibility: visible;">
                         <li><button id="ProductManager"onclick="window.location.href='/Admin/ProductManager'">Quản lý sản phẩm</button></li>
+                        <li><button id="BuildManager" onclick="window.location.href = '/Admin/BuildManager'">Quản lý máy bộ</button></li>
                         <li><button id="InvoiceManager" onclick="window.location.href='/Admin/InvoiceManager'">Quản lý hóa đơn</button></li>
                         <li><button id="CategoryManager" onclick="window.location.href='/Admin/CategoryManager'">Quản lý danh mục</button></li>
                         <li><button id="InvoiceInManager" onclick="window.location.href = '/Admin/InvoiceInManager'">Quản lý hóa đơn nhập</button></li>
@@ -60,18 +61,18 @@
                 <div id="Push" class="push">
                     <a onclick="MenuClick();" style="cursor: pointer;"><i class="fas fa-bars" style="font-size: 22px;"></i></a>
                     <div class="user" style="float: right;">
-                        <a style="float: right;" href="#"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@name</a>
+                        <a style="float: right;" href="javascript:void(0);"><i class="fas fa-user-circle" style="margin-right: 10px;"></i>@name</a>
                         <div class="dropdown-user" style="right: 10px;">
                             <a href="/Admin/AdminLogin/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
                         </div>
                     </div>
                     <div class="notification">
-                        <a style="float: right;border-right: 2px solid #DCDCDC" href="#"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> {{TotalNotification}} </span>Thông báo</a>
+                        <a style="float: right;border-right: 2px solid #DCDCDC" href="javascript:void(0);"><i class="fas fa-bell" style="margin-right: 10px;"></i><span class='badge badge-warning' id='lblCartCount'> {{TotalNotification}} </span>Thông báo</a>
                         <div class="dropdown-notification">
                             <div class="wall-background no-select">Thông báo</div>
                             <div class="unread-notification no-select">Có {{TotalNotification}} thông báo mới</div>
                             <div class="notification-content">
-                                <a class="notification-item" ng-click="GoToInvoiceManager();" href="#" ng-repeat="item in Notification">
+                                <a class="notification-item" ng-click="GoToInvoiceManager();" href="javascript:void(0);" ng-repeat="item in Notification">
                                     <div class="notification-icon"><i class="fas fa-archive"></i></div>
                                     <div style="text-align: left;margin-left: 60px;color: #1E90FF;"><span style="font-weight: bold;">Khách hàng {{item.CustomerName}}</span><span class="Time">{{item.PurchaseDate.slice(6, -2) | date:'dd/MM/yyyy'}}</span></div>
                                     <div class="notification-info">{{item.CustomerName}} yêu cầu xác nhận đơn hàng mã <span style="font-weight: bold;">#{{item.Id}}</span></div>
@@ -105,6 +106,22 @@
 				Push = document.getElementById("Push");
 				Table = document.getElementById("admin-table-best-sale");
 				TableNew = document.getElementById("admin-table-new-customers");
+
+				$('.numberonly').on('keypress', function (e) {
+				    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+				}).on('paste', function (e) {
+				    var cb = e.originalEvent.clipboardData || window.clipboardData;
+				    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
+				});
+
+				$('.currency').on('input', function (e) {
+				    $(this).val(formatCurrency(this.value.replace(/[,]/g, '')));
+				}).on('keypress', function (e) {
+				    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+				}).on('paste', function (e) {
+				    var cb = e.originalEvent.clipboardData || window.clipboardData;
+				    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
+				});
 
 
 				var height = [];
@@ -228,24 +245,27 @@
 				}
 			}
 
+			if (Table != null) {
+			    Table.onscroll = function () { myFunction() };
 
-			Table.onscroll = function() {myFunction()};
-
-			function myFunction() {
-				var winScroll = Table.scrollTop || Table.scrollTop;
-				var height = Table.scrollHeight - Table.clientHeight;
-				var scrolled = (winScroll / height) * 100;
-				document.getElementById("myBar").style.width = scrolled + "%";
+			    function myFunction() {
+			        var winScroll = Table.scrollTop || Table.scrollTop;
+			        var height = Table.scrollHeight - Table.clientHeight;
+			        var scrolled = (winScroll / height) * 100;
+			        document.getElementById("myBar").style.width = scrolled + "%";
+			    }
 			}
+			if (TableNew != null) {
+			    TableNew.onscroll = function () { myFunctionNew() };
 
-			TableNew.onscroll = function() {myFunctionNew()};
-
-			function myFunctionNew() {
-				var winScroll = TableNew.scrollTop || TableNew.scrollTop;
-				var height = TableNew.scrollHeight - TableNew.clientHeight;
-				var scrolled = (winScroll / height) * 100;
-				document.getElementById("newBar").style.width = scrolled + "%";
+			    function myFunctionNew() {
+			        var winScroll = TableNew.scrollTop || TableNew.scrollTop;
+			        var height = TableNew.scrollHeight - TableNew.clientHeight;
+			        var scrolled = (winScroll / height) * 100;
+			        document.getElementById("newBar").style.width = scrolled + "%";
+			    }
 			}
+			
 
 		
 			function UnCheck() {
@@ -284,20 +304,11 @@
 			    $('#search_input').find(':input').val('');
 			}
 
-			$('.currency').on('input', function (e) {
-			    $(this).val(formatCurrency(this.value.replace(/[,]/g, '')));
-			}).on('keypress', function (e) {
-			    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
-			}).on('paste', function (e) {
-			    var cb = e.originalEvent.clipboardData || window.clipboardData;
-			    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
-			});
-
 			function FormatIt(price) {
 			    document.getElementById("Edit_Sell_Price").value = formatCurrency(price.replace(/[,]/g, ''));
 			}
 
-        function formatCurrency(number) {
+            function formatCurrency(number) {
 			    var n = number.split('').reverse().join("");
 			    var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");
 			    return n2.split('').reverse().join('');

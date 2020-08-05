@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Data;
 using CyberShop.Areas.Admin.Models;
 using Rotativa;
+using Microsoft.Ajax.Utilities;
+
 namespace CyberShop.Areas.Admin.Controllers
 {
     public class InvoiceInManagerController : Controller
@@ -51,20 +53,21 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult FilterInvoiceIn(InvoiceInManagerViewModel model)
         {
             var lstInvoice = new List<InvoiceInManagerViewModel>();
-            
-                lstInvoice = (from a in data.InOrder_Detail
-                              join c in data.InOrders on a.InOrder_id equals c.Id
-                              where a.IsDeleted == false && ( (model.Product_id == null) || (a.Product_id == model.Product_id) ) && ( (model.Id == null) || (c.Id == model.Id) )
-                              select new InvoiceInManagerViewModel
-                              {
-                                  Id = c.Id,
-                                  Status = c.Status,
-                                  Total = c.Total,
-                                  IsDeleted = c.IsDeleted,
-                                  CreateBy = c.CreateBy,
-                                  CreateDate = c.CreateDate,
-                              }).ToList();
-            
+
+            lstInvoice = (from a in data.InOrder_Detail
+                          join c in data.InOrders on a.InOrder_id equals c.Id
+                          where a.IsDeleted == false && c.IsDeleted == false && ((model.Product_id == null) || (a.Product_id == model.Product_id)) && ((model.Id == null) || (c.Id == model.Id))
+                          select new InvoiceInManagerViewModel
+                          {
+                              Id = c.Id,
+                              Status = c.Status,
+                              Total = c.Total,
+                              IsDeleted = c.IsDeleted,
+                              CreateBy = c.CreateBy,
+                              CreateDate = c.CreateDate,
+                          }).ToList();
+
+
             if (model.DateFrom != null && model.DateTo == null)
             {
                 var dateFrom = DateTime.Parse(model.DateFrom);
@@ -81,9 +84,8 @@ namespace CyberShop.Areas.Admin.Controllers
                 var dateTo = DateTime.Parse(model.DateTo);
                 lstInvoice = lstInvoice.Where(x => x.CreateDate >= dateFrom && x.CreateDate <= dateTo).ToList();
             }
-            lstInvoice = lstInvoice.Where(x => x.IsDeleted == false).ToList();
             List<object> ReturnData = new List<object>();
-            foreach (var item in lstInvoice)
+            foreach (var item in lstInvoice.DistinctBy(x => x.Id))
             {
                 ReturnData.Add(new InvoiceInManagerViewModel
                 {
@@ -244,6 +246,19 @@ namespace CyberShop.Areas.Admin.Controllers
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteInvoiceInChecked(List<int> id)
+        {
+            InOrder entity = new InOrder();
+            foreach (var item in id)
+            {
+                entity = data.InOrders.Find(item);
+                entity.IsDeleted = true;
+                data.SaveChanges();
+            }
+            return ReturnInvoiceIn();
         }
 
         public JsonResult DeleteDetailInvoiceIn(int id)

@@ -15,7 +15,7 @@
         <div class="col-md-12 row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;" id="search_input">
             <div class="col-md-2">
                 <p>Mã hóa đơn:</p>
-                <input type="text" placeholder="Nhập mã hóa đơn..." id="invoice_id">
+                <input type="text" class="numberonly" placeholder="Nhập mã hóa đơn..." id="invoice_id">
             </div>
             <div class="col-md-2">
                 <p>Thời gian từ:</p>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-2">
                 <p>Số điện thoại:</p>
-                <input type="text" placeholder="Nhập số điện thoại..." id="customer_phone">
+                <input type="text" class="numberonly" placeholder="Nhập số điện thoại..." id="customer_phone">
             </div>
             <div class="col-md-2">
                 <p>Trạng thái:</p>
@@ -60,13 +60,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 3%;" class="checkbox"><input type="checkbox" id="check-all" onchange="Check()"></th>
-                                <th style="width: 7%;"><a href="#" ng-click="sortByInvoice('Id')">Mã hóa đơn</a></th>
-                                <th style="width: 15%;"><a href="#" ng-click="sortByInvoice('CustomerName')" >Tên khách hàng</a></th>
-                                <th style="width: 28%;"><a href="#" ng-click="sortByInvoice('DeliveryAddress')">Địa chỉ</a></th>
-                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('DeliveryPhoneNum')">Số điện thoại</a></th>
-                                <th style="width: 10%;"><a href="#" ng-click="sortByInvoice('PurchaseDate')">Ngày xuất</a></th>
-                                <th style="width: 12%;"><a href="#" ng-click="sortByInvoice('Status')">Tình trạng</a></th>
-                                <th style="width: 15%;"><a href="#" >Hành động</a></th>
+                                <th style="width: 7%;"><a href="javascript:void(0);" ng-click="sortByInvoice('Id')">Mã hóa đơn</a></th>
+                                <th style="width: 15%;"><a href="javascript:void(0);" ng-click="sortByInvoice('CustomerName')" >Tên khách hàng</a></th>
+                                <th style="width: 28%;"><a href="javascript:void(0);" ng-click="sortByInvoice('DeliveryAddress')">Địa chỉ</a></th>
+                                <th style="width: 10%;"><a href="javascript:void(0);" ng-click="sortByInvoice('DeliveryPhoneNum')">Số điện thoại</a></th>
+                                <th style="width: 10%;"><a href="javascript:void(0);" ng-click="sortByInvoice('PurchaseDate')">Ngày xuất</a></th>
+                                <th style="width: 12%;"><a href="javascript:void(0);" ng-click="sortByInvoice('Status')">Tình trạng</a></th>
+                                <th style="width: 15%; color: #1E90FF">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="items-table">
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-md-3" style="text-align: left;">
                             <p>Số điện thoại</p>
-                            <input type="text" placeholder="hãng số điện thoại..." id="phone_number" ng-value="phoneNumber">
+                            <input type="text" class="numberonly" placeholder="số điện thoại..." id="phone_number" ng-value="phoneNumber">
                         </div>
                         <div class="col-md-6">
                             <p>Địa chỉ:</p>
@@ -123,7 +123,7 @@
                             <button onclick="ShowProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
                             <div class="Dropdown-Product-Background" id="Product-Background"></div>
                             <div class="Dropdown-Product" id="Product">
-                                <a href="#" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
+                                <a href="javascript:void(0);" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
                                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                                 <div class="col-md-4">
                                     <p>Tìm kiếm sản phẩm:</p>
@@ -156,12 +156,12 @@
                                             <table>
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 40%;"><a ng-click="sortProduct('ProductName')" href="#">Tên sản phẩm</a></th>
-                                                        <th style="width: 10%;"><a ng-click="sortProduct('ProductTypeName')"href="#">Loại SP</a></th>
-                                                        <th style="width: 10%;"><a ng-click="sortProduct('BrandName')"href="#">Hãng SP</a></th>
-                                                        <th style="width: 15%;"><a ng-click="sortProduct('Amount')"href="#">SL hàng tồn</a></th>
-                                                        <th style="width: 10%;"><a ng-click="sortProduct('MonthWarranty')"href="#">Bảo hành</a></th>
-                                                        <th style="width: 20%;"><a ng-click="sortProduct('Price')"href="#">Giá tiền</a></th>
+                                                        <th style="width: 40%;"><a ng-click="sortProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                        <th style="width: 10%;"><a ng-click="sortProduct('ProductTypeName')"href="javascript:void(0);">Loại SP</a></th>
+                                                        <th style="width: 10%;"><a ng-click="sortProduct('BrandName')"href="javascript:void(0);">Hãng SP</a></th>
+                                                        <th style="width: 15%;"><a ng-click="sortProduct('Amount')"href="javascript:void(0);">SL hàng tồn</a></th>
+                                                        <th style="width: 10%;"><a ng-click="sortProduct('MonthWarranty')"href="javascript:void(0);">Bảo hành</a></th>
+                                                        <th style="width: 20%;"><a ng-click="sortProduct('Price')"href="javascript:void(0);">Giá tiền</a></th>
                                                         <th style="width: 5%;text-align: center;"></th>
                                                     </tr>
                                                 </thead>
@@ -173,9 +173,8 @@
                                                         <td>{{item.Amount}}</td>
                                                         <td>{{item.MonthWarranty}}</td>
                                                         <td>{{item.Price | currency:"":0}}</td>
-                                                        <td style="text-align: center;"><a href="#" ng-click="AddProductToInvoice(item.id, item.Price,item.MonthWarranty)"><i class="fas fa-plus"></i></a></td>
+                                                        <td style="text-align: center;"><a href="javascript:void(0);" ng-click="AddProductToInvoice(item.id, item.Price,item.MonthWarranty)"><i class="fas fa-plus"></i></a></td>
                                                     </tr>
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -191,18 +190,18 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th style="width: 45%;"><a href="#">Tên sản phẩm</a></th>
-                                                <th style="width: 10%;"><a href="#">Số lượng</a></th>
-                                                <th style="width: 20%;"><a href="#">Giá tiền (VNĐ)</a></th>
-                                                <th style="width: 15%;text-align: center;"><a href="#">Hoạt động</a></th>
+                                                <th style="width: 45%;"><a ng-click="sortInvoiceProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                <th style="width: 10%;"><a ng-click="sortInvoiceProduct('Amount')" href="javascript:void(0);">Số lượng</a></th>
+                                                <th style="width: 20%;"><a ng-click="sortInvoiceProduct('Price')" href="javascript:void(0);">Giá tiền (VNĐ)</a></th>
+                                                <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in listInvoiceDetail" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
+                                            <tr ng-repeat="item in listInvoiceDetail | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                                 <td>{{item.ProductName}}</td>
                                                 <td>{{item.Amount}}</td>
                                                 <td>{{item.Price | currency:"":0}}</td>
-                                                <td style="text-align: center;"><a href="#" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
+                                                <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -210,7 +209,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="float: right;">Tổng tiền: {{bucket.total_price | currency:"":0}}</div>
+                    <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" ng-click="UpdateInvoice()">Xác nhận</button>
@@ -271,15 +270,17 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width: 45%;"><a href="#">Tên sản phẩm</a></th>
-                                            <th style="width: 30%;"><a href="#">Số lượng</a></th>
-                                            <th style="width: 30%;"><a href="#">Bảo hành</a></th>
+                                            <th style="width: 45%;"><a ng-click="sortViewInProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                            <th style="width: 10%;"><a ng-click="sortViewInProduct('Amount')" href="javascript:void(0);">Số lượng</a></th>
+                                            <th style="width: 20%;"><a ng-click="sortViewInProduct('Price')" href="javascript:void(0);">Giá tiền</a></th>
+                                            <th style="width: 30%;"><a ng-click="sortViewInProduct('WarrantyExpires')" href="javascript:void(0);">Bảo hành</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="item in WarrantyInvoiceDetail">
+                                        <tr ng-repeat="item in WarrantyInvoiceDetail | orderBy:ViewInProduct:reverseViewInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                             <td>{{item.ProductName}}</td>
                                             <td>{{item.Amount}}</td>
+                                            <td>{{item.Price | currency:"":0}}</td>
                                             <td>{{item.WarrantyExpires.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
                                         </tr>
                                     </tbody>
@@ -287,7 +288,9 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
+                <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
 
 
 
@@ -356,5 +359,6 @@
         ProductBackground.style.visibility = "hidden";
         Product.style.visibility = "hidden";
     }
+
 </script>
 

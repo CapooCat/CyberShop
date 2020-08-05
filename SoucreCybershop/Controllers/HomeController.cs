@@ -16,17 +16,29 @@ namespace CyberShop.Controllers
         ShopPCComponentsEntities data = new ShopPCComponentsEntities();
         public ActionResult Index()
         {
-            List<ProductHomeViewModel> spGiamGia = new List<ProductHomeViewModel>();
-            spGiamGia = data.Products.Take(12).Select(x => new ProductHomeViewModel
-            {
-                id = x.id,
-                ProductName = x.ProductName,
-                oldPrice = x.Price,
-                Image = x.Image,
-            }).ToList();
-            ViewBag.SpGiamGia = spGiamGia;
+            var spBanChay = new List<ProductHomeViewModel>();
+            spBanChay = (from a in data.Products
+                     join b in data.Invoice_Detail on a.id equals b.Product_id
+                     where a.IsDeleted == false
+                     group b by new
+                     {
+                         a.id,
+                         a.ProductName,
+                         a.Price,
+                         a.Image
+                     } into x
+                     select new ProductHomeViewModel
+                     {
+                         id = x.Key.id,
+                         ProductName = x.Key.ProductName,
+                         oldPrice = x.Key.Price,
+                         Image = x.Key.Image,
+                         SellAmount = x.Sum(b => b.Amount)
+                     }).OrderByDescending(x => x.SellAmount).Take(12).ToList();
+            ViewBag.SpBanchay = spBanChay;
+
             List<ProductHomeViewModel> spMoi = new List<ProductHomeViewModel>();
-            spMoi = data.Products.Take(12).Select(x=> new ProductHomeViewModel {
+            spMoi = data.Products.Where(x => x.IsDeleted == false).OrderByDescending(t => t.CreateDate).Take(12).Select(x=> new ProductHomeViewModel {
                 id=x.id,
                 ProductName=x.ProductName,
                 oldPrice=x.Price,
@@ -53,7 +65,7 @@ namespace CyberShop.Controllers
             UserDao userDao = new UserDao();
             if(ModelState.IsValid)
             {
-                if (userDao.KTTaiKhoan(model.Username))
+                if (userDao.KTTaiKhoan(model.Username) && userDao.NotAdmin(model.Username))
                 {
                     if (userDao.KTMatKhau(Encryptor.MD5Hash(model.Password), model.Username))
                     {
@@ -174,94 +186,6 @@ namespace CyberShop.Controllers
                 }
             }
             return View(model);
-        }
-        private Uri RedirectUri
-        {
-            get
-            {
-                var uriBuilder = new UriBuilder(Request.Url);
-                uriBuilder.Query = null;
-                uriBuilder.Fragment = null;
-                uriBuilder.Path = Url.Action("FacebookCallback");
-                return uriBuilder.Uri;
-            }
-        }
-        [AllowAnonymous]
-        public ActionResult LoginFacebook()
-        {
-            var fb = new FacebookClient();
-            var loginUrl = fb.GetLoginUrl(new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret=ConfigurationManager.AppSettings["FbAppSecret"],
-                redirect_uri=RedirectUri.AbsoluteUri,
-                response_type="code",
-                scope="email"
-            });
-            return Redirect(loginUrl.AbsoluteUri);
-        }
-        public ActionResult FacebookCallback(string code)
-        {
-            var fb = new FacebookClient();
-            dynamic result = fb.Post("oauth/access_token", new
-            {
-                client_id = ConfigurationManager.AppSettings["FbAppId"],
-                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
-                redirect_uri = RedirectUri.AbsoluteUri,
-                code = code,
-            });
-            var accessToken = result.access_token;
-            fb.AccessToken = accessToken;
-            if(!string.IsNullOrEmpty(accessToken))
-            {
-                fb.AccessToken = accessToken;
-                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email,picture");
-                string email = me.email;
-                string username = me.email;
-                string birthday = me.birthday;
-                string image = me.picture.data.url;
-                string firstname = me.first_name;
-                string middlename = me.middle_name;
-                string lastname = me.last_name;
-
-                var userDao = new UserDao();
-                if (userDao.KTEmail(email)!=true)
-                {
-                    var user = new User();
-                    user.Email = email;
-                    user.Username = email;
-                    user.Name = firstname + " " + middlename + " " + lastname;
-                    user.IsDeleted = false;
-                    user.CreateDate = DateTime.Now;
-
-                    var resultInsert=userDao.InsertUser(user);
-                    if(resultInsert==true)
-                    {
-                        user = userDao.getInfo(user.Email);
-                        var userSession = new UserInfo();
-                        userSession.Id = user.id;
-                        userSession.TaiKhoan = "";
-                        userSession.Image = user.Image;
-                        userSession.HoTen = user.Name;
-                        userSession.DateOfBirth = null;
-                        Session.Add(CommonConstantUser.USER_SESSION, userSession);  
-                    }
-                }
-                else
-                {
-                    var user = new User();
-                    user.Email = email;
-                    user = userDao.getInfo(user.Email);
-                    var userSession = new UserInfo();
-                    userSession.Id = user.id;
-                    userSession.TaiKhoan = user.Username;
-                    userSession.Image = user.Image;
-                    userSession.HoTen = user.Name;
-                    userSession.DateOfBirth = null;
-                    Session.Add(CommonConstantUser.USER_SESSION, userSession);
-                }
-            }
-            return Redirect("/");
         }
 
         public JsonResult LoadItems(int id)

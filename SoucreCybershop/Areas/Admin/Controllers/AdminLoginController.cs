@@ -50,7 +50,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "CategoryManager");
+                        return RedirectToAction("Index", "SummaryManager");
                     }
                 }
                 else
