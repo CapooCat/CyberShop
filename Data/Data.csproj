@@ -87,6 +87,7 @@
     <Compile Include="Product.cs">
       <DependentUpon>CyberShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Detail_PcSetDao.cs" />
     <Compile Include="ProductDao.cs" />
     <Compile Include="CyberShopModel.Context.cs">
       <AutoGen>True</AutoGen>

@@ -49,12 +49,14 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             var model = new List<ProductTypeManagerViewModel>();
             model = (from a in data.ProducTypes
+                     join b in data.Categories on a.Category_id equals b.Id
                      where a.IsDeleted == false
                      select new ProductTypeManagerViewModel
                      {
                          id = a.Id,
                          TypeName = a.TypeName,
-                         MetaTitle = a.Metatitle
+                         MetaTitle = a.Metatitle,
+                         CategoryName = b.Name
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -63,7 +65,8 @@ namespace CyberShop.Areas.Admin.Controllers
                 {
                     id = item.id,
                     TypeName = item.TypeName,
-                    MetaTitle = item.MetaTitle
+                    MetaTitle = item.MetaTitle,
+                    CategoryName = item.CategoryName
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -215,6 +218,7 @@ namespace CyberShop.Areas.Admin.Controllers
             
             Type.TypeName = model.TypeName;
             Type.Metatitle = model.MetaTitle;
+            Type.Category_id = model.Category_id;
             Type.IsDeleted = false;
             Type.CreateTime = DateTime.Now;
             Type.CreateBy = "Admin";
@@ -239,9 +243,22 @@ namespace CyberShop.Areas.Admin.Controllers
             Product.IsDeleted = false;
             Product.CreateDate = DateTime.Now;
             Product.CreateBy = "Admin";
-            
-            if (ProductDao.InsertProduct(Product))
-            { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+            if (ProductDao.InsertProduct(Product)) {
+                if (model.ProductType_id == 20)
+                {
+                    var Detail_PcSetDao = new Detail_PcSetDao();
+                    var PCset = new Detail_PcSets();
+                    int Id = data.Products.Max(x => x.id);
+                    PCset.product_id = Id;
+                    if (Detail_PcSetDao.InsertPC(PCset))
+                    { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
+                    else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
+                } else
+                {
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
+                
+            }
             else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
         }
 
