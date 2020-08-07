@@ -137,12 +137,12 @@
 
                     <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                         <div class="col-md-4">
-                            <p>Tên sản phẩm:</p>
+                            <p>Tên sản phẩm: <span style="color: red;">*</span></p>
                             <input type="text" placeholder="Nhập tên sản phẩm..." id="txt_Add_ProductName" ng-value="txt_Add_ProductName">
                         </div>
                         <div class="col-md-4">
-                            <p>Loại sản phẩm:</p>
-                            <select class="list-select" id="txt_Add_Type" ng-value="txt_Add_Type">
+                            <p>Loại sản phẩm: <span style="color: red;">*</span></p>
+                            <select class="list-select" id="txt_Add_Type" onchange="checkType();" ng-value="txt_Add_Type">
                                 <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                                 @foreach (var item in prdTypeList)
                                 {
@@ -151,7 +151,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <p>Hãng:</p>
+                            <p>Hãng: <span style="color: red;">*</span></p>
                             <select class="list-select" id="txt_Add_Brand" ng-value="txt_Add_Brand">
                                 <option value=""> <text style="color:silver">Chọn hãng</text></option>
                                 @foreach (var item in brandList)
@@ -161,27 +161,28 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <p>Giá bán:</p>
+                            <p>Giá bán: <span style="color: red;">*</span></p>
                             <input class="currency" type="text" placeholder="Nhập giá tiền..." id="txt_Add_SellPrice" ng-value="txt_Add_SellPrice">
                         </div>
                         <div class="col-md-4">
-                            <p>Số lượng:</p>
+                            <p>Số lượng: <span style="color: red;">*</span></p>
                             <input type="text" class="numberonly" placeholder="Nhập số lượng..." id="txt_Add_Quantity" ng-value="txt_Add_Quantity">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Mô tả (Google Doc):</p>
+                            <p>Mô tả (Google Doc): <span style="color: red;">*</span></p>
                             <input type="text" placeholder="Nhập link Google Doc..." id="txt_Add_Doc" ng-value="txt_Add_Doc">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Bảo hành:</p>
+                            <p>Bảo hành: <span style="color: red;">*</span></p>
                             <input type="text" class="numberonly" placeholder="Nhập tháng bảo hành..." id="txt_Add_Warranty" ng-value="txt_Add_Warranty">
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <p>Từ khóa:</p>
+                            <p>Từ khóa: <span style="color: red;">VD: gtx-1650</span></p>
                             <input type="text" placeholder="Nhập từ khóa..." id="txt_Add_MetaTitle" ng-value="txt_Add_MetaTitle">
                         </div>
                         <div class="col-md-4" style="text-align: center;">
-                            <input type="file" id="myFile1" onchange="angular.element(this).scope().AddFiles(this.files)" style="display: none;" accept="image/*" multiple>
+                            <input type="file" id="myFile1" onchange="angular.element(this).scope().AddFiles(this.files)" style="display: none;" accept="image/*">
+                            <button style="width: 60px; height: 60px;" onclick="ResetAdd()"><i class="fas fa-redo-alt" style="margin-right: 10px;"></i></button>
                             <button onclick="Upload()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm hình ảnh</button>
                         </div>
 
@@ -192,10 +193,10 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th style="width: 10%;text-align: center;"><a href="javascript:void(0);">Ảnh chính</a></th>
-                                                <th style="width: 45%;"><a href="javascript:void(0);">Tên hình ảnh</a></th>
-                                                <th style="width: 30%;"><a href="javascript:void(0);">Hình ảnh</a></th>
-                                                <th style="width: 5%;text-align: center;"><a href="javascript:void(0);">Xóa</a></th>
+                                                <th style="width: 10%;text-align: center;">Ảnh chính</th>
+                                                <th style="width: 45%;">Tên hình ảnh</th>
+                                                <th style="width: 30%;">Hình ảnh</th>
+                                                <th style="width: 5%;text-align: center;">Xóa</th>
                                             </tr>
                                         </thead>
                                         <tbody id="IMG_DATA">
@@ -236,11 +237,11 @@
 
                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
                     <div class="col-md-4">
-                        <p>Tên sản phẩm:</p>
+                        <p>Tên sản phẩm: <span style="color: red;">*</span></p>
                         <input type="text" placeholder="Nhập tên sản phẩm..." id="Edit_Product_Name" ng-value="Product_Name">
                     </div>
                     <div class="col-md-4">
-                        <p>Loại sản phẩm:</p>
+                        <p>Loại sản phẩm: <span style="color: red;">*</span></p>
                         <select class="list-select" id="Edit_Product_Type" ng-value="Product_Type">
                             <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
                             @foreach (var item in prdTypeList)
@@ -250,7 +251,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <p>Hãng:</p>
+                        <p>Hãng: <span style="color: red;">*</span></p>
                         <select class="list-select" id="Edit_Brand" ng-value="Brand">
                             <option value=""> <text style="color:silver">Chọn hãng</text></option>
                             @foreach (var item in brandList)
@@ -260,23 +261,23 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <p>Giá bán:</p>
+                        <p>Giá bán: <span style="color: red;">*</span></p>
                         <input class="currency" type="text" placeholder="Nhập giá tiền..." id="Edit_Sell_Price" ng-value="Sell_Price">
                     </div>
                     <div class="col-md-4">
-                        <p>Số lượng:</p>
+                        <p>Số lượng: <span style="color: red;">*</span></p>
                         <input type="text" class="numberonly" placeholder="Nhập số lượng..." id="Edit_Quantity" ng-value="Quantity">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
-                        <p>Mô tả (Google Doc):</p>
+                        <p>Mô tả (Google Doc): <span style="color: red;">*</span></p>
                         <input type="text" placeholder="Nhập link Google Doc..." id="Edit_Doc" ng-value="Doc">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
-                        <p>Bảo hành:</p>
+                        <p>Bảo hành: <span style="color: red;">*</span></p>
                         <input type="text" class="numberonly" placeholder="Nhập tháng bảo hành..." id="Edit_Warranty" ng-value="Warranty">
                     </div>
                     <div class="col-md-4" style="text-align: left;">
-                        <p>Từ khóa:</p>
+                        <p>Từ khóa: <span style="color: red;">VD: gtx-1650</span></p>
                         <input type="text" placeholder="Nhập từ khóa..." id="Edit_MetaTitle" ng-value="MetaTitle">
                     </div>
                     <div class="col-md-4" style="text-align: center;">
@@ -496,6 +497,17 @@
     table = document.getElementById("items-table");
     ItemCheckBox = table.getElementsByTagName("input");
 
+    function checkType() {
+
+        if (document.getElementById("txt_Add_Type").value == 20) {
+            document.getElementById("txt_Add_SellPrice").value = 1;
+            document.getElementById("txt_Add_SellPrice").disabled = true;
+        } else {
+            document.getElementById("txt_Add_SellPrice").value = "";
+            document.getElementById("txt_Add_SellPrice").disabled = false;
+        }
+    }
+
         function previewImages() {
 
             var preview = document.querySelector('#preview');
@@ -539,6 +551,19 @@
 
         function Resize() {
 
+        }
+
+        function ResetAdd() {
+            document.getElementById("txt_Add_Type").value = "";
+            document.getElementById("txt_Add_SellPrice").value = "";
+            document.getElementById("txt_Add_Brand").value = "";
+            document.getElementById("txt_Add_ProductName").value = "";
+            document.getElementById("txt_Add_Doc").value = "";
+            document.getElementById("txt_Add_Quantity").value = "";
+            document.getElementById("txt_Add_MetaTitle").value = "";
+            document.getElementById("txt_Add_Warranty").value = "";
+            var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+            scope.TempIMG = [];
         }
         
 </script>

@@ -9,6 +9,7 @@ namespace CyberShop.Areas.Admin.Models
     {
         public int id { get; set; }
         public int product_id { get; set; }
+        public Nullable<double> Price { get; set; }
         public Nullable<int> cpu_id { get; set; }
         public Nullable<int> main_id { get; set; }
         public Nullable<int> ram_id { get; set; }
@@ -22,6 +23,7 @@ namespace CyberShop.Areas.Admin.Models
         public Nullable<int> mouse_id { get; set; }
         public Nullable<int> headphone_id { get; set; }
         public Nullable<int> speaker_id { get; set; }
+        public Nullable<int> case_id { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public string CreateBy { get; set; }

@@ -22,6 +22,7 @@ namespace CyberShop.Models
         public Nullable<int> mouse_id { get; set; }
         public Nullable<int> headphone_id { get; set; }
         public Nullable<int> speaker_id { get; set; }
+        public Nullable<int> case_id { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public string CreateBy { get; set; }

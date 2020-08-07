@@ -831,7 +831,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         SellPrice = parseFloat(SellPrice.replace(/\,/g, ''));
 
         $scope.loading = true;
-        if (ProductName == "" || Type == "" || Brand == "" || SellPrice == "" || Quantity == "" || Doc == "" || MetaTitle == "" || Warranty == "") {
+        if (ProductName == "" || SellPrice == "" || Type == "" || Brand == "" || Quantity == "" || Doc == "" || MetaTitle == "" || Warranty == "") {
             $scope.loading = false;
             Swal.fire({
                 icon: 'error',
@@ -1165,49 +1165,58 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
 
         Price = parseFloat(Price.replace(/\,/g, ''));
 
-        $http({
-            url: '/Admin/ProductManager/ProductUpdate',
-            method: "POST",
-            data: {
-                id: $scope.product_id,
-                Brand_id: Brand_id,
-                ProductType_id: ProductType_id,
-                ProductName: ProductName,
-                MetaTitle: MetaTitle,
-                Amount: Quantity,
-                Info: Info,
-                Price: Price,
-                MonthWarranty: MonthWarranty
-            }
-        }).then(function onSuccess(response) {
-            // Handle success
-            $scope.loading = false;
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: 'Đã sửa thành công',
-            })
-            $scope.Product_Name = "";
-            $scope.Product_Type = "";
-            $scope.Brand = "";
-            $scope.Sell_Price = "";
-            $scope.Quantity = "";
-            $scope.Doc = "";
-            $scope.Warranty = "";
-            $scope.MetaTitle = "";
-            $scope.FilterProduct();
-            $("[data-dismiss=modal]").trigger({ type: "click" });
-            console.log(response);
-        }).catch(function onError(response) {
-            // Handle error
+        if (ProductName == "" || Price == "" || ProductType_id == "" || Brand_id == "" || Quantity == "" || Info == "" || MetaTitle == "" || MonthWarranty == "") {
             $scope.loading = false;
             Swal.fire({
                 icon: 'error',
                 title: 'Thất bại',
-                text: 'Sửa thất bại',
+                text: 'Không được bỏ trống',
             })
-            console.log(response);
-        });
+        } else {
+            $http({
+                url: '/Admin/ProductManager/ProductUpdate',
+                method: "POST",
+                data: {
+                    id: $scope.product_id,
+                    Brand_id: Brand_id,
+                    ProductType_id: ProductType_id,
+                    ProductName: ProductName,
+                    MetaTitle: MetaTitle,
+                    Amount: Quantity,
+                    Info: Info,
+                    Price: Price,
+                    MonthWarranty: MonthWarranty
+                }
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã sửa thành công',
+                })
+                $scope.Product_Name = "";
+                $scope.Product_Type = "";
+                $scope.Brand = "";
+                $scope.Sell_Price = "";
+                $scope.Quantity = "";
+                $scope.Doc = "";
+                $scope.Warranty = "";
+                $scope.MetaTitle = "";
+                $scope.FilterProduct();
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                console.log(response);
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Sửa thất bại',
+                })
+                console.log(response);
+            });
+        }
     }
 
     $scope.MainImage = function (url) {
@@ -1258,6 +1267,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Lưu thành công',
             })
+            $('#myFile1').val('');
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -3083,6 +3093,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
 
     //----------------BUILD_MANAGER_START--------------------//
 
+    var PCid = null;
+
     var mainSelect = document.getElementById("mainSelect");
     var mainItem = document.getElementById("mainItem");
 
@@ -3184,8 +3196,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 monitorSelect.hidden = false;
                 monitorItem.hidden = true;
             }
-            else {
-                $scope.CoolerID = null;
+            else if ($scope.ProductTypeName == "Tản nhiệt") {
+                $scope.CoolerId = null;
                 coolSelect.hidden = false;
                 coolItem.hidden = true;
             }
@@ -3193,12 +3205,152 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         });
     }
 
-    $scope.SelectPC = function (id) {
-        $scope.loading = true;
-        $http.get("/Admin/BuildManager/GetSelectedPC").then(function (response) {
-            PCdata = angular.fromJson(response.data);
+    $scope.ConfirmPC = function () {
+        if (PCid == null) { Swal.fire({
+            icon: 'error',
+            title: 'Thất bại',
+            text: 'Bạn chưa chọn máy',
+        })} else {
+            $scope.loading = true;
+            $http({
+                url: '/Admin/BuildManager/SavePC',
+                method: "POST",
+                data: {
+                    product_id: PCid,
+                    main_id: $scope.MainId,
+                    cpu_id: $scope.CPUId,
+                    ram_id: $scope.RamId,
+                    ssd_id: $scope.SSDId,
+                    hdd_id: $scope.HDDId,
+                    power_id: $scope.PSUId,
+                    vga_int: $scope.VGAId,
+                    case_id: $scope.CaseId,
+                    monitor_id: $scope.MonitorId,
+                    cooler_id: $scope.CoolerID,
+                    Price: $scope.TotalPrice
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Xác nhận thành công',
+                })
+                $scope.ResetPcPart();
+                document.getElementById("ConfirmPC_btn").disabled = true;
+                document.getElementById("ConfirmPC_btn").className = "Disabled";
 
-            $scope.loading = false;
+                document.getElementById("btn_MAIN").disabled = true;
+                document.getElementById("btn_MAIN").className = "Disabled";
+
+                document.getElementById("btn_CPU").disabled = true;
+                document.getElementById("btn_CPU").className = "Disabled";
+
+                document.getElementById("btn_RAM").disabled = true;
+                document.getElementById("btn_RAM").className = "Disabled";
+
+                document.getElementById("btn_SSD").disabled = true;
+                document.getElementById("btn_SSD").className = "Disabled";
+
+                document.getElementById("btn_HDD").disabled = true;
+                document.getElementById("btn_HDD").className = "Disabled";
+
+                document.getElementById("btn_PSU").disabled = true;
+                document.getElementById("btn_PSU").className = "Disabled";
+
+                document.getElementById("btn_VGA").disabled = true;
+                document.getElementById("btn_VGA").className = "Disabled";
+
+                document.getElementById("btn_CASE").disabled = true;
+                document.getElementById("btn_CASE").className = "Disabled";
+
+                document.getElementById("btn_MONITOR").disabled = true;
+                document.getElementById("btn_MONITOR").className = "Disabled";
+
+                document.getElementById("btn_COOLER").disabled = true;
+                document.getElementById("btn_COOLER").className = "Disabled";
+
+                PCid = null;
+                $scope.TotalPrice = 0;
+
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Đã xảy ra lỗi',
+                })
+                console.log(response);
+            });
+        }
+    }
+
+    $scope.SelectPC = function (id, Name) {
+        $scope.ResetPcPart();
+        PCid = id;
+        $scope.TotalPrice = 0;
+        $scope.SelectingPC = "( Đang chọn " + Name + " )";
+        $scope.loading = true;
+        $http.get("/Admin/BuildManager/GetSelectedPC/" + id).then(function (response) {
+            $scope.PCdata = angular.fromJson(response.data);
+            if($scope.PCdata[0].main_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].main_id);
+            if ($scope.PCdata[0].cpu_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].cpu_id);
+            if ($scope.PCdata[0].ram_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].ram_id);
+            if ($scope.PCdata[0].ssd_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].ssd_id);
+            if ($scope.PCdata[0].hdd_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].hdd_id);
+            if ($scope.PCdata[0].power_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].power_id);
+            if ($scope.PCdata[0].vga_int != null)
+                $scope.AddToBuildPC($scope.PCdata[0].vga_int);
+            if ($scope.PCdata[0].case_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].case_id);
+            if ($scope.PCdata[0].monitor_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].monitor_id);
+            if ($scope.PCdata[0].cooler_id != null)
+                $scope.AddToBuildPC($scope.PCdata[0].cooler_id);
+
+            if ($scope.PCdata[0].cooler_id == null && $scope.PCdata[0].monitor_id == null && $scope.PCdata[0].case_id == null && $scope.PCdata[0].vga_int == null && $scope.PCdata[0].power_id == null && $scope.PCdata[0].hdd_id == null && $scope.PCdata[0].ssd_id == null && $scope.PCdata[0].ram_id == null && $scope.PCdata[0].cpu_id == null && $scope.PCdata[0].main_id == null)
+                $scope.loading = false;
+
+            document.getElementById("ConfirmPC_btn").disabled = false;
+            document.getElementById("ConfirmPC_btn").className = "";
+
+            document.getElementById("btn_MAIN").disabled = false;
+            document.getElementById("btn_MAIN").className = "";
+
+            document.getElementById("btn_CPU").disabled = false;
+            document.getElementById("btn_CPU").className = "";
+
+            document.getElementById("btn_RAM").disabled = false;
+            document.getElementById("btn_RAM").className = "";
+
+            document.getElementById("btn_SSD").disabled = false;
+            document.getElementById("btn_SSD").className = "";
+
+            document.getElementById("btn_HDD").disabled = false;
+            document.getElementById("btn_HDD").className = "";
+
+            document.getElementById("btn_PSU").disabled = false;
+            document.getElementById("btn_PSU").className = "";
+
+            document.getElementById("btn_VGA").disabled = false;
+            document.getElementById("btn_VGA").className = "";
+
+            document.getElementById("btn_CASE").disabled = false;
+            document.getElementById("btn_CASE").className = "";
+
+            document.getElementById("btn_MONITOR").disabled = false;
+            document.getElementById("btn_MONITOR").className = "";
+
+            document.getElementById("btn_COOLER").disabled = false;
+            document.getElementById("btn_COOLER").className = "";
         });
     }
 
@@ -3328,7 +3480,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 monitorSelect.hidden = true;
                 monitorItem.hidden = false;
             }
-            else {
+            else if ($scope.ProductTypeName == "Tản nhiệt") {
                 $scope.CoolerID = $scope.temp[0].id;
                 $scope.CoolerName = $scope.temp[0].ProductName;
                 $scope.CoolerPrice = $scope.temp[0].Price;

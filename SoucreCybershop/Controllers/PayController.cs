@@ -90,7 +90,8 @@ namespace CyberShop.Controllers
                                 vga_int = x.vga_int,
                                 power_id = x.power_id,
                                 cooler_id = x.cooler_id,
-                                monitor_id = x.monitor_id
+                                monitor_id = x.monitor_id,
+                                case_id = x.case_id
                             }).FirstOrDefault();
 
                             AddToInvoice(PC.cpu_id, item.Quanlity);
@@ -102,6 +103,7 @@ namespace CyberShop.Controllers
                             AddToInvoice(PC.power_id, item.Quanlity);
                             AddToInvoice(PC.cooler_id, item.Quanlity);
                             AddToInvoice(PC.monitor_id, item.Quanlity);
+                            AddToInvoice(PC.case_id, item.Quanlity);
                         }
                         else
                         {

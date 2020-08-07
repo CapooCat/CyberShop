@@ -39,6 +39,28 @@ namespace CyberShop.Areas.Admin.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SavePC(PCDetailManagerViewModel model)
+        {
+            Detail_PcSets entity = new Detail_PcSets();
+            Product product = new Product();
+            int ID = data.Detail_PcSets.First(x => x.product_id == model.product_id).id;
+            entity = data.Detail_PcSets.Find(ID);
+            entity.main_id = model.main_id;
+            entity.cpu_id = model.cpu_id;
+            entity.ram_id = model.ram_id;
+            entity.ssd_id = model.ssd_id;
+            entity.hdd_id = model.hdd_id;
+            entity.power_id = model.power_id;
+            entity.vga_int = model.vga_int;
+            entity.case_id = model.case_id;
+            entity.monitor_id = model.monitor_id;
+            entity.cooler_id = model.cooler_id;
+            product.Price = model.Price;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetSelectedPC(int id)
         {
             var model = new List<PCDetailManagerViewModel>();
@@ -55,7 +77,7 @@ namespace CyberShop.Areas.Admin.Controllers
                          hdd_id = a.hdd_id,
                          ssd_id = a.ssd_id,
                          cooler_id = a.cooler_id,
-
+                         case_id = a.case_id
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -71,7 +93,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     hdd_id = item.hdd_id,
                     ssd_id = item.ssd_id,
                     cooler_id = item.cooler_id,
-
+                    case_id = item.case_id
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
