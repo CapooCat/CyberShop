@@ -56,6 +56,7 @@ namespace CyberShop.Areas.Admin.Controllers
             entity.case_id = model.case_id;
             entity.monitor_id = model.monitor_id;
             entity.cooler_id = model.cooler_id;
+            product = data.Products.Find(model.product_id);
             product.Price = model.Price;
             data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
