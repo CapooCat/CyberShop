@@ -297,6 +297,7 @@
     <Content Include="assets\css\owl.carousel.min.css" />
     <Content Include="assets\css\owl.theme.default.min.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\icon\favicon.ico" />
     <Content Include="assets\img\1.png" />
     <Content Include="assets\img\2.png" />
     <Content Include="assets\img\3.png" />
