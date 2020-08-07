@@ -3083,7 +3083,45 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
 
     //----------------BUILD_MANAGER_START--------------------//
 
+    var mainSelect = document.getElementById("mainSelect");
+    var mainItem = document.getElementById("mainItem");
 
+    var cpuSelect = document.getElementById("cpuSelect");
+    var cpuItem = document.getElementById("cpuItem");
+
+    var ramSelect = document.getElementById("ramSelect");
+    var ramItem = document.getElementById("ramItem");
+
+    var ssdSelect = document.getElementById("ssdSelect");
+    var ssdItem = document.getElementById("ssdItem");
+
+    var hddSelect = document.getElementById("hddSelect");
+    var hddItem = document.getElementById("hddItem");
+
+    var psuSelect = document.getElementById("psuSelect");
+    var psuItem = document.getElementById("psuItem");
+
+    var vgaSelect = document.getElementById("vgaSelect");
+    var vgaItem = document.getElementById("vgaItem");
+
+    var caseSelect = document.getElementById("caseSelect");
+    var caseItem = document.getElementById("caseItem");
+
+    var monitorSelect = document.getElementById("monitorSelect");
+    var monitorItem = document.getElementById("monitorItem");
+
+    var coolSelect = document.getElementById("coolSelect");
+    var coolItem = document.getElementById("coolItem");
+
+    $scope.SelectPcPart = function (id) {
+        $scope.loading = true;
+        $http.get("/BuildManager/ReturnPCPart/" + id).then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            $scope.PcPartLst = response.data;
+            $scope.TypeName = $scope.temp[0].TypeName;
+            $scope.loading = false;
+        });
+    }
 
     $scope.ReturnPC = function () {
         $scope.loading = true;
@@ -3093,6 +3131,214 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         });
     }
     $scope.ReturnPC();
+
+    $scope.DeletePcPart = function (id) {
+        $scope.loading = true;
+        $http.get("/BuildManager/ReturnPcItem/" + id).then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            $scope.TotalPrice = $scope.TotalPrice - $scope.temp[0].Price;
+            $scope.ProductTypeName = $scope.temp[0].ProductTypeName;
+            if ($scope.ProductTypeName == "Main") {
+                $scope.MainId = null;
+                console.log($scope.MainId);
+                mainSelect.hidden = false;
+                mainItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "CPU") {
+                $scope.CPUId = null;
+                cpuSelect.hidden = false;
+                cpuItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "RAM") {
+                $scope.RamId = null;
+                ramSelect.hidden = false;
+                ramItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "SSD") {
+                $scope.SSDId = null;
+                ssdSelect.hidden = false;
+                ssdItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "HDD") {
+                $scope.HDDId = null;
+                hddSelect.hidden = false;
+                hddItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "PSU") {
+                $scope.PSUId = null;
+                psuSelect.hidden = false;
+                psuItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "Card màn hình") {
+                $scope.VGAId = null;
+                vgaSelect.hidden = false;
+                vgaItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "Case") {
+                $scope.CaseId = null;
+                caseSelect.hidden = false;
+                caseItem.hidden = true;
+            }
+            else if ($scope.ProductTypeName == "Màn hình") {
+                $scope.MonitorId = null;
+                monitorSelect.hidden = false;
+                monitorItem.hidden = true;
+            }
+            else {
+                $scope.CoolerID = null;
+                coolSelect.hidden = false;
+                coolItem.hidden = true;
+            }
+            $scope.loading = false;
+        });
+    }
+
+    $scope.SelectPC = function (id) {
+        $scope.loading = true;
+        $http.get("/Admin/BuildManager/GetSelectedPC").then(function (response) {
+            PCdata = angular.fromJson(response.data);
+
+            $scope.loading = false;
+        });
+    }
+
+    $scope.ResetPcPart = function () {
+
+        $scope.TotalPrice = 0;
+
+        $scope.MainId = null;
+        console.log($scope.MainId);
+        mainSelect.hidden = false;
+        mainItem.hidden = true;
+
+        $scope.CPUId = null;
+        cpuSelect.hidden = false;
+        cpuItem.hidden = true;
+
+        $scope.RamId = null;
+        ramSelect.hidden = false;
+        ramItem.hidden = true;
+
+        $scope.SSDId = null;
+        ssdSelect.hidden = false;
+        ssdItem.hidden = true;
+
+        $scope.HDDId = null;
+        hddSelect.hidden = false;
+        hddItem.hidden = true;
+
+        $scope.PSUId = null;
+        psuSelect.hidden = false;
+        psuItem.hidden = true;
+
+        $scope.VGAId = null;
+        vgaSelect.hidden = false;
+        vgaItem.hidden = true;
+
+        $scope.CaseId = null;
+        caseSelect.hidden = false;
+        caseItem.hidden = true;
+
+        $scope.MonitorId = null;
+        monitorSelect.hidden = false;
+        monitorItem.hidden = true;
+
+        $scope.CoolerID = null;
+        coolSelect.hidden = false;
+        coolItem.hidden = true;
+    }
+
+    $scope.TotalPrice = 0;
+    $scope.AddToBuildPC = function (id) {
+        $scope.loading = true;
+        $http.get("/BuildManager/ReturnPcItem/" + id).then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            var ProductId = $scope.temp[0].id;
+            $scope.TotalPrice = $scope.TotalPrice + $scope.temp[0].Price;
+            $scope.ProductTypeName = $scope.temp[0].ProductTypeName;
+            if ($scope.ProductTypeName == "Main") {
+                $scope.MainId = $scope.temp[0].id;
+                $scope.MainName = $scope.temp[0].ProductName;
+                $scope.MainPrice = $scope.temp[0].Price;
+                $scope.MainImage = $scope.temp[0].Image;
+                mainSelect.hidden = true;
+                mainItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "CPU") {
+                $scope.CPUId = $scope.temp[0].id;
+                $scope.CPUName = $scope.temp[0].ProductName;
+                $scope.CPUPrice = $scope.temp[0].Price;
+                $scope.CPUImage = $scope.temp[0].Image;
+                cpuSelect.hidden = true;
+                cpuItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "RAM") {
+                $scope.RamId = $scope.temp[0].id;
+                $scope.RamName = $scope.temp[0].ProductName;
+                $scope.RamPrice = $scope.temp[0].Price;
+                $scope.RamImage = $scope.temp[0].Image;
+                ramSelect.hidden = true;
+                ramItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "SSD") {
+                $scope.SSDId = $scope.temp[0].id;
+                $scope.SSDName = $scope.temp[0].ProductName;
+                $scope.SSDPrice = $scope.temp[0].Price;
+                $scope.SSDImage = $scope.temp[0].Image;
+                ssdSelect.hidden = true;
+                ssdItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "HDD") {
+                $scope.HDDId = $scope.temp[0].id;
+                $scope.HDDName = $scope.temp[0].ProductName;
+                $scope.HDDPrice = $scope.temp[0].Price;
+                $scope.HDDImage = $scope.temp[0].Image;
+                hddSelect.hidden = true;
+                hddItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "PSU") {
+                $scope.PSUId = $scope.temp[0].id;
+                $scope.PSUName = $scope.temp[0].ProductName;
+                $scope.PSUPrice = $scope.temp[0].Price;
+                $scope.PSUImage = $scope.temp[0].Image;
+                psuSelect.hidden = true;
+                psuItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "Card màn hình") {
+                $scope.VGAId = $scope.temp[0].id;
+                $scope.VGAName = $scope.temp[0].ProductName;
+                $scope.VGAPrice = $scope.temp[0].Price;
+                $scope.VGAImage = $scope.temp[0].Image;
+                vgaSelect.hidden = true;
+                vgaItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "Case") {
+                $scope.CaseId = $scope.temp[0].id;
+                $scope.CaseName = $scope.temp[0].ProductName;
+                $scope.CasePrice = $scope.temp[0].Price;
+                $scope.CaseImage = $scope.temp[0].Image;
+                caseSelect.hidden = true;
+                caseItem.hidden = false;
+            }
+            else if ($scope.ProductTypeName == "Màn hình") {
+                $scope.MonitorId = $scope.temp[0].id;
+                $scope.MonitorName = $scope.temp[0].ProductName;
+                $scope.MonitorPrice = $scope.temp[0].Price;
+                $scope.MonitorImage = $scope.temp[0].Image;
+                monitorSelect.hidden = true;
+                monitorItem.hidden = false;
+            }
+            else {
+                $scope.CoolerID = $scope.temp[0].id;
+                $scope.CoolerName = $scope.temp[0].ProductName;
+                $scope.CoolerPrice = $scope.temp[0].Price;
+                $scope.CoolerImage = $scope.temp[0].Image;
+                coolSelect.hidden = true;
+                coolItem.hidden = false;
+            }
+            $scope.loading = false;
+        });
+    }
 
 
     //----------------BUILD_MANAGER_END--------------------//
