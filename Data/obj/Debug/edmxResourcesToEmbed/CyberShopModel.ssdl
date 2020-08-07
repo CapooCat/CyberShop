@@ -41,6 +41,7 @@
     <Property Name="hdd_id" Type="int" />
     <Property Name="ssd_id" Type="int" />
     <Property Name="vga_int" Type="int" />
+    <Property Name="case_id" Type="int" />
     <Property Name="power_id" Type="int" />
     <Property Name="cooler_id" Type="int" />
     <Property Name="monitor_id" Type="int" />

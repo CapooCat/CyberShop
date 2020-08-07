@@ -25,5 +25,6 @@ namespace CyberShop.Areas.Admin.Models
         public string BrandName { get; set; }
         public float? PriceTo { get; set; }
         public float? PriceFrom { get; set; }
+        public string CheckStatus { get; set; }
     }
 }

@@ -26,6 +26,7 @@
     <EntitySetMapping Name="Detail_PcSets">
       <EntityTypeMapping TypeName="ShopPCComponentsModel.Detail_PcSets">
         <MappingFragment StoreEntitySet="Detail_PcSets">
+          <ScalarProperty Name="case_id" ColumnName="case_id" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />

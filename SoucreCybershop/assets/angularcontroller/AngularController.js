@@ -453,8 +453,8 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 monitorSelect.hidden = true;
                 monitorItem.hidden = false;
             }
-            else {
-                $scope.CoolerID = $scope.temp[0].id;
+            else if ($scope.ProductTypeName == "Tản nhiệt") {
+                $scope.CoolerId = $scope.temp[0].id;
                 $scope.CoolerName = $scope.temp[0].ProductName;
                 $scope.CoolerPrice = $scope.temp[0].Price;
                 $scope.CoolerImage = $scope.temp[0].Image;
@@ -544,7 +544,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 monitorSelect.hidden = false;
                 monitorItem.hidden = true;
             }
-            else {
+            else if ($scope.ProductTypeName == "Tản nhiệt") {
                 coolSelect.hidden = false;
                 coolItem.hidden = true;
             }

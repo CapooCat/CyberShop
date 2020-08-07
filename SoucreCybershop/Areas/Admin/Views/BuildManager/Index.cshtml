@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Quản lý sản phẩm";
+    ViewBag.Title = "Quản lý máy bộ";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
     var prdTypeList = new ProductTypeDao().ListProductType();
@@ -12,8 +12,11 @@
     <h3 style="margin: 20px;border-bottom: 1px solid #DCDCDC;padding-bottom: 16px;"><i class="fas fa-desktop" style="margin-right: 10px;"></i>Quản lý máy bộ</h3>
     <div class="row" style="margin: 5px;">
         <div class="col-md-4" style="padding-top: 10px;padding-bottom: 10px;">
+            <div class="product-input">
+                <input type="text" placeholder="Nhập máy bộ" ng-model="search.ProductName">
+            </div>
             <div class="Box" style="padding: 0;">
-                <div class="chart-title" style="height: 55px;">Máy bộ</div>
+                <div class="chart-title" style="height: 55px;">Máy bộ {{SelectingPC}}</div>
                 <div class="progress-container">
                     <div class="progress-bar" id="myBar"></div>
                 </div>
@@ -21,23 +24,30 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width: 70%;"><a href="javascript:void(0);" ng-click="sortByProduct('ProductName')">Tên máy bộ</a></th>
-                                <th style="width: 20%;color: #1E90FF">hành động</th>
+                                <th style="width: 60%;"><a href="javascript:void(0);" ng-click="sortByProduct('ProductName')">Tên máy bộ</a></th>
+                                <th style="width: 40%;color: #1E90FF">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="items-table">
-                            <tr ng-repeat="item in PClist">
+                            <tr ng-repeat="item in PClist | filter: search">
                                 <td>{{item.ProductName}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" ng-click=""><i class="fas fa-edit"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" ng-click="SelectPC(item.id, item.ProductName)"><i class="fas fa-edit"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            <div class="row product-input" style="text-align: center; margin:0">
+                <div class="col-md-6"><button ng-click="ResetPcPart()" style="width: 95%"><i class="fas fa-redo-alt" style="margin-right: 10px;"></i>Reset</button></div>
+                <div class="col-md-6"><button ng-click="ConfirmPC()" style="width: 95%" id="ConfirmPC_btn" disabled><i class="fas fa-check" style="margin-right: 10px;"></i>Xác nhận</button></div>
+            </div>
+            <h5 class="col-md-12" style="text-align:center;margin-top: 10px;">Chi phí dự tính: {{TotalPrice | currency:"":0}}đ</h5>
         </div>
+
+
         <div class="col-md-8 row" style="padding-top: 10px;padding-bottom: 10px;">
         <div class="col-md-3 PC-Title">Mainboard - Bo mạch chủ</div>
-        <div class="col-md-9 PC-Info" id="mainSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(2)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Mainboard</button></div>
+        <div class="col-md-9 PC-Info" id="mainSelect"><button id="btn_MAIN" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(2)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Mainboard</button></div>
         <div class="col-md-9 PC-Item" id="mainItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{MainImage}}">
             <div class="Info">
@@ -48,7 +58,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">CPU - Vi xử lý</div>
-        <div class="col-md-9 PC-Info" id="cpuSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(3)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn CPU</button></div>
+        <div class="col-md-9 PC-Info" id="cpuSelect"><button id="btn_CPU" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(3)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn CPU</button></div>
         <div class="col-md-9 PC-Item" id="cpuItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{CPUImage}}">
             <div class="Info">
@@ -59,7 +69,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">RAM - Bộ nhớ trong</div>
-        <div class="col-md-9 PC-Info" id="ramSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(5)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn RAM</button></div>
+        <div class="col-md-9 PC-Info" id="ramSelect"><button id="btn_RAM" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(5)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn RAM</button></div>
         <div class="col-md-9 PC-Item" id="ramItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{RamImage}}">
             <div class="Info">
@@ -70,7 +80,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">SSD - ổ cứng thể rắn</div>
-        <div class="col-md-9 PC-Info" id="ssdSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(9)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn SSD</button></div>
+        <div class="col-md-9 PC-Info" id="ssdSelect"><button id="btn_SSD" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(9)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn SSD</button></div>
         <div class="col-md-9 PC-Item" id="ssdItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" src="{{SSDImage}}">
             <div class="Info">
@@ -81,7 +91,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">HDD - ổ cứng PC</div>
-        <div class="col-md-9 PC-Info" id="hddSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(8)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn HDD</button></div>
+        <div class="col-md-9 PC-Info" id="hddSelect"><button id="btn_HDD" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(8)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn HDD</button></div>
         <div class="col-md-9 PC-Item" id="hddItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{HDDImage}}">
             <div class="Info">
@@ -92,7 +102,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">PSU - Nguồn PC</div>
-        <div class="col-md-9 PC-Info" id="psuSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(4)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn PSU</button></div>
+        <div class="col-md-9 PC-Info" id="psuSelect"><button id="btn_PSU" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(4)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn PSU</button></div>
         <div class="col-md-9 PC-Item" id="psuItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" src="{{PSUImage}}">
             <div class="Info">
@@ -103,7 +113,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">VGA - Card màn hình</div>
-        <div class="col-md-9 PC-Info" id="vgaSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(1)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn VGA</button></div>
+        <div class="col-md-9 PC-Info" id="vgaSelect"><button id="btn_VGA" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(1)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn VGA</button></div>
         <div class="col-md-9 PC-Item" id="vgaItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" src="{{VGAImage}}">
             <div class="Info">
@@ -114,7 +124,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">Case - Vỏ thùng máy</div>
-        <div class="col-md-9 PC-Info" id="caseSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(6)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Case</button></div>
+        <div class="col-md-9 PC-Info" id="caseSelect"><button id="btn_CASE" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(6)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Case</button></div>
         <div class="col-md-9 PC-Item" id="caseItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{CaseImage}}">
             <div class="Info">
@@ -125,7 +135,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">Màn hình</div>
-        <div class="col-md-9 PC-Info" id="monitorSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(12)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn màn hình</button></div>
+        <div class="col-md-9 PC-Info" id="monitorSelect"><button id="btn_MONITOR" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(12)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn màn hình</button></div>
         <div class="col-md-9 PC-Item" id="monitorItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{MonitorImage}}">
             <div class="Info">
@@ -136,7 +146,7 @@
         </div>
 
         <div class="col-md-3 PC-Title">Tản nhiệt</div>
-        <div class="col-md-9 PC-Info" id="coolSelect"><button data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(7)"><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Tản nhiệt</button></div>
+        <div class="col-md-9 PC-Info" id="coolSelect"><button id="btn_COOLER" data-toggle="modal" data-target="#Modal" ng-click="SelectPcPart(7)" disabled><i class="fas fa-plus" style="margin-right: 5px;"></i>Chọn Tản nhiệt</button></div>
         <div class="col-md-9 PC-Item" id="coolItem" hidden>
             <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{CoolerImage}}">
             <div class="Info">
@@ -146,12 +156,59 @@
             </div>
         </div>
     </div>
+
+
+        <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Chọn {{TypeName}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="search">
+                            <input placeholder="Tìm kiếm..." type="text" ng-model="search.ProductName">
+                            <button><i class="fa fa-search"></i></button>
+                        </div>
+                        <div style="margin-top:20px;overflow: scroll;height:475px;">
+                            <div class="PC-Part" ng-repeat="item in PcPartLst | filter:search">
+                                <img style="max-width: 150px;max-height:150px;float: left" ng-src="{{item.Image}}">
+                                <div class="Info">
+                                    {{item.ProductName}}
+                                    <p class="Price">Giá tiền: {{item.Price | currency:"":0}} VNĐ</p>
+                                    <p ng-if="item.CheckStatus=='còn hàng'">Tình trạng: <span style="font-weight:bold;color:#1E90FF">{{item.CheckStatus}}</span></p>
+                                    <p ng-if="item.CheckStatus=='hết hàng'">Tình trạng: <span style="font-weight:bold;color:red">{{item.CheckStatus}}</span></p>
+                                </div>
+                                <button ng-if="item.CheckStatus=='còn hàng'" class="add" data-dismiss="modal" ng-click="AddToBuildPC(item.id)">Chọn</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </section>
 
 <script>
     Active = document.getElementById("BuildManager");
     Active.className = "active-button";
+    document.getElementById("ConfirmPC_btn").className = "Disabled";
+    document.getElementById("btn_MAIN").className = "Disabled";
+    document.getElementById("btn_CPU").className = "Disabled";
+    document.getElementById("btn_RAM").className = "Disabled";
+    document.getElementById("btn_SSD").className = "Disabled";
+    document.getElementById("btn_HDD").className = "Disabled";
+    document.getElementById("btn_PSU").className = "Disabled";
+    document.getElementById("btn_VGA").className = "Disabled";
+    document.getElementById("btn_CASE").className = "Disabled";
+    document.getElementById("btn_MONITOR").className = "Disabled";
+    document.getElementById("btn_COOLER").className = "Disabled";
+
 
     function Resize() {
 

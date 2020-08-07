@@ -250,6 +250,7 @@ namespace CyberShop.Areas.Admin.Controllers
                     var PCset = new Detail_PcSets();
                     int Id = data.Products.Max(x => x.id);
                     PCset.product_id = Id;
+                    PCset.IsDeleted = false;
                     if (Detail_PcSetDao.InsertPC(PCset))
                     { return Json(new { success = true }, JsonRequestBehavior.AllowGet); }
                     else { return Json(new { success = false }, JsonRequestBehavior.AllowGet); }
