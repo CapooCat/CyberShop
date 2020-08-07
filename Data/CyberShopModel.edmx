@@ -46,6 +46,7 @@
           <Property Name="hdd_id" Type="int" />
           <Property Name="ssd_id" Type="int" />
           <Property Name="vga_int" Type="int" />
+          <Property Name="case_id" Type="int" />
           <Property Name="power_id" Type="int" />
           <Property Name="cooler_id" Type="int" />
           <Property Name="monitor_id" Type="int" />
@@ -476,6 +477,7 @@
           <Property Name="CreateTime" Type="DateTime" Precision="0" />
           <Property Name="CreateBy" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_Detail_PcSets_Product" FromRole="Detail_PcSets" ToRole="Product" />
+          <Property Name="case_id" Type="Int32" />
         </EntityType>
         <EntityType Name="InOrder_Detail">
           <Key>
@@ -792,6 +794,7 @@
           <EntitySetMapping Name="Detail_PcSets">
             <EntityTypeMapping TypeName="ShopPCComponentsModel.Detail_PcSets">
               <MappingFragment StoreEntitySet="Detail_PcSets">
+                <ScalarProperty Name="case_id" ColumnName="case_id" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
