@@ -28,7 +28,7 @@
                         <tbody id="items-table">
                             <tr ng-repeat="item in PClist">
                                 <td>{{item.ProductName}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" onclick="FormatIt(this.id);" ng-click=""><i class="fas fa-edit"></i></button></td>
+                                <td class="table-product-action"><button data-toggle="modal" data-target="#myEditModal" ng-click=""><i class="fas fa-edit"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -151,7 +151,11 @@
 
 <script>
     Active = document.getElementById("BuildManager");
-    Active.className = "active-button"
+    Active.className = "active-button";
+
+    function Resize() {
+
+    }
         
 </script>
 @section scripts{

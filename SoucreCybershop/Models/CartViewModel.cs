@@ -12,5 +12,6 @@ namespace CyberShop.Models
         public Nullable<double> Price { get; set; }
         public int Quanlity { get; set; }
         public string Image { get; set; }
+        public int ProductType { get; set; }
     }
 }

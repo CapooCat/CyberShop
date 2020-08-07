@@ -584,7 +584,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     id: lstId
                 },
             }).then(function onSuccess(response) {
-                $scope.invoiceList = response.data;
                 // Handle success
                 $scope.loading = false;
                 Swal.fire({
@@ -592,6 +591,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã xóa thành công',
                 })
+                $scope.FilterInvoice();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -775,6 +775,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
     $scope.AddType = function () {
         var Type = document.getElementById("txt_Type").value;
         var MetaTitle = document.getElementById("txt_Type_MetaTitle").value;
+        var CategoryId = document.getElementById("txt_Category_id").value;
         $scope.loading = true;
         if (Type == "" || MetaTitle == "") {
             $scope.loading = false;
@@ -790,7 +791,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 method: "POST",
                 data: {
                     TypeName: Type,
-                    MetaTitle: MetaTitle
+                    MetaTitle: MetaTitle,
+                    Category_id: CategoryId
                 }
             }).then(function onSuccess(response) {
                 // Handle success
@@ -910,9 +912,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                                                     $scope.txt_Add_MetaTitle = "";
                                                     $scope.txt_Add_Warranty = "";
                                                     $scope.TempIMG = [];
-                                                    $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
-                                                        $scope.productList = response.data;
-                                                    });
+                                                    $scope.FilterProduct();
                                                     $("[data-dismiss=modal]").trigger({ type: "click" });
                                                 }
                                                 console.log(response);
@@ -1096,7 +1096,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     id: lstId
                 },
             }).then(function onSuccess(response) {
-                $scope.productList = response.data;
                 // Handle success
                 $scope.loading = false;
                 Swal.fire({
@@ -1104,6 +1103,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã xóa thành công',
                 })
+                $scope.FilterProduct();
                 console.log(response.data);
             }).catch(function onError(response) {
                 // Handle error
@@ -1195,7 +1195,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             $scope.Doc = "";
             $scope.Warranty = "";
             $scope.MetaTitle = "";
-            $scope.ReturnProductList();
+            $scope.FilterProduct();
             $("[data-dismiss=modal]").trigger({ type: "click" });
             console.log(response);
         }).catch(function onError(response) {
@@ -1396,7 +1396,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Đã xóa thành công',
             })
-            $scope.ReturnProductList();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -1419,7 +1418,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 id: $scope.product_id
             },
         }).then(function onSuccess(response) {
-            $scope.productList = response.data;
             // Handle success
             $scope.loading = false;
             Swal.fire({
@@ -1427,6 +1425,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Đã xóa thành công',
             })
+            $scope.FilterProduct();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -1539,7 +1538,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     id: lstId
                 },
             }).then(function onSuccess(response) {
-                $scope.lstUser = response.data;
                 // Handle success
                 $scope.loading = false;
                 Swal.fire({
@@ -1547,6 +1545,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã xóa thành công',
                 })
+                $scope.FilterUser();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -1596,7 +1595,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 id: $scope.user_id
             },
         }).then(function onSuccess(response) {
-            $scope.lstUser = response.data;
             // Handle success
             $scope.loading = false;
             Swal.fire({
@@ -1604,6 +1602,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Đã xóa thành công',
             })
+            $scope.FilterUser();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -1651,13 +1650,13 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             },
         }).then(function onSuccess(response) {
             // Handle success
-            $scope.lstUser = response.data;
             $scope.loading = false;
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
                 text: 'Cập nhật thành công',
             })
+            $scope.FilterUser();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -1787,7 +1786,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 })
             }
             $scope.ViewInvoice(GetInvoiceId, "Đã Hoàn Thành");
-            $scope.ReturnInvoice();
+            $scope.FilterInvoice();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -1817,7 +1816,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             },
         }).then(function onSuccess(response) {
             // Handle success
-            $scope.lstUser = response.data;
             $scope.loading = false;
             Swal.fire({
                 icon: 'success',
@@ -1825,7 +1823,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 text: 'Cập nhật thành công',
             })
             $("[data-dismiss=modal]").trigger({ type: "click" });
-            $scope.ReturnInvoice();
+            $scope.FilterInvoice();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -1946,7 +1944,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     id: $scope.invoice_id
                 },
             }).then(function onSuccess(response) {
-                $scope.invoiceList = response.data;
                 // Handle success
                 $scope.loading = false;
                 Swal.fire({
@@ -1954,6 +1951,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã xóa thành công',
                 })
+                $scope.FilterInvoice();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error
@@ -2260,7 +2258,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 text: 'Cập nhật thành công',
             })
             $scope.ViewInvoiceIn(InvoiceInID, "Đã Hoàn Thành");
-            $scope.ReturnInvoiceIn();
+            $scope.FilterInvoiceIn();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -2303,7 +2301,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 id: id
             },
         }).then(function onSuccess(response) {
-            $scope.invoiceInList = response.data;
             // Handle success
             $scope.loading = false;
             Swal.fire({
@@ -2311,6 +2308,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 title: 'Thành công',
                 text: 'Đã xóa thành công',
             })
+            $scope.FilterInvoiceIn();
             console.log(response);
         }).catch(function onError(response) {
             // Handle error
@@ -2378,7 +2376,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     title: 'Thành công',
                     text: 'Đã xóa thành công',
                 })
-                $scope.ReturnInvoiceIn();
+                $scope.FilterInvoiceIn();
                 console.log(response);
             }).catch(function onError(response) {
                 // Handle error

@@ -342,43 +342,70 @@
 
 
                 <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <p>Tên loại SP:</p>
                         <input type="text" placeholder="Nhập tên loại sản phẩm..." id="txt_Type">
                     </div>
-                    <div class="col-md-4">
-                        <p>từ khóa:</p>
+                    <div class="col-md-3">
+                        <p>Từ khóa:</p>
                         <input type="text" placeholder="Nhập từ khóa..." id="txt_Type_MetaTitle">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <p>Danh mục:</p>
+                        <select class="list-select" id="txt_Category_id">
+                            <option value=""> <text style="color:silver">Chọn danh mục</text></option>
+                            <option ng-repeat="item in catList" value="{{item.Id}}">{{item.Name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
                         <button ng-click="AddType()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm</button>
                     </div>
-                    <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
-                        <p>Danh sách các loại SP:</p>
-                        <div class="Box" style="padding: 0;margin-top: 10px;">
-                            <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 10%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('id')">Id</a></th>
-                                            <th style="width: 35%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('TypeName')">Tên loại SP</a></th>
-                                            <th style="width: 40%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('MetaTitle')">Từ khóa</a></th>
-                                            <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="item in productTypeList | orderBy:PTypeName:reverseType">
-                                            <td style="text-align:center">{{item.id}}</td>
-                                            <td style="text-align:center">{{item.TypeName}}</td>
-                                            <td style="text-align:center">{{item.MetaTitle}}</td>
-                                            <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteType(item.id)"><i class="fas fa-times"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    <div class="col-md-12" style="padding-top: 10px;margin-top: 10px;border-top: 1px solid #DCDCDC"><h3>Tìm kiếm</h3></div>
+                    <div class="col-md-4">
+                        <p>Tên loại SP:</p>
+                        <input type="text" placeholder="Nhập tên loại sản phẩm..." ng-model="type.TypeName">
+                    </div>
+                    <div class="col-md-4">
+                        <p>Từ khóa:</p>
+                        <input type="text" placeholder="Nhập từ khóa..." ng-model="type.MetaTitle">
+                    </div>
+                    <div class="col-md-4">
+                        <p>Danh mục:</p>
+                        <select class="list-select" ng-model="type.CategoryName">
+                            <option value=""> <text style="color:silver">Chọn danh mục</text></option>
+                            <option ng-repeat="item in catList" value="{{item.Name}}">{{item.Name}}</option>
+                        </select>
+                    </div>
+
+                        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <div class="Box" style="padding: 0;margin-top: 10px;">
+                                <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('id')">Id</a></th>
+                                                <th style="width: 25%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('TypeName')">Tên loại SP</a></th>
+                                                <th style="width: 25%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('MetaTitle')">Từ khóa</a></th>
+                                                <th style="width: 25%;text-align: center;"><a href="javascript:void(0);" ng-click="sortTypeBy('Category_id')">Danh mục</a></th>
+                                                <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in productTypeList | filter:type | orderBy:PTypeName:reverseType">
+                                                <td style="text-align:center">{{item.id}}</td>
+                                                <td style="text-align:center">{{item.TypeName}}</td>
+                                                <td style="text-align:center">{{item.MetaTitle}}</td>
+                                                <td style="text-align:center">{{item.CategoryName}}</td>
+                                                <td style="text-align: center;" ng-if="item.id != 20"><a href="javascript:void(0);" ng-click="DeleteType(item.id)"><i class="fas fa-times"></i></a></td>
+                                                <td style="text-align: center;" ng-if="item.id == 20"><a><i class="fas fa-times"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
             </div>
@@ -414,8 +441,16 @@
                     <div class="col-md-4">
                         <button ng-click="AddBrand()"><i class="fas fa-plus" style="margin-right: 10px;"></i>Thêm</button>
                     </div>
+                    <div class="col-md-12" style="padding-top: 10px;margin-top: 10px;border-top: 1px solid #DCDCDC"><h3>Tìm kiếm</h3></div>
+                    <div class="col-md-4">
+                        <p>Tên loại SP:</p>
+                        <input type="text" placeholder="Nhập tên hãng..." ng-model="brand.BrandName">
+                    </div>
+                    <div class="col-md-4">
+                        <p>Từ khóa:</p>
+                        <input type="text" placeholder="Nhập từ khóa..." ng-model="brand.MetaTitle">
+                    </div>
                     <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
-                    <p>Danh sách các hãng:</p>
                     <div class="Box" style="padding: 0;margin-top: 10px;">
                         <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
                             <table>
@@ -428,7 +463,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in brandList | orderBy:BrandName:reverseBrand">
+                                    <tr ng-repeat="item in brandList | filter:brand | orderBy:BrandName:reverseBrand">
                                         <td style="text-align:center">{{item.id}}</td>
                                         <td style="text-align:center">{{item.BrandName}}</td>
                                         <td style="text-align:center">{{item.MetaTitle}}</td>
@@ -500,6 +535,10 @@
         }
         function turnUpload() {
             document.getElementById("myFile2").click();
+        }
+
+        function Resize() {
+
         }
         
 </script>

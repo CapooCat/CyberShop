@@ -43,6 +43,7 @@ namespace CyberShop.Controllers
                     item.Quanlity = 1;
                     item.Image = product.Image;
                     item.Price = product.Price;
+                    item.ProductType = product.ProductType_id;
                     list.Add(item);
                     Session[Common.CommonConstantUser.CART_SESSION] = list;
                 }

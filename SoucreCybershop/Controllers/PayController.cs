@@ -77,16 +77,45 @@ namespace CyberShop.Controllers
                     InvoiceDetailDao inDetailDao = new InvoiceDetailDao();
                     foreach (CartViewModel item in cart)
                     {
-                        inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
-                        inDetail.Product_id = item.id;
-                        inDetail.Amount = item.Quanlity;
-                        inDetail.Price = item.Price;
-                        var warranty = Convert.ToInt32(data.Products.First(x => x.id == item.id).MonthWarranty);
-                        inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
-                        inDetail.CreateBy = "Admin";
-                        inDetail.CreateDate = DateTime.Now;
-                        inDetail.IsDeleted = false;
-                        inDetailDao.InsertInvoiceDetail(inDetail);
+                        if (item.ProductType == 20)
+                        {
+                            var PC = new PCViewModel();
+                            PC = data.Detail_PcSets.Where(x => x.product_id == item.id).Select(x => new PCViewModel
+                            {
+                                cpu_id = x.cpu_id,
+                                main_id = x.main_id,
+                                ram_id = x.ram_id,
+                                hdd_id = x.hdd_id,
+                                ssd_id = x.ssd_id,
+                                vga_int = x.vga_int,
+                                power_id = x.power_id,
+                                cooler_id = x.cooler_id,
+                                monitor_id = x.monitor_id
+                            }).FirstOrDefault();
+
+                            AddToInvoice(PC.cpu_id, item.Quanlity);
+                            AddToInvoice(PC.main_id, item.Quanlity);
+                            AddToInvoice(PC.ram_id, item.Quanlity);
+                            AddToInvoice(PC.hdd_id, item.Quanlity);
+                            AddToInvoice(PC.ssd_id, item.Quanlity);
+                            AddToInvoice(PC.vga_int, item.Quanlity);
+                            AddToInvoice(PC.power_id, item.Quanlity);
+                            AddToInvoice(PC.cooler_id, item.Quanlity);
+                            AddToInvoice(PC.monitor_id, item.Quanlity);
+                        }
+                        else
+                        {
+                            inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
+                            inDetail.Product_id = item.id;
+                            inDetail.Amount = item.Quanlity;
+                            inDetail.Price = item.Price;
+                            var warranty = Convert.ToInt32(data.Products.First(x => x.id == item.id).MonthWarranty);
+                            inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
+                            inDetail.CreateBy = "Admin";
+                            inDetail.CreateDate = DateTime.Now;
+                            inDetail.IsDeleted = false;
+                            inDetailDao.InsertInvoiceDetail(inDetail);
+                        }
                     }
                     cart.RemoveAll(x => cart.Any());
                     ViewBag.Success = "yes";
@@ -94,6 +123,32 @@ namespace CyberShop.Controllers
             }
             return View(model);
         }
+
+        public bool AddToInvoice(Nullable<int> id, int quantity)
+        {
+            if (id == null)
+            {
+                return false;
+            }
+            else
+            {
+                Invoice_Detail inDetail = new Invoice_Detail();
+                InvoiceDetailDao inDetailDao = new InvoiceDetailDao();
+                inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
+                inDetail.Product_id = id.GetValueOrDefault();
+                inDetail.Amount = quantity;
+                inDetail.Price = Convert.ToDouble(data.Products.First(x => x.id == id).Price);
+                var warranty = Convert.ToInt32(data.Products.First(x => x.id == id).MonthWarranty);
+                inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
+                inDetail.CreateBy = "Admin";
+                inDetail.CreateDate = DateTime.Now;
+                inDetail.IsDeleted = false;
+                inDetailDao.InsertInvoiceDetail(inDetail);
+                return true;
+            }
+        }
+
+
         //public JsonResult ConfirmCoupon(string id)
         //{
         //    var coupon = data.Coupons.Where(x => x.Coupon_Code.Equals(id)).Count();
