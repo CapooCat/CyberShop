@@ -32,6 +32,7 @@ namespace Data
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public string CreateBy { get; set; }
+        public Nullable<int> case_id { get; set; }
     
         public virtual Product Product { get; set; }
     }
