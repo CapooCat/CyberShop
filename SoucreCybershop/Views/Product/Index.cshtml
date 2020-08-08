@@ -37,7 +37,8 @@
                       <p class="price-tag">{{ item.Price | currency:"":0 }}đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
-                        <button type="button" ng-click="AddItem(item.id)" class="Add" data-loading-text="<i class='fa fa-circle-notch fa-spin'></i>"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                        <button ng-if="item.Amount > 0" type="button" ng-click="AddItem(item.id)" class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                        <button ng-if="item.Amount <= 0" type="button" class="Add Disabled" disabled><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Hết hàng</button>
                 </div>
              </div>
         </div>

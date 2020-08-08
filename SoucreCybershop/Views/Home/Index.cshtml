@@ -25,7 +25,29 @@
             <div class="col-md-4"><a href="/danh-muc/may-bo-cybershop"><img src="/assets/img/solid5.png"></a></div>
             <div class="col-md-4"><a href="/Home/InstallmentTerm"><img src="/assets/img/solid4.png"></a></div>
         </div>
+        <div class="col-md-12" style="text-align: center;font-size: 25px; font-weight: bold; margin-top: 40px;color: #1E90FF">
+            Vì sao nên chọn chúng tôi ?
+        </div>
+        <div class="col-md-3 layer">
+            <div class="layer-icon"><i class="fas fa-heart"></i></div>
+        </div> 
+        <div class="col-md-3 layer">
+            <div class="layer-icon"><i class="fas fa-money-bill-wave"></i></div>
+        </div>
+        <div class="col-md-3 layer">
+            <div class="layer-icon"><i class="fas fa-shipping-fast"></i></div>
+        </div>
+        <div class="col-md-3 layer">
+            <div class="layer-icon"><i class="fas fa-thumbs-up"></i></div>
+        </div>
+        <div class="col-md-3 text-layer">Nổi tiếng nhiệt tình</div>
+        <div class="col-md-3 text-layer">Giá cực tốt</div>
+        <div class="col-md-3 text-layer">Giao hàng siêu tốc</div>
+        <div class="col-md-3 text-layer">Uy tín tận cùng</div>
+        
     </div>
+
+    
 
     <div class="items-header">Sản phẩm bán chạy</div>
     <div class="owl-carousel owl-theme home-item">
@@ -40,7 +62,14 @@
                         <p class="price-tag">@string.Format("{0:#,##0}", item.oldPrice)đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
-                    <button ng-click="AddItem(@item.id)" class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                    @if (@item.Amount > 0)
+                    {
+                        <button ng-click="AddItem(@item.id)" class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                    }
+                    @if (@item.Amount <= 0)
+                    {
+                        <button type="button" class="Add Disabled" disabled><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Hết hàng</button>
+                    }
                 </div>
             </div>
         </div>
@@ -60,8 +89,13 @@
                         <p class="price-tag">@string.Format("{0:#,##0}", item.oldPrice)đ</p>
                         <p class="status">Tình trạng: còn hàng</p>
                     </a>
-
+                    @if (@item.Amount > 0) {
                     <button ng-click="AddItem(@item.id)" class="Add"><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Thêm vào giỏ</button>
+                    }
+                    @if (@item.Amount <= 0)
+                    {
+                    <button type="button" class="Add Disabled" disabled><i class="fas fa-shopping-cart" style="margin-right: 10px"></i>Hết hàng</button>
+                    }
                 </div>
             </div>
         </div>
