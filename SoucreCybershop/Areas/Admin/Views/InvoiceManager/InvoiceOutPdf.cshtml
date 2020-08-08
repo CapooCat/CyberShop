@@ -82,7 +82,7 @@
                                 <td>@string.Format("{0:#,##0}", item.Price)</td>
                                 <td>@string.Format("{0:#,##0}", item.Amount * item.Price)</td>
                             </tr>
-                            total += item.Amount * item.Price;
+                            total += (item.Amount * item.Price);
                         }
                         <tr>
                             <td colspan="5"><span style="float:left;font-weight:bold">Tổng tiền hàng (VNĐ):</span><span style="float: right;">@string.Format("{0:#,##0}",total)</span></td>

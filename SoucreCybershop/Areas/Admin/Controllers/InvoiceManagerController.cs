@@ -101,8 +101,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 CreateBy=x.CreateBy,
                 CreateDate=x.CreateDate,
                 CustomerName=x.CustomerName
-            }).ToList();
-
+            }).OrderByDescending(x=>x.Status).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
             {
@@ -240,7 +239,7 @@ namespace CyberShop.Areas.Admin.Controllers
                 var dateTo = DateTime.Parse(model.DateTo);
                 lstInvoice = lstInvoice.Where(x => x.PurchaseDate >= dateFrom && x.PurchaseDate <= dateTo).ToList();
             }
-            lstInvoice = lstInvoice.Where(x => x.IsDeleted == false).ToList();
+            lstInvoice = lstInvoice.Where(x => x.IsDeleted == false).OrderBy(x=>x.Status).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in lstInvoice)
             {
@@ -446,7 +445,7 @@ namespace CyberShop.Areas.Admin.Controllers
                               ProductName = b.ProductName,
                               ProductTypeName = a.TypeName,
                               CustomerName = d.CustomerName,
-                              Price = b.Price,
+                              Price = c.Price,
                               PhoneName = d.DeliveryPhoneNum,
                               Address = d.DeliveryAddress,
                               MonthsWarranty = b.MonthWarranty,
