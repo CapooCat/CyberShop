@@ -20,7 +20,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
     var InvoiceID = 0;
     var ProductID = 0;
     var n = 0;
-    var stoptime;
+    var stotime;
     var stop;
     var audio = new Audio('../assets/sound/ringtones.mp3');
     $scope.TempIMG = [];

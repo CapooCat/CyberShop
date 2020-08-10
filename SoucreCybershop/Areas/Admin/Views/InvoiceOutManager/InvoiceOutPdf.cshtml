@@ -76,8 +76,8 @@
                                 <td>@item.ProductTypeName</td>
                                 <td>@item.MonthsWarranty</td>
                                 <td>@item.Amount</td>
-                                <td>@string.Format("{0:#,##0.00}",item.Price)</td>
-                                <td>@string.Format("{0:#,##0.00}", item.Amount * item.Price)</td>
+                                <td>@string.Format("{0:#,##0}",item.Price)</td>
+                                <td>@string.Format("{0:#,##0}", item.Amount * item.Price)</td>
                             </tr>
                             total += item.Amount * item.Price;
                         }
