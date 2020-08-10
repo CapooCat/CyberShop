@@ -248,6 +248,7 @@
     <Compile Include="Areas\Admin\Models\ProductManagerViewModel.cs" />
     <Compile Include="Common\CommonConstantUser.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\MailHelper.cs" />
     <Compile Include="Common\UserInfo.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -325,6 +326,7 @@
     <Content Include="assets\js\popper.min.js" />
     <Content Include="assets\js\tendina.min.js" />
     <Content Include="assets\sound\ringtones.mp3" />
+    <Content Include="assets\template_mail\ForgotPasswordEmail.html" />
     <Content Include="assets\webfonts\fa-brands-400.svg" />
     <Content Include="assets\webfonts\fa-regular-400.svg" />
     <Content Include="assets\webfonts\fa-solid-900.svg" />
@@ -438,6 +440,7 @@
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\TransportTerm.cshtml" />
     <Content Include="Views\Home\WarrantyTerm.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

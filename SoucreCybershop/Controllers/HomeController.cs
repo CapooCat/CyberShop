@@ -255,5 +255,42 @@ namespace CyberShop.Controllers
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        public  JsonResult CheckEmail(string email)
+        {
+            var res = new UserDao().KTEmail(email);
+            if(res==true)
+            {
+                return Json(new { success = "true"}, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = "false"}, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult SendEmail(string email)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[6];
+            var random = new Random();
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+            var password = new String(stringChars);
+            //password = Encryptor.MD5Hash(password);
+            User entity = new User();
+            entity = data.Users.Where(x => x.Email == email).First();
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/template_mail/ForgotPasswordEmail.html"));
+            content = content.Replace("{{CustomerName}}", entity.Name);
+            content = content.Replace("{{Password}}", password);
+            entity.Password = Encryptor.MD5Hash(password);
+            new MailHelper().SendMail(email, "Password reset", content);
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -573,6 +573,33 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 console.log(response);
             });
     }
+    $scope.FindPassword = function () {
+        var email = document.getElementById("forgot_password").value;
+        $http.get("/Home/CheckEmail?email=" + email).then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+            var success = $scope.temp.success;
+            if(success =="true")
+            {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Gửi mail thành công',
+                    text: 'Vui lòng kiểm tra email của mình',
+                })
+                $http.get("/Home/SendEmail?email=" + email).then(function (response) {
+                });
+                console.log(response);
+            }
+            else
+            {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email không đúng',
+                    text: 'Vui lòng nhập lại email',
+                })
+                console.log(response);
+            }
+        });
+    }
     //$scope.discount_price = 0;
     //var btn_confirm = document.getElementById("ConfirmDiscount");
     //if (btn_confirm != null) {
