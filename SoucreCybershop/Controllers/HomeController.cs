@@ -25,7 +25,8 @@ namespace CyberShop.Controllers
                          a.id,
                          a.ProductName,
                          a.Price,
-                         a.Image
+                         a.Image,
+                         a.Amount
                      } into x
                      select new ProductHomeViewModel
                      {
@@ -33,6 +34,7 @@ namespace CyberShop.Controllers
                          ProductName = x.Key.ProductName,
                          oldPrice = x.Key.Price,
                          Image = x.Key.Image,
+                         Amount = x.Key.Amount,
                          SellAmount = x.Sum(b => b.Amount)
                      }).OrderByDescending(x => x.SellAmount).Take(12).ToList();
             ViewBag.SpBanchay = spBanChay;
@@ -43,6 +45,7 @@ namespace CyberShop.Controllers
                 ProductName=x.ProductName,
                 oldPrice=x.Price,
                 Image=x.Image,
+                Amount = x.Amount
             }).ToList();
             ViewBag.spMoi = spMoi;
             return View();
@@ -122,7 +125,7 @@ namespace CyberShop.Controllers
             var model = (from a in data.ProductImages
                          join b in data.Products on a.Product_id equals b.id
                          join c in data.Brands on b.Brand_id equals c.Id
-                         where b.id == id
+                         where b.id == id && a.IsDeleted == false
                          select new DetailProductViewModel
                          {
                              id = b.id,
@@ -132,7 +135,8 @@ namespace CyberShop.Controllers
                              MonthWarranty=b.MonthWarranty,
                              Url=a.Url,
                              BrandName=c.BrandName,
-                             Info = b.Info
+                             Info = b.Info,
+                             Amount = b.Amount
                          }).ToList();
             var cate = (from a in data.ProducTypes
                         join b in data.Products on a.Id equals b.ProductType_id

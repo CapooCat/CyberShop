@@ -48,8 +48,15 @@
             </ul>
             <p style="margin-top: 50px;" class="price-tag"><span>Giá: </span>@string.Format("{0:#,##0}", @Model.FirstOrDefault().Price)đ</p>
             <div style="margin-top: 25px;">
+            @if (@Model.FirstOrDefault().Amount > 0)
+            {
                 <button ng-click="AddItem(@Model.FirstOrDefault().id)">Thêm vào giỏ</button>
-                <button ng-click="GoToPay(); AddItem(@Model.FirstOrDefault().id)">Mua ngay</button>
+                <button ng-click="GoToPay(); AddItem(@Model.FirstOrDefault().id)">Mua ngay</button>  
+            }
+            @if (@Model.FirstOrDefault().Amount <= 0)
+            {
+                <button class="Disabled" disabled>Hết hàng</button>
+            }
                 <button data-toggle="modal" data-target="#Modal" class="compare" ng-click="LoadItems(@Model.FirstOrDefault().ProductType_id, @Model.FirstOrDefault().id)">So sánh</button>
             </div>
         </div>

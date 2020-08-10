@@ -48,7 +48,8 @@
                             <th style="width: 15%;">Hãng</th>
                             <th style="width: 15%;">Loại sản phẩm</th>
                             <th style="width: 15%;">Số lượng</th>
-                            <th style="width: 15%;">Giá tiền (VNĐ)</th>
+                            <th style="width: 15%;">Đơn giá (VNĐ)</th>
+                            <th style="width: 15%;">Thành tiền (VNĐ)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +61,7 @@
                                 <td>@item.ProductTypeName</td>
                                 <td>@item.Amount</td>
                                 <td>@string.Format("{0:#,##0}", item.Price)</td>
+                                <td>@string.Format("{0:#,##0}", item.Amount * item.Price)</td>
                             </tr>
                             total += item.Amount * item.Price;
                         }

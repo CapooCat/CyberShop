@@ -23,6 +23,7 @@ namespace CyberShop.Models
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public int ProductType_id { get; set; }
+        public int? Amount { get; set; }
         public int? SellAmount { get; set; }
     }
 }

@@ -73,7 +73,8 @@ namespace CyberShop.Controllers
                          IsDeleted = a.IsDeleted,
                          CreateBy = a.CreateBy,
                          CreateDate = a.CreateDate,
-                         ProductType_id = a.ProductType_id
+                         ProductType_id = a.ProductType_id,
+                         Amount = a.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -92,7 +93,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -117,7 +119,8 @@ namespace CyberShop.Controllers
                          IsDeleted = c.IsDeleted,
                          CreateBy = c.CreateBy,
                          CreateDate = c.CreateDate,
-                         ProductType_id = c.ProductType_id
+                         ProductType_id = c.ProductType_id,
+                         Amount = c.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -136,7 +139,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -169,7 +173,8 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ProductType_id = b.ProductType_id
+                         ProductType_id = b.ProductType_id,
+                         Amount = b.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -189,7 +194,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -213,7 +219,8 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ProductType_id = b.ProductType_id
+                         ProductType_id = b.ProductType_id,
+                         Amount = b.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -232,7 +239,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -257,7 +265,8 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ProductType_id = b.ProductType_id
+                         ProductType_id = b.ProductType_id,
+                         Amount = b.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -276,7 +285,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -301,7 +311,8 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ProductType_id = b.ProductType_id
+                         ProductType_id = b.ProductType_id,
+                         Amount = b.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -320,7 +331,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -346,7 +358,8 @@ namespace CyberShop.Controllers
                          IsDeleted = b.IsDeleted,
                          CreateBy = b.CreateBy,
                          CreateDate = b.CreateDate,
-                         ProductType_id = b.ProductType_id
+                         ProductType_id = b.ProductType_id,
+                         Amount = b.Amount
                      }).ToList();
             List<object> ReturnData = new List<object>();
             foreach (var item in model)
@@ -365,7 +378,8 @@ namespace CyberShop.Controllers
                     CreateDate = item.CreateDate,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
@@ -389,7 +403,8 @@ namespace CyberShop.Controllers
                     IsDeleted = item.IsDeleted,
                     CreateBy = item.CreateBy,
                     CreateDate = item.CreateDate,
-                    ProductType_id = item.ProductType_id
+                    ProductType_id = item.ProductType_id,
+                    Amount = item.Amount
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);

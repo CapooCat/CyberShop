@@ -5,6 +5,55 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+.layer {
+  padding-right: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.text-layer {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.layer-icon {
+  transition: .2s;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 80px;
+  width: 80px;
+  background-color: #1E90FF;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 30px;
+  border: 2px solid #1E90FF;
+}
+
+.layer-icon:hover {
+  transform: rotate(45deg);
+  background-color: #fff;
+  color: #1E90FF;
+}
+
+.layer-icon i {
+  transition: .2s
+}
+
+.layer-icon:hover i {
+  transform: rotate(-45deg);
+  color: #1E90FF;
+}
+
 /* Header */
 .no-select {
   -webkit-user-select: none;
@@ -262,7 +311,7 @@ button:focus {
 }
 
 .dropdown-content {
-  margin-top: 9px;
+  margin-top: 11px;
   visibility: hidden;
   opacity: 0;
   transition: 0.1s 0.2s;
@@ -270,6 +319,7 @@ button:focus {
   background-color: #f9f9f9;
   min-width: 175px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
 }
 
 .dropdown-content a::after{
@@ -343,6 +393,9 @@ button:focus {
   bottom: 0;
   background-color: #f9f9f9;
   min-width: 900px;
+  margin-left: 3px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .dropdown-content .more-content-items {
