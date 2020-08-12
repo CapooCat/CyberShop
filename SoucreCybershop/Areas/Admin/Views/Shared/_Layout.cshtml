@@ -35,7 +35,11 @@
             <div class="topnav" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);padding: 12px 16px;">
 
                 <div id="sidebar" class="sidenav" style="visibility: visible;">
-                    <a class="drop active" onclick='show_more(0);'>Quản lý</a>
+                    <a class="drop active" onclick='show_more(0);'>Tổng quan</a>
+                    <div class="nav-detail" style="visibility: visible;">
+                        <li><button id="SummaryManager" onclick="window.location.href='/Admin/SummaryManager'">Thống kê</button></li>
+                    </div>
+                    <a class="drop active" onclick='show_more(1);'>Quản lý</a>
                     <div class="nav-detail" style="visibility: visible;">
                         <li><button id="ProductManager"onclick="window.location.href='/Admin/ProductManager'">Quản lý sản phẩm</button></li>
                         <li><button id="BuildManager" onclick="window.location.href = '/Admin/BuildManager'">Quản lý máy bộ</button></li>
@@ -43,19 +47,15 @@
                         <li><button id="CategoryManager" onclick="window.location.href='/Admin/CategoryManager'">Quản lý danh mục</button></li>
                         <li><button id="InvoiceInManager" onclick="window.location.href = '/Admin/InvoiceInManager'">Quản lý hóa đơn nhập</button></li>
                     </div>
-                    <a class="drop active" onclick='show_more(1);'>Kinh doanh</a>
+                    <a class="drop active" onclick='show_more(2);'>Kinh doanh</a>
                     <div class="nav-detail" style="visibility: visible;">
                         <li><button id="InvoiceOutManager" onclick="window.location.href='/Admin/InvoiceOutManager'">Lập hóa đơn xuất</button></li>
                         <li><button id="AddInvoiceInManager" onclick="window.location.href='/Admin/AddInvoiceInManager'">Lập hóa đơn nhập</button></li>
                     </div>
-                    <a class="drop active" onclick='show_more(2);'>Tài khoản</a>
+                    <a class="drop active" onclick='show_more(3);'>Tài khoản</a>
                     <div class="nav-detail" style="visibility: visible;">
                         <li><button id="CustomerManager" onclick="window.location.href='/Admin/CustomerManager'">Quản lý tài khoản khách hàng</button></li>
                         <li><button id="AdminManager" onclick="window.location.href='/Admin/AdminManager'">Quản lý admin</button></li>
-                    </div>
-                    <a class="drop active" onclick='show_more(3);'>Tổng quan</a>
-                    <div class="nav-detail" style="visibility: visible;">
-                        <li><button id="SummaryManager" onclick="window.location.href='/Admin/SummaryManager'">Thống kê</button></li>
                     </div>
                 </div>
                 <div id="Push" class="push">
