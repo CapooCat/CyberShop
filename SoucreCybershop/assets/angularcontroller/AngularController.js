@@ -626,5 +626,96 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
     //}
     //else { }
 
+
+    $scope.RequestChangePass = function (username) {
+        if (document.getElementById("old_pass").value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được để trống',
+            })
+        } else {
+            var Password = document.getElementById("old_pass").value;
+            $scope.loading = true;
+            $http({
+                url: '/Home/CheckPassword',
+                method: "POST",
+                data: {
+                    Password: Password,
+                    Username: username
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                if (response.data.success == false) {
+                    $scope.loading = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Mật khẩu không đúng',
+                    })
+                } else {
+                    $scope.loading = false;
+                    document.getElementById("new_pass").disabled = false;
+                    document.getElementById("re_enter_pass").disabled = false;
+                    document.getElementById("Confirm_change").className = "";
+                    document.getElementById("Confirm_change").disabled = false;
+                    console.log(response);
+                }
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Đã xảy ra lỗi',
+                })
+                console.log(response);
+            });
+        }
+    }
+
+    $scope.ChangePass = function (username) {
+        if (document.getElementById("new_pass").value == "" && document.getElementById("re_enter_pass").value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Không được để trống',
+            })
+        } else if (document.getElementById("new_pass").value != document.getElementById("re_enter_pass").value) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Nhập lại mật khẩu không chính xác',
+            })
+        } else {
+            var newPassword = document.getElementById("new_pass").value;
+            $scope.loading = true;
+            $http({
+                url: '/Home/ChangePassword',
+                method: "POST",
+                data: {
+                    Password: newPassword,
+                    Username: username
+                },
+            }).then(function onSuccess(response) {
+                // Handle success
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Thay đổi mật khẩu thành công',
+                })
+            }).catch(function onError(response) {
+                // Handle error
+                $scope.loading = false;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại',
+                    text: 'Đã xảy ra lỗi',
+                })
+                console.log(response);
+            });
+        }
+    }
 });
 
