@@ -30,23 +30,23 @@ namespace Data
         public string MetaTitle { get; set; }
         public string Info { get; set; }
         public Nullable<double> Price { get; set; }
+        public Nullable<int> Amount { get; set; }
         public Nullable<int> SalePercent { get; set; }
         public Nullable<int> MonthWarranty { get; set; }
         public string Image { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> Amount { get; set; }
     
+        public virtual Brand Brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detail_PcSets> Detail_PcSets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOrder_Detail> InOrder_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice_Detail> Invoice_Detail { get; set; }
+        public virtual ProducType ProducType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
-        public virtual Brand Brand { get; set; }
-        public virtual ProducType ProducType { get; set; }
     }
 }

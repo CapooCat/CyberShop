@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fa0d51cb3b114b7e8635bf3b8b741460" Name="Diagram1" >
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Brand" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Category" Width="1.5" PointX="1.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Detail_PcSets" Width="1.5" PointX="5.25" PointY="16.875" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder" Width="1.5" PointX="6" PointY="5.25" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.InOrder_Detail" Width="1.5" PointX="8.25" PointY="9.125" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Invoice_Detail" Width="1.5" PointX="5.25" PointY="9" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.Product" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.ProductImage" Width="1.5" PointX="5.25" PointY="14" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.ProducType" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.sysdiagram" Width="1.5" PointX="3.75" PointY="2.125" />
+        <EntityTypeShape EntityType="ShopPCComponentsModel.User" Width="1.5" PointX="0.75" PointY="13.75" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Product_Brand" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Category_Category" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_ProducType_Category1" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Detail_PcSets_Product" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_InOrder_Detail_Product" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Invoice" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_User" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Invoice_Detail_Product" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_Product_ProducType" />
+        <AssociationConnector Association="ShopPCComponentsModel.FK_ProductImage_Product" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

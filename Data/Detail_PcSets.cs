@@ -22,6 +22,7 @@ namespace Data
         public Nullable<int> hdd_id { get; set; }
         public Nullable<int> ssd_id { get; set; }
         public Nullable<int> vga_int { get; set; }
+        public Nullable<int> case_id { get; set; }
         public Nullable<int> power_id { get; set; }
         public Nullable<int> cooler_id { get; set; }
         public Nullable<int> monitor_id { get; set; }
@@ -32,7 +33,6 @@ namespace Data
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public string CreateBy { get; set; }
-        public Nullable<int> case_id { get; set; }
     
         public virtual Product Product { get; set; }
     }

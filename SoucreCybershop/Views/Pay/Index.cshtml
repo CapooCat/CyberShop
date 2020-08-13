@@ -77,7 +77,7 @@
             <div style="color:red;" ng-show="formThanhToan.CustomerName.$touched && formThanhToan.CustomerName.$invalid">Bạn chưa nhập họ tên</div>
             <div style="color:red;" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</div>
         </div>
-        <div class="error" id="Post_Error">
+        <div class="error" id="Post_Error" style="width: 100%;">
             <ul>
                 @Html.ValidationSummary(false, "", "alert alert-danger")
             </ul>

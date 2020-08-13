@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopPCComponentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nchar" MaxLength="15" />
+    <Property Name="Info" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
+    <Property Name="CreateTime" Type="date" />
+    <Property Name="Metatitle" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_lv2_id" Type="int" />
+    <Property Name="category_lv3_id" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Metatitle" Type="nchar" MaxLength="50" />
+    <Property Name="category_lv1_master_id" Type="int" />
+    <Property Name="category_lv2_master_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Detail_PcSets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="cpu_id" Type="int" />
+    <Property Name="main_id" Type="int" />
+    <Property Name="ram_id" Type="int" />
+    <Property Name="hdd_id" Type="int" />
+    <Property Name="ssd_id" Type="int" />
+    <Property Name="vga_int" Type="int" />
+    <Property Name="case_id" Type="int" />
+    <Property Name="power_id" Type="int" />
+    <Property Name="cooler_id" Type="int" />
+    <Property Name="monitor_id" Type="int" />
+    <Property Name="keyboard_id" Type="int" />
+    <Property Name="mouse_id" Type="int" />
+    <Property Name="headphone_id" Type="int" />
+    <Property Name="speaker_id" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateTime" Type="date" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="InOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="Info" Type="nvarchar(max)" />
+    <Property Name="Total" Type="float" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="InOrder_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InOrder_id" Type="int" />
+    <Property Name="Product_id" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_id" Type="int" />
+    <Property Name="PurchaseDate" Type="date" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeliveryAddress" Type="nvarchar(max)" />
+    <Property Name="DeliveryPhoneNum" Type="nchar" MaxLength="15" />
+    <Property Name="Status" Type="nvarchar" MaxLength="30" />
+    <Property Name="Total" Type="float" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Invoice_Detail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Invoice_id" Type="int" Nullable="false" />
+    <Property Name="Product_id" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="WarrantyExpires" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand_id" Type="int" Nullable="false" />
+    <Property Name="ProductType_id" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MetaTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Info" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="SalePercent" Type="int" />
+    <Property Name="MonthWarranty" Type="int" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Url" Type="varchar(max)" Nullable="false" />
+    <Property Name="Product_id" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProducType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category_id" Type="int" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateBy" Type="nchar" MaxLength="30" />
+    <Property Name="CreateTime" Type="date" />
+    <Property Name="Info" Type="nvarchar" MaxLength="500" />
+    <Property Name="Metatitle" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="PhoneNum" Type="nvarchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreateDate" Type="date" />
+  </EntityType>
+  <Association Name="FK_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="category_lv1_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detail_PcSets_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Detail_PcSets" Type="Self.Detail_PcSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Detail_PcSets">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InOrder_Detail_InOrder">
+    <End Role="InOrder" Type="Self.InOrder" Multiplicity="0..1" />
+    <End Role="InOrder_Detail" Type="Self.InOrder_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="InOrder_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InOrder_Detail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="InOrder_Detail" Type="Self.InOrder_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="InOrder_Detail">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Detail_Invoice">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="Invoice_Detail" Type="Self.Invoice_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice_Detail">
+        <PropertyRef Name="Invoice_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Detail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Invoice_Detail" Type="Self.Invoice_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Invoice_Detail">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="User_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Brand_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProducType">
+    <End Role="ProducType" Type="Self.ProducType" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProducType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProductType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductImage_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProducType_Category1">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="ProducType" Type="Self.ProducType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProducType">
+        <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopPCComponentsModelStoreContainer">
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detail_PcSets" EntityType="Self.Detail_PcSets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InOrder" EntityType="Self.InOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InOrder_Detail" EntityType="Self.InOrder_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice_Detail" EntityType="Self.Invoice_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProducType" EntityType="Self.ProducType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Category1" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detail_PcSets_Product" Association="Self.FK_Detail_PcSets_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Detail_PcSets" EntitySet="Detail_PcSets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="Self.FK_InOrder_Detail_InOrder">
+      <End Role="InOrder" EntitySet="InOrder" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InOrder_Detail_Product" Association="Self.FK_InOrder_Detail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Detail_Invoice" Association="Self.FK_Invoice_Detail_Invoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Detail_Product" Association="Self.FK_Invoice_Detail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Invoice_Detail" EntitySet="Invoice_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_User" Association="Self.FK_Invoice_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Brand" Association="Self.FK_Product_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProducType" Association="Self.FK_Product_ProducType">
+      <End Role="ProducType" EntitySet="ProducType" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductImage" EntitySet="ProductImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProducType_Category1" Association="Self.FK_ProducType_Category1">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="ProducType" EntitySet="ProducType" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

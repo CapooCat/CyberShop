@@ -22,7 +22,7 @@ namespace Data
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual InOrder InOrder { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

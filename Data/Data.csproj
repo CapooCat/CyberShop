@@ -55,96 +55,98 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Brand.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="BrandDao.cs" />
     <Compile Include="CategoriesDao.cs" />
     <Compile Include="Category.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CyberShop.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CyberShop.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CyberShop.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CyberShop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CyberShop.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CyberShop.edmx</DependentUpon>
     </Compile>
     <Compile Include="Detail_PcSets.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="InOrder.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="InOrderDao.cs" />
     <Compile Include="InOrder_Detail.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDao.cs" />
     <Compile Include="InOrderDetailDao.cs" />
     <Compile Include="InvoiceDetailDao.cs" />
     <Compile Include="Invoice_Detail.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="Product.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Detail_PcSetDao.cs" />
+    <Compile Include="Product.cs">
+      <DependentUpon>CyberShop.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProductDao.cs" />
-    <Compile Include="CyberShopModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CyberShopModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CyberShopModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CyberShopModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CyberShopModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="ProductImage.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductImageDao.cs" />
     <Compile Include="ProductTypeDao.cs" />
     <Compile Include="ProducType.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>CyberShopModel.tt</DependentUpon>
+      <DependentUpon>CyberShop.tt</DependentUpon>
     </Compile>
     <Compile Include="UserDao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="CyberShopModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CyberShopModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App_Browsers\qt.browser" />
-    <None Include="CyberShopModel.edmx.diagram">
-      <DependentUpon>CyberShopModel.edmx</DependentUpon>
+    <EntityDeploy Include="CyberShop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CyberShop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CyberShop.edmx.diagram">
+      <DependentUpon>CyberShop.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\Data.dll" />
     <Content Include="bin\Debug\Data.pdb" />
-    <Content Include="CyberShopModel.Context.tt">
+    <Content Include="CyberShop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CyberShopModel.edmx</DependentUpon>
-      <LastGenOutput>CyberShopModel.Context.cs</LastGenOutput>
+      <DependentUpon>CyberShop.edmx</DependentUpon>
+      <LastGenOutput>CyberShop.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="CyberShopModel.tt">
+    <Content Include="CyberShop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CyberShopModel.edmx</DependentUpon>
-      <LastGenOutput>CyberShopModel.cs</LastGenOutput>
+      <DependentUpon>CyberShop.edmx</DependentUpon>
+      <LastGenOutput>CyberShop.cs</LastGenOutput>
     </Content>
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />

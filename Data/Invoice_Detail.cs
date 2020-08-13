@@ -24,7 +24,7 @@ namespace Data
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual Invoice Invoice { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
