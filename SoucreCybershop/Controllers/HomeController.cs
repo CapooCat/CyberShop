@@ -287,8 +287,37 @@ namespace CyberShop.Controllers
             string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/template_mail/ForgotPasswordEmail.html"));
             content = content.Replace("{{CustomerName}}", entity.Name);
             content = content.Replace("{{Password}}", password);
+            content = content.Replace("{{User}}", entity.Username);
             entity.Password = Encryptor.MD5Hash(password);
             new MailHelper().SendMail(email, "Password reset", content);
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CheckPassword(SignUpViewModel model)
+        {
+            UserDao userDao = new UserDao();
+            if (userDao.KTTaiKhoan(model.Username) && userDao.KTMatKhau(Encryptor.MD5Hash(model.Password), model.Username) && userDao.NotAdmin(model.Username))
+            {
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult ChangePassword(SignUpViewModel model)
+        {
+            User entity = new User();
+            entity = data.Users.Where(x => x.Username == model.Username).SingleOrDefault();
+            if (String.IsNullOrEmpty(model.Password)) { }
+            else
+            {
+                entity.Password = Encryptor.MD5Hash(model.Password);
+            }
             data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }

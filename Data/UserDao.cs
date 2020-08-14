@@ -47,7 +47,7 @@ namespace Data
         }
         public bool KTEmail(string email)
         {
-            var res = data.Users.Where(x => x.Email == email && x.IsDeleted == false).Count();
+            var res = data.Users.Where(x => x.Email == email && x.IsDeleted == false && x.UserType != "admin").Count();
             if (res > 0)
             {
                 return true;
