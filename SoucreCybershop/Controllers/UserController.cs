@@ -30,22 +30,6 @@ namespace CyberShop.Controllers
                 {
                     ViewBag.Warning = "yes";
                 }
-                var res = (from a in data.Invoices
-                           join b in data.Invoice_Detail on a.Id equals b.Invoice_id
-                           join c in data.Products on b.Product_id equals c.id
-                           where a.User_id == user.Id
-                           select new InvoiceDetailViewModel
-                           {
-                               Id = b.Id,
-                               Invoice_id = a.Id,
-                               Product_id = c.id,
-                               ProductName = c.ProductName,
-                               Amount = b.Amount,
-                               Price = b.Price,
-                               Status = a.Status,
-                               CreateDate = b.CreateDate
-                           }).ToList();
-                ViewBag.OrderHistory = res;
                 return View(model);
             }
             return Redirect("/");
@@ -64,25 +48,116 @@ namespace CyberShop.Controllers
                 user.PhoneNum = model.PhoneNum;
                 userDao.UpdateUser(user);
                 ViewBag.Success = "Cập nhật thành công";
-
-                var res = (from a in data.Invoices
-                           join b in data.Invoice_Detail on a.Id equals b.Invoice_id
-                           join c in data.Products on b.Product_id equals c.id
-                           where a.User_id == userSession.Id
-                           select new InvoiceDetailViewModel
-                           {
-                               Id = b.Id,
-                               Invoice_id = a.Id,
-                               Product_id = c.id,
-                               ProductName = c.ProductName,
-                               Amount = b.Amount,
-                               Price = b.Price,
-                               Status = a.Status,
-                               CreateDate = b.CreateDate
-                           }).ToList();
-                ViewBag.OrderHistory = res;
             }
             return View(model);
+        }
+        public JsonResult ReturnOrderHistory()
+        {
+            var userSession = (UserInfo)Session[CommonConstantUser.USER_SESSION];
+            if (userSession != null)
+            {
+                var res = (from a in data.Invoices
+                           where a.User_id == userSession.Id
+                           select new InvoiceViewModel
+                           {
+                               Id = a.Id,
+                               Total = a.Total,
+                               Status = a.Status,
+                               CreateDate = a.CreateDate
+                           }).ToList();
+                List<object> ReturnData = new List<object>();
+                foreach (var item in res)
+                {
+                    ReturnData.Add(new InvoiceViewModel
+                    {
+                        Id = item.Id,
+                        Total = item.Total,
+                        Status = item.Status,
+                        CreateDate = item.CreateDate
+                    });
+                }
+                return Json(ReturnData, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success=false}, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ReturnInvoiceById(int id)
+        {
+            var model = new List<InvoiceViewModel>();
+            model = (from a in data.Invoices
+                     where a.IsDeleted == false && a.Id==id
+                     select new InvoiceViewModel
+                     {
+                         Id=a.Id,
+                         User_id=a.User_id,
+                         CustomerName=a.CustomerName,
+                         PurchaseDate=a.PurchaseDate,
+                         DeliveryAddress=a.DeliveryAddress,
+                         DeliveryPhoneNum = a.DeliveryPhoneNum,
+                         Total=a.Total,
+                         IsDeleted=a.IsDeleted,
+                         CreateBy=a.CreateBy,
+                         Status=a.Status
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new InvoiceViewModel
+                {
+                    Id = item.Id,
+                    User_id = item.User_id,
+                    CustomerName = item.CustomerName,
+                    PurchaseDate = item.PurchaseDate,
+                    DeliveryAddress = item.DeliveryAddress,
+                    DeliveryPhoneNum = item.DeliveryPhoneNum,
+                    Total = item.Total,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    Status = item.Status
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ReturnInvoiceDetailById(int id)
+        {
+            var model = new List<InvoiceDetailViewModel>();
+            model = (from a in data.Invoices
+                     join b in data.Invoice_Detail on a.Id equals b.Invoice_id
+                     join c in data.Products on b.Product_id equals c.id
+                     where a.IsDeleted == false && a.Id == id && b.IsDeleted==false
+                     select new InvoiceDetailViewModel
+                     {
+                         Id = b.Id,
+                         Invoice_id = b.Invoice_id,
+                         Product_id = b.Product_id,
+                         ProductName = c.ProductName,
+                         Amount = b.Amount,
+                         Price = b.Price,
+                         WarrantyExpires = b.WarrantyExpires,
+                         IsDeleted = a.IsDeleted,
+                         CreateBy = a.CreateBy,
+                         CreateDate = a.CreateDate
+                     }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (var item in model)
+            {
+                ReturnData.Add(new InvoiceDetailViewModel
+                {
+                    Id = item.Id,
+                    Invoice_id = item.Invoice_id,
+                    Product_id = item.Product_id,
+                    ProductName = item.ProductName,
+                    Amount = item.Amount,
+                    Price = item.Price,
+                    WarrantyExpires = item.WarrantyExpires,
+                    IsDeleted = item.IsDeleted,
+                    CreateBy = item.CreateBy,
+                    CreateDate = item.CreateDate,
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
     }
 }

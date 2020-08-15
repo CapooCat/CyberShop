@@ -60,7 +60,7 @@ namespace CyberShop.Controllers
                         invoice.PurchaseDate = DateTime.Now;
                         invoice.DeliveryAddress = model.Address + " " + model.City;
                         invoice.DeliveryPhoneNum = model.PhoneNum;
-                        invoice.Status = "Đang chờ xem";
+                        invoice.Status = "Chưa xác nhận";
                         invoice.IsDeleted = false;
                         invoice.CreateBy = "Admin";
                         invoice.CreateDate = DateTime.Now;

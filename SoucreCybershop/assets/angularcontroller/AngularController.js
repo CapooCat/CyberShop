@@ -717,5 +717,93 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
             });
         }
     }
+    $scope.bucket = { total_price: 0 };
+    $scope.EditInvoice = function (id) {
+        InvoiceID = id;
+        $scope.bucket.total_price = 0;
+        $scope.loading = true;
+        $http.get("/User/ReturnInvoiceById/" + id).then(function (response) {
+            $scope.dataInvoice = angular.fromJson(response.data);
+            $scope.clientName = $scope.dataInvoice[0].CustomerName;
+            $scope.phoneNumber = $scope.dataInvoice[0].DeliveryPhoneNum;
+            $scope.address = $scope.dataInvoice[0].DeliveryAddress;
+            $http.get("/User/ReturnInvoiceDetailById/" + id).then(function (response) {
+                $scope.listInvoiceDetail = response.data;
+                $scope.loading = false;
+            });
+        });
+    }
+    $scope.ReturnProduct = function () {
+        $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
+            $scope.productList = response.data;
+        });
+    }
+    $scope.sortProduct = function (ProductN) {
+        $scope.reverseProduct = ($scope.ProductN === ProductN) ? !$scope.reverseProduct : false;
+        $scope.ProductN = ProductN;
+    };
+    $scope.sortInvoiceProduct = function (InProduct) {
+        $scope.reverseInProduct = ($scope.InProduct === InProduct) ? !$scope.reverseInProduct : false;
+        $scope.InProduct = InProduct;
+    };
+    $scope.ReturnOrderHistory = function () {
+        $http.get("/User/ReturnOrderHistory").then(function (response) {
+            $scope.lstOrderHistory = response.data;
+        });
+    }
+    $scope.UpdateInvoice = function () {
+        $scope.loading = true;
+        var Name = document.getElementById("client_name").value;
+        var SDT = document.getElementById("phone_number").value;
+        var Address = document.getElementById("address").value;
+        $http({
+            url: '/Admin/InvoiceManager/UpdateInvoice',
+            method: "POST",
+            data: {
+                Id: InvoiceID,
+                DeliveryAddress: Address,
+                DeliveryPhoneNum: SDT,
+                CustomerName: Name
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Cập nhật thành công',
+            })
+            $("[data-dismiss=modal]").trigger({ type: "click" });
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: 'Cập nhật thất bại',
+            })
+            console.log(response);
+        });
+    }
+    $scope.ViewInvoice = function (id) {
+        $scope.bucket.total_price = 0;
+        $scope.invoice_id = id;
+        $scope.loading = true;
+        $http.get("/Admin/InvoiceManager/ReturnViewInvoiceById/" + id).then(function (response) {
+            $scope.dataInvoice = angular.fromJson(response.data);
+            $scope.Invoice_Id = $scope.dataInvoice[0].Id;
+            $scope.Invoice_CustomerName = $scope.dataInvoice[0].CustomerName;
+            $scope.Invoice_DeliveryPhoneNum = $scope.dataInvoice[0].DeliveryPhoneNum;
+            $scope.Invoice_DeliveryAddress = $scope.dataInvoice[0].DeliveryAddress;
+            $scope.Invoice_Status = $scope.dataInvoice[0].Status;
+            $scope.Invoice_CreateDate = $scope.dataInvoice[0].CreateDate;
+            $http.get("/Admin/InvoiceManager/ReturnViewDetailInvoiceById/" + id).then(function (response) {
+                $scope.loading = false;
+                $scope.listInvoiceDetail2 = response.data;
+            });
+        });
+    };
+    $scope.ReturnOrderHistory();
 });
 
