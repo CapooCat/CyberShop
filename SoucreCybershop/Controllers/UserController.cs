@@ -64,7 +64,7 @@ namespace CyberShop.Controllers
                                Total = a.Total,
                                Status = a.Status,
                                CreateDate = a.CreateDate
-                           }).ToList();
+                           }).OrderByDescending(x=>x.CreateDate).ToList();
                 List<object> ReturnData = new List<object>();
                 foreach (var item in res)
                 {
@@ -158,6 +158,23 @@ namespace CyberShop.Controllers
                 });
             }
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult DeleteInvoice(int id)
+        {
+            Invoice invoice = new Invoice();
+            invoice = data.Invoices.Find(id);
+            invoice.Status = "Đã hủy";
+            data.SaveChanges();
+            return Json(new { success=true}, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult UpdateAmountInvoiceDetail(int id,int Amount)
+        {
+            Invoice_Detail invoice_detail = new Invoice_Detail();
+            invoice_detail = data.Invoice_Detail.Find(id);
+            invoice_detail.Amount = Amount;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1847,7 +1847,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
     }
 
         $scope.AddProductToInvoice = function (id, price, warranty) {
-        $scope.loading = true;
+            $scope.loading = true;
             $http({
                 url: '/Admin/InvoiceManager/AddProductToInvoice',
                 method: "POST",

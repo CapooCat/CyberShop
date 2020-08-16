@@ -131,8 +131,8 @@
             <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
             <td ng-if="item.Status=='Chưa xác nhận'"><div class="waiting">{{item.Status}}</div></td>
             <td ng-if="item.Status!='Chưa xác nhận'"><div class="pending">{{item.Status}}</div></td>
-            <td class="table-product-action" ng-if="item.Status=='Chưa xác nhận'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete"><i class="fas fa-trash"></i></button></td>
-            <td class="table-product-action" ng-if="item.Status!='Chưa xác nhận'"><button class="look"><i class="fas fa-eye"></i></button></td>
+            <td class="table-product-action" ng-if="item.Status=='Chưa xác nhận'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+            <td class="table-product-action" ng-if="item.Status!='Chưa xác nhận'"><button class="look" data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
         </tr>
         
     </table>
@@ -187,7 +187,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Sửa hóa đơn</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close" ng-click="CheckAmountNull()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -208,7 +208,7 @@
                         <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
 
                         <div class="col-md-12" style="text-align: center;">
-                            <button onclick="ShowProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
+                            <button onclick="ShowProduct()" ng-click="ReturnProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
                             <div class="Dropdown-Product-Background" id="Product-Background"></div>
                             <div class="Dropdown-Product" id="Product">
                                 <a href="javascript:void(0);" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
@@ -284,10 +284,10 @@
                                                 <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="items-table">
                                             <tr ng-repeat="item in listInvoiceDetail | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                                 <td>{{item.ProductName}}</td>
-                                                <td>{{item.Amount}}</td>
+                                                <td><input type="number" min="1" ng-value="item.Amount" id="AmountInput_{{item.Id}}" ng-change="ChangeAmount(item.Id)" ng-model="AmountValue" oninput="validity.valid||(value='');"/></td>
                                                 <td>{{item.Price | currency:"":0}}</td>
                                                 <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
                                             </tr>
@@ -301,7 +301,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" ng-click="UpdateInvoice()">Xác nhận</button>
-                    <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
+                    <button type="button" class="second-btn" data-dismiss="modal" id="btn_out" ng-click="CheckAmountNull()">Thoát</button>
                 </div>
             </div>
         </div>
@@ -358,12 +358,9 @@
 
                     </div>
                     <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
-
-
-
                 </div>
                 <div class="modal-footer">
-                    <button class="second-btn" data-dismiss="modal">Thoát</button>
+                    <button class="second-btn" data-dismiss="modal" >Thoát</button>
                 </div>
             </div>
         </div>
@@ -371,7 +368,8 @@
 </section>
 @section scripts{
 <script>
-
+    table = document.getElementById("items-table");
+    ItemInput = table.getElementsByTagName("input");
     function OpenPassChangeModal() {
         document.getElementById("new_pass").disabled = true;
         document.getElementById("re_enter_pass").disabled = true;
@@ -416,6 +414,17 @@
 	    } else {
 	        x.style.display = 'none';
 	    }
+	    Product = document.getElementById("Product");
+	    ProductBackground = document.getElementById("Product-Background");
+        function ShowProduct() {
+        ProductBackground.style.visibility = "visible";
+        Product.style.visibility = "visible";
+    }
+
+         function HideProduct() {
+        ProductBackground.style.visibility = "hidden";
+        Product.style.visibility = "hidden";
+    }
 </script>
     }
 
