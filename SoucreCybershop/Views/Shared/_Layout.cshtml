@@ -114,7 +114,7 @@
                                                 <tr ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)" style="border-bottom: 1px solid #DCDCDC">
                                                     <td><img style="max-width: 50px;max-height:50px" ng-src="{{item.Image}}"></td>
                                                     <td><a href="/Home/DetailProduct/{{item.id}}">{{item.ProductName}}</a></td>
-                                                    <td class="cart-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="{{item.id}}" value="{{item.Quanlity}}" type="text" onchange="ApplyQuantity(this.id,this)" style="float: left;"><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></td>
+                                                    <td><div class="cart-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="{{item.id}}" class="numberonly" value="{{item.Quanlity}}" type="text" onchange="ApplyQuantity(this.id,this)" style="float: left;"><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
                                                     <td>{{item.Price | currency:"":0}}đ</td>
                                                     <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
                                                 </tr>

@@ -136,7 +136,8 @@ namespace CyberShop.Controllers
                 {
                     if (quantity == 0)
                     {
-                        cartList.Remove(item);
+                        item.Quanlity = 1;
+                        item.Price = Convert.ToDouble(product.Price * item.Quanlity);
                     }
                     else
                     {
