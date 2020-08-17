@@ -124,19 +124,5 @@ namespace CyberShop.Controllers
             Session[Common.CommonConstantUser.CART_SESSION] = cartList;
             return new EmptyResult();
         }
-        [HttpPost]
-        public JsonResult ChangeQuanlityCart(int id,int Amount)
-        {
-            var cart = Session[Common.CommonConstantUser.CART_SESSION];
-            List<CartViewModel> cartList = (List<CartViewModel>)cart;
-            foreach (CartViewModel item in cartList.ToList())
-            {
-                if (item.id == id)
-                {
-                        item.Quanlity = Amount;
-                }
-            }
-            return Json(new {success=true }, JsonRequestBehavior.AllowGet);
-        }
     }
 }
