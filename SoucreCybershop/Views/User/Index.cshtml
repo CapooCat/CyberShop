@@ -1,8 +1,11 @@
 ﻿@using CyberShop.Models;
+@using Data;
 @{
-    ViewBag.Title = "Thông tìn người dùng";
+    ViewBag.Title = "Thông tin người dùng";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<CyberShop.Models.InvoiceDetailViewModel> listOrderHistory = ViewBag.OrderHistory;
+    List<CyberShop.Models.InvoiceViewModel> listOrderHistory = ViewBag.OrderHistory;
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
 }
 @model CyberShop.Models.UserViewModel
 @section style{
@@ -116,28 +119,22 @@
     <h1 style="text-align: center; margin: 50px;">Lịch sử mua hàng</h1>
     <table>
         <tr>
-            <th style="width: 10%;">Mã hóa đơn</th>
-            <th style="width: 35%;">Tên sản phẩm</th>
-            <th style="width: 10%;">Số lượng</th>
-            <th style="width: 20%;">Giá</th>
-            <th style="width: 15%;">Ngày mua</th>
-            <th style="width: 10%;">Tình trạng</th>
+            <th style="width: 20%;">Mã hóa đơn</th>
+            <th style="width: 20%;">Tổng tiền (VNĐ)</th>
+            <th style="width: 20;">Ngày mua</th>
+            <th style="width: 20%;">Tình trạng</th>
+            <th style="width: 20%;">Thao tác</th>
         </tr>
-        @foreach (InvoiceDetailViewModel item in listOrderHistory)
-        {
-        <tr>
-            <td>@item.Invoice_id</td>
-            <td><a href="#">@item.ProductName</a></td>
-            <td>@item.Amount</td>
-            <td>@string.Format("{0:#,##0.00}", item.Price)</td>
-            <td>@item.CreateDate</td>
-            @if (item.Status == "Chưa hoàn thành")
-            {<td>Chưa nhận</td> }
-            else
-            {
-            <td>Đã nhận</td> }
+        <tr ng-repeat="item in lstOrderHistory">
+            <td>{{item.Id}}</td>
+            <td>{{item.Total | currency:"":0}}</td>
+            <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+            <td ng-if="item.Status=='Chưa xác nhận'"><div class="waiting">{{item.Status}}</div></td>
+            <td ng-if="item.Status!='Chưa xác nhận'"><div class="pending">{{item.Status}}</div></td>
+            <td class="table-product-action" ng-if="item.Status=='Chưa xác nhận'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+            <td class="table-product-action" ng-if="item.Status!='Chưa xác nhận'"><button class="look" data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
         </tr>
-        }
+        
     </table>
 
     <div class="modal fade" id="PasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -185,10 +182,194 @@
         </div>
     </div>
     </div>
+    <div class="modal fade" id="EditInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sửa hóa đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close" ng-click="CheckAmountNull()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                        <div class="col-md-3">
+                            <p>Họ tên khách hàng:</p>
+                            <input type="text" placeholder="Nhập Họ tên..." id="client_name" ng-value="clientName">
+                        </div>
+                        <div class="col-md-3" style="text-align: left;">
+                            <p>Số điện thoại</p>
+                            <input type="text" class="numberonly" placeholder="số điện thoại..." id="phone_number" ng-value="phoneNumber">
+                        </div>
+                        <div class="col-md-6">
+                            <p>Địa chỉ:</p>
+                            <input type="text" placeholder="Nhập địa chỉ..." id="address" ng-value="address">
+                        </div>
+                        <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
+
+                        <div class="col-md-12" style="text-align: center;">
+                            <button onclick="ShowProduct()" ng-click="ReturnProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
+                            <div class="Dropdown-Product-Background" id="Product-Background"></div>
+                            <div class="Dropdown-Product" id="Product">
+                                <a href="javascript:void(0);" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
+                                <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                                    <div class="col-md-4">
+                                        <p>Tìm kiếm sản phẩm:</p>
+                                        <input type="text" placeholder="Nhập từ khóa..." ng-model="search.ProductName">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Lọc theo loại sản phẩm:</p>
+                                        <select class="list-select" ng-model="search.ProductTypeName">
+                                            <option value="">Chọn loại sản phẩm</option>
+                                            @foreach (var item in prdTypeList)
+                                            {
+                                                <option value="@item.TypeName">@item.TypeName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Lọc theo hãng:</p>
+                                        <select class="list-select" ng-model="search.BrandName">
+                                            <option value="">Chọn hãng sản phẩm</option>
+                                            @foreach (var item in brandList)
+                                            {
+                                                <option value="@item.BrandName">@item.BrandName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                                        <p>Danh sách sản phẩm:</p>
+                                        <div class="Box" style="padding: 0;margin-top: 10px;">
+                                            <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 320px;">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 40%;"><a ng-click="sortProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                            <th style="width: 10%;"><a ng-click="sortProduct('ProductTypeName')" href="javascript:void(0);">Loại SP</a></th>
+                                                            <th style="width: 10%;"><a ng-click="sortProduct('BrandName')" href="javascript:void(0);">Hãng SP</a></th>
+                                                            <th style="width: 15%;"><a ng-click="sortProduct('Amount')" href="javascript:void(0);">SL hàng tồn</a></th>
+                                                            <th style="width: 10%;"><a ng-click="sortProduct('MonthWarranty')" href="javascript:void(0);">Bảo hành</a></th>
+                                                            <th style="width: 20%;"><a ng-click="sortProduct('Price')" href="javascript:void(0);">Giá tiền</a></th>
+                                                            <th style="width: 5%;text-align: center;"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in productList | filter:search | orderBy:ProductN:reverseProduct">
+                                                            <td>{{item.ProductName}}</td>
+                                                            <td>{{item.ProductTypeName}}</td>
+                                                            <td>{{item.BrandName}}</td>
+                                                            <td>{{item.Amount}}</td>
+                                                            <td>{{item.MonthWarranty}}</td>
+                                                            <td>{{item.Price | currency:"":0}}</td>
+                                                            <td style="text-align: center;"><a href="javascript:void(0);" ng-click="AddProductToInvoice(item.id, item.Price,item.MonthWarranty)"><i class="fas fa-plus"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <p>Danh sách sản phẩm trong hóa đơn:</p>
+                            <div class="Box" style="padding: 0;margin-top: 10px;">
+                                <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 45%;"><a ng-click="sortInvoiceProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                <th style="width: 10%;"><a ng-click="sortInvoiceProduct('Amount')" href="javascript:void(0);">Số lượng</a></th>
+                                                <th style="width: 20%;"><a ng-click="sortInvoiceProduct('Price')" href="javascript:void(0);">Giá tiền (VNĐ)</a></th>
+                                                <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="items-table">
+                                            <tr ng-repeat="item in listInvoiceDetail | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
+                                                <td>{{item.ProductName}}</td>
+                                                <td><input type="number" min="1" ng-value="item.Amount" id="AmountInput_{{item.Id}}" ng-change="ChangeAmount(item.Id)" ng-model="AmountValue" oninput="validity.valid||(value='');"/></td>
+                                                <td>{{item.Price | currency:"":0}}</td>
+                                                <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="UpdateInvoice()">Xác nhận</button>
+                    <button type="button" class="second-btn" data-dismiss="modal" id="btn_out" ng-click="CheckAmountNull()">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ViewInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Chi tiết hóa đơn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+
+                        <div class="col-md-6 info">
+                            <p>Mã hóa đơn: <span ng-bind="Invoice_Id"></span></p>
+                            <p>Họ và tên: <span ng-bind="Invoice_CustomerName"></span></p>
+                            <p>Số điện thoại: <span ng-bind="Invoice_DeliveryPhoneNum"></span></p>
+                        </div>
+                        <div class="col-md-6 info">
+                            <p>Địa chỉ: <span ng-bind="Invoice_DeliveryAddress"></span></p>
+                            <p>Tình trạng: <span ng-bind="Invoice_Status"></span></p>
+                            <p>Ngày xuất: <span ng-bind="Invoice_CreateDate.slice(6, -2) | date:'dd/MM/yyyy'"></span></p>
+                        </div>
+                        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                            <p>Sản phẩm trong hóa đơn: (chọn SP cần bảo hành)</p>
+                            <div class="Box" style="padding: 0;margin-top: 10px;">
+                                <div id="admin-table-best-sale" class="admin-table modal-table" style="height: 250px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 45%;"><a ng-click="sortViewInProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                <th style="width: 10%;"><a ng-click="sortViewInProduct('Amount')" href="javascript:void(0);">Số lượng</a></th>
+                                                <th style="width: 20%;"><a ng-click="sortViewInProduct('Price')" href="javascript:void(0);">Giá tiền</a></th>
+                                                <th style="width: 30%;"><a ng-click="sortViewInProduct('WarrantyExpires')" href="javascript:void(0);">Bảo hành</a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in listInvoiceDetail2 | orderBy:ViewInProduct:reverseViewInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
+                                                <td>{{item.ProductName}}</td>
+                                                <td>{{item.Amount}}</td>
+                                                <td>{{item.Price | currency:"":0}}</td>
+                                                <td>{{item.WarrantyExpires.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
+                </div>
+                <div class="modal-footer">
+                    <button class="second-btn" data-dismiss="modal" >Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @section scripts{
 <script>
-
+    table = document.getElementById("items-table");
+    ItemInput = table.getElementsByTagName("input");
     function OpenPassChangeModal() {
         document.getElementById("new_pass").disabled = true;
         document.getElementById("re_enter_pass").disabled = true;
@@ -233,6 +414,17 @@
 	    } else {
 	        x.style.display = 'none';
 	    }
+	    Product = document.getElementById("Product");
+	    ProductBackground = document.getElementById("Product-Background");
+        function ShowProduct() {
+        ProductBackground.style.visibility = "visible";
+        Product.style.visibility = "visible";
+    }
+
+         function HideProduct() {
+        ProductBackground.style.visibility = "hidden";
+        Product.style.visibility = "hidden";
+    }
 </script>
     }
 

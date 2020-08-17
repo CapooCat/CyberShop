@@ -1,7 +1,9 @@
-﻿
+﻿@using Data;
 @{
     ViewBag.Title = "Thanh toán";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var prdTypeList = new ProductTypeDao().ListProductType();
+    var brandList = new BrandDao().ListBrand();
 }
 @model CyberShop.Models.CustomerOrderViewModel
 @section style{
@@ -41,111 +43,224 @@
         <li class="breadcrumb-item"><a href="/Home"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
         <li class="breadcrumb-item active">Thanh toán</li>
     </ul>
-    @if (ViewBag.Success != null)
-    {
-        <div class="alert success">
-            <span class="closebtn">&times;</span>
-            <strong></strong>Đặt hàng thành công
-        </div>
-    }
-    else {}
-    <table>
-        <tr>
-            <th style="width: 20%;">Sản phẩm</th>
-            <th style="width: 40%;">Tên sản phẩm</th>
-            <th style="width: 10%;">Số lượng</th>
-            <th style="width: 20%;">Giá</th>
-            <th style="width: 10%;">Tác vụ</th>
-        </tr>
-        <tr ng-repeat="item in cartList">
-            <td><img style="max-width: 200px;max-height:200px;" ng-src="{{item.Image}}"></td>
-            <td><a href="#">{{item.ProductName}}</a></td>
-            <td>{{item.Quanlity}}</td>
-            <td>{{item.Price | currency:"":0}}đ</td>
-            <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
-        </tr>
-        <tr class="Total-Payment">
-            <td colspan="3">Tổng tiền</td>
-            <td colspan="2">{{bucket.total_amount | currency:"":0}}đ</td>
-        </tr>
-    </table>
-    <h1 style="text-align: center; margin-top: 50px;">Điền thông tin</h1>
-    <form action="/Pay/Index" method="post" name="formThanhToan">
-        <div class="pay-error">
-            <div style="color:red;" ng-show="formThanhToan.PhoneNum.$touched && formThanhToan.PhoneNum.$invalid">Bạn chưa nhập số điện thoại</div>
-            <div style="color:red;" ng-show="formThanhToan.Address.$touched && formThanhToan.Address.$invalid">Bạn chưa nhập địa chỉ</div>
-            <div style="color:red;" ng-show="formThanhToan.CustomerName.$touched && formThanhToan.CustomerName.$invalid">Bạn chưa nhập họ tên</div>
-            <div style="color:red;" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</div>
-        </div>
-        <div class="error" id="Post_Error" style="width: 100%;">
-            <ul>
-                @Html.ValidationSummary(false, "", "alert alert-danger")
-            </ul>
-        </div>
+    <div id="cart_null" hidden>
+        <h1 style="text-align: center; margin-top: 50px;">Giỏ hàng</h1>
+        <p style="text-align: center;">Không có sản phẩm nào trong giỏ hàng</p>
+    </div>
+    <div class="start-pay">
+    <button id="view_order" style="font-size:20px" ng-click="ViewOrder()">Xem đơn hàng  <i class="fa fa-angle-down" style="font-size:24px" id="icon_down"></i></button>
+    </div>
+    <div id="section_Order">
+        <table id="tbl_items" hidden>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Sản phẩm</th>
+                    <th style="width: 40%;">Tên sản phẩm</th>
+                    <th style="width: 10%;">Số lượng</th>
+                    <th style="width: 20%;">Giá</th>
+                    <th style="width: 10%;">Tác vụ</th>
+                </tr>
+            </thead>
+            <tbody id="tbody_items">
+                <tr ng-repeat="item in cartList">
+                    <td><img style="max-width: 150px;max-height:150px;" ng-src="{{item.Image}}"></td>
+                    <td><a href="#">{{item.ProductName}}</a></td>
+                    <td><input type="number" min="1" ng-value="item.Quanlity" id="QuanlityInput_{{item.id}}" ng-change="ChangeAmountCart(item.id)" ng-model="QuanlityValue" oninput="validity.valid||(value='');" /></td>
+                    <td>{{item.Price | currency:"":0}}đ</td>
+                    <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
+                </tr>
+            </tbody>
+            <tr class="Total-Payment">
+                <td colspan="3">Tổng tiền</td>
+                <td colspan="2">{{bucket.total_amount | currency:"":0}}đ</td>
+            </tr>
+        </table>
+        <h1 style="text-align: center; margin-top: 50px;">Điền thông tin</h1>
+        @*<form action="/Pay/Index" method="post" name="formThanhToan">*@
+        @*<div class="pay-error">
+                <div style="color:red;" ng-show="formThanhToan.PhoneNum.$touched && formThanhToan.PhoneNum.$invalid">Bạn chưa nhập số điện thoại</div>
+                <div style="color:red;" ng-show="formThanhToan.Address.$touched && formThanhToan.Address.$invalid">Bạn chưa nhập địa chỉ</div>
+                <div style="color:red;" ng-show="formThanhToan.CustomerName.$touched && formThanhToan.CustomerName.$invalid">Bạn chưa nhập họ tên</div>
+                <div style="color:red;" ng-show="formThanhToan.Email.$touched && formThanhToan.Email.$invalid">Bạn chưa nhập Email</div>
+            </div>
+            <div class="error" id="Post_Error" style="width: 100%;">
+                <ul>
+                    @Html.ValidationSummary(false, "", "alert alert-danger")
+                </ul>
+            </div>*@
         <div class="row">
             <div class="col-md-6 input-info">
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.CustomerName, new { @type = "text", @placeholder = "Họ và tên...", @name = "search", @required=true, })
-
+                    <input type="text" placeholder="Họ và tên..." name="search" id="CustomerName" ng-change="CheckNull()" ng-model="CustomerName" />
                 </div>
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.Email, new { @type = "text", @placeholder = "Email...", @name = "search", @required = true, })
-
+                    <input type="text" placeholder="Email..." name="search" id="Email" ng-change="CheckNull()" ng-model="Email" />
                 </div>
-                    @*<div class="discount">
-                @Html.TextBoxFor(model => model.Discount, new { @type = "text", @placeholder = "Mã giảm giá...",@id="input_cpn" })
-                <div class="tick-mark" hidden id="tickmark">
-                    <svg class="checkmark" viewBox="0 0 52 52">
-                        <circle class="checkmark-circle" fill="none" cx="26" cy="26" r="25"></circle>
-                        <path class="checkmart-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
-                    </svg>
+                <div style="width:100%;">
+                    <select id="sl_city" class="list-select" ng-model="selectionCity" ng-change="ReturnDistrict()">
+                        <option value="">Chọn Tỉnh/Thành</option>
+                        <option ng-repeat="item in cityList" value="{{item.ID}}">{{item.Title}}</option>
+                    </select>
                 </div>
-                <button id="ConfirmDiscount">Xác nhận</button>
-                <span style="color:red" hidden id="error_cpn">Mã giảm giá không hợp lệ</span>
-            </div>*@
-                    <h3 style="text-align: center; margin: 30px;">Phương thức thanh toán</h3>
-                    <div class="pay-method" style="text-align: center;">
-                        <button id="tt1" class="active" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-wallet"></i>@Html.RadioButtonFor(model => model.Payment, "Thanh toán khi nhận hàng", new { @value = "Thanh toán khi nhận hàng", @checked = true, @style = "display:none", })</div>Thanh toán khi nhận hàng</button>
-                    </div>
+                <h3 style="text-align: center; margin: 30px;">Phương thức thanh toán</h3>
+                <div class="pay-method" style="text-align: center;">
+                    <button id="tt1" class="active" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-wallet"></i>@Html.RadioButtonFor(model => model.Payment, "Thanh toán khi nhận hàng", new { @value = "Thanh toán khi nhận hàng", @checked = true, @style = "display:none", })</div>Thanh toán khi nhận hàng</button>
                 </div>
+            </div>
             <div class="col-md-6 input-info">
-                
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.PhoneNum, new { @type = "text", @placeholder = "Số điện thoại...", @name = "search", @required = true,@id="key", @class = "numberonly", })
+                    <input type="text" class="numberonly" placeholder="Số điện thoại..." name="search" id="key" ng-change="CheckNull()" ng-model="PhoneNum" />
 
                 </div>
                 <div style="width:100%;">
-                    @Html.TextBoxFor(model => model.Address, new { @type = "text", @placeholder = "Địa chỉ...", @name = "search", @required = true, })
-
+                    <input type="text" placeholder="Địa chỉ..." name="search" id="Address" ng-change="CheckNull()" ng-model="Address" />
                 </div>
-
-                    @*<div class="form-group">
-            @*<select id="province" class="form-control" data-role="select-dropdown" data-profile="minimal">
-                <option value="" disabled selected>Chọn tỉnh thành...</option>
-                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                <option value="Hà Nội">Hà Nội</option>
-            </select>*@
-                    @*@Html.DropDownListFor(model => model.City,
-                new List<SelectListItem> {
-                   new SelectListItem { Value = "" , Text = "Chọn tỉnh thành",Disabled=true,Selected=true },
-                   new SelectListItem { Value = "Hồ Chí Minh" , Text = "Hồ Chí Minh" },
-                   new SelectListItem { Value = "Hà Nội" , Text = "Hà Nội" }
-                    },
-                new { @class = "form-control", @data_role = "select-dropdown", @data_profile = "minimal",@ng_model="City",@required=true, })
-                <span style="color:red" ng-show="formThanhToan.City.$touched && formThanhToan.Address.$invalid">Bạn chưa chọn tỉnh thành </span>
-            </div>*@
-
-                    <h3 style="text-align: center; margin: 30px;">Phương thức nhận hàng</h3>
-                    <div class="pay-method" style="text-align: center;">
-                        <button id="giaohang" class="active" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-shipping-fast"></i>@Html.RadioButtonFor(model => model.Receive, "Giao hàng tận tay", new { @style = "display:none", @id = "rd_giaohang" })</div>Giao hàng tận tay</button>
-                        @*<button id="nhanhang" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-store"></i>@Html.RadioButtonFor(model => model.Receive, "Nhận hàng tại Cybershop", new { @style = "display:none" , @id = "rd_nhanhang"})</div>Nhận hàng tại Cybershop</button>*@
-                    </div>
+                <div style="width:100%;">
+                    <select id="sl_district" class="list-select" ng-change="CheckNull()" ng-model="selectionDistrict">
+                        <option value="">Chọn Quận/Huyện</option>
+                        <option ng-repeat="item in districtList" value="{{item.ID}}">{{item.Title}}</option>
+                    </select>
                 </div>
+                <h3 style="text-align: center; margin: 30px;">Phương thức nhận hàng</h3>
+                <div class="pay-method" style="text-align: center;">
+                    <button id="giaohang" class="active" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-shipping-fast"></i>@Html.RadioButtonFor(model => model.Receive, "Giao hàng tận tay", new { @style = "display:none", @id = "rd_giaohang" })</div>Giao hàng tận tay</button>
+                    @*<button id="nhanhang" href="#"><div><i style="font-size: 40px; padding: 5px;" class="fas fa-store"></i>@Html.RadioButtonFor(model => model.Receive, "Nhận hàng tại Cybershop", new { @style = "display:none" , @id = "rd_nhanhang"})</div>Nhận hàng tại Cybershop</button>*@
+                </div>
+            </div>
         </div>
         <div class="start-pay">
-            <button type="submit" @*ng-click="checkSelection($event)"*@>Thanh toán</button>
+            <button @*data-toggle="modal" data-target="#EditInvoice"*@ ng-click="OrderProduct()" id="btn_order">Đặt hàng</button>
         </div>
-    </form>
+        @*</form>*@
+        <div class="modal fade" id="EditInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Sửa hóa đơn</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close" ng-click="CheckAmountNull()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                            <div class="col-md-3">
+                                <p>Họ tên khách hàng:</p>
+                                <input type="text" placeholder="Nhập Họ tên..." id="client_name" ng-value="clientName">
+                            </div>
+                            <div class="col-md-3" style="text-align: left;">
+                                <p>Số điện thoại</p>
+                                <input type="text" class="numberonly" placeholder="Số điện thoại..." id="phone_number" ng-value="phoneNumber">
+                            </div>
+                            <div class="col-md-3" style="text-align: left;">
+                                <p>Email</p>
+                                <input type="text" class="numberonly" placeholder="Email..." id="customer_email" ng-value="email">
+                            </div>
+                            <div class="col-md-6">
+                                <p>Địa chỉ:</p>
+                                <input type="text" placeholder="Nhập địa chỉ..." id="address" ng-value="address">
+                            </div>
+                            <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
+
+                            <div class="col-md-12" style="text-align: center;">
+                                <button onclick="ShowProduct()" ng-click="ReturnProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
+                                <div class="Dropdown-Product-Background" id="Product-Background"></div>
+                                <div class="Dropdown-Product" id="Product">
+                                    <a href="javascript:void(0);" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
+                                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
+                                        <div class="col-md-4">
+                                            <p>Tìm kiếm sản phẩm:</p>
+                                            <input type="text" placeholder="Nhập từ khóa..." ng-model="search.ProductName">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Lọc theo loại sản phẩm:</p>
+                                            <select class="list-select" ng-model="search.ProductTypeName">
+                                                <option value="">Chọn loại sản phẩm</option>
+                                                @foreach (var item in prdTypeList)
+                                                {
+                                                    <option value="@item.TypeName">@item.TypeName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>Lọc theo hãng:</p>
+                                            <select class="list-select" ng-model="search.BrandName">
+                                                <option value="">Chọn hãng sản phẩm</option>
+                                                @foreach (var item in brandList)
+                                                {
+                                                    <option value="@item.BrandName">@item.BrandName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                                            <p>Danh sách sản phẩm:</p>
+                                            <div class="Box" style="padding: 0;margin-top: 10px;">
+                                                <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 320px;">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 40%;"><a ng-click="sortProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                                <th style="width: 10%;"><a ng-click="sortProduct('ProductTypeName')" href="javascript:void(0);">Loại SP</a></th>
+                                                                <th style="width: 10%;"><a ng-click="sortProduct('BrandName')" href="javascript:void(0);">Hãng SP</a></th>
+                                                                <th style="width: 15%;"><a ng-click="sortProduct('Amount')" href="javascript:void(0);">SL hàng tồn</a></th>
+                                                                <th style="width: 10%;"><a ng-click="sortProduct('MonthWarranty')" href="javascript:void(0);">Bảo hành</a></th>
+                                                                <th style="width: 20%;"><a ng-click="sortProduct('Price')" href="javascript:void(0);">Giá tiền</a></th>
+                                                                <th style="width: 5%;text-align: center;"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="item in productList | filter:search | orderBy:ProductN:reverseProduct">
+                                                                <td>{{item.ProductName}}</td>
+                                                                <td>{{item.ProductTypeName}}</td>
+                                                                <td>{{item.BrandName}}</td>
+                                                                <td>{{item.Amount}}</td>
+                                                                <td>{{item.MonthWarranty}}</td>
+                                                                <td>{{item.Price | currency:"":0}}</td>
+                                                                <td style="text-align: center;"><a href="javascript:void(0);" ng-click="AddProductToInvoice(item.id, item.Price,item.MonthWarranty)"><i class="fas fa-plus"></i></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                                <p>Danh sách sản phẩm trong hóa đơn:</p>
+                                <div class="Box" style="padding: 0;margin-top: 10px;">
+                                    <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 325px;">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 45%;"><a ng-click="sortInvoiceProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                    <th style="width: 10%;"><a ng-click="sortInvoiceProduct('Quanlity')" href="javascript:void(0);">Số lượng</a></th>
+                                                    <th style="width: 20%;"><a ng-click="sortInvoiceProduct('Price')" href="javascript:void(0);">Giá tiền (VNĐ)</a></th>
+                                                    <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="items-table">
+                                                <tr ng-repeat="item in orderList | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Quanlity)">
+                                                    <td>{{item.ProductName}}</td>
+                                                    <td><input type="number" min="1" ng-value="item.Quanlity" id="AmountInput_{{item.id}}" ng-change="ChangeAmount(item.id)" ng-model="AmountValue" oninput="validity.valid||(value='');" /></td>
+                                                    <td>{{item.Price | currency:"":0}}</td>
+                                                    <td style="text-align: center;"><a href="javascript:void(0);" ng-click="RemoveItem(item.id)"><i class="fas fa-times"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="OrderProductConfirm()">Xác nhận</button>
+                        <button type="button" class="second-btn" data-dismiss="modal" id="btn_out" ng-click="CheckAmountNull()">Thoát</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @section scripts{
     <script>

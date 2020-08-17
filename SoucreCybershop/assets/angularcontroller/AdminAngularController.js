@@ -883,7 +883,6 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                                     }
                                 }).then(function onSuccess(response) {
                                     // Handle success
-                                    var MainIMG = "";
                                     for (i = 0; $scope.TempIMG.length > i; i++) {
                                         if (document.getElementById("IMG_DATA").getElementsByClassName("MainIMG")[i].checked == true) {
                                             j = j + 1;
@@ -1848,7 +1847,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
     }
 
         $scope.AddProductToInvoice = function (id, price, warranty) {
-        $scope.loading = true;
+            $scope.loading = true;
             $http({
                 url: '/Admin/InvoiceManager/AddProductToInvoice',
                 method: "POST",
