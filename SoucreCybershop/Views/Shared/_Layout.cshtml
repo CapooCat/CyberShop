@@ -25,7 +25,7 @@
     <title>@ViewBag.Title</title>
      @RenderSection("style", false)
 </head>
-<body ng-app="MyApp" ng-controller="MyController">
+<body ng-app="MyApp" ng-controller="MyController" id="MyControllerAnJS">
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
     <script>
@@ -101,7 +101,7 @@
                                             <thead>
                                                 <tr>
                                                     <th colspan="2" style="width: 50%;">Sản phẩm</th>
-                                                    <th style="width: 15%;">Số lượng</th>
+                                                    <th style="width: 15%;text-align:center">Số lượng</th>
                                                     <th style="width: 20%;">Giá</th>
                                                     <th style="width: 15%;">Tác vụ</th>
                                                 </tr>
@@ -114,9 +114,9 @@
                                                 <tr ng-repeat="item in cartList" ng-init="bucket.total_amount = (item.Price + bucket.total_amount)" style="border-bottom: 1px solid #DCDCDC">
                                                     <td><img style="max-width: 50px;max-height:50px" ng-src="{{item.Image}}"></td>
                                                     <td><a href="/Home/DetailProduct/{{item.id}}">{{item.ProductName}}</a></td>
-                                                    <td>{{item.Quanlity}}</td>
+                                                    <td class="cart-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="{{item.id}}" value="{{item.Quanlity}}" type="text" onchange="ApplyQuantity(this.id,this)" style="float: left;"><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></td>
                                                     <td>{{item.Price | currency:"":0}}đ</td>
-                                                    <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a><a ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a></td>
+                                                    <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
                                                 </tr>
                                             </tbody>
                                             
@@ -242,6 +242,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
+
+        function ApplyQuantity(id, quantity) {
+            var quanti = quantity;
+            var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+            scope.ApplyQuantity(id, quantity.value);
+        }
+
         $('.numberonly').on('keypress', function (e) {
             if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
         }).on('paste', function (e) {

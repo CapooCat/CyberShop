@@ -729,6 +729,48 @@ button:focus {
 
 /* Cart */
 
+.cart-quantity {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  float: left;
+  text-align: center;
+}
+
+.cart-quantity input[type=text] {
+  width: 50px;
+  height: 40px;
+  border-radius: 0;
+  background-color: #fff;
+}
+
+.cart-quantity a {
+  transition: .2s !important;
+  background-color: #1E90FF;
+  padding: 0 !important;
+  height: 40px;
+  margin: 0 !important;
+  cursor: pointer;
+  color: #fff !important;
+  width: 30px;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.cart-quantity a:hover {
+  opacity: 0.8;
+}
+
+.minus {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.plus {
+  border-radius: 0px 10px 10px 0px;
+}
+
 .dropdown-cart {
   position: relative;
   margin-top: 50px;

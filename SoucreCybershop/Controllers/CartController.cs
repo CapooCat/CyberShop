@@ -124,5 +124,46 @@ namespace CyberShop.Controllers
             Session[Common.CommonConstantUser.CART_SESSION] = cartList;
             return new EmptyResult();
         }
+
+        public EmptyResult ApplyQuantity(int id, int quantity)
+        {
+            var cart = Session[Common.CommonConstantUser.CART_SESSION];
+            var product = data.Products.Where(x => x.id == id).FirstOrDefault();
+            List<CartViewModel> cartList = (List<CartViewModel>)cart;
+            foreach (CartViewModel item in cartList.ToList())
+            {
+                if (item.id == id)
+                {
+                    if (quantity == 0)
+                    {
+                        cartList.Remove(item);
+                    }
+                    else
+                    {
+                        item.Quanlity = quantity;
+                        item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                    }
+                }
+            }
+            Session[Common.CommonConstantUser.CART_SESSION] = cartList;
+            return new EmptyResult();
+        }
+
+        public EmptyResult PlusItem(int id)
+        {
+            var cart = Session[Common.CommonConstantUser.CART_SESSION];
+            var product = data.Products.Where(x => x.id == id).FirstOrDefault();
+            List<CartViewModel> cartList = (List<CartViewModel>)cart;
+            foreach (CartViewModel item in cartList.ToList())
+            {
+                if (item.id == id)
+                {
+                    item.Quanlity += 1;
+                    item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                }
+            }
+            Session[Common.CommonConstantUser.CART_SESSION] = cartList;
+            return new EmptyResult();
+        }
     }
 }

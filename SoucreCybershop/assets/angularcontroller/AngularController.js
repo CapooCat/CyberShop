@@ -316,6 +316,33 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         });
     }
 
+    $scope.PlusItem = function (id) {
+        $scope.loading = true;
+        $http.get("/Cart/PlusItem/" + id).then(function (response) {
+            $scope.bucket.total_amount = 0;
+            $scope.FetchCart();
+        });
+    }
+
+    $scope.ApplyQuantity = function (id, quantity) {
+        $scope.loading = true;
+        if (quantity == "")
+            quantity = 0;
+        $http({
+            url: '/Cart/ApplyQuantity',
+            method: "POST",
+            data: {
+                id: id,
+                quantity: quantity
+            }
+        }).then(function onSuccess() {
+            // Handle success
+            $scope.loading = false;
+            $scope.bucket.total_amount = 0;
+            $scope.FetchCart();
+        });
+    }
+
     $scope.redirect = function () {
         if ($scope.myValue.replace(/\s/g, '').length != 0)
         {
