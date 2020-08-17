@@ -273,6 +273,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         var url = "/Pay";
         $http.get("/Cart/ReturnCartItem").then(function (response) {
             $scope.cartList = response.data;
+
             $http.get("/Cart/ReturnCartItem").then(function (response) {
                 if (Items.offsetHeight > 500)
                 {
@@ -1006,6 +1007,131 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 title: 'Không được để trống',
                 text: 'Bạn chưa nhập số lượng sản phẩm',
             })
+        }
+    }
+    $scope.ReturnCity = function () {
+        var proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var url = "https://thongtindoanhnghiep.co/api/city";
+        $http.get(proxyurl+url).then(function (response) {
+            $scope.cityList = response.data.LtsItem;
+            console.log(response);
+        });
+    }
+    $scope.ReturnDistrict = function () {
+        var proxyurl = "https://cors-anywhere.herokuapp.com/";
+        switch ($scope.selectionCity) {
+            case "":
+                $scope.districtList = null;
+                document.getElementById("btn_order").removeAttribute("data-toggle");
+                document.getElementById("btn_order").removeAttribute("data-target");
+                break;
+            case $scope.selectionCity:
+                $http.get(proxyurl + "https://thongtindoanhnghiep.co/api/city/" + $scope.selectionCity + "/district").then(function (response) {
+                    $scope.districtList = response.data;
+                    console.log(response);
+                });
+                document.getElementById("btn_order").setAttribute("data-toggle", "modal");
+                document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
+                break;
+        }
+    }
+    $scope.ReturnCity();
+    $scope.CheckNull = function () {
+        var customerName = document.getElementById("CustomerName").value;
+        var email = document.getElementById("Email").value;
+        var phoneNum = document.getElementById("key").value;
+        var address = document.getElementById("Address").value;
+        var district = document.getElementById("sl_district");
+        var districtSelect = district.options[district.selectedIndex].value;
+        if (customerName == "" || email == "" || phoneNum == "" || address == ""|| districtSelect == "")
+        {
+            document.getElementById("btn_order").removeAttribute("data-toggle");
+            document.getElementById("btn_order").removeAttribute("data-target");
+        }
+        else
+        {
+            document.getElementById("btn_order").setAttribute("data-toggle", "modal");
+            document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
+        }
+    }
+    $scope.CheckCart = function () {
+        if (document.getElementById("section_Order") != null && document.getElementById("cart_null") != null)
+        {
+            if (!$scope.cartList)
+            {
+                document.getElementById("section_Order").hidden = true;
+                document.getElementById("cart_null").hidden = false;
+            }
+            else
+            {
+                document.getElementById("section_Order").hidden = false;
+                document.getElementById("cart_null").hidden = true;
+            }
+        }
+    }
+    $scope.ViewOrder = function () {
+        if (document.getElementById("icon_down").getAttribute("class") == "fa fa-angle-down")
+        {
+            document.getElementById("icon_down").setAttribute("class", "fa fa-angle-right");
+            document.getElementById("tbl_items").hidden = false;
+        }
+        else
+        {
+            document.getElementById("icon_down").setAttribute("class", "fa fa-angle-down");
+            document.getElementById("tbl_items").hidden = true;
+        }
+    }
+    $scope.ChangeAmountCart = function (id) {
+        var tag_id = "QuanlityInput_" + id;
+        var quanlity = document.getElementById(tag_id).value;
+        $scope.loading = true;
+        if(quanlity=="")
+        {
+            quanlity = 1;
+        }
+        else
+        { }
+        $http({
+            url: '/Cart/ChangeQuanlityCart',
+            method: "POST",
+            data: {
+                id: id,
+                Amount: quanlity
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+            console.log(response);
+        });
+    }
+    $scope.OrderProduct = function () {
+        $scope.loading = true;
+        var customerName = document.getElementById("CustomerName").value;
+        var email = document.getElementById("Email").value;
+        var phoneNum = document.getElementById("key").value;
+        var address = document.getElementById("Address").value;
+        var city = document.getElementById("sl_city");
+        var citySelect = city.options[city.selectedIndex].text;
+        var district = document.getElementById("sl_district");
+        var districtSelect = district.options[district.selectedIndex].text;
+        if (customerName == "" || email == "" || phoneNum == "" || address == "" || citySelect == "Chọn Tỉnh/Thành" || districtSelect == "Chọn Quận/Huyện") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Không được để trống',
+                text: 'Bạn chưa nhập đầy đủ thông tin giao hàng',
+            })
+            $scope.loading = false;
+        }
+        else {
+            $scope.clientName = customerName;
+            $scope.phoneNumber = phoneNum;
+            $scope.email = email;
+            $scope.address = address +" "+districtSelect +" "+ citySelect;
+            $scope.orderList = $scope.cartList;
+            $scope.loading = false;
         }
     }
 });
