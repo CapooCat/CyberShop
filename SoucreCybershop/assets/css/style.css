@@ -733,15 +733,19 @@ button:focus {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  float: left;
-  text-align: center;
 }
 
 .cart-quantity input[type=text] {
+  text-indent: 0;
+  padding: 0;
+  margin: 0;
   width: 50px;
   height: 40px;
   border-radius: 0;
   background-color: #fff;
+  border-top: 2px solid #1E90FF;
+  border-bottom: 2px solid #1E90FF;
+  text-align: center;
 }
 
 .cart-quantity a {
@@ -825,6 +829,10 @@ button:focus {
   border-bottom: 1px solid #DCDCDC;
 }
 
+.Info p {
+  margin-bottom: 10px;
+}
+
 .action {
   transition: .2s;
   color: red;
@@ -875,6 +883,46 @@ button:focus {
   border: 2px solid #1E90FF;
   background-color: #fff;
   color: #1E90FF;
+}
+
+.pay-quantity {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.pay-quantity input[type=text] {
+  border: 0;
+  width: 50px;
+  height: 40px;
+  border-radius: 0;
+  background-color: #fff;
+  text-align: center;
+  border-top: 2px solid #1E90FF;
+  border-bottom: 2px solid #1E90FF;
+}
+
+.pay-quantity input[type=text]:focus {
+  outline: none;
+}
+
+.pay-quantity a {
+  transition: .2s !important;
+  background-color: #1E90FF;
+  padding: 0 !important;
+  height: 40px;
+  margin: 0 !important;
+  cursor: pointer;
+  color: #fff !important;
+  width: 30px;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.pay-quantity a:hover {
+  opacity: 0.8;
 }
 /* User */
 

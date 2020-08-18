@@ -65,7 +65,7 @@
                 <tr ng-repeat="item in cartList">
                     <td><img style="max-width: 150px;max-height:150px;" ng-src="{{item.Image}}"></td>
                     <td><a href="#">{{item.ProductName}}</a></td>
-                    <td><input type="number" min="1" ng-value="item.Quanlity" id="QuanlityInput_{{item.id}}" ng-change="ChangeAmountCart(item.id)" ng-model="QuanlityValue" oninput="validity.valid||(value='');" /></td>
+                    <td><div class="pay-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="{{item.id}}" type="text" class="numberonly" value="{{item.Quanlity}}" onchange="ApplyQuantity(this.id,this)" style="float: left;" /><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
                     <td>{{item.Price | currency:"":0}}đ</td>
                     <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
                 </tr>

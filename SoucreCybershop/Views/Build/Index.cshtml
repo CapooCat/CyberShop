@@ -24,6 +24,7 @@
             <div class="Info">
                 {{MainName}}
                 <p class="Price">Giá tiền: {{MainPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(0, MainPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="MAIN" ng-change="ApplyAmount(0)" onchange="checkvalid(0)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(0, MainPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(MainId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -35,6 +36,7 @@
             <div class="Info">
                 {{CPUName}}
                 <p class="Price">Giá tiền: {{CPUPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(1, CPUPrice)"><i class="fas fa-minus"></i></a><input  type="text" class="numberonly amount" value="1" ng-model="CPU" ng-change="ApplyAmount(1)" onchange="checkvalid(1)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(1, CPUPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(CPUId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -46,6 +48,7 @@
             <div class="Info">
                 {{RamName}}
                 <p class="Price">Giá tiền: {{RamPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(2, RamPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="RAM" ng-change="ApplyAmount(2)" onchange="checkvalid(2)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(2, RamPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(RamId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -57,6 +60,7 @@
             <div class="Info">
                 {{SSDName}}
                 <p class="Price">Giá tiền: {{SSDPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(3, SSDPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="SSD" ng-change="ApplyAmount(3)" onchange="checkvalid(3)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(3, SSDPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(SSDId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -68,6 +72,7 @@
             <div class="Info">
                 {{HDDName}}
                 <p class="Price">Giá tiền: {{HDDPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(4, HDDPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="HDD" ng-change="ApplyAmount(4)" onchange="checkvalid(4)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(4, HDDPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(HDDId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -79,6 +84,7 @@
             <div class="Info">
                 {{PSUName}}
                 <p class="Price">Giá tiền: {{PSUPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(5, PSUPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="PSU" ng-change="ApplyAmount(5)" onchange="checkvalid(5)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(5, PSUPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(PSUId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -90,6 +96,7 @@
             <div class="Info">
                 {{VGAName}}
                 <p class="Price">Giá tiền: {{VGAPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(6, VGAPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="VGA" ng-change="ApplyAmount(6)" onchange="checkvalid(6)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(6, VGAPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(VGAId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -101,6 +108,7 @@
             <div class="Info">
                 {{CaseName}}
                 <p class="Price">Giá tiền: {{CasePrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(7, CasePrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="CASE" ng-change="ApplyAmount(7)" onchange="checkvalid(7)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(7, CasePrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(CaseId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -112,6 +120,7 @@
             <div class="Info">
                 {{MonitorName}}
                 <p class="Price">Giá tiền: {{MonitorPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(8, MonitorPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="MONITOR" ng-change="ApplyAmount(8)" onchange="checkvalid(8)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(8, MonitorPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(MonitorId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -123,6 +132,7 @@
             <div class="Info">
                 {{CoolerName}}
                 <p class="Price">Giá tiền: {{CoolerPrice | currency:"":0}} VNĐ</p>
+                <p class="pay-quantity" style="float:left;padding:0;margin-right: 10px;"><a class="minus" style="float:left" ng-click="Minus(9, CoolerPrice)"><i class="fas fa-minus"></i></a><input type="text" class="numberonly amount" value="1" ng-model="COOLER" ng-change="ApplyAmount(9)" onchange="checkvalid(9)" style="float: left;" /><a class="plus" style="float:left" ng-click="Plus(9, CoolerPrice)"><i class="fas fa-plus"></i></a></p>
                 <div><button class="delete" ng-click="DeletePcPart(CoolerId)"><i class="fas fa-trash"></i></button></div>
             </div>
         </div>
@@ -153,6 +163,7 @@
                                 <p ng-if="item.CheckStatus=='còn hàng'">Tình trạng: <span style="font-weight:bold;color:#1E90FF">{{item.CheckStatus}}</span></p>
                                 <p ng-if="item.CheckStatus=='hết hàng'">Tình trạng: <span style="font-weight:bold;color:red">{{item.CheckStatus}}</span></p>
                             </div>
+                            
                             <button ng-if="item.CheckStatus=='còn hàng'" class="add" data-dismiss="modal" ng-click="AddToBuildPC(item.id)">Chọn</button>
                         </div>
                     </div>         
@@ -166,6 +177,13 @@
 <script type="text/javascript">
     PC = document.getElementById("PC");
     PC.style.display = "none";
+
+    function checkvalid(id) {
+        var a = document.getElementsByClassName("amount");
+        if (a[id].value == "" || a[id].value == 0) {
+            a[id].value = 1;
+        }
+    }
 </script>
     }
 

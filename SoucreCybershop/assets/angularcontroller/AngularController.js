@@ -283,6 +283,12 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 else {
                     Element.style.height = "auto";
                 }
+                $('.numberonly').on('keypress', function (e) {
+                    if (!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();
+                }).on('paste', function (e) {
+                    var cb = e.originalEvent.clipboardData || window.clipboardData;
+                    if (!$.isNumeric(cb.getData('text'))) e.preventDefault();
+                });
             });
             if (BuyNow == true) {
                 $window.location.href = url;
@@ -370,6 +376,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
     }
     $scope.TotalPrice=0;
     var lstIdPcPart = [];
+    var a = document.getElementsByClassName("amount");
     $scope.AddToBuildPC = function (id) {
         $scope.loading = true;
         var mainSelect = document.getElementById("mainSelect");
@@ -413,6 +420,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.MainName=$scope.temp[0].ProductName;
                 $scope.MainPrice = $scope.temp[0].Price;
                 $scope.MainImage = $scope.temp[0].Image;
+                a[0].value = 1;
                 mainSelect.hidden = true;
                 mainItem.hidden = false;
             }
@@ -422,6 +430,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.CPUName = $scope.temp[0].ProductName;
                 $scope.CPUPrice = $scope.temp[0].Price;
                 $scope.CPUImage = $scope.temp[0].Image;
+                a[1].value = 1;
                 cpuSelect.hidden = true;
                 cpuItem.hidden = false;
             }
@@ -430,6 +439,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.RamName = $scope.temp[0].ProductName;
                 $scope.RamPrice = $scope.temp[0].Price;
                 $scope.RamImage = $scope.temp[0].Image;
+                a[2].value = 1;
                 ramSelect.hidden = true;
                 ramItem.hidden = false;
             }
@@ -438,6 +448,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.SSDName = $scope.temp[0].ProductName;
                 $scope.SSDPrice = $scope.temp[0].Price;
                 $scope.SSDImage = $scope.temp[0].Image;
+                a[3].value = 1;
                 ssdSelect.hidden = true;
                 ssdItem.hidden = false;
             }
@@ -446,6 +457,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.HDDName = $scope.temp[0].ProductName;
                 $scope.HDDPrice = $scope.temp[0].Price;
                 $scope.HDDImage = $scope.temp[0].Image;
+                a[4].value = 1;
                 hddSelect.hidden = true;
                 hddItem.hidden = false;
             }
@@ -454,6 +466,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.PSUName = $scope.temp[0].ProductName;
                 $scope.PSUPrice = $scope.temp[0].Price;
                 $scope.PSUImage = $scope.temp[0].Image;
+                a[5].value = 1;
                 psuSelect.hidden = true;
                 psuItem.hidden = false;
             }
@@ -462,6 +475,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.VGAName = $scope.temp[0].ProductName;
                 $scope.VGAPrice = $scope.temp[0].Price;
                 $scope.VGAImage = $scope.temp[0].Image;
+                a[6].value = 1;
                 vgaSelect.hidden = true;
                 vgaItem.hidden = false;
             }
@@ -470,6 +484,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.CaseName = $scope.temp[0].ProductName;
                 $scope.CasePrice = $scope.temp[0].Price;
                 $scope.CaseImage = $scope.temp[0].Image;
+                a[7].value = 1;
                 caseSelect.hidden = true;
                 caseItem.hidden = false;
             }
@@ -478,6 +493,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.MonitorName = $scope.temp[0].ProductName;
                 $scope.MonitorPrice = $scope.temp[0].Price;
                 $scope.MonitorImage = $scope.temp[0].Image;
+                a[8].value = 1;
                 monitorSelect.hidden = true;
                 monitorItem.hidden = false;
             }
@@ -486,12 +502,57 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.CoolerName = $scope.temp[0].ProductName;
                 $scope.CoolerPrice = $scope.temp[0].Price;
                 $scope.CoolerImage = $scope.temp[0].Image;
+                a[9].value = 1;
                 coolSelect.hidden = true;
                 coolItem.hidden = false;
             }
             $scope.loading = false;
         });
     }
+
+    $scope.Minus = function (id, Price) {
+        var a = document.getElementsByClassName("amount");
+        if (parseInt(a[id].value) <= 1) { a[id].value = 1; }
+        else {
+            var amount = parseInt(a[id].value) - 1;
+            $scope.TotalPrice = $scope.TotalPrice - Price;
+            a[id].value = amount;
+        }
+    }
+
+    $scope.Plus = function (id, Price) {
+        var a = document.getElementsByClassName("amount");
+        var amount = parseInt(a[id].value) + 1;
+        a[id].value = amount;
+        $scope.TotalPrice = $scope.TotalPrice + Price;
+    }
+
+    $scope.ApplyAmount = function (id) {
+        var a = document.getElementsByClassName("amount");
+        var MAIN = 0; var CPU = 0; var RAM = 0; var SSD = 0; var HDD = 0; var PSU = 0; var VGA = 0; var CASE = 0; var MONITOR = 0; var COOLER = 0;
+        if (document.getElementById("mainItem").hidden == false)
+            MAIN = $scope.MainPrice * parseInt(a[0].value);
+        if (document.getElementById("cpuItem").hidden == false)
+            CPU = $scope.CPUPrice * parseInt(a[1].value);
+        if (document.getElementById("ramItem").hidden == false)
+            RAM = $scope.RamPrice * parseInt(a[2].value);
+        if (document.getElementById("ssdItem").hidden == false)
+            HDD = $scope.SSDPrice * parseInt(a[3].value);
+        if (document.getElementById("hddItem").hidden == false)
+            HDD = $scope.HDDPrice * parseInt(a[4].value);
+        if (document.getElementById("psuItem").hidden == false)
+            PSU = $scope.PSUPrice * parseInt(a[5].value);
+        if (document.getElementById("vgaItem").hidden == false)
+            VGA = $scope.VGAPrice * parseInt(a[6].value);
+        if (document.getElementById("caseItem").hidden == false)
+            CASE = $scope.CasePrice * parseInt(a[7].value);
+        if (document.getElementById("monitorItem").hidden == false)
+            MONITOR = $scope.MonitorPrice * parseInt(a[8].value);
+        if (document.getElementById("coolItem").hidden == false)
+            COOLER = $scope.CoolerPrice * parseInt(a[9].value);
+        $scope.TotalPrice = MAIN + CPU + RAM + SSD + HDD + PSU + VGA + CASE + MONITOR + COOLER;
+    }
+
     $scope.DeletePcPart = function (id) {
         $scope.loading = true;
         var mainSelect = document.getElementById("mainSelect");
@@ -524,8 +585,8 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         var coolSelect = document.getElementById("coolSelect");
         var coolItem = document.getElementById("coolItem");
         $http.get("/Build/ReturnPcItem/" + id).then(function (response) {
+            var a = document.getElementsByClassName("amount");
             $scope.temp = angular.fromJson(response.data);
-            $scope.TotalPrice= $scope.TotalPrice-$scope.temp[0].Price;
             for(var i=0;i<lstIdPcPart.length;i++)
             {
                 if(lstIdPcPart[i]==id)
@@ -538,43 +599,53 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
             {
                 mainSelect.hidden = false;
                 mainItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[0].value));
             }
             else if ($scope.ProductTypeName == "CPU")
             {
                 cpuSelect.hidden = false;
                 cpuItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[1].value));
             }
             else if ($scope.ProductTypeName == "RAM") {
                 ramSelect.hidden = false;
                 ramItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[2].value));
             }
             else if ($scope.ProductTypeName == "SSD") {
                 ssdSelect.hidden = false;
                 ssdItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[3].value));
             }
             else if ($scope.ProductTypeName == "HDD") {
                 hddSelect.hidden = false;
                 hddItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[4].value));
             }
             else if ($scope.ProductTypeName == "PSU") {
                 psuSelect.hidden = false;
                 psuItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[5].value));
             }
             else if ($scope.ProductTypeName == "Card màn hình") {
                 vgaSelect.hidden = false;
                 vgaItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[6].value));
             }
             else if ($scope.ProductTypeName == "Case") {
                 caseSelect.hidden = false;
                 caseItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[7].value));
             }
             else if ($scope.ProductTypeName == "Màn hình") {
                 monitorSelect.hidden = false;
                 monitorItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[8].value));
             }
             else if ($scope.ProductTypeName == "Tản nhiệt") {
                 coolSelect.hidden = false;
                 coolItem.hidden = true;
+                $scope.TotalPrice = $scope.TotalPrice - ($scope.temp[0].Price * parseInt(a[9].value));
             }
             $scope.loading = false;
         });
@@ -583,12 +654,15 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         document.getElementById("rsPage").click();
     }
     $scope.AddAllToCart = function () {
+        var a = document.getElementsByClassName("amount");
         $scope.loading = true;
             $http({
                 url: '/Build/AddAllToCart',
                 method: "POST",
                 data: {
-                    lstId: lstIdPcPart
+                    lstId: lstIdPcPart,
+                    //qanMAIN: a[0].value,
+                    //qanCPU: a[0].value
                 }
             }).then(function onSuccess(response) {
                 // Handle success
