@@ -64,6 +64,7 @@
     <Property Name="IsDeleted" Type="bit" />
     <Property Name="Status" Type="nvarchar" MaxLength="30" />
     <Property Name="CreateDate" Type="date" />
+    <Property Name="Distributor" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="InOrder_Detail">
     <Key>

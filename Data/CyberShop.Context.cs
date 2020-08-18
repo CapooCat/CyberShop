@@ -13,10 +13,10 @@ namespace Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShopPCComponentsEntities1 : DbContext
+    public partial class ShopPCComponentsEntities : DbContext
     {
-        public ShopPCComponentsEntities1()
-            : base("name=ShopPCComponentsEntities1")
+        public ShopPCComponentsEntities()
+            : base("name=ShopPCComponentsEntities")
         {
         }
     
