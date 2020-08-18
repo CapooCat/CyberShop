@@ -69,6 +69,7 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="Status" Type="nvarchar" MaxLength="30" />
           <Property Name="CreateDate" Type="date" />
+          <Property Name="Distributor" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="InOrder_Detail">
           <Key>
@@ -379,7 +380,6 @@
           <EntitySet Name="Brands" EntityType="ShopPCComponentsModel.Brand" />
           <EntitySet Name="Categories" EntityType="ShopPCComponentsModel.Category" />
           <EntitySet Name="Detail_PcSets" EntityType="ShopPCComponentsModel.Detail_PcSets" />
-          <EntitySet Name="InOrders" EntityType="ShopPCComponentsModel.InOrder" />
           <EntitySet Name="InOrder_Detail" EntityType="ShopPCComponentsModel.InOrder_Detail" />
           <EntitySet Name="Invoices" EntityType="ShopPCComponentsModel.Invoice" />
           <EntitySet Name="Invoice_Detail" EntityType="ShopPCComponentsModel.Invoice_Detail" />
@@ -404,10 +404,6 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Detail_PcSets" EntitySet="Detail_PcSets" />
           </AssociationSet>
-          <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder">
-            <End Role="InOrder" EntitySet="InOrders" />
-            <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
-          </AssociationSet>
           <AssociationSet Name="FK_InOrder_Detail_Product" Association="ShopPCComponentsModel.FK_InOrder_Detail_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
@@ -431,6 +427,11 @@
           <AssociationSet Name="FK_ProductImage_Product" Association="ShopPCComponentsModel.FK_ProductImage_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <EntitySet Name="InOrders" EntityType="ShopPCComponentsModel.InOrder" />
+          <AssociationSet Name="FK_InOrder_Detail_InOrder" Association="ShopPCComponentsModel.FK_InOrder_Detail_InOrder">
+            <End Role="InOrder" EntitySet="InOrders" />
+            <End Role="InOrder_Detail" EntitySet="InOrder_Detail" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Brand">
@@ -491,19 +492,6 @@
           <Property Name="CreateBy" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_Detail_PcSets_Product" FromRole="Detail_PcSets" ToRole="Product" />
         </EntityType>
-        <EntityType Name="InOrder">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Total" Type="Double" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder" ToRole="InOrder_Detail" />
-        </EntityType>
         <EntityType Name="InOrder_Detail">
           <Key>
             <PropertyRef Name="Id" />
@@ -515,8 +503,8 @@
           <Property Name="Amount" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="InOrder" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder_Detail" ToRole="InOrder" />
           <NavigationProperty Name="Product" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_Product" FromRole="InOrder_Detail" ToRole="Product" />
+          <NavigationProperty Name="InOrder" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder_Detail" ToRole="InOrder" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -679,18 +667,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InOrder_Detail_InOrder">
-          <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="0..1" />
-          <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InOrder_Detail">
-              <PropertyRef Name="InOrder_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_InOrder_Detail_Product">
           <End Type="ShopPCComponentsModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
@@ -763,6 +739,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="Distributor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InOrder_Detail" Relationship="ShopPCComponentsModel.FK_InOrder_Detail_InOrder" FromRole="InOrder" ToRole="InOrder_Detail" />
+        </EntityType>
+        <Association Name="FK_InOrder_Detail_InOrder">
+          <End Type="ShopPCComponentsModel.InOrder" Role="InOrder" Multiplicity="0..1" />
+          <End Type="ShopPCComponentsModel.InOrder_Detail" Role="InOrder_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InOrder_Detail">
+              <PropertyRef Name="InOrder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -822,19 +824,6 @@
                 <ScalarProperty Name="cpu_id" ColumnName="cpu_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InOrders">
-            <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder">
-              <MappingFragment StoreEntitySet="InOrder">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Info" ColumnName="Info" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -954,6 +943,20 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InOrders">
+            <EntityTypeMapping TypeName="ShopPCComponentsModel.InOrder">
+              <MappingFragment StoreEntitySet="InOrder">
+                <ScalarProperty Name="Distributor" ColumnName="Distributor" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

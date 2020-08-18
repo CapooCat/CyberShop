@@ -27,6 +27,7 @@ namespace Data
         public Nullable<bool> IsDeleted { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Distributor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InOrder_Detail> InOrder_Detail { get; set; }
