@@ -1111,14 +1111,17 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         }
     }
     $scope.ReturnCity = function () {
+        $scope.loading = true;
         var proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = "https://thongtindoanhnghiep.co/api/city";
         $http.get(proxyurl+url).then(function (response) {
             $scope.cityList = response.data.LtsItem;
             console.log(response);
         });
+        $scope.loading = false;
     }
     $scope.ReturnDistrict = function () {
+        $scope.loading = true;
         var proxyurl = "https://cors-anywhere.herokuapp.com/";
         switch ($scope.selectionCity) {
             case "":
@@ -1135,6 +1138,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
                 break;
         }
+        $scope.loading = false;
     }
     $scope.ReturnCity();
     $scope.CheckNull = function () {
@@ -1218,22 +1222,181 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         var citySelect = city.options[city.selectedIndex].text;
         var district = document.getElementById("sl_district");
         var districtSelect = district.options[district.selectedIndex].text;
-        if (customerName == "" || email == "" || phoneNum == "" || address == "" || citySelect == "Chọn Tỉnh/Thành" || districtSelect == "Chọn Quận/Huyện") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Không được để trống',
-                text: 'Bạn chưa nhập đầy đủ thông tin giao hàng',
-            })
-            $scope.loading = false;
+        $http.get("/Pay/CheckSessionUser").then(function (response) {
+            $scope.temp = angular.fromJson(response.data);
+        });
+        if ($scope.temp =="false") {
+            if (customerName == "" || email == "" || phoneNum == "" || address == "" || citySelect == "Chọn Tỉnh/Thành" || districtSelect == "Chọn Quận/Huyện") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không được để trống',
+                    text: 'Bạn chưa nhập đầy đủ thông tin giao hàng',
+                })
+                $scope.loading = false;
+            }
+            else {
+                $scope.clientName = customerName;
+                $scope.phoneNumber = phoneNum;
+                $scope.email = email;
+                $scope.address = address + ", " + districtSelect + ", " + citySelect;
+                $scope.loading = false;
+            }
         }
         else {
-            $scope.clientName = customerName;
-            $scope.phoneNumber = phoneNum;
-            $scope.email = email;
-            $scope.address = address +" "+districtSelect +" "+ citySelect;
-            $scope.orderList = $scope.cartList;
-            $scope.loading = false;
+            if (customerName == "" || email == "" || phoneNum == "" || address == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không được để trống',
+                    text: 'Bạn chưa nhập đầy đủ thông tin giao hàng',
+                })
+                $scope.loading = false;
+            }
+            else {
+                $scope.clientName = customerName;
+                $scope.phoneNumber = phoneNum;
+                $scope.email = email;
+                $scope.address = address + ", " + districtSelect + ", " + citySelect;
+                $scope.loading = false;
+            }
         }
     }
+    $scope.OrderProductConfirm = function() {
+        $scope.loading = true;
+        var customerName = document.getElementById("CustomerName").value;
+        var email = document.getElementById("Email").value;
+        var phoneNum = document.getElementById("key").value;
+        var address = document.getElementById("Address").value;
+        var city = document.getElementById("sl_city");
+        var citySelect = city.options[city.selectedIndex].text;
+        var district = document.getElementById("sl_district");
+        var districtSelect = district.options[district.selectedIndex].text;
+        $http.get("/Pay/CheckSessionUser").then(function (response) {
+            $scope.tem = angular.fromJson(response.data);
+        });
+        if ($scope.tem.success = false)
+        {
+            if (customerName == "" || email == "" || phoneNum == "" || address == "" || citySelect == "Chọn Tỉnh/Thành" || districtSelect == "Chọn Quận/Huyện") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không được để trống',
+                    text: 'Bạn chưa nhập đầy đủ thông tin giao hàng',
+                })
+                $scope.loading = false;
+            }
+            else
+            {
+                $http({
+                    url: '/Pay/Index',
+                    method: "POST",
+                    data: {
+                        CustomerName: customerName,
+                        Email: email,
+                        PhoneNum: phoneNum,
+                        Address: $scope.address
+                    },
+                }).then(function onSuccess(response) {
+                    // Handle success
+                    $scope.loading = false;
+                    $scope.temp = angular.fromJson(response.data);
+                    if ($scope.temp.success == "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công',
+                            text: 'Đặt hàng thành công',
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thất bại',
+                            text: 'Bạn chưa thêm sản phẩm vào giỏ hàng',
+                        })
+                    }
+                    console.log(response);
+                }).catch(function onError(response) {
+                    // Handle error
+                    $scope.loading = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Đặt hàng thất bại',
+                    })
+                    console.log(response);
+                });
+            }
+        }
+        else
+        {
+            if (customerName == "" || email == "" || phoneNum == "" || address == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không được để trống',
+                    text: 'Bạn chưa nhập đầy đủ thông tin giao hàng',
+                })
+                $scope.loading = false;
+            }
+            else {
+                $http({
+                    url: '/Pay/Index',
+                    method: "POST",
+                    data: {
+                        CustomerName: customerName,
+                        Email: email,
+                        PhoneNum: phoneNum,
+                        Address: $scope.address
+                    },
+                }).then(function onSuccess(response) {
+                    // Handle success
+                    $scope.loading = false;
+                    $scope.temp = angular.fromJson(response.data);
+                    if ($scope.temp.success == "true") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công',
+                            text: 'Đặt hàng thành công',
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thất bại',
+                            text: 'Bạn chưa thêm sản phẩm vào giỏ hàng',
+                        })
+                    }
+                    console.log(response);
+                }).catch(function onError(response) {
+                    // Handle error
+                    $scope.loading = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Đặt hàng thất bại',
+                    })
+                    console.log(response);
+                });
+            }
+        }
+    }
+    $scope.CheckSessionUser = function () {
+        var sl_city = document.getElementById("sl_city");
+        var sl_district = document.getElementById("sl_district")
+        if(sl_city!=null && sl_district!=null)
+        {
+            $http.get("/Pay/CheckSessionUser").then(function (response) {
+                $scope.temp = angular.fromJson(response.data);
+                if($scope.temp.success=="true")
+                {
+                    sl_city.hidden = true;
+                    sl_district.hidden = true;
+                }
+                else
+                {
+                    sl_city.hidden = false;
+                    sl_district.hidden = false;
+                }
+            });
+        }
+    }
+    $scope.CheckSessionUser();
 });
 
