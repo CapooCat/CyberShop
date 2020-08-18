@@ -140,7 +140,8 @@ namespace CyberShop.Controllers
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
         }
-        public JsonResult AddAllToCart(List<int> lstId)
+        
+        public JsonResult AddAllToCart(List<int> lstId, int qanMAIN, int qanCPU, int qanRAM, int qanSSD, int qanHDD, int qanPSU, int qanVGA, int qanCASE, int qanMONITOR, int qanCOOLER)
         {
             foreach (var id in lstId)
             {
@@ -153,9 +154,54 @@ namespace CyberShop.Controllers
                     {
                         foreach (var item in list)
                         {
-                            if (item.id == id)
+                            if (item.id == id && product.ProductType_id == 2) //MAIN
                             {
-                                item.Quanlity += 1;
+                                item.Quanlity += qanMAIN;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 3) //CPU
+                            {
+                                item.Quanlity += qanCPU;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 5) //RAM
+                            {
+                                item.Quanlity += qanRAM;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 9) //SSD
+                            {
+                                item.Quanlity += qanSSD;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 8) //HDD
+                            {
+                                item.Quanlity += qanHDD;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 4) //PSU
+                            {
+                                item.Quanlity += qanPSU;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 1) //VGA
+                            {
+                                item.Quanlity += qanVGA;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 6) //CASE
+                            {
+                                item.Quanlity += qanCASE;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 12) //MONITOR
+                            {
+                                item.Quanlity += qanMONITOR;
+                                item.Price = Convert.ToDouble(product.Price * item.Quanlity);
+                            }
+                            if (item.id == id && product.ProductType_id == 7) //COOLER
+                            {
+                                item.Quanlity += qanCOOLER;
                                 item.Price = Convert.ToDouble(product.Price * item.Quanlity);
                             }
                         }
@@ -166,9 +212,48 @@ namespace CyberShop.Controllers
                         var item = new CartViewModel();
                         item.id = id;
                         item.ProductName = data.Products.Where(x => x.id == id).Select(x => x.ProductName).FirstOrDefault();
-                        item.Quanlity = 1;
+                        if (product.ProductType_id == 2) //MAIN
+                        {
+                            item.Quanlity = qanMAIN;
+                        }
+                        if (product.ProductType_id == 3) //CPU
+                        {
+                            item.Quanlity = qanCPU;
+                        }
+                        if (product.ProductType_id == 5) //RAM
+                        {
+                            item.Quanlity = qanRAM;
+                        }
+                        if (product.ProductType_id == 9) //SSD
+                        {
+                            item.Quanlity = qanSSD;
+                        }
+                        if (product.ProductType_id == 8) //HDD
+                        {
+                            item.Quanlity = qanHDD;
+                        }
+                        if (product.ProductType_id == 4) //PSU
+                        {
+                            item.Quanlity = qanPSU;
+                        }
+                        if (product.ProductType_id == 1) //VGA
+                        {
+                            item.Quanlity = qanVGA;
+                        }
+                        if (product.ProductType_id == 6) //CASE
+                        {
+                            item.Quanlity = qanCASE;
+                        }
+                        if (product.ProductType_id == 12) //MONITOR
+                        {
+                            item.Quanlity = qanMONITOR;
+                        }
+                        if (product.ProductType_id == 7) //COOLER
+                        {
+                            item.Quanlity = qanCOOLER;
+                        }
                         item.Image = product.Image;
-                        item.Price = product.Price;
+                        item.Price = Convert.ToDouble(product.Price * item.Quanlity);
                         list.Add(item);
                         Session[Common.CommonConstantUser.CART_SESSION] = list;
                     }
@@ -180,9 +265,48 @@ namespace CyberShop.Controllers
                     var item = new CartViewModel();
                     item.id = id;
                     item.ProductName = data.Products.Where(x => x.id == id).Select(x => x.ProductName).FirstOrDefault();
-                    item.Quanlity = 1;
+                    if (product.ProductType_id == 2) //MAIN
+                    {
+                        item.Quanlity = qanMAIN;
+                    }
+                    if (product.ProductType_id == 3) //CPU
+                    {
+                        item.Quanlity = qanCPU;
+                    }
+                    if (product.ProductType_id == 5) //RAM
+                    {
+                        item.Quanlity = qanRAM;
+                    }
+                    if (product.ProductType_id == 9) //SSD
+                    {
+                        item.Quanlity = qanSSD;
+                    }
+                    if (product.ProductType_id == 8) //HDD
+                    {
+                        item.Quanlity = qanHDD;
+                    }
+                    if (product.ProductType_id == 4) //PSU
+                    {
+                        item.Quanlity = qanPSU;
+                    }
+                    if (product.ProductType_id == 1) //VGA
+                    {
+                        item.Quanlity = qanVGA;
+                    }
+                    if (product.ProductType_id == 6) //CASE
+                    {
+                        item.Quanlity = qanCASE;
+                    }
+                    if (product.ProductType_id == 12) //MONITOR
+                    {
+                        item.Quanlity = qanMONITOR;
+                    }
+                    if (product.ProductType_id == 7) //COOLER
+                    {
+                        item.Quanlity = qanCOOLER;
+                    }
                     item.Image = product.Image;
-                    item.Price = product.Price;
+                    item.Price = Convert.ToDouble(product.Price * item.Quanlity);
                     list.Add(item);
                     Session[Common.CommonConstantUser.CART_SESSION] = list;
                 }

@@ -526,10 +526,10 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         a[id].value = amount;
         $scope.TotalPrice = $scope.TotalPrice + Price;
     }
-
+    
     $scope.ApplyAmount = function (id) {
-        var a = document.getElementsByClassName("amount");
         var MAIN = 0; var CPU = 0; var RAM = 0; var SSD = 0; var HDD = 0; var PSU = 0; var VGA = 0; var CASE = 0; var MONITOR = 0; var COOLER = 0;
+        var a = document.getElementsByClassName("amount");
         if (document.getElementById("mainItem").hidden == false)
             MAIN = $scope.MainPrice * parseInt(a[0].value);
         if (document.getElementById("cpuItem").hidden == false)
@@ -537,7 +537,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         if (document.getElementById("ramItem").hidden == false)
             RAM = $scope.RamPrice * parseInt(a[2].value);
         if (document.getElementById("ssdItem").hidden == false)
-            HDD = $scope.SSDPrice * parseInt(a[3].value);
+            SSD = $scope.SSDPrice * parseInt(a[3].value);
         if (document.getElementById("hddItem").hidden == false)
             HDD = $scope.HDDPrice * parseInt(a[4].value);
         if (document.getElementById("psuItem").hidden == false)
@@ -655,17 +655,50 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
     }
     $scope.AddAllToCart = function () {
         var a = document.getElementsByClassName("amount");
+        var qanMAIN = 0; var qanCPU = 0; var qanRAM = 0; var qanSSD = 0; var qanHDD = 0; var qanPSU = 0; var qanVGA = 0; var qanCASE = 0; var qanMONITOR = 0; var qanCOOLER = 0;
+        if (document.getElementById("mainItem").hidden == false)
+            qanMAIN = a[0].value;
+        if (document.getElementById("cpuItem").hidden == false)
+            qanCPU = a[1].value;
+        if (document.getElementById("ramItem").hidden == false)
+            qanRAM = a[2].value;
+        if (document.getElementById("ssdItem").hidden == false)
+            qanSSD = a[3].value;
+        if (document.getElementById("hddItem").hidden == false)
+            qanHDD = a[4].value;
+        if (document.getElementById("psuItem").hidden == false)
+            qanPSU = a[5].value;
+        if (document.getElementById("vgaItem").hidden == false)
+            qanVGA = a[6].value;
+        if (document.getElementById("caseItem").hidden == false)
+            qanCASE = a[7].value;
+        if (document.getElementById("monitorItem").hidden == false)
+            qanMONITOR = a[8].value;
+        if (document.getElementById("coolItem").hidden == false)
+            qanCOOLER = a[9].value;
+
+        console.log(qanMAIN);
+        var a = document.getElementsByClassName("amount");
         $scope.loading = true;
             $http({
                 url: '/Build/AddAllToCart',
                 method: "POST",
                 data: {
                     lstId: lstIdPcPart,
-                    //qanMAIN: a[0].value,
-                    //qanCPU: a[0].value
+                    qanMAIN: qanMAIN,
+                    qanCPU: qanCPU,
+                    qanRAM: qanRAM,
+                    qanSSD: qanSSD,
+                    qanHDD: qanHDD,
+                    qanPSU: qanPSU,
+                    qanVGA: qanVGA,
+                    qanCASE: qanCASE,
+                    qanMONITOR: qanMONITOR,
+                    qanCOOLER: qanCOOLER
                 }
             }).then(function onSuccess(response) {
                 // Handle success
+                $scope.bucket.total_amount = 0;
                 $scope.FetchCart();
                 $scope.loading = false;
                 console.log(response);
