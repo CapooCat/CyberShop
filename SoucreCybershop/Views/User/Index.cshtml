@@ -129,8 +129,13 @@
             <td>{{item.Id}}</td>
             <td>{{item.Total | currency:"":0}}</td>
             <td>{{item.CreateDate.slice(6, -2) | date:'dd/MM/yyyy'}}</td>
-            <td ng-if="item.Status=='Chưa xác nhận'"><div class="waiting">{{item.Status}}</div></td>
-            <td ng-if="item.Status!='Chưa xác nhận'"><div class="pending">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Chưa xác nhận'"><div class="pending">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Đã xác nhận'"><div class="confirmed">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Đang chờ xem'"><div class="waiting">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Đã hoàn thành'"><div class="complete">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Đã đóng gói'"><div class="prepared">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Đang vận chuyển'"><div class="shipping">{{item.Status}}</div></td>
+            <td ng-if="item.Status=='Đã hủy'"><div class="canceled">{{item.Status}}</div></td>
             <td class="table-product-action" ng-if="item.Status=='Chưa xác nhận'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
             <td class="table-product-action" ng-if="item.Status!='Chưa xác nhận'"><button class="look" data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
         </tr>
@@ -287,7 +292,7 @@
                                         <tbody id="items-table">
                                             <tr ng-repeat="item in listInvoiceDetail | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                                 <td>{{item.ProductName}}</td>
-                                                <td><input type="number" min="1" ng-value="item.Amount" id="AmountInput_{{item.Id}}" ng-change="ChangeAmount(item.Id)" ng-model="AmountValue" oninput="validity.valid||(value='');"/></td>
+                                                <td><div class="admin-quantity"><a class="minus" style="float:left" ng-click="MinusItemInvoice(item.Id)"><i class="fas fa-minus"></i></a><input id="{{item.Id}}" class="numberonly" value="{{item.Amount}}" type="text" onchange="ApplyQuantity(this.id,this)" style="float: left;"><a class="plus" style="float:left" ng-click="PlusItemInvoice(item.Id)"><i class="fas fa-plus"></i></a></div></td>
                                                 <td>{{item.Price | currency:"":0}}</td>
                                                 <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteDetailProduct(item.Id)"><i class="fas fa-times"></i></a></td>
                                             </tr>
@@ -358,6 +363,21 @@
 
                     </div>
                     <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
+                    <div style="margin-top: 20px; margin-bottom: 20px;font-weight: bold">Quy trình: <span id="cancel" style="color: red; font-weight: normal;display: none"><i class="fas fa-times"></i> Hóa đơn đã bị hủy</span></div>
+                    <div class="d-flex flex-row justify-content-between align-items-center align-content-center track-status">
+                        <span class="dot step"></span>
+                        <hr class="flex-fill track-line step"><span class="dot"></span>
+                        <hr class="flex-fill track-line step"><span class="dot"></span>
+                        <hr class="flex-fill track-line step"><span class="dot"></span>
+                        <hr class="flex-fill track-line step"><span class="d-flex justify-content-center align-items-center big-dot dot"><i class="fa fa-check text-white"></i></span>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between track-status-font" style="margin-bottom: 20px;">
+                        <div class="d-flex flex-column track-font"><span>Chưa xác nhận</span></div>
+                        <div class="d-flex flex-column track-font"><span>Đã xác nhận</span></div>
+                        <div class="d-flex flex-column track-font"><span>Đã đóng gói</span></div>
+                        <div class="d-flex flex-column track-font"><span>Đang vận chuyển</span></div>
+                        <div class="d-flex flex-column track-font"><span>Đã hoàn thành</span></div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="second-btn" data-dismiss="modal" >Thoát</button>
@@ -368,6 +388,12 @@
 </section>
 @section scripts{
 <script>
+
+    function ApplyQuantity(id, quantity) {
+        var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+        scope.ApplyQuantityInvoice(id, quantity.value);
+    }
+
     table = document.getElementById("items-table");
     ItemInput = table.getElementsByTagName("input");
     function OpenPassChangeModal() {

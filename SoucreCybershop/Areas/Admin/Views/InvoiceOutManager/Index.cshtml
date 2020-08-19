@@ -59,9 +59,9 @@
                                 <td>{{item.ProductTypeName}}</td>
                                 <td>{{item.BrandName}}</td>
                                 <td>{{item.WarrantyMonths}}</td>
-                                <td>{{item.Amount}}</td>
+                                <td><div class="admin-quantity"><a class="minus" style="float:left" ng-click="MinusInvoice(item.Product_Id)"><i class="fas fa-minus"></i></a><input id="{{item.Product_Id}}" class="numberonly" value="{{item.Amount}}" type="text" onchange="ApplyQuantity(this.id,this)" style="float: left;"><a class="plus" style="float:left" ng-click="PlusInvoice(item.Product_Id)"><i class="fas fa-plus"></i></a></div></td>
                                 <td>{{item.Price | currency:"":0}}</td>
-                                <td class="table-product-action"><button data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button><button class="delete" ng-click="RemoveItem(item.Product_Id)"><i class="fas fa-trash"></i></button></td>
+                                <td class="table-product-action"><button class="delete" ng-click="RemoveItem(item.Product_Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -158,6 +158,10 @@
 </section>
 
 <script>
+    function ApplyQuantity(id, quantity) {
+        var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+        scope.ApplyInvoice(id, quantity.value);
+    }
     Active = document.getElementById("InvoiceOutManager");
     Active.className = "active-button";
     CheckAll = document.getElementById("check-all");

@@ -56,7 +56,7 @@ namespace CyberShop.Areas.Admin.Controllers
 
             lstInvoice = (from a in data.InOrder_Detail
                           join c in data.InOrders on a.InOrder_id equals c.Id
-                          where a.IsDeleted == false && c.IsDeleted == false && ((model.Product_id == null) || (a.Product_id == model.Product_id)) && ((model.Id == null) || (c.Id == model.Id))
+                          where a.IsDeleted == false && c.IsDeleted == false && ((model.Status == null) || (c.Status == model.Status)) && ((model.Product_id == null) || (a.Product_id == model.Product_id)) && ((model.Id == null) || (c.Id == model.Id))
                           select new InvoiceInManagerViewModel
                           {
                               Id = c.Id,
@@ -331,6 +331,35 @@ namespace CyberShop.Areas.Admin.Controllers
                               Amount = c.Amount
                           }).ToList();
             return View(invoicePdf);
+        }
+
+        public JsonResult ApplyQuantity(int Id, int Amount)
+        {
+            InOrder_Detail entity = new InOrder_Detail();
+            entity = data.InOrder_Detail.Find(Id);
+            entity.Amount = Amount;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Plus(int Id)
+        {
+            InOrder_Detail entity = new InOrder_Detail();
+            entity = data.InOrder_Detail.Find(Id);
+            entity.Amount += 1;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Minus(int Id)
+        {
+            InOrder_Detail entity = new InOrder_Detail();
+            entity = data.InOrder_Detail.Find(Id);
+            if (entity.Amount <= 1) { entity.Amount = 1; }
+            else
+            {
+                entity.Amount -= 1;
+            }
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

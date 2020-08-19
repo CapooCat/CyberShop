@@ -854,6 +854,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         }
     }
     $scope.bucket = { total_price: 0 };
+    var InvoiceID = 0;
     $scope.EditInvoice = function (id) {
         InvoiceID = id;
         $scope.bucket.total_price = 0;
@@ -892,71 +893,40 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         var Name = document.getElementById("client_name").value;
         var SDT = document.getElementById("phone_number").value;
         var Address = document.getElementById("address").value;
-        table = document.getElementById("items-table");
-        ItemInput = table.getElementsByTagName("input");
-        if (document.getElementById("btn_close").hasAttribute("data-dismiss") && document.getElementById("btn_out").hasAttribute("data-dismiss")) {
-            for (var i = 0; i < ItemInput.length; i++)
-            {
-                var id = ItemInput[i].getAttribute("id");
-                id = id.replace("AmountInput_", "");
-                id = parseInt(id);
-                var amount = ItemInput[i].value;
-                $http({
-                    url: '/User/UpdateAmountInvoiceDetail',
-                    method: "POST",
-                    data: {
-                        id: id,
-                        Amount: amount
-                    },
-                }).then(function onSuccess(response) {
-                    // Handle success
-                    
-                }).catch(function onError(response) {
-                    // Handle error
-                    console.log(response);
-                });
-            }
-            $http({
-                url: '/Admin/InvoiceManager/UpdateInvoice',
-                method: "POST",
-                data: {
-                    Id: InvoiceID,
-                    DeliveryAddress: Address,
-                    DeliveryPhoneNum: SDT,
-                    CustomerName: Name
-                },
-            }).then(function onSuccess(response) {
-                // Handle success
-                $scope.loading = false;
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành công',
-                    text: 'Cập nhật thành công',
-                })
-                $("[data-dismiss=modal]").trigger({ type: "click" });
-                console.log(response);
-            }).catch(function onError(response) {
-                // Handle error
-                $scope.loading = false;
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thất bại',
-                    text: 'Cập nhật thất bại',
-                })
-                console.log(response);
-            });
-        }
-        else {
+        $http({
+            url: '/Admin/InvoiceManager/UpdateInvoice',
+            method: "POST",
+            data: {
+                Id: InvoiceID,
+                DeliveryAddress: Address,
+                DeliveryPhoneNum: SDT,
+                CustomerName: Name
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Cập nhật thành công',
+            })
+            $("[data-dismiss=modal]").trigger({ type: "click" });
+            console.log(response);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
             Swal.fire({
                 icon: 'error',
-                title: 'Không được để trống',
-                text: 'Bạn chưa nhập số lượng sản phẩm',
+                title: 'Thất bại',
+                text: 'Cập nhật thất bại',
             })
-        }
-        
+            console.log(response);
+        });
     }
 
     $scope.ViewInvoice = function (id) {
+        var trackstatus = document.getElementsByClassName("step");
+        var fontstatus = document.getElementsByClassName("track-font")
         $scope.bucket.total_price = 0;
         $scope.invoice_id = id;
         $scope.loading = true;
@@ -968,6 +938,41 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
             $scope.Invoice_DeliveryAddress = $scope.dataInvoice[0].DeliveryAddress;
             $scope.Invoice_Status = $scope.dataInvoice[0].Status;
             $scope.Invoice_CreateDate = $scope.dataInvoice[0].CreateDate;
+            for (i = 0; i < trackstatus.length; i++) {
+                trackstatus[i].classList.remove("active");
+                fontstatus[i].classList.remove("active");
+            }
+            document.getElementById("cancel").style.display = "none";
+            if ($scope.dataInvoice[0].Status == "Chưa xác nhận") {
+                for (i = 0; i < 1; i++) {
+                    trackstatus[i].className += " active";
+                    fontstatus[i].className += " active";
+                }
+            } else if ($scope.dataInvoice[0].Status == "Đã xác nhận") {
+                for (i = 0; i < 2; i++) {
+                    trackstatus[i].className += " active";
+                    fontstatus[i].className += " active";
+                }
+            } else if ($scope.dataInvoice[0].Status == "Đã đóng gói") {
+                for (i = 0; i < 3; i++) {
+                    trackstatus[i].className += " active";
+                    fontstatus[i].className += " active";
+                }
+            } else if ($scope.dataInvoice[0].Status == "Đang vận chuyển") {
+                for (i = 0; i < 4; i++) {
+                    trackstatus[i].className += " active";
+                    fontstatus[i].className += " active";
+                }
+            }
+            else if ($scope.dataInvoice[0].Status == "Đã hoàn thành") {
+                for (i = 0; i < 5; i++) {
+                    trackstatus[i].className += " active";
+                    fontstatus[i].className += " active";
+                }
+            }
+            else if ($scope.dataInvoice[0].Status == "Đã hủy") {
+                document.getElementById("cancel").style.display = "inline-block";
+            }
             $http.get("/Admin/InvoiceManager/ReturnViewDetailInvoiceById/" + id).then(function (response) {
                 $scope.loading = false;
                 $scope.listInvoiceDetail2 = response.data;
@@ -1230,14 +1235,14 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
     }
     $scope.CheckCart();
     $scope.ViewOrder = function () {
-        if (document.getElementById("icon_down").getAttribute("class") == "fa fa-angle-down")
+        if (document.getElementById("tbl_items").hidden == true)
         {
-            document.getElementById("icon_down").setAttribute("class", "fa fa-angle-right");
+            document.getElementById("view_order").className += " active";
             document.getElementById("tbl_items").hidden = false;
         }
         else
         {
-            document.getElementById("icon_down").setAttribute("class", "fa fa-angle-down");
+            document.getElementById("view_order").classList.remove("active");
             document.getElementById("tbl_items").hidden = true;
         }
     }
@@ -1315,6 +1320,65 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         }
         });
     }
+
+    $scope.MinusItemInvoice = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/User/Minus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            $scope.EditInvoice(InvoiceID);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.PlusItemInvoice = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/User/Plus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            $scope.EditInvoice(InvoiceID);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.ApplyQuantityInvoice = function (id, quantity) {
+        $scope.loading = true;
+        if (quantity <= 1 || quantity == "") {
+            quantity = 1;
+        }
+        $http({
+            url: '/User/ApplyQuantity',
+            method: "POST",
+            data: {
+                Id: id,
+                Amount: quantity
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            $scope.EditInvoice(InvoiceID);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
     $scope.OrderProductConfirm = function() {
         $scope.loading = true;
         var customerName = document.getElementById("client_name").value;

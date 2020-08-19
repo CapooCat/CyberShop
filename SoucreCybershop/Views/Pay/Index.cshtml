@@ -51,9 +51,9 @@
         </div>
     </div>
     <div id="section_Order">
-    <div class="start-pay">
-    <button id="view_order" style="font-size:20px" ng-click="ViewOrder()">Xem đơn hàng  <i class="fa fa-angle-down" style="font-size:24px" id="icon_down"></i></button>
-    </div>
+        <div class="cart-btn">
+            <a id="view_order" class="View-Cart" style="font-size:20px" ng-click="ViewOrder()">Xem đơn hàng</a>
+        </div>
     <div id="section_Order">
         <table id="tbl_items" hidden>
             <thead>
@@ -180,7 +180,7 @@
                                             <tbody>
                                                 <tr ng-repeat="item in cartList">
                                                     <td>{{item.ProductName}}</td>
-                                                    <td><div class="pay-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="Item_{{item.id}}" type="text" class="numberonly" value="{{item.Quanlity}}" onchange="ApplyQuantity3(this.id,this)" style="float: left;" /><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
+                                                    <td><div class="admin-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="Item_{{item.id}}" type="text" class="numberonly" value="{{item.Quanlity}}" onchange="ApplyQuantity3(this.id,this)" style="float: left;" /><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
                                                     <td>{{item.Price | currency:"":0}}</td>
                                                     <td style="text-align: center;"><a href="javascript:void(0);" ng-click="RemoveItem(item.id)"><i class="fas fa-times"></i></a></td>
                                                 </tr>

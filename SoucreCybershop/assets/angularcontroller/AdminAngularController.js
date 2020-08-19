@@ -2266,6 +2266,64 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         $scope.Name = Name;
     };
 
+    $scope.MinusItemInvoiceIn = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceInManager/Minus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            $scope.EditInvoiceIn(InvoiceInID);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.PlusItemInvoiceIn = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceInManager/Plus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            $scope.EditInvoiceIn(InvoiceInID);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.ApplyQuantityInvoiceIn = function (id, quantity) {
+        $scope.loading = true;
+        if (quantity <= 1 || quantity == "") {
+            quantity = 1;
+        }
+        $http({
+            url: '/Admin/InvoiceInManager/ApplyQuantity',
+            method: "POST",
+            data: {
+                Id: id,
+                Amount: quantity
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.loading = false;
+            $scope.EditInvoiceIn(InvoiceInID);
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
     $.fn.modal.Constructor.prototype._enforceFocus = function () { };
 
     $scope.EditInvoiceIn = function (id) {
@@ -2283,7 +2341,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var Price;
 
         swal.mixin({
-            input: 'text',
+            input: 'number',
             confirmButtonText: 'Next &rarr;',
             showCancelButton: true,
             progressSteps: ['1', '2']
@@ -2292,7 +2350,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
               title: 'Bước 1',
               text: 'Nhập số lượng sản phẩm cần nhập',
               preConfirm: function (value) {
-                  Amount = value;
+                      Amount = value;
               }
           },
 
@@ -2300,7 +2358,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
               title: 'Bước 2',
               text: 'Nhập giá tiền mua sản phẩm',
               preConfirm: function (value) {
-                  Price = value;
+                      Price = value;
               }
           }
         ]).then((result) => {
@@ -2361,6 +2419,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         var dateFrom = document.getElementById("date_from").value;
         var dateTo = document.getElementById("date_to").value;
         var InProduct = document.getElementById("in_product_search").value;
+        var Status = document.getElementById("status_invoice_in").value;
         $scope.loading = true;
         if (dateFrom > dateTo && dateFrom != "" && dateTo != "") {
             $scope.loading = false;
@@ -2378,7 +2437,8 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     Id: OrderId,
                     DateFrom: dateFrom,
                     DateTo: dateTo,
-                    Product_id: InProduct
+                    Product_id: InProduct,
+                    Status: Status
                 }
             }).then(function onSuccess(response) {
                 // Handle success
@@ -3730,6 +3790,127 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         });
     }
 
+    $scope.MinusInvoiceIn = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/AddInvoiceInManager/Minus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.bucket.total_price_invoice = 0;
+            $scope.loading = false;
+            $scope.ReturnInvoiceInSession();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
 
+    $scope.PlusInvoiceIn = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/AddInvoiceInManager/Plus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.bucket.total_price_invoice = 0;
+            $scope.loading = false;
+            $scope.ReturnInvoiceInSession();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.ApplyInvoiceIn = function (id, quantity) {
+        $scope.loading = true;
+        if (quantity <= 1 || quantity == "") {
+            quantity = 1;
+        }
+        $http({
+            url: '/Admin/AddInvoiceInManager/ApplyQuantity',
+            method: "POST",
+            data: {
+                Id: id,
+                Amount: quantity
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.bucket.total_price_invoice = 0;
+            $scope.loading = false;
+            $scope.ReturnInvoiceInSession();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.MinusInvoice = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceOutManager/Minus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.bucket.total_price_invoice = 0;
+            $scope.loading = false;
+            $scope.ReturnInvoiceoOut();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.PlusInvoice = function (id) {
+        $scope.loading = true;
+        $http({
+            url: '/Admin/InvoiceOutManager/Plus',
+            method: "POST",
+            data: {
+                Id: id,
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.bucket.total_price_invoice = 0;
+            $scope.loading = false;
+            $scope.ReturnInvoiceoOut();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
+
+    $scope.ApplyInvoice = function (id, quantity) {
+        $scope.loading = true;
+        if (quantity <= 1 || quantity == "") {
+            quantity = 1;
+        }
+        $http({
+            url: '/Admin/InvoiceOutManager/ApplyQuantity',
+            method: "POST",
+            data: {
+                Id: id,
+                Amount: quantity
+            },
+        }).then(function onSuccess(response) {
+            // Handle success
+            $scope.bucket.total_price_invoice = 0;
+            $scope.loading = false;
+            $scope.ReturnInvoiceoOut();
+        }).catch(function onError(response) {
+            // Handle error
+            $scope.loading = false;
+        });
+    }
     //----------------BUILD_MANAGER_END--------------------//
+
     });
