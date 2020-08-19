@@ -29,17 +29,13 @@ namespace CyberShop.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index(CustomerOrderViewModel model)
+        public JsonResult Index(CustomerOrderViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                    if (Session[CyberShop.Common.CommonConstantUser.CART_SESSION] == null)
+            var cartt = Session[Common.CommonConstantUser.CART_SESSION];
+            List<CartViewModel> cartList = (List<CartViewModel>)cartt;
+                    if (cartList == null || cartList.Count==0)
                     {
-                        ModelState.AddModelError("", "Không thể thanh toán vì không có sản phẩm");
-                    }
-                    else if (model.Address == "" || model.PhoneNum == "" || model.CustomerName == "" || model.Email == "")
-                    {
-                        ModelState.AddModelError("", "Không được bỏ trống");
+                        return Json(new { success = "false" }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
@@ -120,11 +116,8 @@ namespace CyberShop.Controllers
                             }
                         }
                         cart.RemoveAll(x => cart.Any());
-                        ViewBag.Success = "yes";
-                    }
+                    return Json(new { success = "true" }, JsonRequestBehavior.AllowGet);
                 }
-            
-            return View(model);
         }
 
         public bool AddToInvoice(Nullable<int> id, int quantity)
@@ -148,6 +141,56 @@ namespace CyberShop.Controllers
                 inDetail.IsDeleted = false;
                 inDetailDao.InsertInvoiceDetail(inDetail);
                 return true;
+            }
+        }
+        public JsonResult CheckSessionUser()
+        {
+            if(Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
+            {
+                var user_session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+                return Json(new { user_id = user_session.Id }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ReturnUserById(int id)
+        {
+            List<UserViewModel> user = new List<UserViewModel>();
+            user = data.Users.Where(x => x.id == id).Select(x => new UserViewModel
+            {
+                id=x.id,
+                Name=x.Name,
+                Email=x.Email,
+                PhoneNum=x.PhoneNum,
+                Address=x.Address
+            }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (UserViewModel item in user)
+            {
+                ReturnData.Add(new UserViewModel
+                {
+                    id = item.id,
+                    Name = item.Name,
+                    Email = item.Email,
+                    PhoneNum = item.PhoneNum,
+                    Address = item.Address
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CheckCartNull()
+        {
+            var cartt = Session[Common.CommonConstantUser.CART_SESSION];
+            List<CartViewModel> cartList = (List<CartViewModel>)cartt;
+            if (cartList == null || cartList.Count == 0)
+            {
+                return Json(new { success = "false" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = "true" }, JsonRequestBehavior.AllowGet);
             }
         }
 

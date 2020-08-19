@@ -38,7 +38,7 @@
     </style>
      }
 <section class="container" style="padding-top: 160px; padding-bottom: 50px;">
-    <h3><i class="fas fa-money-bill" style="margin-right: 10px"></i>Thanh toán</h3>
+    <h3><i class="fas fa-money-bill" style="margin-right: 10px"></i>Đặt hàng</h3>
     <ul class="breadcrumb Page-address">
         <li class="breadcrumb-item"><a href="/Home"><i class="fas fa-home" style="margin-right: 10px"></i>Trang chủ</a></li>
         <li class="breadcrumb-item active">Thanh toán</li>
@@ -46,7 +46,11 @@
     <div id="cart_null" hidden>
         <h1 style="text-align: center; margin-top: 50px;">Giỏ hàng</h1>
         <p style="text-align: center;">Không có sản phẩm nào trong giỏ hàng</p>
+        <div style="text-align: center;">
+        <a href="/">Tiếp tục mua hàng</a>
+        </div>
     </div>
+    <div id="section_Order">
     <div class="start-pay">
     <button id="view_order" style="font-size:20px" ng-click="ViewOrder()">Xem đơn hàng  <i class="fa fa-angle-down" style="font-size:24px" id="icon_down"></i></button>
     </div>
@@ -65,7 +69,7 @@
                 <tr ng-repeat="item in cartList">
                     <td><img style="max-width: 150px;max-height:150px;" ng-src="{{item.Image}}"></td>
                     <td><a href="#">{{item.ProductName}}</a></td>
-                    <td><div class="pay-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="{{item.id}}" type="text" class="numberonly" value="{{item.Quanlity}}" onchange="ApplyQuantity(this.id,this)" style="float: left;" /><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
+                    <td><div class="pay-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="Order_{{item.id}}" type="text" class="numberonly" value="{{item.Quanlity}}" onchange="ApplyQuantity2(this.id,this)" style="float: left;" /><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
                     <td>{{item.Price | currency:"":0}}đ</td>
                     <td><a ng-click="RemoveItem(item.id)"><i class="fas fa-trash action"></i></a></td>
                 </tr>
@@ -91,7 +95,7 @@
         <div class="row">
             <div class="col-md-6 input-info">
                 <div style="width:100%;">
-                    <input type="text" placeholder="Họ và tên..." name="search" id="CustomerName" ng-change="CheckNull()" ng-model="CustomerName" />
+                    <input type="text" placeholder="Họ và tên..." name="search"  id="CustomerName" ng-change="CheckNull()" ng-model="CustomerName" />
                 </div>
                 <div style="width:100%;">
                     <input type="text" placeholder="Email..." name="search" id="Email" ng-change="CheckNull()" ng-model="Email" />
@@ -136,7 +140,7 @@
             <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Sửa hóa đơn</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Thông tin đơn hàng</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close" ng-click="CheckAmountNull()">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -159,72 +163,7 @@
                                 <p>Địa chỉ:</p>
                                 <input type="text" placeholder="Nhập địa chỉ..." id="address" ng-value="address">
                             </div>
-                            <div class="col-md-12" style="margin-top: 10px;font-size: 20px;border-bottom: 1px solid #DCDCDC; padding-bottom: 10px;margin-bottom: 15px;">Quản lý sản phẩm hóa đơn</div>
 
-                            <div class="col-md-12" style="text-align: center;">
-                                <button onclick="ShowProduct()" ng-click="ReturnProduct()"><i class="fas fa-plus" style="margin-right: 10px;border-bottom: 1px"></i>Thêm</button>
-                                <div class="Dropdown-Product-Background" id="Product-Background"></div>
-                                <div class="Dropdown-Product" id="Product">
-                                    <a href="javascript:void(0);" class="exit" onclick="HideProduct()"><i class="fas fa-times"></i></a>
-                                    <div class="row product-input" style="padding-top: 10px;padding-bottom: 10px; text-align: center;">
-                                        <div class="col-md-4">
-                                            <p>Tìm kiếm sản phẩm:</p>
-                                            <input type="text" placeholder="Nhập từ khóa..." ng-model="search.ProductName">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Lọc theo loại sản phẩm:</p>
-                                            <select class="list-select" ng-model="search.ProductTypeName">
-                                                <option value="">Chọn loại sản phẩm</option>
-                                                @foreach (var item in prdTypeList)
-                                                {
-                                                    <option value="@item.TypeName">@item.TypeName</option>
-                                                }
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p>Lọc theo hãng:</p>
-                                            <select class="list-select" ng-model="search.BrandName">
-                                                <option value="">Chọn hãng sản phẩm</option>
-                                                @foreach (var item in brandList)
-                                                {
-                                                    <option value="@item.BrandName">@item.BrandName</option>
-                                                }
-                                            </select>
-                                        </div>
-                                        <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
-                                            <p>Danh sách sản phẩm:</p>
-                                            <div class="Box" style="padding: 0;margin-top: 10px;">
-                                                <div class="admin-table modal-table" id="admin-table-best-sale" style="height: 320px;">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th style="width: 40%;"><a ng-click="sortProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
-                                                                <th style="width: 10%;"><a ng-click="sortProduct('ProductTypeName')" href="javascript:void(0);">Loại SP</a></th>
-                                                                <th style="width: 10%;"><a ng-click="sortProduct('BrandName')" href="javascript:void(0);">Hãng SP</a></th>
-                                                                <th style="width: 15%;"><a ng-click="sortProduct('Amount')" href="javascript:void(0);">SL hàng tồn</a></th>
-                                                                <th style="width: 10%;"><a ng-click="sortProduct('MonthWarranty')" href="javascript:void(0);">Bảo hành</a></th>
-                                                                <th style="width: 20%;"><a ng-click="sortProduct('Price')" href="javascript:void(0);">Giá tiền</a></th>
-                                                                <th style="width: 5%;text-align: center;"></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="item in productList | filter:search | orderBy:ProductN:reverseProduct">
-                                                                <td>{{item.ProductName}}</td>
-                                                                <td>{{item.ProductTypeName}}</td>
-                                                                <td>{{item.BrandName}}</td>
-                                                                <td>{{item.Amount}}</td>
-                                                                <td>{{item.MonthWarranty}}</td>
-                                                                <td>{{item.Price | currency:"":0}}</td>
-                                                                <td style="text-align: center;"><a href="javascript:void(0);" ng-click="AddProductToInvoice(item.id, item.Price,item.MonthWarranty)"><i class="fas fa-plus"></i></a></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
                                 <p>Danh sách sản phẩm trong hóa đơn:</p>
                                 <div class="Box" style="padding: 0;margin-top: 10px;">
@@ -232,16 +171,16 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 45%;"><a ng-click="sortInvoiceProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
-                                                    <th style="width: 10%;"><a ng-click="sortInvoiceProduct('Quanlity')" href="javascript:void(0);">Số lượng</a></th>
-                                                    <th style="width: 20%;"><a ng-click="sortInvoiceProduct('Price')" href="javascript:void(0);">Giá tiền (VNĐ)</a></th>
-                                                    <th style="width: 15%;text-align: center;color: #1E90FF">Hành động</th>
+                                                    <th style="width: 50%;"><a ng-click="sortInvoiceProduct('ProductName')" href="javascript:void(0);">Tên sản phẩm</a></th>
+                                                    <th style="width: 20%;"><a ng-click="sortInvoiceProduct('Quanlity')" href="javascript:void(0);">Số lượng</a></th>
+                                                    <th style="width: 15%;"><a ng-click="sortInvoiceProduct('Price')" href="javascript:void(0);">Giá tiền (VNĐ)</a></th>
+                                                    <th style="width: 15%;color: #1E90FF">Hành động</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="items-table">
-                                                <tr ng-repeat="item in orderList | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Quanlity)">
+                                            <tbody>
+                                                <tr ng-repeat="item in cartList">
                                                     <td>{{item.ProductName}}</td>
-                                                    <td><input type="number" min="1" ng-value="item.Quanlity" id="AmountInput_{{item.id}}" ng-change="ChangeAmount(item.id)" ng-model="AmountValue" oninput="validity.valid||(value='');" /></td>
+                                                    <td><div class="pay-quantity"><a class="minus" style="float:left" ng-click="MiniusItem(item.id)"><i class="fas fa-minus"></i></a><input id="Item_{{item.id}}" type="text" class="numberonly" value="{{item.Quanlity}}" onchange="ApplyQuantity3(this.id,this)" style="float: left;" /><a class="plus" style="float:left" ng-click="PlusItem(item.id)"><i class="fas fa-plus"></i></a></div></td>
                                                     <td>{{item.Price | currency:"":0}}</td>
                                                     <td style="text-align: center;"><a href="javascript:void(0);" ng-click="RemoveItem(item.id)"><i class="fas fa-times"></i></a></td>
                                                 </tr>
@@ -251,19 +190,42 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_price | currency:"":0}}</div>
+                        <div style="float: right;">Tổng tiền (VNĐ): {{bucket.total_amount | currency:"":0}}đ</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" ng-click="OrderProductConfirm()">Xác nhận</button>
-                        <button type="button" class="second-btn" data-dismiss="modal" id="btn_out" ng-click="CheckAmountNull()">Thoát</button>
+                        <button type="button" class="second-btn" data-dismiss="modal" id="btn_out" @*ng-click="CheckAmountNull()"*@>Thoát</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </section>
 @section scripts{
     <script>
+        function ApplyQuantity2(id, quantity) {
+            var order_id = id;
+            order_id = order_id.replace("Order_", "");
+            order_id = parseInt(order_id);
+            var quanti = quantity;
+            var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+            scope.ApplyQuantity(order_id, quantity.value);
+        }
+        function ApplyQuantity3(id, quantity) {
+            var order_id = id;
+            order_id = order_id.replace("Item_", "");
+            order_id = parseInt(order_id);
+            var quanti = quantity;
+            var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+            scope.ApplyQuantity(order_id, quantity.value);
+        }
+        Product = document.getElementById("Product");
+        ProductBackground = document.getElementById("Product-Background");
+        function ShowProduct() {
+            ProductBackground.style.visibility = "visible";
+            Product.style.visibility = "visible";
+        }
         var x = document.getElementById("Post_Error");
         var list = x.getElementsByTagName("UL")[0];
         if (list.getElementsByTagName("LI")[0].innerHTML != "") {

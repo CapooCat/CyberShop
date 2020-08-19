@@ -2861,6 +2861,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         })
     }
     $scope.SubmitInvoiceIn = function () {
+        var distributor=document.getElementById("distributor");
         if ($scope.lstInvoiceInss == "" || $scope.lstInvoiceInss == null || $scope.lstInvoiceInss == "{}") {
             Swal.fire({
                 icon: 'error',
@@ -2868,9 +2869,17 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 text: 'Bạn chưa thêm sản phẩm',
             });
         }
+        else if(distributor.value=="")
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Xuất hóa đơn thất bại',
+                text: 'Bạn chưa thêm nhà phân phối',
+            });
+        }
         else {
             $scope.loading = true;
-            $http.get("/Admin/AddInvoiceInManager/SubmitInvoiceIn").then(function (response) {
+            $http.get("/Admin/AddInvoiceInManager/SubmitInvoiceIn?distributor=" + distributor.value).then(function (response) {
                 $scope.loading = false;
                 $scope.bucket.total_price_invoice = 0;
                 $scope.ReturnInvoiceInSession();
