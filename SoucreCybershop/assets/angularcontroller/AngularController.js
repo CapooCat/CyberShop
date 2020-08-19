@@ -295,6 +295,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
             } else {
                 $scope.loading = false;
             }
+            $scope.CheckCart();
         });
     }
     $scope.bucket = { total_amount: 0 };
@@ -1175,38 +1176,58 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
     }
     $scope.ReturnCity();
     $scope.CheckNull = function () {
-        var customerName = document.getElementById("CustomerName").value;
-        var email = document.getElementById("Email").value;
-        var phoneNum = document.getElementById("key").value;
-        var address = document.getElementById("Address").value;
-        var district = document.getElementById("sl_district");
-        var districtSelect = district.options[district.selectedIndex].value;
-        if (customerName == "" || email == "" || phoneNum == "" || address == ""|| districtSelect == "")
-        {
-            document.getElementById("btn_order").removeAttribute("data-toggle");
-            document.getElementById("btn_order").removeAttribute("data-target");
-        }
-        else
-        {
-            document.getElementById("btn_order").setAttribute("data-toggle", "modal");
-            document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
+        if (document.getElementById("btn_order") != null) {
+            var customerName = document.getElementById("CustomerName").value;
+            var email = document.getElementById("Email").value;
+            var phoneNum = document.getElementById("key").value;
+            var address = document.getElementById("Address").value;
+            var district = document.getElementById("sl_district");
+            var districtSelect = district.options[district.selectedIndex].value;
+            $http.get("/Pay/CheckSessionUser").then(function (response) {
+                $scope.temp = angular.fromJson(response.data);
+                if ($scope.temp.success == "false") {
+                    if (customerName == "" || email == "" || phoneNum == "" || address == "" || districtSelect == "") {
+                        document.getElementById("btn_order").removeAttribute("data-toggle");
+                        document.getElementById("btn_order").removeAttribute("data-target");
+                    }
+                    else {
+                        document.getElementById("btn_order").setAttribute("data-toggle", "modal");
+                        document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
+                    }
+                }
+                else {
+                    if (customerName == "" || email == "" || phoneNum == "" || address == "") {
+                        document.getElementById("btn_order").removeAttribute("data-toggle");
+                        document.getElementById("btn_order").removeAttribute("data-target");
+                    }
+                    else {
+                        document.getElementById("btn_order").setAttribute("data-toggle", "modal");
+                        document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
+                    }
+                }
+            });
         }
     }
     $scope.CheckCart = function () {
         if (document.getElementById("section_Order") != null && document.getElementById("cart_null") != null)
         {
-            if (!$scope.cartList)
-            {
-                document.getElementById("section_Order").hidden = true;
-                document.getElementById("cart_null").hidden = false;
-            }
-            else
-            {
-                document.getElementById("section_Order").hidden = false;
-                document.getElementById("cart_null").hidden = true;
-            }
+            $http.get("/Pay/CheckCartNull").then(function (response) {
+                $scope.cartExist = angular.fromJson(response.data);
+                if ($scope.cartExist.success=="false")
+                {
+                    document.getElementById("btn_out").click();
+                    document.getElementById("section_Order").hidden = true;
+                    document.getElementById("cart_null").hidden = false;
+                }
+                else
+                {
+                    document.getElementById("section_Order").hidden = false;
+                    document.getElementById("cart_null").hidden = true;
+                }
+            });
         }
     }
+    $scope.CheckCart();
     $scope.ViewOrder = function () {
         if (document.getElementById("icon_down").getAttribute("class") == "fa fa-angle-down")
         {
@@ -1257,8 +1278,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         var districtSelect = district.options[district.selectedIndex].text;
         $http.get("/Pay/CheckSessionUser").then(function (response) {
             $scope.temp = angular.fromJson(response.data);
-        });
-        if ($scope.temp =="false") {
+        if ($scope.temp.success =="false") {
             if (customerName == "" || email == "" || phoneNum == "" || address == "" || citySelect == "Chọn Tỉnh/Thành" || districtSelect == "Chọn Quận/Huyện") {
                 Swal.fire({
                     icon: 'error',
@@ -1288,27 +1308,23 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 $scope.clientName = customerName;
                 $scope.phoneNumber = phoneNum;
                 $scope.email = email;
-                $scope.address = address + ", " + districtSelect + ", " + citySelect;
+                $scope.address = address;
                 $scope.loading = false;
             }
         }
+        });
     }
     $scope.OrderProductConfirm = function() {
         $scope.loading = true;
-        var customerName = document.getElementById("CustomerName").value;
-        var email = document.getElementById("Email").value;
-        var phoneNum = document.getElementById("key").value;
-        var address = document.getElementById("Address").value;
-        var city = document.getElementById("sl_city");
-        var citySelect = city.options[city.selectedIndex].text;
-        var district = document.getElementById("sl_district");
-        var districtSelect = district.options[district.selectedIndex].text;
+        var customerName = document.getElementById("client_name").value;
+        var email = document.getElementById("customer_email").value;
+        var phoneNum = document.getElementById("phone_number").value;
+        var address = document.getElementById("address").value;
         $http.get("/Pay/CheckSessionUser").then(function (response) {
-            $scope.tem = angular.fromJson(response.data);
-        });
-        if ($scope.tem.success = false)
+            $scope.user = angular.fromJson(response.data);
+        if ($scope.user.success == "false")
         {
-            if (customerName == "" || email == "" || phoneNum == "" || address == "" || citySelect == "Chọn Tỉnh/Thành" || districtSelect == "Chọn Quận/Huyện") {
+            if (customerName == "" || email == "" || phoneNum == "" || address == "") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Không được để trống',
@@ -1409,26 +1425,38 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                 });
             }
         }
+        });
     }
     $scope.CheckSessionUser = function () {
         var sl_city = document.getElementById("sl_city");
-        var sl_district = document.getElementById("sl_district")
+        var sl_district = document.getElementById("sl_district");
+        $scope.loading = true;
         if(sl_city!=null && sl_district!=null)
         {
             $http.get("/Pay/CheckSessionUser").then(function (response) {
                 $scope.temp = angular.fromJson(response.data);
-                if($scope.temp.success=="true")
-                {
-                    sl_city.hidden = true;
-                    sl_district.hidden = true;
-                }
-                else
+                if($scope.temp.success=="false")
                 {
                     sl_city.hidden = false;
                     sl_district.hidden = false;
                 }
+                else
+                {
+                    sl_city.hidden = true;
+                    sl_district.hidden = true;
+                    document.getElementById("btn_order").setAttribute("data-toggle", "modal");
+                    document.getElementById("btn_order").setAttribute("data-target", "#EditInvoice");
+                    $http.get("/Pay/ReturnUserById/" + $scope.temp.user_id).then(function (response) {
+                        $scope.dataUser=angular.fromJson(response.data);
+                        $scope.CustomerName = $scope.dataUser[0].Name;
+                        $scope.Email = $scope.dataUser[0].Email;
+                        $scope.PhoneNum = $scope.dataUser[0].PhoneNum;
+                        $scope.Address = $scope.dataUser[0].Address;
+                    });
+                }
             });
         }
+        $scope.loading = false;
     }
     $scope.CheckSessionUser();
 });

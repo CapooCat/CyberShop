@@ -147,11 +147,50 @@ namespace CyberShop.Controllers
         {
             if(Session[CyberShop.Common.CommonConstantUser.USER_SESSION] != null)
             {
-                return Json(new { success = "true" }, JsonRequestBehavior.AllowGet);
+                var user_session = (CyberShop.Common.UserInfo)Session[CyberShop.Common.CommonConstantUser.USER_SESSION];
+                return Json(new { user_id = user_session.Id }, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 return Json(new { success = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult ReturnUserById(int id)
+        {
+            List<UserViewModel> user = new List<UserViewModel>();
+            user = data.Users.Where(x => x.id == id).Select(x => new UserViewModel
+            {
+                id=x.id,
+                Name=x.Name,
+                Email=x.Email,
+                PhoneNum=x.PhoneNum,
+                Address=x.Address
+            }).ToList();
+            List<object> ReturnData = new List<object>();
+            foreach (UserViewModel item in user)
+            {
+                ReturnData.Add(new UserViewModel
+                {
+                    id = item.id,
+                    Name = item.Name,
+                    Email = item.Email,
+                    PhoneNum = item.PhoneNum,
+                    Address = item.Address
+                });
+            }
+            return Json(ReturnData, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CheckCartNull()
+        {
+            var cartt = Session[Common.CommonConstantUser.CART_SESSION];
+            List<CartViewModel> cartList = (List<CartViewModel>)cartt;
+            if (cartList == null || cartList.Count == 0)
+            {
+                return Json(new { success = "false" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = "true" }, JsonRequestBehavior.AllowGet);
             }
         }
 
