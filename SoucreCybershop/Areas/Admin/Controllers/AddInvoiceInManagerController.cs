@@ -192,7 +192,7 @@ namespace CyberShop.Areas.Admin.Controllers
                           }).ToList();
             return View(invoicePdf);
         }
-        public JsonResult SubmitInvoiceIn()
+        public JsonResult SubmitInvoiceIn(string distributor)
         {
             InOrder inOder = new InOrder();
             List<InvoiceInCreateViewModel> invoiceInList = (List<InvoiceInCreateViewModel>)Session[Common.CommonConstantUser.INVOICEIN_SESSION];
@@ -206,6 +206,7 @@ namespace CyberShop.Areas.Admin.Controllers
             inOder.IsDeleted = false;
             inOder.Status = "Chưa hoàn thành";
             inOder.CreateDate = DateTime.Now;
+            inOder.Distributor = distributor;
             var inorderDao = new InOrderDao().InsertInOrder(inOder);
             //Tạo chi tiết hóa đơn
             InOrder_Detail inOrderDetail = new InOrder_Detail();
