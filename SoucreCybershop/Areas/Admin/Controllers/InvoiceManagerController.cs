@@ -362,6 +362,56 @@ namespace CyberShop.Areas.Admin.Controllers
             return Json(ReturnData, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ApplyQuantity (int Id, int Amount) {
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(Id);
+            entity.Amount = Amount;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Plus (int Id) {
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(Id);
+            entity.Amount += 1;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Minus (int Id) {
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(Id);
+            if (entity.Amount <= 1) { entity.Amount = 1; } else {
+                entity.Amount -= 1;
+            }
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CancelInvoice (InvoiceManagerViewModel model)
+        {
+            Invoice entity = new Invoice();
+            Product Productentity = new Product();
+
+            var prdList = new List<InvoiceDetailMangerViewModel>();
+            prdList = (from a in data.Invoice_Detail
+                       join b in data.Products on a.Product_id equals b.id
+                       where a.IsDeleted == false && a.Invoice_id == model.Id
+                       select new InvoiceDetailMangerViewModel
+                       {
+                           Product_id = a.Product_id,
+                           Amount = a.Amount,
+                       }).ToList();
+            foreach (var item in prdList)
+            {
+                Productentity = data.Products.Find(item.Product_id);
+                Productentity.Amount = Productentity.Amount + item.Amount;
+                data.SaveChanges();
+            }
+            entity = data.Invoices.Find(model.Id);
+            entity.Status = model.Status;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Confirm(InvoiceManagerViewModel model)
         {
             var NotEnoughStock = false;

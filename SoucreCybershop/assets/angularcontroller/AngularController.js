@@ -954,6 +954,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
         }
         
     }
+
     $scope.ViewInvoice = function (id) {
         $scope.bucket.total_price = 0;
         $scope.invoice_id = id;
