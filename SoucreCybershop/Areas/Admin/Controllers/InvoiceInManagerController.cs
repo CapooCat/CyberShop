@@ -316,7 +316,8 @@ namespace CyberShop.Areas.Admin.Controllers
                           join b in data.Products on a.Id equals b.ProductType_id
                           join c in data.InOrder_Detail on b.id equals c.Product_id
                           join d in data.ProducTypes on b.ProductType_id equals d.Id
-                          where c.InOrder_id == id && c.IsDeleted == false
+                          join e in data.InOrders on c.InOrder_id equals e.Id
+                          where c.InOrder_id == id && c.IsDeleted == false && e.IsDeleted==false
                           select new InvoiceInPdfViewModel
                           {
                               Id = a.Id,
@@ -324,6 +325,7 @@ namespace CyberShop.Areas.Admin.Controllers
                               BrandName = a.BrandName,
                               ProductTypeName = d.TypeName,
                               Price = c.Price,
+                              Distributor=e.Distributor,
                               BrandPhone = a.PhoneNumber,
                               Address = a.Address,
                               IsDeleted = c.IsDeleted,

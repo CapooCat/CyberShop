@@ -30,7 +30,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnCustomerAmount()
         {
 
-            var lstCustomer = data.Users.Where(x => x.IsDeleted == false).ToList();
+            var lstCustomer = data.Users.Where(x => x.IsDeleted == false && x.UserType!="admin").ToList();
             var totalUser = 0;
             foreach (var item in lstCustomer)
             {

@@ -14,6 +14,7 @@ namespace CyberShop.Areas.Admin.Models
         public string ProductTypeName { get; set; }
         public string BrandPhone { get; set; }
         public string Address { get; set; }
+        public string Distributor { get; set; }
         public int? MonthsWarranty { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<double> Price { get; set; }
