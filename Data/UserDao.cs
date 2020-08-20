@@ -91,6 +91,7 @@ namespace Data
                 res.Name = entity.Name;
                 res.Address = entity.Address;
                 res.PhoneNum = entity.PhoneNum;
+                res.Email = entity.Email;
                 data.SaveChanges();
                 return true;
             }

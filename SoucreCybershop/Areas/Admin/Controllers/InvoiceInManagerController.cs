@@ -313,7 +313,7 @@ namespace CyberShop.Areas.Admin.Controllers
         {
             List<InvoiceInPdfViewModel> invoicePdf = new List<InvoiceInPdfViewModel>();
             invoicePdf = (from a in data.Brands
-                          join b in data.Products on a.Id equals b.ProductType_id
+                          join b in data.Products on a.Id equals b.Brand_id
                           join c in data.InOrder_Detail on b.id equals c.Product_id
                           join d in data.ProducTypes on b.ProductType_id equals d.Id
                           join e in data.InOrders on c.InOrder_id equals e.Id

@@ -46,6 +46,7 @@ namespace CyberShop.Controllers
                 user.Name = model.Name;
                 user.Address = model.Address;
                 user.PhoneNum = model.PhoneNum;
+                user.Email = model.Email;
                 userDao.UpdateUser(user);
                 ViewBag.Success = "Cập nhật thành công";
             }

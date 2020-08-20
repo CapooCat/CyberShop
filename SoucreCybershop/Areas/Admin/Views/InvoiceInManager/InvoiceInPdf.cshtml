@@ -36,7 +36,8 @@
                 <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu nhập kho</div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
                 <div class="col-md-12">
-                    <span><span style="font-weight: bold">Khách hàng:</span> Công ty TNHH linh kiện máy tính CyberShop</span>
+                    <span><span style="font-weight: bold">Khách hàng: </span> Công ty TNHH linh kiện máy tính CyberShop</span><br />
+                    <span><span style="font-weight: bold">Nhà phân phối: </span>@Model.First().Distributor</span>
                 </div>
                 <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn nhập sản phẩm</div>
             </div>
@@ -46,8 +47,7 @@
                         <tr>
                             <th style="width: 35%;">Tên sản phẩm</th>
                             <th style="width: 15%;">Hãng</th>
-                            <th style="width: 15%;">Nhà phân phối</th>
-                            <th style="width: 10%;">Loại sản phẩm</th>
+                            <th style="width: 15%;">Loại sản phẩm</th>
                             <th style="width: 10%;">Số lượng</th>
                             <th style="width: 15%;">Đơn giá (VNĐ)</th>
                             <th style="width: 15%;">Thành tiền (VNĐ)</th>
@@ -59,7 +59,6 @@
                             <tr>
                                 <td>@item.ProductName</td>
                                 <td>@item.BrandName</td>
-                                <td>@item.Distributor</td>
                                 <td>@item.ProductTypeName</td>
                                 <td>@item.Amount</td>
                                 <td>@string.Format("{0:#,##0}", item.Price)</td>
