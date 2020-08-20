@@ -136,8 +136,9 @@
             <td ng-if="item.Status=='Đã đóng gói'"><div class="prepared">{{item.Status}}</div></td>
             <td ng-if="item.Status=='Đang vận chuyển'"><div class="shipping">{{item.Status}}</div></td>
             <td ng-if="item.Status=='Đã hủy'"><div class="canceled">{{item.Status}}</div></td>
-            <td class="table-product-action" ng-if="item.Status=='Chưa xác nhận'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
-            <td class="table-product-action" ng-if="item.Status!='Chưa xác nhận'"><button class="look" data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
+            <td class="table-product-action" ng-if="item.Status== 'Chưa xác nhận'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+            <td class="table-product-action" ng-if="item.Status== 'Đang chờ xem'"><button class="edit" data-toggle="modal" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)" class="look"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
+            <td class="table-product-action" ng-if="item.Status != 'Chưa xác nhận' && item.Status != 'Đang chờ xem'"><button class="look" data-toggle="modal" data-target="#ViewInvoiceModal" ng-click="ViewInvoice(item.Id)"><i class="fas fa-eye"></i></button></td>
         </tr>
         
     </table>

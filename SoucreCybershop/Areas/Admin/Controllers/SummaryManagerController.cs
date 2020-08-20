@@ -19,7 +19,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnTurnover()
         {
 
-            var lstInvoice = data.Invoices.Where(x => x.IsDeleted == false).ToList();
+            var lstInvoice = data.Invoices.Where(x => x.IsDeleted == false && x.Status=="Đã hoàn thành").ToList();
             double? totalTurnover = 0;
             foreach(var item in lstInvoice)
             {
@@ -40,7 +40,12 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnTotalProductSell()
         {
 
-            var lstProductSell = data.Invoice_Detail.Where(x => x.IsDeleted == false).ToList();
+            var lstProductSell = (from a in data.Invoices
+                                  join b in data.Invoice_Detail on a.Id equals b.Invoice_id
+                                  where a.IsDeleted == false && a.Status == "Đã hoàn thành"
+                                  select new {
+                                      b.Amount
+                                  }).ToList();
             int? totalProductSell = 0;
             foreach (var item in lstProductSell)
             {
@@ -54,7 +59,8 @@ namespace CyberShop.Areas.Admin.Controllers
             var model = new List<BestSellerViewModel>();
             model = (from a in data.Products
                      join b in data.Invoice_Detail on a.id equals b.Product_id
-                     where a.IsDeleted == false
+                     join c in data.Invoices on b.Invoice_id equals c.Id
+                     where a.IsDeleted == false && c.IsDeleted == false && c.Status=="Đã hoàn thành"
                      group b by new {
                          a.id,
                          a.ProductName,
@@ -83,7 +89,7 @@ namespace CyberShop.Areas.Admin.Controllers
         public JsonResult ReturnNewDeal()
         {
             var model = new List<InvoiceManagerViewModel>();
-            model = data.Invoices.Where(x => x.IsDeleted == false).OrderByDescending(x=>x.PurchaseDate).Select(x => new InvoiceManagerViewModel
+            model = data.Invoices.Where(x => x.IsDeleted == false && x.Status == "Đã hoàn thành").OrderByDescending(x=>x.PurchaseDate).Select(x => new InvoiceManagerViewModel
             {
                 Id = x.Id,
                 User_id = x.User_id,
@@ -124,7 +130,7 @@ namespace CyberShop.Areas.Admin.Controllers
             List<object> ReturnData = new List<object>();
             for (int i = 1; i <= 12; i++)
             {
-                var model = data.Invoices.Where(x => x.PurchaseDate.Value.Year == 2020 && x.PurchaseDate.Value.Month == i).ToList();
+                var model = data.Invoices.Where(x => x.PurchaseDate.Value.Year == 2020 && x.PurchaseDate.Value.Month == i && x.Status=="Đã hoàn thành").ToList();
                 if (model != null)
                 {
                     double? totalInMonth = 0;

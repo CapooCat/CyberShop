@@ -239,6 +239,7 @@ namespace CyberShop.Areas.Admin.Controllers
             Product.Price = model.Price;
             Product.Amount = model.Amount;
             Product.Info = model.Info;
+            Product.MonthWarranty = model.MonthWarranty;
             Product.MetaTitle = model.MetaTitle;
             Product.IsDeleted = false;
             Product.CreateDate = DateTime.Now;

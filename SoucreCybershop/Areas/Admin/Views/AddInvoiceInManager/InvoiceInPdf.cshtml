@@ -36,7 +36,11 @@
                 <div class="col-md-12" style="margin-top:50px;text-align:center;font-size:40px;font-weight:bold">Phiếu nhập kho</div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:50px;">@Model.First().CreateDate.Value.ToString("dd/MM/yyyy")</div>
                 <div class="col-md-12">
-                    <span><span style="font-weight: bold">Khách hàng:</span> Công ty TNHH linh kiện máy tính CyberShop</span>
+                    <span><span style="font-weight: bold">Khách hàng: </span> Công ty TNHH linh kiện máy tính CyberShop</span>
+                    
+                </div>
+                <div class="col-md-12">
+                    <span><span style="font-weight: bold">Nhà phân phối: </span>@Model.First().Distributor</span>
                 </div>
                 <div class="col-md-12" style="text-align:center; margin-top: 10px;margin-bottom: 10px;font-size: 25px;font-weight:bold">Chi tiết hóa đơn nhập sản phẩm</div>
             </div>

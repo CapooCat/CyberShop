@@ -158,7 +158,7 @@ namespace CyberShop.Areas.Admin.Controllers
                                    where d.Id == newInvoiceId && d.IsDeleted==false
                                    select new InvoiceOutPdfViewModel
                                    {
-                                       Id = a.Id,
+                                       Id = d.Id,
                                        ProductName = b.ProductName,
                                        ProductTypeName = a.TypeName,
                                        CustomerName = d.CustomerName,

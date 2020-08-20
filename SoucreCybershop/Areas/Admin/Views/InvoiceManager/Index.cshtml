@@ -42,6 +42,8 @@
                     <option value="Đã đóng gói"><text>Đã đóng gói</text></option>
                     <option value="Đang vận chuyển"><text>Đang vận chuyển</text></option>
                     <option value="Đã hoàn thành"><text>Đã hoàn thành</text></option>
+                    <option value="Đang chờ xem"><text>Đang chờ xem</text></option>
+                    <option value="Đã hủy"><text>Đã hủy</text></option>
                 </select>
             </div>
         </div>
@@ -73,9 +75,8 @@
                         </thead>
                         <tbody id="items-table">
                             <tr ng-repeat="item in invoiceList">
-                                <td class="checkbox" ng-if="item.Status=='Chưa xác nhận'"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
-                                <td class="checkbox" ng-if="item.Status=='Đang chờ xem'"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
-                                <td class="checkbox" ng-if="item.Status=='Đã hoàn thành' || item.Status=='Đã hủy' || item.Status=='Đã xác nhận' || item.Status=='Đang vận chuyển' ||  item.Status=='Đã đóng gói'"><i class="fas fa-check-circle"></i></td>
+                                <td class="checkbox" ng-if="item.Status=='Chưa xác nhận' || item.Status=='Đã hủy' || item.Status=='Đang chờ xem'"><input type="checkbox" onchange="CheckItem()" value="{{item.Id}}"></td>
+                                <td class="checkbox" ng-if="item.Status=='Đã hoàn thành' || item.Status=='Đã xác nhận' || item.Status=='Đang vận chuyển' ||  item.Status=='Đã đóng gói'"><i class="fas fa-check-circle"></i></td>
                                 <td>{{item.Id}}</td>
                                 <td>{{item.CustomerName}}</td>
                                 <td>{{item.DeliveryAddress}}</td>
@@ -90,7 +91,8 @@
                                 <td ng-if="item.Status=='Đã hủy'"><div class="canceled">{{item.Status}}</div></td>
                                 <td class="table-product-action" ng-if="item.Status=='Chưa xác nhận'"><button data-toggle="modal" class="edit" data-target="#EditInvoice" ng-click="EditInvoice(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id, item.Status)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
                                 <td class="table-product-action" ng-if="item.Status=='Đang chờ xem'"><button data-toggle="modal" class="edit" data-target="#EditInvoice" ng-click="SeenThenEdit(item.Id)"><i class="fas fa-edit"></i></button><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="SeenThenView(item.Id)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
-                                <td class="table-product-action" ng-if="item.Status=='Đã hoàn thành' || item.Status=='Đã hủy' || item.Status=='Đã xác nhận' || item.Status=='Đang vận chuyển' ||  item.Status=='Đã đóng gói'"><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id, item.Status)"><i class="fas fa-eye"></i></button></td>
+                                <td class="table-product-action" ng-if="item.Status=='Đã hoàn thành' || item.Status=='Đã xác nhận' || item.Status=='Đang vận chuyển' ||  item.Status=='Đã đóng gói'"><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id, item.Status)"><i class="fas fa-eye"></i></button></td>
+                                <td class="table-product-action" ng-if="item.Status=='Đã hủy'"><button data-toggle="modal" data-target="#ViewInvoiceModal" class="look" ng-click="ViewInvoice(item.Id, item.Status)"><i class="fas fa-eye"></i></button><button class="delete" ng-click="DeleteInvoice(item.Id)"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>

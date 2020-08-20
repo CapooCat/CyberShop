@@ -176,13 +176,15 @@ namespace CyberShop.Areas.Admin.Controllers
                           join b in data.Products on a.Id equals b.ProductType_id
                           join c in data.InOrder_Detail on b.id equals c.Product_id
                           join d in data.ProducTypes on b.ProductType_id equals d.Id
-                          where c.InOrder_id == newInvoiceId && c.IsDeleted == false
+                          join e in data.InOrders on c.InOrder_id equals e.Id
+                          where c.InOrder_id == newInvoiceId && c.IsDeleted == false && e.IsDeleted==false
                           select new InvoiceInPdfViewModel
                           {
                               Id = a.Id,
                               ProductName = b.ProductName,
                               BrandName = a.BrandName,
                               ProductTypeName=d.TypeName,
+                              Distributor=e.Distributor,
                               Price = c.Price,
                               BrandPhone = a.PhoneNumber,
                               Address = a.Address,

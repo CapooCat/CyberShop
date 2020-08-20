@@ -849,6 +849,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
             for (i = 0; $scope.TempIMG.length > i; i++) {
                 if (document.getElementById("IMG_DATA").getElementsByClassName("MainIMG")[i].checked == true)
                 {
+                    console.log(Warranty);
                     $http({
                         url: '/Admin/ProductManager/AddProduct',
                         method: "POST",
@@ -857,6 +858,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                             Brand_id: Brand,
                             ProductType_id: Type,
                             Price: SellPrice,
+                            MonthWarranty: Warranty, 
                             Amount: Quantity,
                             Info: Doc,
                             MetaTitle: MetaTitle
@@ -864,6 +866,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                     }).then(function onSuccess(response) {
                         // Handle success
                         var j = 0;
+                        console.log(response);
                         $http.get("/Admin/ProductManager/ReturnProduct").then(function (response) {
                             $scope.NewId = angular.fromJson(response.data);
                             for (i = 0; response.data.length > i; i++) {
