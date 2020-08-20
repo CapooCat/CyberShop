@@ -57,7 +57,7 @@ namespace CyberShop.Controllers
             if (userSession != null)
             {
                 var res = (from a in data.Invoices
-                           where a.User_id == userSession.Id
+                           where a.User_id == userSession.Id && a.IsDeleted == false
                            select new InvoiceViewModel
                            {
                                Id = a.Id,
@@ -167,12 +167,33 @@ namespace CyberShop.Controllers
             data.SaveChanges();
             return Json(new { success=true}, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
-        public JsonResult UpdateAmountInvoiceDetail(int id,int Amount)
+        public JsonResult ApplyQuantity(int Id, int Amount)
         {
-            Invoice_Detail invoice_detail = new Invoice_Detail();
-            invoice_detail = data.Invoice_Detail.Find(id);
-            invoice_detail.Amount = Amount;
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(Id);
+            entity.Amount = Amount;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Plus(int Id)
+        {
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(Id);
+            entity.Amount += 1;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Minus(int Id)
+        {
+            Invoice_Detail entity = new Invoice_Detail();
+            entity = data.Invoice_Detail.Find(Id);
+            if (entity.Amount <= 1) { entity.Amount = 1; }
+            else
+            {
+                entity.Amount -= 1;
+            }
             data.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }

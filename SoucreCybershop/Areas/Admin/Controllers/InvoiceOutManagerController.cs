@@ -204,7 +204,7 @@ namespace CyberShop.Areas.Admin.Controllers
             invoice.DeliveryAddress = model.Address;
             invoice.DeliveryPhoneNum = model.NumberPhone;
             invoice.IsDeleted = false;
-            invoice.Status = "Chưa hoàn thành";
+            invoice.Status = "Đã hoàn thành";
             invoice.CreateBy = "Admin";
             invoice.CreateDate = DateTime.Now;
             invoice.Total = total;
@@ -232,5 +232,71 @@ namespace CyberShop.Areas.Admin.Controllers
             invoiceOutList.RemoveAll(x => invoiceOutList.Any());
             return Json(new { success=true}, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ApplyQuantity(int? Id, int Amount)
+        {
+            var sessionInvoiceDetail = Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
+            if (sessionInvoiceDetail != null)
+            {
+                var list = (List<InvoiceOutManagerViewModel>)sessionInvoiceDetail;
+                if (list.Exists(x => x.Product_Id == Id))
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.Product_Id == Id)
+                        {
+                            item.Amount = Amount;
+                        }
+                    }
+                    Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION] = list;
+                }
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Plus(int? Id)
+        {
+            var sessionInvoiceDetail = Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
+            if (sessionInvoiceDetail != null)
+            {
+                var list = (List<InvoiceOutManagerViewModel>)sessionInvoiceDetail;
+                if (list.Exists(x => x.Product_Id == Id))
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.Product_Id == Id)
+                        {
+                            item.Amount += 1;
+                        }
+                    }
+                    Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION] = list;
+                }
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Minus(int? Id)
+        {
+            var sessionInvoiceDetail = Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION];
+            if (sessionInvoiceDetail != null)
+            {
+                var list = (List<InvoiceOutManagerViewModel>)sessionInvoiceDetail;
+                if (list.Exists(x => x.Product_Id == Id))
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.Product_Id == Id)
+                        {
+                            if (item.Amount <= 1) { item.Amount = 1; }
+                            else
+                            {
+                                item.Amount -= 1;
+                            }
+                        }
+                    }
+                    Session[Common.CommonConstantUser.INVOICEDETAIL_SESSION] = list;
+                }
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

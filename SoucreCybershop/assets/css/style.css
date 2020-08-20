@@ -2583,8 +2583,7 @@ canvas{
 .PC-Item .Info, .PC-Part .Info {
   border: none;
   background-color: #fff;
-  float: left;
-  margin-left: 10px;
+  margin-left: 160px;
   padding: 0;
 }
 
@@ -2819,7 +2818,7 @@ canvas{
 
 .pending {
   padding: 4px 4px;
-  background-color: red;
+  background-color: #ff0066;
   color: #fff;
   border-radius: 10px;
   text-align: center;
@@ -2902,4 +2901,174 @@ canvas{
 .go-btn button:hover {
   background-color: #fff;
   color: #1E90FF;
+}
+
+.track-line {
+    height: 2px !important;
+    border: none;
+    background-color: #DCDCDC;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 0px;
+    background-color: #DCDCDC;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.big-dot {
+    height: 25px;
+    width: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    background-color: #DCDCDC;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.big-dot i {
+    font-size: 12px;
+}
+
+.track-font {
+  color: #DCDCDC;
+}
+
+.track-status .active {
+  background-color: #1E90FF !important;
+}
+
+.track-status .active + span {
+  background-color: #1E90FF !important;
+}
+
+.track-status-font .active span {
+   background-color: #fff !important;
+  color: #1E90FF !important;
+}
+
+.confirmed {
+  background-color: green;
+  padding: 4px 4px;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.canceled {
+  background-color: red;
+  padding: 4px 4px;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.prepared {
+  background-color: purple;
+  padding: 4px 4px;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.shipping {
+  background-color: #ff6600;
+  padding: 4px 4px;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.admin-quantity {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.admin-quantity a {
+  transition: .2s !important;
+  background-color: #1E90FF;
+  padding: 0 !important;
+  height: 40px !important;
+  margin: 0 !important;
+  cursor: pointer;
+  color: #fff !important;
+  width: 30px;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+.admin-quantity a:hover {
+  opacity: 0.8;
+}
+
+.admin-quantity input[type=text] {
+  border: none;
+  border-top: 2px solid #1E90FF;
+  border-bottom: 2px solid #1E90FF;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  width: 50px;
+  border-radius: 0;
+  box-shadow: 0 0 0 0;
+  text-align: center;
+}
+
+.admin-quantity input[type=text]:focus {
+  outline: none;
+}
+
+.View-Cart {
+  transition: .2s;
+  width: 100%;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #fff !important;
+  border: 2px solid #1E90FF;
+  background-color: #1E90FF !important;
+  display: block;
+  text-align: left;
+}
+
+.View-Cart:after {
+  transition: .2s;
+  width: 25px !important;
+  height: 25px !important;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-family: "FontAwesome";
+  content: "\f077";
+  float: right;
+  margin-right: 0px;
+}
+
+.cart-btn .active {
+  color: #1E90FF !important;
+  background-color: #fff !important;
+}
+
+.cart-btn .active:after {
+  padding-bottom: 5px;
+  -webkit-transform: rotate(180deg);
+}
+
+.View-Cart:after:hover {
+  color: #1E90FF !important;
+}
+
+.View-Cart i{
+  float: right;
 }

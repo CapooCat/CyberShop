@@ -226,5 +226,70 @@ namespace CyberShop.Areas.Admin.Controllers
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ApplyQuantity(int? Id, int Amount)
+        {
+            var sessionInvoiceIn = Session[Common.CommonConstantUser.INVOICEIN_SESSION];
+            if (sessionInvoiceIn != null)
+            {
+                var list = (List<InvoiceInCreateViewModel>)sessionInvoiceIn;
+                if (list.Exists(x => x.Product_Id == Id))
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.Product_Id == Id)
+                        {
+                            item.Amount = Amount;
+                        }
+                    }
+                    Session[Common.CommonConstantUser.INVOICEIN_SESSION] = list;
+                }
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Plus(int? Id)
+        {
+            var sessionInvoiceIn = Session[Common.CommonConstantUser.INVOICEIN_SESSION];
+            if (sessionInvoiceIn != null)
+            {
+                var list = (List<InvoiceInCreateViewModel>)sessionInvoiceIn;
+                if (list.Exists(x => x.Product_Id == Id))
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.Product_Id == Id)
+                        {
+                            item.Amount += 1;
+                        }
+                    }
+                    Session[Common.CommonConstantUser.INVOICEIN_SESSION] = list;
+                }
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Minus(int? Id)
+        {
+            var sessionInvoiceIn = Session[Common.CommonConstantUser.INVOICEIN_SESSION];
+            if (sessionInvoiceIn != null)
+            {
+                var list = (List<InvoiceInCreateViewModel>)sessionInvoiceIn;
+                if (list.Exists(x => x.Product_Id == Id))
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.Product_Id == Id)
+                        {
+                            if (item.Amount <= 1) { item.Amount = 1; }
+                            else
+                            {
+                                item.Amount -= 1;
+                            }
+                        }
+                    }
+                    Session[Common.CommonConstantUser.INVOICEIN_SESSION] = list;
+                }
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

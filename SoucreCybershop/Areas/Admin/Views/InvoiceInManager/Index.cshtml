@@ -35,6 +35,14 @@
                     }
                 </select>
             </div>
+            <div class="col-md-2">
+                <p>Trạng thái:</p>
+                <select class="list-select" id="status_invoice_in">
+                    <option value=""><text>Chọn trạng thái...</text></option>
+                    <option value="Chưa hoàn thành"><text>Chưa hoàn thành</text></option>
+                    <option value="Đã hoàn thành"><text>Đã hoàn thành</text></option>
+                </select>
+            </div>
         </div>
 
         <div class="col-md-12 product-action" style="padding-top: 10px;padding-bottom: 10px; text-align: left;">
@@ -171,7 +179,7 @@
                                         <tbody>
                                             <tr ng-repeat="item in listInvoiceInDetail | orderBy:InProduct:reverseInProduct" ng-init="bucket.total_price = bucket.total_price+ (item.Price * item.Amount)">
                                                 <td>{{item.ProductName}}</td>
-                                                <td>{{item.Amount}}</td>
+                                                <td><div class="admin-quantity"><a class="minus" style="float:left" ng-click="MinusItemInvoiceIn(item.Id)"><i class="fas fa-minus"></i></a><input id="{{item.Id}}" class="numberonly" value="{{item.Amount}}" type="text" onchange="ApplyQuantity(this.id,this)" style="float: left;"><a class="plus" style="float:left" ng-click="PlusItemInvoiceIn(item.Id)"><i class="fas fa-plus"></i></a></div></td>
                                                 <td>{{item.Price | currency:"":0}}</td>
                                                 <td style="text-align: center;"><a href="javascript:void(0);" ng-click="DeleteDetailProductIn(item.Id)"><i class="fas fa-times"></i></a></td>
                                             </tr>
@@ -262,7 +270,7 @@
                 <div class="modal-footer">
                     <button id="Print" ng-click="PrintInvoiceInById()"><i class="fas fa-print" style="padding-right:10px;"></i>In hóa đơn</button>
                     <a target="_blank" href="/Admin/InvoiceInManager/PrintViewToPdf" id="PrintInvoiceIn" hidden></a>
-                    <button id="ConfirmInvoice" ng-click="confirmIn()">Xác nhận thành công</button>
+                    <button id="ConfirmInvoice" ng-click="confirmIn()">Xác nhận hoàn thành</button>
                     <button type="button" class="second-btn" data-dismiss="modal">Thoát</button>
                 </div>
             </div>
@@ -272,6 +280,10 @@
 </section>
 
 <script>
+    function ApplyQuantity(id, quantity) {
+        var scope = angular.element(document.getElementById('MyControllerAnJS')).scope();
+        scope.ApplyQuantityInvoiceIn(id, quantity.value);
+    }
     Active = document.getElementById("InvoiceInManager");
     Active.className = "active-button";
 
