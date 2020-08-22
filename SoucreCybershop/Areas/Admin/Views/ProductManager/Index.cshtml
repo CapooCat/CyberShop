@@ -31,8 +31,14 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <p>Tên hãng</p>
-                <input type="text" placeholder="Nhập tên hãng..." id="product_brand">
+                <p>Hãng:</p>
+                <select class="list-select" id="product_brand">
+                    <option value=""> <text style="color:silver">Chọn loại sản phẩm</text></option>
+                    @foreach (var item in brandList)
+                    {
+                        <option value="@item.BrandName">@item.BrandName</option>
+                    }
+                </select>
             </div>
             <div class="col-md-2">
                 <p>Giá tiền từ:</p>

@@ -1965,7 +1965,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         if (GetStatus == "Đang vận chuyển")
             TheNextStatus = "Đã hoàn thành";
         $http({
-            url: '/Admin/InvoiceManager/Confirm',
+            url: '/Admin/InvoiceManager/ConfirmNext',
             method: "POST",
             data: {
                 Id: GetInvoiceId,
