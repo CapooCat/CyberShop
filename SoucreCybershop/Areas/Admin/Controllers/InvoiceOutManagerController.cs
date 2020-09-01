@@ -190,47 +190,73 @@ namespace CyberShop.Areas.Admin.Controllers
                 id = x.id
             }).ToList();
 
-            if (CheckAccount.Count > 0)
-            {
-                foreach (var item in CheckAccount)
-                {
-                    invoice.User_id = item.id;
-                }
-            } else
-            {
-                invoice.User_id = null;
-            }
-            invoice.CustomerName = model.CustomerName;
-            invoice.DeliveryAddress = model.Address;
-            invoice.DeliveryPhoneNum = model.NumberPhone;
-            invoice.IsDeleted = false;
-            invoice.Status = "Đã hoàn thành";
-            invoice.CreateBy = "Admin";
-            invoice.CreateDate = DateTime.Now;
-            invoice.Total = total;
-            invoice.PurchaseDate = DateTime.Now;
-            var invoiceDao = new InvoiceDao().InsertInvoice(invoice);
-            //Tạo chi tiết hóa đơn
-            Invoice_Detail inDetail = new Invoice_Detail();
-            Product product = new Product();
+            var NotEnoughStock = false;
+            Product Productentity = new Product();
             foreach (InvoiceOutManagerViewModel item in invoiceOutList)
             {
-                inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
-                inDetail.Product_id = item.Product_Id.Value;
-                inDetail.Amount = item.Amount;
-                inDetail.Price = item.Price;
-                var warranty = Convert.ToInt32(data.Products.First(x => x.id == item.Product_Id).MonthWarranty);
-                inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
-                inDetail.CreateBy = "Admin";
-                inDetail.CreateDate = DateTime.Now;
-                inDetail.IsDeleted = false;
-                var inDetailDao = new InvoiceDetailDao().InsertInvoiceDetail(inDetail);
-
-                product = data.Products.Find(item.Product_Id);
-                data.SaveChanges();
+                Productentity = data.Products.Find(item.Product_Id);
+                if (Productentity.Amount < item.Amount)
+                {
+                    NotEnoughStock = true; break;
+                }
             }
-            invoiceOutList.RemoveAll(x => invoiceOutList.Any());
-            return Json(new { success=true}, JsonRequestBehavior.AllowGet);
+
+            if (NotEnoughStock == false)
+            {
+                foreach (InvoiceOutManagerViewModel item in invoiceOutList)
+                {
+                    Productentity = data.Products.Find(item.Product_Id);
+                    Productentity.Amount = Productentity.Amount - item.Amount;
+                    data.SaveChanges();
+                }
+
+
+                if (CheckAccount.Count > 0)
+                {
+                    foreach (var item in CheckAccount)
+                    {
+                        invoice.User_id = item.id;
+                    }
+                }
+                else
+                {
+                    invoice.User_id = null;
+                }
+                invoice.CustomerName = model.CustomerName;
+                invoice.DeliveryAddress = model.Address;
+                invoice.DeliveryPhoneNum = model.NumberPhone;
+                invoice.IsDeleted = false;
+                invoice.Status = "Đã hoàn thành";
+                invoice.CreateBy = "Admin";
+                invoice.CreateDate = DateTime.Now;
+                invoice.Total = total;
+                invoice.PurchaseDate = DateTime.Now;
+                var invoiceDao = new InvoiceDao().InsertInvoice(invoice);
+                //Tạo chi tiết hóa đơn
+                Invoice_Detail inDetail = new Invoice_Detail();
+                Product product = new Product();
+                foreach (InvoiceOutManagerViewModel item in invoiceOutList)
+                {
+                    inDetail.Invoice_id = data.Invoices.OrderByDescending(x => x.Id).First().Id;
+                    inDetail.Product_id = item.Product_Id.Value;
+                    inDetail.Amount = item.Amount;
+                    inDetail.Price = item.Price;
+                    var warranty = Convert.ToInt32(data.Products.First(x => x.id == item.Product_Id).MonthWarranty);
+                    inDetail.WarrantyExpires = DateTime.Now.AddMonths(warranty);
+                    inDetail.CreateBy = "Admin";
+                    inDetail.CreateDate = DateTime.Now;
+                    inDetail.IsDeleted = false;
+                    var inDetailDao = new InvoiceDetailDao().InsertInvoiceDetail(inDetail);
+
+                    product = data.Products.Find(item.Product_Id);
+                    data.SaveChanges();
+                }
+                invoiceOutList.RemoveAll(x => invoiceOutList.Any());
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            } else
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult ApplyQuantity(int? Id, int Amount)

@@ -1418,6 +1418,7 @@ app.controller('MyController', function ($scope, $http, $window, $q, $sce) {
                             title: 'Thành công',
                             text: 'Đặt hàng thành công',
                         });
+                        $scope.FetchCart();
                     }
                     else {
                         Swal.fire({

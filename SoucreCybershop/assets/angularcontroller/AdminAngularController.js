@@ -1839,7 +1839,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
         $scope.invoice_id=id;
         if (Status == "Chưa xác nhận") { document.getElementById("ConfirmInvoice").disabled = false; document.getElementById("ConfirmInvoice").style.display = "block"; }
         else { document.getElementById("ConfirmInvoice").disabled = true; document.getElementById("ConfirmInvoice").style.display = "none"; }
-        if (Status != "Chưa xác nhận" && Status != "Đã hoàn thành" && Status != "Đã hủy" ) {
+        if (Status != "Chưa xác nhận" && Status != "Đã hoàn thành" && Status != "Đã hủy") {
             document.getElementById("NextStatus").disabled = false; document.getElementById("NextStatus").style.display = "block";
         } else {
             document.getElementById("NextStatus").disabled = true; document.getElementById("NextStatus").style.display = "none";
@@ -2242,7 +2242,7 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 // Handle success
                 $scope.loading = false;
                 console.log(response);
-                $scope.ViewInvoice(id, response.data.Status);
+                $scope.ViewInvoice(id, "Chưa xác nhận");
                 $scope.FilterInvoice();
                 $scope.ReturnNotification();
             }).catch(function onError(response) {
@@ -3105,10 +3105,19 @@ app.controller('MyAdminController', function ($scope, $http, $filter, $interval)
                 },
             }).then(function onSuccess(response) {
                 // Handle success
-                $scope.ReturnInvoiceoOut();
-                document.getElementById("PrintToPdf").click();
-                $scope.loading = false;
-                console.log(response);
+                if (response.data.success) {
+                    $scope.ReturnInvoiceoOut();
+                    document.getElementById("PrintToPdf").click();
+                    $scope.loading = false;
+                    console.log(response);
+                } else {
+                    $scope.loading = false;
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại',
+                        text: 'Không có đủ số lượng hàng trong kho',
+                    })
+                }
             }).catch(function onError(response) {
                 // Handle error
                 $scope.loading = false;
