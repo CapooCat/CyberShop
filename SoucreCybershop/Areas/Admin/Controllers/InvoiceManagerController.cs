@@ -457,6 +457,16 @@ namespace CyberShop.Areas.Admin.Controllers
             }
         }
 
+        public JsonResult ConfirmNext(InvoiceManagerViewModel model)
+        {
+            Invoice entity = new Invoice();
+
+            entity = data.Invoices.Find(model.Id);
+            entity.Status = model.Status;
+            data.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult UpdateInvoice(InvoiceManagerViewModel model)
         {
             Invoice entity = new Invoice();
